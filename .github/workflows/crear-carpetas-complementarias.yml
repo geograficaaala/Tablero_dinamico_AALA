@@ -1,0 +1,76 @@
+name: Crear carpetas complementarias AALA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: infraestructura-complementaria-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  crear-carpetas:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Crear estructura complementaria
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          directorios=(
+            config/global
+            config/atitlan_recicla
+            src/styles/themes
+            src/styles/programs
+            src/components/header
+            src/components/footer
+            src/components/charts
+            src/modes/executive
+            src/modes/presentation
+            src/modes/email
+            data/staging/atitlan_recicla
+            public/assets/logos
+          )
+
+          for directorio in "${directorios[@]}"; do
+            mkdir -p "$directorio"
+            if [[ -z "$(ls -A "$directorio")" ]]; then
+              touch "$directorio/.gitkeep"
+            fi
+          done
+
+      - name: Registrar carpetas nuevas
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git add -- \
+            config/global/ \
+            config/atitlan_recicla/ \
+            src/styles/themes/ \
+            src/styles/programs/ \
+            src/components/header/ \
+            src/components/footer/ \
+            src/components/charts/ \
+            src/modes/executive/ \
+            src/modes/presentation/ \
+            src/modes/email/ \
+            data/staging/atitlan_recicla/ \
+            public/assets/logos/
+
+          if git diff --cached --quiet; then
+            echo "La estructura ya existe. No se requieren cambios."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Crear carpetas complementarias de infraestructura AALA"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
