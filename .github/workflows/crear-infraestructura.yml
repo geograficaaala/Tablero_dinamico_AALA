@@ -1,0 +1,89 @@
+name: Crear infraestructura AALA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: infraestructura-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  crear-estructura:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener repositorio
+        uses: actions/checkout@v7
+
+      - name: Crear carpetas
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          programas=(
+            atitlan_recicla
+            conservando_atitlan
+            fortalecimiento_municipal
+            educando_para_conservar
+            reforestacion
+            tul
+          )
+
+          compartidas=(
+            data/schema
+            scripts/shared
+            src/styles
+            src/core
+            src/components
+            src/views
+            public/assets/images
+            public/assets/icons
+            docs/arquitectura
+            tests/shared
+            config/shared
+          )
+
+          bases=(
+            data
+            data/snapshots
+            references
+            scripts
+            src/programs
+            tests
+            docs/programas
+            config/programas
+            public/data/v1/programas
+          )
+
+          for directorio in "${compartidas[@]}"; do
+            mkdir -p "$directorio"
+            if [ -z "$(ls -A "$directorio")" ]; then
+              touch "$directorio/.gitkeep"
+            fi
+          done
+
+          for programa in "${programas[@]}"; do
+            for base in "${bases[@]}"; do
+              directorio="$base/$programa"
+              mkdir -p "$directorio"
+              if [ -z "$(ls -A "$directorio")" ]; then
+                touch "$directorio/.gitkeep"
+              fi
+            done
+          done
+
+      - name: Guardar estructura
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data references scripts src tests docs config public
+          if git diff --cached --quiet; then
+            echo "La estructura ya existe. No hay cambios."
+          else
+            git commit -m "Crear estructura modular AALA Dashboard 2.0"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
