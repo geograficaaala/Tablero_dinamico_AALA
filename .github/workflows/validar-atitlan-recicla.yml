@@ -1,0 +1,24 @@
+name: Validar datos — Atitlán Recicla
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/atitlan_recicla/**'
+      - 'references/atitlan_recicla/**'
+      - 'scripts/atitlan_recicla/**'
+      - '.github/workflows/validar-atitlan-recicla.yml'
+  pull_request:
+    paths:
+      - 'data/atitlan_recicla/**'
+      - 'references/atitlan_recicla/**'
+      - 'scripts/atitlan_recicla/**'
+      - '.github/workflows/validar-atitlan-recicla.yml'
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/atitlan_recicla/validate_data.py
