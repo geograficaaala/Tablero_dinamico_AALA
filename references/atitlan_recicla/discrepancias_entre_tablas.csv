@@ -1,0 +1,7 @@
+anio,mes_num,indicador_id,valor_indicadores,valor_total_mes,diferencia,estado
+2026,3,ingreso_bruto_mujeres,28018.42,28149.269999999997,-130.85,REVISAR SEMANTICA (p. ej. bruto vs neto)
+2026,4,ingreso_bruto_mujeres,30110.77,30241.270000000004,-130.5,REVISAR SEMANTICA (p. ej. bruto vs neto)
+2026,5,ingreso_bruto_mujeres,35737.04,36455.14,-718.1,REVISAR SEMANTICA (p. ej. bruto vs neto)
+2026,3,ingreso_bruto_municipalidades,2800.84,6223.71,-3422.87,REVISAR SEMANTICA (p. ej. bruto vs neto)
+2026,4,ingreso_bruto_municipalidades,950.1,2222.63,-1272.53,REVISAR SEMANTICA (p. ej. bruto vs neto)
+2026,5,ingreso_bruto_municipalidades,841.85,1859.3600000000001,-1017.51,REVISAR SEMANTICA (p. ej. bruto vs neto)
