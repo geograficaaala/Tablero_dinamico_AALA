@@ -1,0 +1,18 @@
+ATITLÁN RECICLA — FASE 2
+Repositorio: https://github.com/geograficaaala/Tablero_dinamico_AALA
+
+Descomprime este ZIP en la raíz de Tablero_dinamico_AALA y conserva las rutas internas.
+
+Archivos incluidos:
+.github/workflows/validar-formulas-atitlan-recicla.yml
+src/programs/atitlan_recicla/data-controller.mjs
+tests/atitlan_recicla/paridad.test.mjs
+tests/atitlan_recicla/golden-2026.json
+docs/arquitectura/atitlan-recicla-auditoria-formulas.md
+
+Después de subir los cinco archivos a main, abre GitHub Actions y selecciona:
+Validar fórmulas — Atitlán Recicla
+
+Puedes ejecutarlo manualmente con Run workflow.
+Necesita las tablas y referencias de la Fase 1 ya subidas al repositorio.
+No reemplaza ni altera el dashboard existente.
