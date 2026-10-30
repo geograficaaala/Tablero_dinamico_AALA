@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Atitlán Recicla · AALA</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="../src/styles/global.css" rel="stylesheet"/><link href="../src/styles/programs/atitlan_recicla.css" rel="stylesheet"/><link href="../src/styles/branding.css" rel="stylesheet"/><meta content="Atitlán Recicla — datos y metas oficiales de 2026, Asociación Amigos del Lago de Atitlán" name="description"/></head>
+<body class="view-full"><div id="site-header"></div>
+<div id="vizTooltip"></div>
+<div class="wrap"><div class="aala-page-message" hidden="" id="aalaMessage" role="status"></div>
+<div class="program-shell">
+<main class="program-main">
+<div id="resumen"></div>
+<div class="exec-only">
+<div class="exec-toolbar">
+<div class="card filter">
+<label for="execPeriodSelect">Mes de análisis</label>
+<select id="execPeriodSelect"></select>
+</div>
+<div class="card filter">
+<label>Última lectura válida</label>
+<div class="pill" id="execLatestPill">—</div>
+</div>
+<div class="card aala-exec-helper">
+        Vista ejecutiva · use <strong class="aala-inline-strong">Dashboard completo</strong>para detalle.
+      </div>
+</div>
+<div class="exec-hero-row">
+<div class="exec-status-card">
+<div>
+<div class="es-label">Estado del programa</div>
+<div class="es-title">Atitlán Recicla</div>
+<div class="exec-status-badge" id="execStatusBadge">Cargando…</div>
+</div>
+<div class="exec-period-info" id="execPeriodInfo">— mes —</div>
+</div>
+<div class="exec-kpi-grid" id="execKpiGrid"></div>
+</div>
+<div class="exec-strip" id="execStrip"></div>
+<div class="exec-row-2 exec-row-single">
+<div class="card panel panel-accent chart-zoomable" id="execBarPanel">
+<h3>Materiales por zona</h3>
+<p class="sub" id="execBarSub">Volumen recolectado en qq por zona.</p>
+<div class="viz-wrap" id="execBarChart"></div>
+<div class="interp" id="execBarInterp"></div>
+</div>
+</div>
+<div class="section">
+<article class="card diagnostic" id="execDiagnosticPanel"></article>
+</div>
+</div>
+<div class="full-only">
+<section class="hero hero-story-mode hero-story-split">
+<div class="card hero-main hero-main-story">
+<div class="hero-copy hero-story-copy">
+<div class="hero-head-row">
+<div>
+<h1>Atitlán Recicla</h1>
+</div>
+</div>
+<div class="hero-narrative">
+<p>Atitlán Recicla es un proyecto impulsado desde 2017 por la Asociación de Amigos del Lago de Atitlán, enfocado en fortalecer la gestión de residuos reciclables en municipios del departamento de Sololá, reducir la contaminación del lago Atitlán, mejorar la calidad de vida de las comunidades y generar oportunidades económicas para mujeres. Actualmente trabaja en 13 municipios y 5 aldeas, cuenta con el apoyo de aliados estratégicos como CBC, ambev, Marcas Mundiales, Latitud R y SOCODEVI.</p>
+<p>Se consolidó en 2021 como la primera cooperativa de mujeres recicladoras de Guatemala y Centroamérica. A través de la operación de 10 centros de acopio operados por mujeres y 3 operados por municipalidades, distribuidos en cuatro zonas de gestión, se ha logrado recolectar más de 3,658 toneladas métricas de materiales reciclables, contribuyendo significativamente a la economía circular y a la reducción de la contaminación ambiental. Actualmente beneficia a 64 mujeres líderes e indirectamente a más de 900 mujeres de la cuenca del Lago de Atitlán. Gracias a su impacto social, ambiental y económico, Atitlán Recicla se ha consolidado como un referente regional y nacional en gestión sostenible de residuos.</p>
+</div>
+</div>
+</div>
+<aside aria-label="Logo Atitlán Recicla" class="card hero-logo-card">
+<div class="hero-logo-card-inner">
+<img alt="Logo de Atitlán Recicla" class="hero-inline-logo" src="./assets/logos/atitlan-recicla.png"/>
+</div>
+</aside>
+</section>
+<section class="section annual-section">
+<article class="card panel annual-panel annual-panel-wide">
+<h3>Metas anuales y avance acumulado</h3>
+<p class="sub hidden" id="annualGoalsSubtitle"></p>
+<div class="annual-goals-grid" id="annualGoalsGrid"></div>
+</article>
+</section>
+<section aria-hidden="true" class="toolbar toolbar-compact" hidden="">
+<select hidden="" id="periodSelect"></select>
+<span hidden="" id="latestPeriodPill"></span>
+<select aria-hidden="true" disabled="" hidden="" id="zoneSelect" tabindex="-1"></select>
+</section>
+<section class="section">
+<div class="section-head"><div><h2>Metas mensuales</h2><p class="hidden" id="kpiSubtitle"></p></div></div>
+<div class="kpis" id="kpiGrid"></div>
+</section>
+<div class="section-divider">Tendencia histórica y cumplimiento</div>
+<section class="section">
+<article class="card panel panel-accent chart-zoomable" id="trendChartPanel">
+<div class="trend-panel-head">
+<div>
+<h3>Tendencia mensual del indicador</h3>
+<p class="sub" id="chartSubtitle">—</p>
+</div>
+<div class="trend-panel-tools">
+<div class="filter trend-filter"><label for="indicatorSelect">Indicador para tendencia</label><select id="indicatorSelect"></select></div>
+</div>
+</div>
+<div class="chart-wrap chart-wrap-elevated" id="trendChart"></div>
+<div class="legend"><span><i class="aala-legend-value"></i>Valor</span><span><i class="aala-legend-target"></i>Meta mensual</span></div>
+</article>
+</section>
+<div class="section-divider">Comparativa por zona y material</div>
+<section class="section">
+<article class="card panel panel-accent chart-zoomable" id="zoneBarPanel">
+<h3>Materiales recolectados por zona</h3>
+<p class="sub" id="barZoneSub">Comparación de volumen en qq por zona.</p>
+<div class="viz-wrap" id="zoneBarChart"></div>
+<div class="interp hidden" id="zoneBarInterp"></div>
+</article>
+</section>
+<div class="section-divider">Operación y territorios</div>
+<section class="section grid-2">
+<article class="card panel panel-accent">
+<h3>Estado de avance de indicadores</h3>
+<p class="sub" id="semaforoSubtitle">Cumplimiento del mes y avance acumulado.</p>
+<div id="semaforoTable"></div>
+</article>
+<article class="card panel"><h3 id="territoryTitle">Detalle territorial</h3><p class="sub" id="territorySubtitle">Territorios con resultado reportado.</p><div id="territoryPanel"></div></article>
+</section>
+<div class="section-divider">Diagnóstico narrativo</div>
+<section class="section"><article class="card diagnostic" id="diagnosticPanel"></article></section>
+</div>
+</main>
+</div>
+</div>
+
+
+<div id="site-footer"></div><div aria-label="Presentación del programa" aria-modal="true" class="aala-presentation" hidden="" id="aalaPresentation" role="dialog"><div class="aala-presentation-header"><strong>Atitlán Recicla · Presentación</strong><button class="aala-presentation-close" id="aalaClosePresentation" type="button">× Cerrar</button></div><main class="aala-presentation-slide" id="aalaPresentationContent"></main><div class="aala-presentation-controls"><button id="aalaPrevSlide" type="button">← Anterior</button><span aria-live="polite" id="aalaSlideCount">1 / 1</span><button id="aalaNextSlide" type="button">Siguiente →</button></div></div><script src="../src/programs/atitlan_recicla/dashboard.mjs" type="module"></script></body>
+</html>
