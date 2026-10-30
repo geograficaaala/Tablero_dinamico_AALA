@@ -1,0 +1,15 @@
+{
+  "anio": 2026,
+  "estado_general": {
+    "indicadores": ["materiales_generales", "pet", "vidrio", "ingreso_bruto_total"],
+    "calculo": "promedio_cumplimiento_mensual",
+    "umbrales": { "verde": 1, "amarillo": 0.85, "rojo": 0 }
+  },
+  "estado_zonal": {
+    "calculo": "promedio_participacion_zonal",
+    "umbrales": { "verde": 0.25, "amarillo": 0.10, "rojo": 0 }
+  },
+  "visualizacion": "azul_institucional",
+  "periodos": 12,
+  "metas_anuales": "data/atitlan_recicla/2026/metas_anuales.json"
+}
