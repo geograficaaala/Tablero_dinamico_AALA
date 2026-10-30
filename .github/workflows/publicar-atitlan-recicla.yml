@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/atitlan_recicla/validate_data.py
-      - run: node --test tests/atitlan_recicla/paridad.test.mjs tests/atitlan_recicla/fase3.test.mjs
+      - run: node --test tests/atitlan_recicla/paridad.test.mjs tests/atitlan_recicla/fase3.test.mjs tests/atitlan_recicla/importaciones.test.mjs
       - run: |
           mkdir -p dist
           cp -R public src data config dist/
