@@ -90,10 +90,11 @@ export function parseCsv(csv) {
   });
 }
 
-export function createAtitlanModel({ totalMes, zonaMes, territorioMes, precalculoImpacto, metasAnuales, surusicMensual }) {
+export function createAtitlanModel({ totalMes, zonaMes, territorioMes, precalculoImpacto, metasAnuales, surusicMensual, metasMensuales = {} }) {
   if (!Array.isArray(totalMes) || !Array.isArray(zonaMes) || !Array.isArray(territorioMes)) throw new TypeError('Tablas mensuales requeridas');
   if (!precalculoImpacto?.byZone || !precalculoImpacto?.byMunicipio) throw new TypeError('Precálculo final requerido');
   if (!metasAnuales || !surusicMensual) throw new TypeError('Metas y SURUSIC requeridos');
+  const monthlyMetrics = Object.fromEntries(Object.entries(METRICS).map(([id, metric]) => [id, { ...metric, meta: number(metasMensuales[id] ?? metric.meta) }]));
   const dataYear = Math.max(...totalMes.map(row => number(row.anio)));
   const periods = totalMes.map(row => ({ anio: number(row.anio), mes_num: number(row.mes_num), mes: row.mes || MONTHS[number(row.mes_num)] }))
     .filter(row => row.anio === dataYear && row.mes_num >= 1 && row.mes_num <= 12)
@@ -159,7 +160,7 @@ export function createAtitlanModel({ totalMes, zonaMes, territorioMes, precalcul
   }
 
   function getMetric(anio, mes_num, zona, metricId) {
-    const config = METRICS[metricId];
+    const config = monthlyMetrics[metricId];
     if (!config) throw new RangeError(`Indicador desconocido: ${metricId}`);
     const total = getRows(anio, mes_num)[0];
     const active = getRows(anio, mes_num, zona)[0];
@@ -184,12 +185,12 @@ export function createAtitlanModel({ totalMes, zonaMes, territorioMes, precalcul
   }
 
   function getTrend(anio, zona, metricId) {
-    if (!METRICS[metricId]) throw new RangeError(`Indicador desconocido: ${metricId}`);
+    if (!monthlyMetrics[metricId]) throw new RangeError(`Indicador desconocido: ${metricId}`);
     const rows = (zona === '__all__' ? totalMes : synchronizedZoneRows)
       .filter(row => number(row.anio) === number(anio) && (zona === '__all__' || sameZone(row.zona, zona)));
     return rows.map(row => ({
       anio: number(row.anio), mes_num: number(row.mes_num), mes: row.mes ?? MONTHS[number(row.mes_num)],
-      valor: metricFromRow(row, metricId), referencia: METRICS[metricId].meta
+      valor: metricFromRow(row, metricId), referencia: monthlyMetrics[metricId].meta
     })).sort((a, b) => a.anio - b.anio || a.mes_num - b.mes_num);
   }
 
@@ -244,13 +245,13 @@ export function createAtitlanModel({ totalMes, zonaMes, territorioMes, precalcul
 
   return Object.freeze({
     periods, lastPeriod, zones: ['__all__', ...(precalculoImpacto.zones ?? [])],
-    metrics: METRICS, syncedZoneRows: synchronizedZoneRows, syncedTerritoryRows: synchronizedTerritoryRows,
+    metrics: monthlyMetrics, syncedZoneRows: synchronizedZoneRows, syncedTerritoryRows: synchronizedTerritoryRows,
     originalZoneRows: zonaMes, originalTerritoryRows: territorioMes,
     getRows, getMetric, getKpis, getTrend, getAnnualGoals, getImpact, getSurusic, getProgramStatus, sumMetricSeries
   });
 }
 
-export async function loadAtitlanModel(baseUrl, fetchImpl = fetch) {
+export async function loadAtitlanModel(baseUrl, fetchImpl = fetch, monthlyGoalsUrl = null) {
   if (!baseUrl) throw new TypeError('Se requiere una URL base de datos');
   const base = baseUrl.replace(/\/$/, '');
   const sources = ['total_mes.csv', 'zona_mes.csv', 'territorio_mes.csv', 'precalculo_impacto_final.json', 'metas_anuales.json', 'surusic_mensual.json'];
@@ -259,5 +260,6 @@ export async function loadAtitlanModel(baseUrl, fetchImpl = fetch) {
     if (!response.ok) throw new Error(`No se pudo cargar ${name}: ${response.status}`);
     return name.endsWith('.csv') ? parseCsv(await response.text()) : response.json();
   }));
-  return createAtitlanModel(Object.fromEntries(['totalMes', 'zonaMes', 'territorioMes', 'precalculoImpacto', 'metasAnuales', 'surusicMensual'].map((key, index) => [key, values[index]])));
+  const metasMensuales = monthlyGoalsUrl ? await fetchImpl(monthlyGoalsUrl).then(response => { if (!response.ok) throw new Error(`No se pudo cargar configuración de metas: ${response.status}`); return response.json(); }) : {};
+  return createAtitlanModel({...Object.fromEntries(['totalMes', 'zonaMes', 'territorioMes', 'precalculoImpacto', 'metasAnuales', 'surusicMensual'].map((key, index) => [key, values[index]])), metasMensuales});
 }
