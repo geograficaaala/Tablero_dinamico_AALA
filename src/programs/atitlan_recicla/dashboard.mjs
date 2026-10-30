@@ -1,6 +1,6 @@
 import { loadAtitlanModel, KPI_IDS, ANNUAL_IDS } from './data-controller.mjs';
-import { mountHeader, monthLabel } from '../../components/header.js';
-import { mountFooter } from '../../components/footer.js';
+import { mountHeader, monthLabel } from '../../components/header/header.js';
+import { mountFooter } from '../../components/footer/footer.js';
 
 const DATA_URL = new URL('../../../data/atitlan_recicla/2026', import.meta.url).href;
 const GOALS_URL = new URL('../../../config/atitlan_recicla/metas_2026.json', import.meta.url).href;
