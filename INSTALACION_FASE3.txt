@@ -1,0 +1,13 @@
+TABLERO DINÁMICO AALA — ATITLÁN RECICLA — FASE 3
+
+1. Descomprimir el paquete.
+2. Copiar los archivos y carpetas a la raíz del repositorio geograficaaala/Tablero_dinamico_AALA, manteniendo exactamente sus rutas.
+3. No borrar los archivos existentes de data/atitlan_recicla/2026, scripts/atitlan_recicla, tests/atitlan_recicla ni references/atitlan_recicla.
+4. Confirmar cambios en main.
+5. En Settings → Pages → Build and deployment → Source, seleccionar GitHub Actions.
+6. Entrar a Actions → Publicar Atitlán Recicla → Run workflow.
+7. Al aprobarse el despliegue, visitar https://geograficaaala.github.io/Tablero_dinamico_AALA/public/atitlan-recicla.html
+
+El HTML carga los CSV y las metas existentes en el repositorio. La opción de correo abre un borrador de correo; aún no hay servicio de envío automático.
+
+Las fórmulas originales están cubiertas por pruebas de paridad. La paridad visual de cada gráfico y modalidad permanece pendiente de revisión comparativa en navegador.
