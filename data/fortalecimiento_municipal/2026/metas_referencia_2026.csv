@@ -1,0 +1,6 @@
+﻿indicador_id,componente,indicador,meta_referencia,unidad,criterio_original,estado_aprobacion
+FM_SPEC_02,estudios,Estudios de caracterización finalizados,6,estudios,Estudios municipales finalizados y deduplicados por municipio y tipo de estudio.,referencia_original_pendiente_confirmacion
+FM_SPEC_03,pirdes,PIRDES municipales implementados,5,PIRDES,PIRDES municipales implementados y deduplicados por municipio.,referencia_original_pendiente_confirmacion
+FM_SPEC_05,asistencias,Asistencias técnicas municipales,20,asistencias técnicas,"Asistencias municipales relacionadas con agua, saneamiento y gestión ambiental.",referencia_original_pendiente_confirmacion
+FM_SPEC_04,reuniones,Reuniones CODEMA / eje agua y saneamiento,10,reuniones,Reuniones del eje de agua y saneamiento / CODEMA.,referencia_original_pendiente_confirmacion
+FM_GEN_01,capacidad,Municipalidades con capacidad instalada,15,municipalidades,Municipalidades con avance reconocido hacia capacidad instalada.,referencia_original_pendiente_confirmacion
