@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tablero dinámico de Fortalecimiento Municipal · Amigos del Lago de Atitlán · 2026">
+  <title>Fortalecimiento Municipal · Tablero Dinámico AALA</title>
+  <link rel="stylesheet" href="../src/styles/global.css">
+  <link rel="stylesheet" href="../src/styles/branding.css">
+  <link rel="stylesheet" href="../src/styles/programs/fortalecimiento_municipal.css">
+</head>
+<body class="fm-page">
+  <div id="aalaHeaderRoot"></div>
+  <main class="fm-container">
+    <div id="resumen"></div>
+    <section id="fmHero" class="fm-hero">
+      <div class="fm-hero-text">
+        <p class="fm-overline">Programa de acompañamiento municipal · 2026</p>
+        <h1>Fortalecimiento Municipal</h1>
+        <p>Asesora y capacita a las dependencias municipales en agua y saneamiento, con el objetivo de mejorar estos servicios para la salud de los habitantes y la conservación del Lago Atitlán. Se fortalece el acompañamiento técnico municipal para incidir y hacer sinergias en las municipalidades e instituciones de la cuenca para la mejora y conservación del uso del agua, tratamiento de aguas residuales, residuos sólidos y saneamiento ambiental en general.</p>
+        <p>Con el fin de la eficaz gestión los recursos de inversión, necesarios para garantizar los servicios públicos de agua y saneamiento y de responder adecuadamente a las demandas de la población, y así revertir la constante contaminación del lago de Atitlán.</p>
+      </div>
+      <div class="fm-hero-image"><img src="./assets/logos/fortalecimiento-municipal.png" alt="Fortalecimiento Municipal" loading="lazy"></div>
+    </section>
+    <div id="fmLoading" class="fm-message" role="status">Cargando información de Fortalecimiento Municipal…</div>
+    <div id="fmError" class="fm-message fm-error" role="alert" hidden></div>
+    <section id="metas-anuales" class="fm-section fm-data" hidden>
+      <div class="fm-section-head"><div><p class="fm-eyebrow">Resultados publicados</p><h2>Metas anuales y avance acumulado</h2></div><span id="fmCutLabel" class="fm-period-label"></span></div>
+      <div id="fmKpis" class="fm-kpis"></div>
+      <p class="fm-disclaimer">Metas y cifras reproducidas del tablero original. Su ratificación institucional está pendiente. Los estados internos no se indican mediante colores.</p>
+    </section>
+    <div id="fmFullView" class="fm-data" hidden>
+      <section id="procesos" class="fm-section">
+        <div class="fm-section-head"><div><p class="fm-eyebrow">Seguimiento de procesos</p><h2>Actividades registradas</h2><p>Los registros se muestran acumulados hasta el mes seleccionado.</p></div></div>
+        <div class="fm-filters">
+          <label>Componente<select id="fmComponent"></select></label>
+          <label>Situación<select id="fmStatus"><option value="all">Todos los estados</option><option value="confirmado">Avance confirmado</option><option value="proceso">En revisión</option><option value="pendiente">Pendiente de validar</option><option value="no">Actividad de apoyo</option></select></label>
+          <label>Búsqueda<input id="fmSearch" type="search" placeholder="Municipio, actividad o comentario"></label>
+          <div class="fm-filter-period">Período activo <strong id="fmFilterPeriod">—</strong></div>
+        </div>
+        <article class="fm-panel"><div class="fm-table-head"><h3 id="fmTableTitle">Actividades por componente</h3><span id="fmTableCount"></span></div><div id="fmTable" class="fm-table-wrap"></div></article>
+      </section>
+      <section id="analisis" class="fm-section">
+        <div class="fm-section-head"><div><p class="fm-eyebrow">Lectura narrativa</p><h2>Análisis del mes</h2></div></div>
+        <div id="fmDiagnostic"></div>
+      </section>
+    </div>
+    <section id="fmExecutive" class="fm-data fm-section" hidden>
+      <div class="fm-section-head"><div><p class="fm-eyebrow">Vista ejecutiva</p><h2>Resumen del programa</h2><p id="fmExecPeriod"></p></div></div>
+      <div class="fm-panel fm-exec"><h3>Actividades confirmadas por componente</h3><div id="fmExecStats"></div></div>
+      <div class="fm-panel"><div class="fm-table-head"><h3>Actividades destacadas del período</h3></div><div id="fmExecTable" class="fm-table-wrap"></div></div>
+    </section>
+  </main>
+  <div id="aalaFooterRoot"></div>
+  <div id="fmPresentation" class="aala-presentation" role="dialog" aria-modal="true" aria-label="Presentación de Fortalecimiento Municipal" hidden>
+    <div class="aala-presentation-header"><strong>Fortalecimiento Municipal · AALA</strong><button id="fmPresClose" type="button">Cerrar ×</button></div>
+    <div id="fmSlide" class="aala-presentation-slide"></div>
+    <div class="aala-presentation-controls"><button id="fmPresPrev" type="button">← Anterior</button><span id="fmPresCounter">1 / 1</span><button id="fmPresNext" type="button">Siguiente →</button></div>
+  </div>
+  <script type="module" src="../src/programs/fortalecimiento_municipal/dashboard.mjs"></script>
+</body>
+</html>
