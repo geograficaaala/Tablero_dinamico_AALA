@@ -1,0 +1,21 @@
+Conservando Atitlán · Dashboard modular 2026
+
+Sube los archivos de este paquete a geograficaaala/Tablero_dinamico_AALA conservando sus rutas. No borres ni sustituyas los CSV previamente validados.
+
+Archivos principales:
+- public/conservando-atitlan.html
+- public/assets/logos/conservando-atitlan.png
+- src/styles/programs/conservando_atitlan.css
+- src/components/header/header.js
+- src/programs/conservando_atitlan/dashboard.mjs
+- tests/conservando_atitlan/html.test.mjs
+- .github/workflows/publicar-atitlan-recicla.yml
+- public/index.html
+
+Se requieren los archivos de la infraestructura de datos ya subida: data/conservando_atitlan/2026/*.csv y src/programs/conservando_atitlan/data-controller.mjs, junto con el footer y logo AALA existentes.
+
+La actualización mensual se hace exclusivamente en data/conservando_atitlan/2026, incluyendo metas si se aprueban formalmente. Los umbrales de desempeño se calculan internamente y todas las tarjetas muestran azul institucional.
+
+En GitHub, configura Settings > Pages > Build and deployment > Source: GitHub Actions; ejecuta Actions > Publicar dashboards AALA. La URL quedará en https://geograficaaala.github.io/Tablero_dinamico_AALA/public/conservando-atitlan.html.
+
+La fidelidad visual exacta requiere todavía verificación en navegador contra el HTML original.
