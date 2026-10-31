@@ -1,0 +1,17 @@
+INFRAESTRUCTURA DE DATOS — CONSERVANDO ATITLÁN 2026
+
+1. Descomprime este ZIP.
+2. Sube su contenido a la raíz de geograficaaala/Tablero_dinamico_AALA.
+3. Conserva exactamente la estructura de carpetas. No subas la carpeta "package".
+4. Haz commit en main.
+5. En GitHub Actions ejecuta "Validar datos — Conservando Atitlán".
+6. Confirma que el registro indique 9 meses, 18 metas y 7 pruebas aprobadas.
+
+Fuente única de datos:
+data/conservando_atitlan/2026/datos_mensuales.csv
+
+data/conservando_atitlan/2026/metas_2026.csv contiene las metas independientes.
+data/conservando_atitlan/2026/fuentes_mensuales.csv contiene la trazabilidad.
+
+No se modifica ningún HTML en esta fase. Atitlán Recicla se mantiene intacto.
+El dashboard de Conservando Atitlán se construirá en la siguiente fase.
