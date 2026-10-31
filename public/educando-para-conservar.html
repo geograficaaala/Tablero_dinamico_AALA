@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <!-- ACTUALIZADO: EPC AGOSTO 2026 -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Educando para Conservar · AALA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  
+
+
+
+  <link rel="stylesheet" href="../src/styles/programs/educando_para_conservar.css">
+  <link rel="stylesheet" href="../src/styles/branding.css">
+</head>
+<body>
+  <div id="epcHeaderMount"></div>
+
+  <main class="wrap" id="mainWrap">
+    <div class="loading" id="loadingState">
+      <div class="spinner"></div>
+      <span>Cargando datos del programa</span>
+    </div>
+  </main>
+
+  <div id="epcFooterMount"></div>
+
+  <div class="presentation-overlay" id="presentationOverlay" aria-hidden="true">
+  <div class="presentation-chrome">
+    <div class="presentation-meta" id="presentationMeta">
+      <span>Modo presentación</span>
+    </div>
+    <div class="presentation-actions">
+      <button class="pres-btn" type="button" onclick="prevSlide()">&#8592; Anterior</button>
+      <button class="pres-btn" type="button" onclick="nextSlide()">Siguiente &#8594;</button>
+      <button class="pres-btn primary" type="button" onclick="closePresentation()">&#215; Cerrar</button>
+    </div>
+  </div>
+  <div class="presentation-stage-wrap">
+    <div class="presentation-stage">
+      <div class="presentation-track" id="presentationTrack"></div>
+    </div>
+  </div>
+  <div class="pres-footer-bar">
+    <div class="pres-dots" id="presDots"></div>
+    <div class="pres-counter" id="presCounter">1 / 1</div>
+  </div>
+</div>
+
+<script type="module" src="../src/programs/educando_para_conservar/bootstrap.mjs"></script>
+</body>
+</html>
