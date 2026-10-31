@@ -1,0 +1,29 @@
+name: Validar datos y módulos — Educando para Conservar
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'data/educando_para_conservar/**'
+      - 'references/educando_para_conservar/**'
+      - 'scripts/educando_para_conservar/**'
+      - 'tests/educando_para_conservar/**'
+      - 'src/programs/educando_para_conservar/**'
+      - 'src/styles/programs/educando_para_conservar.css'
+      - 'public/educando-para-conservar.html'
+      - '.github/workflows/validar-educando-para-conservar.yml'
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: python scripts/educando_para_conservar/validate_data.py
+      - run: node --test tests/educando_para_conservar/paridad.test.mjs
+      - run: node --check src/programs/educando_para_conservar/dashboard.js
+      - run: node --check src/programs/educando_para_conservar/bootstrap.mjs

@@ -36,10 +36,24 @@ jobs:
       - run: node --test tests/atitlan_recicla/paridad.test.mjs tests/atitlan_recicla/fase3.test.mjs
       - run: python scripts/conservando_atitlan/validate_data.py
       - run: node --test tests/conservando_atitlan/paridad.test.mjs tests/conservando_atitlan/html.test.mjs tests/conservando_atitlan/modulos.test.mjs
+      - run: python scripts/fortalecimiento_municipal/validate_data.py
+      - run: node --test tests/fortalecimiento_municipal/paridad.test.mjs
+      - run: node --check src/programs/fortalecimiento_municipal/dashboard.mjs
+      - run: python scripts/educando_para_conservar/validate_data.py
+      - run: node --test tests/educando_para_conservar/paridad.test.mjs
       - run: |
           mkdir -p dist
           cp -R public src data config dist/
-          sed -e 's|href="./atitlan-recicla.html"|href="./public/atitlan-recicla.html"|' -e 's|href="./conservando-atitlan.html"|href="./public/conservando-atitlan.html"|' -e 's|href="../src/styles/global.css"|href="./src/styles/global.css"|' public/index.html > dist/index.html
+          sed -E -e 's|href="\./([^/"]+\.html)"|href="./public/\1"|g' -e 's|href="\.\./src/styles/global\.css"|href="./src/styles/global.css"|g' public/index.html > dist/index.html
+          python - <<'PY'
+          from pathlib import Path
+          html = Path('dist/index.html').read_text(encoding='utf-8')
+          for name in ('atitlan-recicla', 'conservando-atitlan', 'fortalecimiento-municipal', 'educando-para-conservar'):
+              assert Path(f'dist/public/{name}.html').is_file(), f'HTML faltante: {name}'
+              assert f'href="./public/{name}.html"' in html, f'Enlace faltante: {name}'
+          assert 'href="./src/styles/global.css"' in html, 'Hoja de estilos incorrecta'
+          print('OK: cuatro botones del portal y enlaces de publicación validados')
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
