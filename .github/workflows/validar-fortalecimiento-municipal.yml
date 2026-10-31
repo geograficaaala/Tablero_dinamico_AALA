@@ -1,0 +1,33 @@
+name: Validar datos y módulos — Fortalecimiento Municipal
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/fortalecimiento_municipal/**'
+      - 'src/programs/fortalecimiento_municipal/**'
+      - 'src/styles/programs/fortalecimiento_municipal.css'
+      - 'src/core/csv.mjs'
+      - 'src/components/**'
+      - 'public/fortalecimiento-municipal.html'
+      - 'tests/fortalecimiento_municipal/**'
+      - 'scripts/fortalecimiento_municipal/**'
+      - 'references/fortalecimiento_municipal/**'
+      - '.github/workflows/validar-fortalecimiento-municipal.yml'
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: python scripts/fortalecimiento_municipal/validate_data.py
+      - run: node --test tests/fortalecimiento_municipal/paridad.test.mjs
+      - run: node --check src/programs/fortalecimiento_municipal/dashboard.mjs
