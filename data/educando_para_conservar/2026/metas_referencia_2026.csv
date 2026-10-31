@@ -1,0 +1,19 @@
+indicator_id,indicador_nombre,unidad,categoria,modelo_medicion,meta_mes,meta_anual,nota_metodologica
+docentes_capacitados,Docentes capacitados,personas,estrategico,monthly_recurrent,121,8,Módulo 7: 119 docentes atendidos (98% reportado).
+centros_cobertura,Centros alcanzados,centros,estrategico,monthly_recurrent,50,8,Módulo 7: 49 centros participantes (98% reportado).
+municipios_actividad_pedagogica,Municipios con actividad pedagógica,municipios,estrategico,monthly_recurrent,13,8,"13 municipios por continuidad de agosto, confirmada por el usuario; acumulado de registros mensuales: 91."
+estudiantes_epc,Estudiantes EPC,estudiantes,estrategico,monthly_recurrent,3514,8,"Módulo 7: 3,428 estudiantes alcanzados (98% reportado)."
+actividades_campo,Actividades de campo,actividades,estrategico,annual_cumulative_profiled,0,128,20 actividades: 2 reforestaciones + 4 limpiezas + 3 ferias + 3 giras + 2 siembras de tul + 4 seguimientos de huertos + 2 seguimientos y finalizaciones de proyectos escolares.
+jovenes_formados_diplomado,Jóvenes formados en diplomado,jóvenes,estrategico,milestone_window,0,120,68 graduados del segundo ciclo el 18 de septiembre. Acumulado: 67 del primer ciclo ya registrados + 68 = 135; no se suman asistencias a módulos como personas nuevas.
+propuestas_juveniles,Propuestas juveniles,propuestas,estrategico,milestone_window,0,12,Sin nuevas propuestas documentadas en septiembre; se conservan las 5 previamente registradas.
+capitales_semilla,Capitales semilla entregados,capitales,estrategico,milestone_window,0,4,Sin entregas documentadas en septiembre; las proyecciones de octubre no se contabilizan.
+act_reforestacion,Campañas de reforestación,actividades,tactico,annual_cumulative_profiled,0,20,"2 campañas, 180 árboles; 20 estudiantes y 23 participantes sin desglose. Acumulado: 20 campañas."
+act_monitoreo_reforestadas,Monitoreo de áreas reforestadas,actividades,tactico,annual_cumulative_profiled,0,8,Sin monitoreos reportados en septiembre. Los 5 monitoreos previstos para octubre quedan fuera del mes.
+act_tul,Manejo / poda / mantenimiento de tul,actividades,tactico,annual_cumulative_profiled,0,10,"2 jornadas realizadas, 95 macollas y 60 estudiantes según confirmación del usuario. El detalle suma 54; se conserva la diferencia en las alertas. Acumulado: 8 jornadas."
+act_ferias,Ferias ambientales,actividades,tactico,annual_cumulative_profiled,0,16,"3 ferias realizadas, 380 estudiantes (116 + 164 + 100); el usuario confirmó la ejecución de la feria del 29 de septiembre. Acumulado: 14 ferias."
+act_huertos,Huertos escolares,actividades,tactico,milestone_window,0,8,Seguimiento de 4 huertos ya existentes; no son proyectos nuevos. Acumulado único conservado: 8 huertos.
+act_giras,Giras educativas,actividades,tactico,annual_cumulative_profiled,0,24,3 giras realizadas con 114 estudiantes (49 + 40 + 25). Acumulado: 22 giras.
+act_murales,Murales pedagógicos,actividades,tactico,milestone_window,0,4,Sin nuevos murales documentados; se mantienen 5 murales acumulados.
+act_centros_acopio,Centros de acopio escolar,actividades,tactico,milestone_window,0,8,Sin nuevos centros de acopio escolar documentados; las campañas de limpieza y acopio no equivalen a nuevos centros. Se mantienen 8 centros únicos.
+act_limpiezas,Campañas de limpieza escolar,actividades,tactico,annual_cumulative_profiled,0,24,4 campañas con 230 estudiantes y 273 sacos o costales (38 + 85 + 125 + 25). Acumulado: 24 campañas.
+act_proyectos_gestion,Proyectos de gestión ambiental escolar,actividades,tactico,milestone_window,0,2,"Seguimiento y finalización de los 2 proyectos ya contabilizados en agosto, ambos al 100%. Acumulado único: 2; no se añaden como proyectos nuevos."
