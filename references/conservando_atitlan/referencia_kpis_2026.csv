@@ -1,0 +1,154 @@
+mes_clave,grupo,id,valor_original,estado_original,avance_original,ratio_vs_esperado_original,texto_meta_original
+2026-01,annual,colectas,1,green,8.333333333333332,1,meta anual: 12 jornadas
+2026-01,annual,aceite,"6,557.51",green,8.19689125,0.9836269499999999,"meta anual: 80,000.00 litros"
+2026-01,annual,agua,"6,557,513",green,8.19689125,0.98362695,"meta anual: 80,000,000 litros"
+2026-01,annual,jabones-prod,"5,500",green,8.456334563345633,1.014760147601476,"meta anual: 65,040 jabones"
+2026-01,annual,jabones-vend,0,green,0,0,"meta anual: 51,600 jabones"
+2026-01,annual,ventas,Q 0.00,green,0,,"meta anual: Q 106,800.00"
+2026-01,annual,pruebas,0,green,0,,meta anual: 3 pruebas
+2026-01,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-01,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-01,monthly,aceite-mes,"6,557.51",yellow,98.36269499999999,0.9836269499999999,"Meta mensual: 6,666.67 litros"
+2026-01,monthly,agua-mes,"6,557,513",yellow,98.362695,0.98362695,"Meta mensual: 6,666,667 litros"
+2026-01,monthly,produccion-mes,"5,500",green,100,1.014760147601476,"Meta mensual: 5,420 jabones"
+2026-01,monthly,jabones-vendidos-mes,0,red,0,0,"Meta mensual: 4,300 jabones"
+2026-01,monthly,ventas-mes,Q 0.00,green,0,,Sin meta mensual fija
+2026-01,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-01,monthly,inmuebles-entregaron,78 / 150,green,52,0.52,52.0% de inmuebles que entregaron aceite
+2026-01,monthly,velas-vendidas-mes,50,green,100,1.25,Meta mensual: 40 velas
+2026-02,annual,colectas,2,green,16.666666666666664,1,meta anual: 12 jornadas
+2026-02,annual,aceite,"13,417.83",green,16.772285,1.0063371,"meta anual: 80,000.00 litros"
+2026-02,annual,agua,"13,417,828",green,16.772285,1.0063370999999999,"meta anual: 80,000,000 litros"
+2026-02,annual,jabones-prod,"11,450",green,17.604551045510455,1.0562730627306274,"meta anual: 65,040 jabones"
+2026-02,annual,jabones-vend,"2,180",green,4.224806201550388,0.2534883720930233,"meta anual: 51,600 jabones"
+2026-02,annual,ventas,"Q 6,862.50",green,6.425561797752809,,"meta anual: Q 106,800.00"
+2026-02,annual,pruebas,0,green,0,,meta anual: 3 pruebas
+2026-02,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-02,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-02,monthly,aceite-mes,"6,860.32",green,100,1.02904725,"Meta mensual: 6,666.67 litros"
+2026-02,monthly,agua-mes,"6,860,315",green,100,1.0290472499999999,"Meta mensual: 6,666,667 litros"
+2026-02,monthly,produccion-mes,"5,950",green,100,1.0977859778597785,"Meta mensual: 5,420 jabones"
+2026-02,monthly,jabones-vendidos-mes,"2,180",red,50.697674418604656,0.5069767441860465,"Meta mensual: 4,300 jabones"
+2026-02,monthly,ventas-mes,"Q 6,862.50",green,100,,Sin meta mensual fija
+2026-02,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-02,monthly,inmuebles-entregaron,88 / 150,green,58.666666666666664,0.5866666666666667,58.7% de inmuebles que entregaron aceite
+2026-02,monthly,velas-vendidas-mes,50,green,100,1.25,Meta mensual: 40 velas
+2026-03,annual,colectas,3,green,25,1,meta anual: 12 jornadas
+2026-03,annual,aceite,"20,470.83",green,25.588535,1.0235414,"meta anual: 80,000.00 litros"
+2026-03,annual,agua,"20,470,828",green,25.588535,1.0235414,"meta anual: 80,000,000 litros"
+2026-03,annual,jabones-prod,"21,830",green,33.56396063960639,1.3425584255842558,"meta anual: 65,040 jabones"
+2026-03,annual,jabones-vend,"5,080",green,9.844961240310077,0.3937984496124031,"meta anual: 51,600 jabones"
+2026-03,annual,ventas,"Q 11,937.50",green,11.17743445692884,,"meta anual: Q 106,800.00"
+2026-03,annual,pruebas,0,green,0,0,meta anual: 3 pruebas
+2026-03,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-03,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-03,monthly,aceite-mes,"7,053.00",green,100,1.05795,"Meta mensual: 6,666.67 litros"
+2026-03,monthly,agua-mes,"7,053,000",green,100,1.05795,"Meta mensual: 6,666,667 litros"
+2026-03,monthly,produccion-mes,"10,380",green,100,1.915129151291513,"Meta mensual: 5,420 jabones"
+2026-03,monthly,jabones-vendidos-mes,"2,900",red,67.44186046511628,0.6744186046511628,"Meta mensual: 4,300 jabones"
+2026-03,monthly,ventas-mes,"Q 5,075.00",green,42.51308900523561,,Sin meta mensual fija
+2026-03,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-03,monthly,inmuebles-entregaron,84 / 150,green,56.00000000000001,0.56,56.0% de inmuebles que entregaron aceite
+2026-03,monthly,velas-vendidas-mes,50,green,100,1.25,Meta mensual: 40 velas
+2026-04,annual,colectas,4,green,33.33333333333333,1,meta anual: 12 jornadas
+2026-04,annual,aceite,"27,810.83",green,34.763535000000005,1.04290605,"meta anual: 80,000.00 litros"
+2026-04,annual,agua,"27,810,828",green,34.763535000000005,1.04290605,"meta anual: 80,000,000 litros"
+2026-04,annual,jabones-prod,"26,680",green,41.02091020910209,1.2306273062730628,"meta anual: 65,040 jabones"
+2026-04,annual,jabones-vend,"7,394",green,14.329457364341087,0.4298837209302326,"meta anual: 51,600 jabones"
+2026-04,annual,ventas,"Q 15,064.50",green,14.105337078651687,,"meta anual: Q 106,800.00"
+2026-04,annual,pruebas,0,green,0,0,meta anual: 3 pruebas
+2026-04,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-04,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-04,monthly,aceite-mes,"7,340.00",green,100,1.101,"Meta mensual: 6,666.67 litros"
+2026-04,monthly,agua-mes,"7,340,000",green,100,1.101,"Meta mensual: 6,666,667 litros"
+2026-04,monthly,produccion-mes,"4,850",yellow,89.48339483394834,0.8948339483394834,"Meta mensual: 5,420 jabones"
+2026-04,monthly,jabones-vendidos-mes,"2,314",red,53.81395348837209,0.5381395348837209,"Meta mensual: 4,300 jabones"
+2026-04,monthly,ventas-mes,"Q 3,127.00",green,20.757409804507283,,Sin meta mensual fija
+2026-04,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-04,monthly,inmuebles-entregaron,90 / 150,green,60,0.6,60.0% de inmuebles que entregaron aceite
+2026-04,monthly,velas-vendidas-mes,50,green,100,1.25,Meta mensual: 40 velas
+2026-05,annual,colectas,5,green,41.66666666666667,1,meta anual: 12 jornadas
+2026-05,annual,aceite,"35,108.83",green,43.886035,1.05326484,"meta anual: 80,000.00 litros"
+2026-05,annual,agua,"35,108,828",green,43.886035,1.05326484,"meta anual: 80,000,000 litros"
+2026-05,annual,jabones-prod,"30,980",green,47.63222632226322,1.1431734317343174,"meta anual: 65,040 jabones"
+2026-05,annual,jabones-vend,"8,401",green,16.281007751937985,0.3907441860465116,"meta anual: 51,600 jabones"
+2026-05,annual,ventas,"Q 16,314.50",green,15.275749063670412,,"meta anual: Q 106,800.00"
+2026-05,annual,pruebas,0,green,0,0,meta anual: 3 pruebas
+2026-05,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-05,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-05,monthly,aceite-mes,"7,298.00",green,100,1.0947,"Meta mensual: 6,666.67 litros"
+2026-05,monthly,agua-mes,"7,298,000",green,100,1.0947,"Meta mensual: 6,666,667 litros"
+2026-05,monthly,produccion-mes,"4,300",red,79.33579335793358,0.7933579335793358,"Meta mensual: 5,420 jabones"
+2026-05,monthly,jabones-vendidos-mes,"1,007",red,23.41860465116279,0.23418604651162792,"Meta mensual: 4,300 jabones"
+2026-05,monthly,ventas-mes,"Q 1,250.00",green,7.6618958595114774,,Sin meta mensual fija
+2026-05,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-05,monthly,inmuebles-entregaron,88 / 150,green,58.666666666666664,0.5866666666666667,58.7% de inmuebles que entregaron aceite
+2026-05,monthly,velas-vendidas-mes,50,green,100,1.25,Meta mensual: 40 velas
+2026-06,annual,colectas,6,green,50,1,meta anual: 12 jornadas
+2026-06,annual,aceite,"43,183.83",green,53.979785,1.0795957,"meta anual: 80,000.00 litros"
+2026-06,annual,agua,"43,183,828",green,53.979785,1.0795957,"meta anual: 80,000,000 litros"
+2026-06,annual,jabones-prod,"35,430",green,54.47416974169742,1.0894833948339484,"meta anual: 65,040 jabones"
+2026-06,annual,jabones-vend,"10,429",green,20.211240310077518,0.4042248062015504,"meta anual: 51,600 jabones"
+2026-06,annual,ventas,"Q 18,814.50",green,17.616573033707866,,"meta anual: Q 106,800.00"
+2026-06,annual,pruebas,0,green,0,0,meta anual: 3 pruebas
+2026-06,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-06,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-06,monthly,aceite-mes,"8,075.00",green,100,1.21125,"Meta mensual: 6,666.67 litros"
+2026-06,monthly,agua-mes,"8,075,000",green,100,1.21125,"Meta mensual: 6,666,667 litros"
+2026-06,monthly,produccion-mes,"4,450",yellow,82.10332103321034,0.8210332103321033,"Meta mensual: 5,420 jabones"
+2026-06,monthly,jabones-vendidos-mes,"2,028",red,47.16279069767442,0.47162790697674417,"Meta mensual: 4,300 jabones"
+2026-06,monthly,ventas-mes,"Q 2,500.00",green,13.287623907092932,,Sin meta mensual fija
+2026-06,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-06,monthly,inmuebles-entregaron,93 / 150,green,62,0.62,62.0% de inmuebles que entregaron aceite
+2026-06,monthly,velas-vendidas-mes,150,green,100,3.75,Meta mensual: 40 velas
+2026-07,annual,colectas,7,green,58.333333333333336,1,meta anual: 12 jornadas
+2026-07,annual,aceite,"49,527.83",green,61.90978500000001,1.0613105999999999,"meta anual: 80,000.00 litros"
+2026-07,annual,agua,"49,527,828",green,61.90978499999999,1.0613105999999999,"meta anual: 80,000,000 litros"
+2026-07,annual,jabones-prod,"38,830",green,59.70172201722017,1.0234580917237743,"meta anual: 65,040 jabones"
+2026-07,annual,jabones-vend,"12,429",green,24.087209302325583,0.4129235880398671,"meta anual: 51,600 jabones"
+2026-07,annual,ventas,"Q 21,014.50",green,19.676498127340825,,"meta anual: Q 106,800.00"
+2026-07,annual,pruebas,0,green,0,0,meta anual: 3 pruebas
+2026-07,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-07,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-07,monthly,aceite-mes,"6,344.00",yellow,95.16,0.9516,"Meta mensual: 6,666.67 litros"
+2026-07,monthly,agua-mes,"6,344,000",yellow,95.16,0.9516,"Meta mensual: 6,666,667 litros"
+2026-07,monthly,produccion-mes,"3,400",red,62.73062730627307,0.6273062730627307,"Meta mensual: 5,420 jabones"
+2026-07,monthly,jabones-vendidos-mes,"2,000",red,46.51162790697674,0.46511627906976744,"Meta mensual: 4,300 jabones"
+2026-07,monthly,ventas-mes,"Q 2,200.00",green,10.468961907254515,,Sin meta mensual fija
+2026-07,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-07,monthly,inmuebles-entregaron,86 / 150,green,57.333333333333336,0.5733333333333334,57.3% de inmuebles que entregaron aceite
+2026-07,monthly,velas-vendidas-mes,40,green,100,1,Meta mensual: 40 velas
+2026-08,annual,colectas,8,green,66.66666666666666,1,meta anual: 12 jornadas
+2026-08,annual,aceite,"56,607.83",green,70.759785,1.061396775,"meta anual: 80,000.00 litros"
+2026-08,annual,agua,"56,607,828",green,70.759785,1.061396775,"meta anual: 80,000,000 litros"
+2026-08,annual,jabones-prod,"43,130",green,66.3130381303813,0.9946955719557196,"meta anual: 65,040 jabones"
+2026-08,annual,jabones-vend,"13,829",green,26.80038759689922,0.4020058139534884,"meta anual: 51,600 jabones"
+2026-08,annual,ventas,"Q 22,514.50",green,21.0809925093633,,"meta anual: Q 106,800.00"
+2026-08,annual,pruebas,1,green,33.33333333333333,0.3333333333333333,meta anual: 3 pruebas
+2026-08,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-08,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-08,monthly,aceite-mes,"7,080.00",green,100,1.062,"Meta mensual: 6,666.67 litros"
+2026-08,monthly,agua-mes,"7,080,000",green,100,1.062,"Meta mensual: 6,666,667 litros"
+2026-08,monthly,produccion-mes,"4,300",red,79.33579335793358,0.7933579335793358,"Meta mensual: 5,420 jabones"
+2026-08,monthly,jabones-vendidos-mes,"1,400",red,32.55813953488372,0.32558139534883723,"Meta mensual: 4,300 jabones"
+2026-08,monthly,ventas-mes,"Q 1,500.00",green,6.66237313731151,,Sin meta mensual fija
+2026-08,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-08,monthly,inmuebles-entregaron,87 / 150,green,57.99999999999999,0.58,58.0% de inmuebles que entregaron aceite
+2026-08,monthly,velas-vendidas-mes,12,red,30,0.3,Meta mensual: 40 velas
+2026-09,annual,colectas,9,green,75,1,meta anual: 12 jornadas
+2026-09,annual,aceite,"63,648.83",green,79.561035,1.0608138,"meta anual: 80,000.00 litros"
+2026-09,annual,agua,"63,648,828",green,79.561035,1.0608138,"meta anual: 80,000,000 litros"
+2026-09,annual,jabones-prod,"46,880",green,72.07872078720787,0.9610496104961049,"meta anual: 65,040 jabones"
+2026-09,annual,jabones-vend,"15,750",green,30.523255813953487,0.4069767441860465,"meta anual: 51,600 jabones"
+2026-09,annual,ventas,"Q 24,879.50",green,23.295411985018728,,"meta anual: Q 106,800.00"
+2026-09,annual,pruebas,1,green,33.33333333333333,0.3333333333333333,meta anual: 3 pruebas
+2026-09,annual,velas-prod,50,green,13.88888888888889,0.1388888888888889,meta anual: 360 velas
+2026-09,monthly,jornadas-recoleccion,1 / 1,green,100,1,Meta mensual: 1 jornada de recolección
+2026-09,monthly,aceite-mes,"7,041.00",green,100,1.05615,"Meta mensual: 6,666.67 litros"
+2026-09,monthly,agua-mes,"7,041,000",green,100,1.05615,"Meta mensual: 6,666,667 litros"
+2026-09,monthly,produccion-mes,"3,750",red,69.18819188191881,0.6918819188191881,"Meta mensual: 5,420 jabones"
+2026-09,monthly,jabones-vendidos-mes,"1,921",red,44.67441860465116,0.4467441860465116,"Meta mensual: 4,300 jabones"
+2026-09,monthly,ventas-mes,"Q 2,365.00",green,9.505818042967102,,Sin meta mensual fija
+2026-09,monthly,inmuebles-atendidos-meta,150 / 150,green,100,1,100% de inmuebles atendidos
+2026-09,monthly,inmuebles-entregaron,87 / 150,green,57.99999999999999,0.58,58.0% de inmuebles que entregaron aceite
+2026-09,monthly,velas-vendidas-mes,43,green,100,1.075,Meta mensual: 40 velas
