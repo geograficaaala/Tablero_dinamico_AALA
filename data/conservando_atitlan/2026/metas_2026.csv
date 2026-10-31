@@ -1,0 +1,19 @@
+clave,indicador,valor,unidad,periodicidad,regla_original
+colectasAnual,Jornadas de recolección,12,jornadas,anual,count_mes_con_actividad
+aceiteAnual,Aceite recolectado,80000,litros,anual,lineal_12_meses
+aguaAnual,Agua protegida,80000000,litros,anual,lineal_12_meses
+jabonesProducidosAnual,Jabones producidos,65040,jabones,anual,meta_anual_independiente
+jabonesProducidosMensual,Jabones producidos,5420,jabones,mensual,meta_mensual_independiente
+jabonesVendidosAnual,Jabones vendidos,51600,jabones,anual,meta_anual_independiente
+jabonesVendidosMensual,Jabones vendidos,4300,jabones,mensual,meta_mensual_independiente
+jabonesHotelVendidosMensual,Jabones vendidos hotel,4000,jabones,mensual,submeta_mensual
+jabonesTocadorVendidosMensual,Jabones vendidos tocador,300,jabones,mensual,submeta_mensual
+inmueblesMensual,Inmuebles atendidos,150,inmuebles,mensual,umbral_operativo
+municipiosJornadasAnual,Municipios con jornadas,7,municipios,anual,meta_de_referencia
+municipiosMetaMes,Municipios visitados,7,municipios,mensual,meta_de_referencia
+pruebasAnual,Pruebas de jabón líquido,3,pruebas,anual,conteo_meses_con_pruebas
+pruebasMeses,Meses esperados para pruebas,3|4|5,meses,programacion,lista_meses
+velasAnual,Velas producidas,360,velas,anual,referencia_anual
+velasProducidas,Velas producidas base,50,velas,base,constante_original
+velasVendidasMes,Velas vendidas,50,velas,mensual,respaldo_si_falta_o_es_cero
+ventasJabonesAnual,Ventas de jabones,106800,quetzales,anual,meta_anual_sin_meta_mensual

@@ -1,0 +1,10 @@
+mes_clave,anio,mes_num,mes_label,aporta_metas_programa,jornadas_recoleccion_ciclo_mes,jornadas_codigos_unicos_mes,filas_recoleccion_validas_mes,municipios_visitados_mes,inmuebles_atendidos_mes,litros_aceite_recolectados_mes,litros_agua_protegidos_mes,clientes_recurrentes_atendidos_mes,filas_clientes_recurrentes_mes,jabones_hotel_producidos_mes,jabones_tocador_producidos_mes,jabones_producidos_mes,jabones_hotel_vendidos_mes,jabones_tocador_vendidos_mes,jabones_vendidos_mes,ingresos_ventas_q_mes,publicaciones_redes_mes,pruebas_jabon_liquido_mes,velas_vendidas_mes,ingresos_ventas_velas_q_mes,tiene_datos_mes,is_latest_data_month
+2026-01,2026,1,Enero,true,1,9,9,9,78,6557.513,6557513,0,0,5100,400,5500,0,0,0,0,8,0,,,true,false
+2026-02,2026,2,Febrero,true,1,9,9,9,88,6860.3150000000005,6860315,0,0,5500,450,5950,1950,230,2180,6862.5,8,0,,,true,false
+2026-03,2026,3,Marzo,true,1,84,84,9,84,7053,7053000,0,0,9600,780,10380,2900,0,2900,5075,8,0,,,true,false
+2026-04,2026,4,Abril,true,1,9,9,9,90,7340,7340000,0,0,4500,350,4850,2294,20,2314,3127,8,0,,,true,false
+2026-05,2026,5,Mayo,true,1,10,10,10,88,7298,7298000,0,0,4000,300,4300,1000,7,1007,1250,8,0,,,true,false
+2026-06,2026,6,Junio,true,1,10,10,10,93,8075,8075000,0,0,4200,250,4450,2000,28,2028,2500,8,0,150,2575,true,false
+2026-07,2026,7,Julio,true,1,9,9,9,86,6344,6344000,0,0,3000,400,3400,2000,0,2000,2200,8,0,40,780,true,false
+2026-08,2026,8,Agosto,true,1,10,9,10,87,7080,7080000,0,0,4000,300,4300,1400,0,1400,1500,8,1,12,230,true,false
+2026-09,2026,9,Septiembre,true,1,10,10,10,87,7041,7041000,0,0,3500,250,3750,1900,21,1921,2365,8,0,43,878.4,true,true

@@ -1,0 +1,18 @@
+{
+  "programa": "conservando_atitlan",
+  "anio": 2026,
+  "primer_periodo": "2026-01",
+  "ultimo_periodo_con_datos": "2026-09",
+  "cantidad_periodos": 9,
+  "fuente_referencia": "docs/index_conservando_atitlan.html (repositorio original)",
+  "sha256_html_original": "ae4c143986d126083c9196f4e5ff8e34cf06c8e1abc726a8fb610ef489e1c0d9",
+  "estado_visual": "blue",
+  "estado_tecnico_regla": {
+    "completo": ">=1",
+    "seguimiento": ">=0.8 y <1",
+    "rezago": "<0.8"
+  },
+  "datos": "datos_mensuales.csv",
+  "metas": "metas_2026.csv",
+  "fuentes": "fuentes_mensuales.csv"
+}
