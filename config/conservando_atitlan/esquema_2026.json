@@ -1,0 +1,43 @@
+{
+  "programa": "conservando_atitlan",
+  "anio": 2026,
+  "identificador": "mes_clave",
+  "campos_numericos": [
+    "jornadas_recoleccion_ciclo_mes",
+    "jornadas_codigos_unicos_mes",
+    "filas_recoleccion_validas_mes",
+    "municipios_visitados_mes",
+    "inmuebles_atendidos_mes",
+    "litros_aceite_recolectados_mes",
+    "litros_agua_protegidos_mes",
+    "clientes_recurrentes_atendidos_mes",
+    "filas_clientes_recurrentes_mes",
+    "jabones_hotel_producidos_mes",
+    "jabones_tocador_producidos_mes",
+    "jabones_producidos_mes",
+    "jabones_hotel_vendidos_mes",
+    "jabones_tocador_vendidos_mes",
+    "jabones_vendidos_mes",
+    "ingresos_ventas_q_mes",
+    "publicaciones_redes_mes",
+    "pruebas_jabon_liquido_mes",
+    "velas_vendidas_mes",
+    "ingresos_ventas_velas_q_mes"
+  ],
+  "campos_requeridos": [
+    "mes_clave",
+    "mes_num",
+    "anio",
+    "tiene_datos_mes",
+    "aporta_metas_programa"
+  ],
+  "validaciones": [
+    "periodos_unicos_y_ordenados",
+    "agua_por_litro_aceite_1000",
+    "produccion_total_por_tipos",
+    "ventas_totales_por_tipos",
+    "metas_independientes_no_recalculadas",
+    "sin_meses_futuros_sin_datos",
+    "compatibilidad_referencia_kpis"
+  ]
+}
