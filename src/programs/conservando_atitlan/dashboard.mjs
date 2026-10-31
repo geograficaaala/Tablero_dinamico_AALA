@@ -1,5 +1,5 @@
 import {cargarDatosConservando,crearControladorConservando} from './data-controller.mjs';
-import {mountProgramHeader} from '../../components/header/header.js';
+import {mountProgramHeader} from '../../components/header.js';
 import {mountFooter} from '../../components/footer/footer.js';
 const MONTHS_ES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 const MONTHS_SHORT=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
