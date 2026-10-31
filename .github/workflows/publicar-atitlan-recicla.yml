@@ -1,4 +1,4 @@
-name: Publicar Atitlán Recicla
+name: Publicar dashboards AALA
 on:
   workflow_dispatch:
   push:
@@ -7,8 +7,9 @@ on:
     paths:
       - 'public/**'
       - 'src/**'
-      - 'config/atitlan_recicla/**'
-      - 'data/atitlan_recicla/**'
+      - 'config/**'
+      - 'data/**'
+      - 'tests/**'
       - '.github/workflows/publicar-atitlan-recicla.yml'
 permissions:
   contents: read
@@ -32,11 +33,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/atitlan_recicla/validate_data.py
-      - run: node --test tests/atitlan_recicla/paridad.test.mjs tests/atitlan_recicla/fase3.test.mjs tests/atitlan_recicla/importaciones.test.mjs
+      - run: node --test tests/atitlan_recicla/paridad.test.mjs tests/atitlan_recicla/fase3.test.mjs
+      - run: python scripts/conservando_atitlan/validate_data.py
+      - run: node --test tests/conservando_atitlan/paridad.test.mjs tests/conservando_atitlan/html.test.mjs
       - run: |
           mkdir -p dist
           cp -R public src data config dist/
-          sed -e 's|href="./atitlan-recicla.html"|href="./public/atitlan-recicla.html"|' -e 's|href="../src/styles/global.css"|href="./src/styles/global.css"|' public/index.html > dist/index.html
+          sed -e 's|href="./atitlan-recicla.html"|href="./public/atitlan-recicla.html"|' -e 's|href="./conservando-atitlan.html"|href="./public/conservando-atitlan.html"|' -e 's|href="../src/styles/global.css"|href="./src/styles/global.css"|' public/index.html > dist/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
