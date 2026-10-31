@@ -35,4 +35,4 @@ jobs:
         with:
           node-version: '22'
       - run: python scripts/conservando_atitlan/validate_data.py
-      - run: node --test tests/conservando_atitlan/paridad.test.mjs
+      - run: node --test tests/conservando_atitlan/paridad.test.mjs tests/conservando_atitlan/modulos.test.mjs

@@ -35,7 +35,7 @@ jobs:
       - run: python scripts/atitlan_recicla/validate_data.py
       - run: node --test tests/atitlan_recicla/paridad.test.mjs tests/atitlan_recicla/fase3.test.mjs
       - run: python scripts/conservando_atitlan/validate_data.py
-      - run: node --test tests/conservando_atitlan/paridad.test.mjs tests/conservando_atitlan/html.test.mjs
+      - run: node --test tests/conservando_atitlan/paridad.test.mjs tests/conservando_atitlan/html.test.mjs tests/conservando_atitlan/modulos.test.mjs
       - run: |
           mkdir -p dist
           cp -R public src data config dist/
