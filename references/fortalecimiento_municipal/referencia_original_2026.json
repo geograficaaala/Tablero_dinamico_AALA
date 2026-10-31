@@ -1,0 +1,105 @@
+{
+  "fuente": "docs/index_fortalecimiento_municipal.html",
+  "periodos_originales": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09"
+  ],
+  "resumen_indicadores": {
+    "2026-01": {
+      "estudios": 0,
+      "pirdes": 1,
+      "asistencias": 0,
+      "reuniones": 1,
+      "capacidad": 0
+    },
+    "2026-02": {
+      "estudios": 2,
+      "pirdes": 2,
+      "asistencias": 1,
+      "reuniones": 2,
+      "capacidad": 0
+    },
+    "2026-03": {
+      "estudios": 3,
+      "pirdes": 2,
+      "asistencias": 3,
+      "reuniones": 3,
+      "capacidad": 0
+    },
+    "2026-04": {
+      "estudios": 4,
+      "pirdes": 2,
+      "asistencias": 3,
+      "reuniones": 3,
+      "capacidad": 1
+    },
+    "2026-05": {
+      "estudios": 5,
+      "pirdes": 2,
+      "asistencias": 3,
+      "reuniones": 4,
+      "capacidad": 1
+    },
+    "2026-06": {
+      "estudios": 5,
+      "pirdes": 2,
+      "asistencias": 5,
+      "reuniones": 4,
+      "capacidad": 1
+    },
+    "2026-07": {
+      "estudios": 5,
+      "pirdes": 3,
+      "asistencias": 7,
+      "reuniones": 5,
+      "capacidad": 1
+    },
+    "2026-08": {
+      "estudios": 5,
+      "pirdes": 3,
+      "asistencias": 22,
+      "reuniones": 8,
+      "capacidad": 18
+    },
+    "2026-09": {
+      "estudios": 5,
+      "pirdes": 3,
+      "asistencias": 23,
+      "reuniones": 8,
+      "capacidad": 18
+    }
+  },
+  "total_actividades": 102,
+  "actividades_por_componente": {
+    "estudios": 13,
+    "pirdes": 12,
+    "asistencias": 30,
+    "reuniones": 36,
+    "capacidad": 11
+  },
+  "overrides_originales": {
+    "2026-08": {
+      "asistencias": 22,
+      "reuniones": 8,
+      "capacidad": 18
+    },
+    "2026-09": {
+      "estudios": 5,
+      "pirdes": 3,
+      "asistencias": 23,
+      "reuniones": 8,
+      "capacidad": 18
+    }
+  },
+  "notas_originales": {
+    "2026-09": "Los acumulados de septiembre conservan la base histórica publicada de agosto: 5 estudios, 3 PIRDES, 22 asistencias, 8 reuniones CODEMA y 18 municipalidades con capacidad instalada. Solo se añade la asistencia de Xejuyú, para llegar a 23. Los 18 de 15 municipios son un valor histórico heredado, no una validación nueva de capacidad instalada en septiembre. El encabezado, el resumen y las hojas de VALIDACIÓN del Excel siguen en abril; para este mes se utilizaron las fechas de las hojas operativas. La capacitación de Porta Hotel es apoyo al sector hotelero; el estudio y el PIRDES se presentan en seguimiento, sin acreditar nuevos productos finalizados o implementados."
+  },
+  "hash_actividades_enero_septiembre": "8a35fd0fc66efe9e83d5e508c98c976329deb26f2808a007291f57211068d343"
+}
