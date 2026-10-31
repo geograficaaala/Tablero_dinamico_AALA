@@ -1,0 +1,38 @@
+name: Validar datos — Conservando Atitlán
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/conservando_atitlan/**'
+      - 'config/conservando_atitlan/**'
+      - 'src/programs/conservando_atitlan/**'
+      - 'tests/conservando_atitlan/**'
+      - 'references/conservando_atitlan/**'
+      - 'scripts/conservando_atitlan/**'
+      - '.github/workflows/validar-conservando-atitlan.yml'
+  pull_request:
+    paths:
+      - 'data/conservando_atitlan/**'
+      - 'config/conservando_atitlan/**'
+      - 'src/programs/conservando_atitlan/**'
+      - 'tests/conservando_atitlan/**'
+      - 'references/conservando_atitlan/**'
+      - 'scripts/conservando_atitlan/**'
+      - '.github/workflows/validar-conservando-atitlan.yml'
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: python scripts/conservando_atitlan/validate_data.py
+      - run: node --test tests/conservando_atitlan/paridad.test.mjs
