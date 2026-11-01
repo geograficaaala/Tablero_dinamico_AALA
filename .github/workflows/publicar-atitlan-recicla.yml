@@ -45,7 +45,7 @@ jobs:
       - run: node --test tests/reforestacion/paridad.test.mjs tests/reforestacion/funcional.test.mjs
       - run: python scripts/tul/validate_data.py
       - run: node --test tests/tul/paridad.test.mjs tests/tul/modulos.test.mjs tests/tul/arranque.test.mjs
-      - run: node --test tests/index/portal.test.mjs
+      - run: node --test tests/index/portal.test.mjs tests/index/original.test.mjs
       - run: node --test tests/index/datos.test.mjs
       - run: |
           mkdir -p dist
@@ -56,9 +56,11 @@ jobs:
           from pathlib import Path
           page = Path('dist/index.html').read_text(encoding='utf-8')
           for name in ('atitlan-recicla', 'conservando-atitlan', 'fortalecimiento-municipal', 'educando-para-conservar', 'reforestando-atitlan', 'tul'):
-              assert Path(f'dist/public/{name}.html').is_file(), f'HTML faltante: {name}'
-              assert f'href="./public/{name}.html"' in page, f'Acceso faltante: {name}'
-          print('OK: seis accesos y HTML de destino publicados')
+              assert Path(f'dist/public/{name}.html').is_file(), name
+          assert 'src="./src/index/index-original.mjs"' in page
+          assert 'href="./src/styles/index-original.css"' in page
+          assert Path('dist/public/assets/maps/cobertura.geojson').is_file()
+          print('OK: portada original, seis destinos y mapa de cobertura')
           PY_CHECK
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
