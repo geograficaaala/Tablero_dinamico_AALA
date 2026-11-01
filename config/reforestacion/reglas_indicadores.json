@@ -1,0 +1,36 @@
+{
+  "programa": "Reforestando Atitlán",
+  "ano": 2026,
+  "modo_de_publicacion": "semaforo_interno_color_visible_azul",
+  "reglas": {
+    "principales": {
+      "evaluacion": "Conservar los estados y porcentajes publicados en total_mes_2026.csv sin recalcular los ajustes históricos"
+    },
+    "complementarios": {
+      "verde_desde": 1,
+      "azul_desde": 0.75,
+      "amarillo_desde": 0.4,
+      "rojo_mayor_que": 0
+    },
+    "metas": {
+      "valor_anual": "metas_referencia_2026.csv",
+      "mensuales": "actividades_complementarias_2026.csv"
+    },
+    "cambios_nuevos": "Agregar períodos con datos completos, aprobar publicación y comprobar cálculos y metas antes del despliegue"
+  },
+  "fuentes": {
+    "periodos_aprobados": [
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09"
+    ],
+    "tabla_aprobacion": "procedencia_2026.csv",
+    "criterio": "Todos los períodos publicados de 2026 se aceptan como datos válidos para el dashboard"
+  }
+}

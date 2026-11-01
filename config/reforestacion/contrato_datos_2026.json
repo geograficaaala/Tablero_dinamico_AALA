@@ -1,0 +1,75 @@
+{
+  "programa": "reforestacion",
+  "anio": 2026,
+  "estado_datos": "aprobados_para_publicacion",
+  "criterio_aceptacion": "Todos los datos publicados de enero a septiembre se consideran válidos según instrucción del solicitante.",
+  "periodo_llave": "periodo_clave",
+  "periodo_formato": "YYYY-MM",
+  "publicacion": "GitHub Pages desde tablas CSV",
+  "tablas": {
+    "total_mes_2026.csv": {
+      "clave": [
+        "periodo_clave"
+      ],
+      "uso": "Cuatro KPI principales, cortes mensuales, metas y tendencias"
+    },
+    "actividades_complementarias_2026.csv": {
+      "clave": [
+        "periodo_clave",
+        "kpi_id"
+      ],
+      "uso": "Nueve indicadores mensuales y descripciones de actividades"
+    },
+    "indicadores_institucionales_2026.csv": {
+      "clave": [
+        "periodo_clave",
+        "indicator_id"
+      ],
+      "uso": "Detalle institucional y modelos de medición originales"
+    },
+    "metas_referencia_2026.csv": {
+      "clave": [
+        "periodo_clave"
+      ],
+      "uso": "Metas de referencia originales por período"
+    },
+    "supervivencia_2026.csv": {
+      "clave": [
+        "periodo_clave"
+      ],
+      "uso": "Porcentaje de supervivencia mensual mostrado"
+    },
+    "procedencia_2026.csv": {
+      "clave": [
+        "periodo_clave"
+      ],
+      "uso": "Aceptación para publicación por período"
+    },
+    "metadata_publicacion.csv": {
+      "clave": [
+        "program_id"
+      ],
+      "uso": "Corte más reciente y resumen del conjunto"
+    },
+    "periodos_2026.csv": {
+      "clave": [
+        "periodo_clave"
+      ],
+      "uso": "Calendario enero–diciembre y disponibilidad de información"
+    },
+    "catalogo_indicadores_2026.csv": {
+      "clave": [
+        "indicador_id"
+      ],
+      "uso": "Diccionario para futura interfaz de carga"
+    }
+  },
+  "restricciones": {
+    "no_modificar_cifras_originales": true,
+    "estados_internos_se_conservan": true,
+    "estados_visibles": "azul",
+    "meses_sin_datos": "no publicar valores inexistentes",
+    "requerir_aprobacion_para_nuevo_mes": true
+  },
+  "nota": "La aprobación para publicación no implica una certificación documental independiente."
+}
