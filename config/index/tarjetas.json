@@ -120,7 +120,7 @@
     "modelId": "reforestacion",
     "dashboard": "reforestando-atitlan.html",
     "hasMonthlyColumn": true,
-    "scoreHeader": "Cumplimiento promedio con respecto a metas mensuales",
+    "scoreHeader": "Avance promedio con respecto a metas anuales",
     "indicators": [
       {
         "index": 0,
