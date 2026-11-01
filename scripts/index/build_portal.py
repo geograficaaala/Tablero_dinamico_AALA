@@ -2,30 +2,33 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parents[2]
 dist = root / 'dist'
-source = root / 'public' / 'index.html'
-html = source.read_text(encoding='utf-8')
-html = html.replace('href="../src/styles/index.css"', 'href="./src/styles/index.css"')
-html = html.replace('src="../src/index/portal.mjs"', 'src="./src/index/portal.mjs"')
+html = (root / 'public/index.html').read_text(encoding='utf-8')
+html = html.replace('href="../src/styles/index-original.css"', 'href="./src/styles/index-original.css"')
+html = html.replace('src="../src/index/index-original.mjs"', 'src="./src/index/index-original.mjs"')
 html = html.replace('src="./assets/logos/', 'src="./public/assets/logos/')
-for slug in ('atitlan-recicla','conservando-atitlan','fortalecimiento-municipal','educando-para-conservar','reforestando-atitlan','tul'):
-    html = html.replace(f'href="./{slug}.html"', f'href="./public/{slug}.html"')
-required = (
+for name in ('chatbot-config.js', 'chatbot-data.js', 'chatbot.js'):
+    html = html.replace(f'src="./{name}"', f'src="./public/{name}"')
+for slug in ('atitlan-recicla', 'conservando-atitlan', 'fortalecimiento-municipal', 'educando-para-conservar', 'reforestando-atitlan', 'tul'):
+    html = html.replace(f'href="./{slug}.html"',f'href="./public/{slug}.html"')
+required = [
     'public/atitlan-recicla.html',
     'public/conservando-atitlan.html',
     'public/fortalecimiento-municipal.html',
     'public/educando-para-conservar.html',
     'public/reforestando-atitlan.html',
     'public/tul.html',
-    'src/index/portal.mjs',
-    'src/styles/index.css',
     'public/assets/logos/aala_logo.png',
-)
-for filename in required:
-    if not (dist / filename).is_file():
-        raise SystemExit(f'Falta archivo requerido para publicar: {filename}')
-if 'src="./src/index/portal.mjs"' not in html:
-    raise SystemExit('La importación del índice no se transformó correctamente')
-if 'href="./src/styles/index.css"' not in html:
-    raise SystemExit('Los estilos del índice no se transformaron correctamente')
+    'public/assets/logos/chill_lago.png',
+    'public/assets/maps/cobertura.geojson',
+    'src/styles/index-original.css',
+    'src/index/index-original.mjs',
+    'src/index/index-data.mjs',
+    'config/index/tarjetas.json',
+]
+missing = [name for name in required if not (dist / name).is_file()]
+if missing:
+    raise SystemExit('Archivos faltantes: ' + ', '.join(missing))
+if 'PROGRAM_MONTH_SNAPSHOTS' in html or '<style>' in html:
+    raise SystemExit('El índice contiene datos o estilos incrustados')
 (dist / 'index.html').write_text(html, encoding='utf-8')
-print('OK: índice publicado con los seis HTML, módulo JavaScript, CSS y logo institucional')
+print('Índice institucional original preparado para GitHub Pages')
