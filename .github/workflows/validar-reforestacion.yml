@@ -1,0 +1,33 @@
+name: Validar datos y módulos — Reforestación
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/reforestacion/**'
+      - 'config/reforestacion/**'
+      - 'references/reforestacion/**'
+      - 'scripts/reforestacion/**'
+      - 'src/programs/reforestacion/**'
+      - 'src/styles/programs/reforestacion.css'
+      - 'public/reforestando-atitlan.html'
+      - 'tests/reforestacion/**'
+      - '.github/workflows/validar-reforestacion.yml'
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: python scripts/reforestacion/validate_data.py
+      - run: node --test tests/reforestacion/paridad.test.mjs tests/reforestacion/funcional.test.mjs
+      - run: node --check src/programs/reforestacion/dashboard.js
+      - run: node --check src/programs/reforestacion/bootstrap.mjs
