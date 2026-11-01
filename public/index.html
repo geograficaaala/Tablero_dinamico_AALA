@@ -2,21 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portal institucional de seguimiento de programas AALA 2026">
-  <title>Tablero dinámico AALA</title>
-  <link rel="stylesheet" href="../src/styles/global.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0f385b">
+  <title>Asociación Amigos del Lago de Atitlán · Tablero dinámico institucional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/styles/index.css">
+  <script type="module" src="../src/index/portal.mjs"></script>
 </head>
 <body>
-  <main class="start">
-    <h1>Tablero Dinámico AALA</h1>
-    <p>Portal institucional de seguimiento de programas · 2026</p>
-    <nav aria-label="Dashboards de programas">
-      <p><a href="./atitlan-recicla.html">Abrir Atitlán Recicla</a></p>
-      <p><a href="./conservando-atitlan.html">Abrir Conservando Atitlán</a></p>
-      <p><a href="./fortalecimiento-municipal.html">Abrir Fortalecimiento Municipal</a></p>
-      <p><a href="./educando-para-conservar.html">Abrir Educando para Conservar</a></p>
-    </nav>
-  </main>
+<header class="header">
+  <a class="header-brand" href="#inicio"><img alt="Logo de Asociación Amigos del Lago de Atitlán" src="./assets/logos/aala_logo.png"><span><strong>Asociación Amigos del Lago de Atitlán</strong><small>Tablero dinámico institucional de avances</small></span></a>
+  <nav aria-label="Secciones del tablero dinámico" class="nav-tabs" role="tablist">
+    <button type="button" class="nav-tab active" data-section="resumen" role="tab" aria-selected="true">Resumen</button>
+    <button type="button" class="nav-tab" data-section="programas" role="tab" aria-selected="false">Programas y proyectos</button>
+  </nav>
+</header>
+<main id="inicio">
+  <div class="page-panel" data-panel="resumen">
+    <section class="hero-shell">
+      <article class="hero-main card"><div class="eyebrow">Seguimiento institucional</div><h1>Asociación Amigos del Lago de Atitlán</h1><p><strong>La Asociación Amigos del Lago de Atitlán se enfoca en generar una cultura regenerativa en la cuenca del Lago de Atitlán</strong>, para que las personas podamos coexistir de forma sostenible y sana con el entorno natural. Impulsamos educación ambiental, reforestación, reciclaje, empoderamiento económico de mujeres y asesoría municipal en agua y saneamiento.</p></article>
+      <aside class="hero-side card"><img src="./assets/logos/aala_logo.png" alt="Identidad institucional AALA"></aside>
+    </section>
+    <section class="dashboard-ribbon" aria-label="Resumen institucional"><article><div>Programas y proyectos con datos accesibles</div><strong id="kpiPrograms">6</strong><p>Seguimiento basado en los archivos de cada programa.</p></article><article><div>Corte de referencia</div><strong id="kpiLatest">Septiembre</strong><p id="kpiLatestSub">Resultados de 2026.</p></article></section>
+    <section class="storyboard"><div class="section-kicker">Cómo leer este tablero</div><h2>¿Qué información ofrece este tablero dinámico?</h2><p class="story-lead">Este tablero permite medir el avance en la consecución de los indicadores de los programas y proyectos institucionales de AALA, comparando cada resultado con sus metas propias y su avance acumulado.</p><div class="story-columns"><p>Los programas no comparten las mismas unidades ni los mismos modelos de medición. Por eso, cada tarjeta distingue las actividades realizadas, el desempeño mensual y el progreso frente a las metas anuales, sin sumar resultados incompatibles.</p><div class="story-points"><article><strong>Seguimiento</strong><span>Resultados correspondientes al mes seleccionado.</span></article><article><strong>Comparación</strong><span>Cumplimiento frente a metas propias de cada programa.</span></article><article><strong>Lectura rápida</strong><span>Información clara para decisiones institucionales.</span></article></div></div></section>
+    <section class="next-step"><div><span class="section-kicker">Explora los avances</span><h2>Conoce el desempeño de los seis programas</h2><p>En las tarjetas podrás comparar resultados mensuales y acumulados anuales, y abrir cada tablero especializado.</p></div><button type="button" class="primary-link" data-section="programas">Ver programas y proyectos ↗</button></section>
+  </div>
+  <div class="page-panel" data-panel="programas" hidden>
+    <section class="program-intro"><div class="section-kicker">Programas y proyectos</div><h1>Seis programas, seis rutas de avance</h1><p>Cada programa se evalúa con sus propios indicadores y metas. La evaluación interna se conserva; el color visible es azul institucional.</p></section>
+    <section class="program-month-toolbar" aria-label="Seleccionar período"><div><strong>Período de lectura</strong><span id="programMonthLabel">Indicadores de septiembre de 2026.</span></div><div class="program-month-buttons" id="programMonthButtons" role="group" aria-label="Seleccionar mes de 2026"></div></section>
+    <section class="program-carousel" aria-label="Tarjetas con indicadores por programa"><div class="carousel-actions"><button type="button" id="programCarouselPrev" aria-label="Programa anterior">‹</button><div id="programCarouselDots" class="carousel-dots"></div><button type="button" id="programCarouselNext" aria-label="Programa siguiente">›</button></div><div class="program-carousel-viewport" id="programCarouselViewport" tabindex="0"><div id="programGrid" aria-live="polite" class="program-grid">Cargando datos de los programas…</div></div></section>
+    <nav class="program-link-tray" aria-label="Accesos directos a los programas"><strong>Acceso directo</strong><a href="./atitlan-recicla.html">Atitlán Recicla</a><a href="./conservando-atitlan.html">Conservando Atitlán</a><a href="./fortalecimiento-municipal.html">Fortalecimiento Municipal</a><a href="./educando-para-conservar.html">Educando para Conservar</a><a href="./reforestando-atitlan.html">Reforestando Atitlán</a><a href="./tul.html">Siembra de Tul</a></nav>
+  </div>
+</main>
+<footer class="site-footer"><div class="footer-inner"><section class="footer-brand"><h2>Asociación Amigos del Lago de Atitlán</h2><p>Trabajamos por una cultura regenerativa en la cuenca del Lago de Atitlán, promoviendo educación, conservación, reciclaje y soluciones sostenibles.</p></section><section><h3>Contacto y sitio</h3><a href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer">Página web</a><a href="https://www.youtube.com/@asociacionamigosdellagodea2358" target="_blank" rel="noopener noreferrer">YouTube</a><a href="https://www.facebook.com/AmigoAtitlan/?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a></section><section><h3>Redes</h3><a href="https://www.linkedin.com/in/aala-atitl%C3%A1n-3653a0325/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.instagram.com/amigoslagoatitlan/" target="_blank" rel="noopener noreferrer">Instagram</a></section><img class="footer-logo" src="./assets/logos/aala_logo.png" alt="Amigos del Lago de Atitlán"></div></footer>
 </body>
 </html>
