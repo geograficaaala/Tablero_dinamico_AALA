@@ -118,16 +118,29 @@ async function loadEducando(){
 }
 
 async function loadReforestacion(){
-  const rows=await fetchCsv('data/reforestacion/2026/indicadores_institucionales_2026.csv');
+  const rows=await fetchCsv('data/reforestacion/2026/total_mes_2026.csv');
   const months=new Set(rows.map(r=>Number(r.mes_num)));
-  return {months,get(month){return rows.filter(r=>Number(r.mes_num)===month).map(r=>{
-    const m=num(r.valor_mes), mg=num(r.meta_mes), a=num(r.valor_acumulado),g=num(r.meta_anual);
-    return metric(r.indicador_nombre,r.unidad,m,mg>0?mg:null,a,g>0?g:null,{
-      monthlyPct:mg>0?ratio(m,mg):null,
-      annualPct:Number.isFinite(num(r.pct_meta_anual))?num(r.pct_meta_anual):null,
-      monthNote:mg>0?'':'No hay meta mensual publicada'
+  const definitions=[
+    ['Hectáreas monitoreadas','ha','ha_monitoreadas_kpi_mes','ha_monitoreadas_kpi_acum','meta_ha'],
+    ['Cobertura cartográfica de monitoreos','unidad','pct_cartografia_mes','pct_cartografia_acum',null],
+    ['Árboles sembrados','árboles','arboles_sembrados_kpi_mes','arboles_sembrados_acum','meta_arboles'],
+    ['Unidad SIG creada','unidad','aporte_sig_mes','aporte_sig_acum','meta_unidad_sig'],
+    ['Plantas netas producidas','plantas','plantas_netas_mes','plantas_netas_acum','meta_plantas'],
+    ['Especies nativas activas','especies','especies_activas_mes','especies_acumuladas_proxy','meta_especies']
+  ];
+  return {months,get(month){
+    const row=rows.find(r=>Number(r.mes_num)===month);
+    if(!row)return [];
+    return definitions.map(([name,unit,monthlyKey,annualKey,goalKey])=>{
+      const monthly=num(row[monthlyKey]);
+      const annual=num(row[annualKey]);
+      const annualGoal=goalKey?num(row[goalKey]):null;
+      return metric(name,unit,monthly,null,annual,annualGoal,{
+        monthlyPct:null,
+        annualPct:annualGoal>0?ratio(annual,annualGoal):null
+      });
     });
-  });}};
+  }};
 }
 
 async function loadTul(){

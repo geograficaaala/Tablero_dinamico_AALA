@@ -417,7 +417,7 @@ function programCard(p){
       <div class="prog-score-wrap">
         <div class="prog-score-header">
           <span class="prog-score-label">${scoreHeader}</span>
-          <span class="prog-score-value">${fmtPct(p.score)}</span>
+          <span class="prog-score-value">${finite(p.score) ? fmtPct(p.score) : '—'}</span>
         </div>
         <div class="prog-score-track">
           <div class="prog-score-fill" style="width:${scoreFill}%"></div>
@@ -536,7 +536,9 @@ function makeProgram(descriptor, month){
   if (!available) return { id:descriptor.id, name:descriptor.name, dashboard, latestLabel:'Sin datos', periodKey:'', score:null, hasMonthlyColumn:descriptor.hasMonthlyColumn, scoreHeader:descriptor.scoreHeader, metrics:[] };
   const rows = source.get(month);
   const metrics = descriptor.indicators.map(d => rows[d.index] ? makeMetric(rows[d.index], d, month) : null).filter(Boolean);
-  const values = metrics.map(m => descriptor.hasMonthlyColumn === false ? m.pct : m.monthlyPct).filter(finite);
+  const monthlyValues = metrics.map(m => m.monthlyPct).filter(finite);
+  const annualValues = metrics.map(m => m.pct).filter(finite);
+  const values = descriptor.hasMonthlyColumn === false || !monthlyValues.length ? annualValues : monthlyValues;
   const score = values.length ? avg(values) : null;
   return {id:descriptor.id,name:descriptor.name,dashboard,latestLabel:MONTH_NAMES[month - 1],periodKey:`2026-${String(month).padStart(2,'0')}`,score,hasMonthlyColumn:descriptor.hasMonthlyColumn,scoreHeader:descriptor.scoreHeader,metrics};
 }
@@ -558,7 +560,7 @@ function renderProgramMonth(month){
   const data=descriptions.map(d=>makeProgram(d,month));
   const grid=document.getElementById('programGrid');
   if(grid){
-    grid.innerHTML=data.map(p=>p.score===null?renderNoData(p):programCard(p)).join('');
+    grid.innerHTML=data.map(p=>!p.periodKey?renderNoData(p):programCard(p)).join('');
     initProgramCarousel();
   }
   const valid=data.filter(p=>finite(p.score));
