@@ -1,0 +1,33 @@
+name: Validar datos y módulos — Siembra de Tul
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/tul/**'
+      - 'src/programs/tul/**'
+      - 'src/styles/programs/tul.css'
+      - 'public/tul.html'
+      - 'public/assets/logos/siembra-de-tul.png'
+      - 'scripts/tul/**'
+      - 'tests/tul/**'
+      - 'references/tul/**'
+      - 'config/tul/**'
+      - '.github/workflows/validar-tul.yml'
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: python scripts/tul/validate_data.py
+      - run: node --test tests/tul/paridad.test.mjs tests/tul/modulos.test.mjs tests/tul/arranque.test.mjs
+      - run: node --check src/programs/tul/dashboard.mjs
