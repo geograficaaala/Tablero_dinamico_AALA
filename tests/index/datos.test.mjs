@@ -44,3 +44,14 @@ test('los porcentajes anuales de Atitlán y Conservando respetan metas del contr
   assert.ok(ar.get(9).find(r=>r.name==='Materiales reciclables').annualGoal>0);
   assert.ok(ca.get(9).find(r=>r.name==='Aceite usado recolectado').annualGoal===80000);
 });
+
+test('Reforestación usa la meta única de 90,000 y sus acumulados del dashboard',async()=>{
+  const model=await programs.find(p=>p.id==='reforestacion').loader();
+  const metrics=model.get(9);
+  const trees=metrics.find(m=>m.name==='Árboles sembrados');
+  assert.equal(trees.annualGoal,90000);
+  assert.equal(trees.annual,35000);
+  assert.ok(Math.abs(trees.annualPct-35000/90000)<1e-10);
+  assert.equal(trees.monthlyPct,null);
+  assert.ok(metrics.filter(m=>m.annualPct!==null).length>=4);
+});
