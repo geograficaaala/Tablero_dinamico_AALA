@@ -1,0 +1,13 @@
+periodo_clave,mes_num,mes_label,datos_disponibles,publicado,anio
+2026-01,1,Enero,true,true,2026
+2026-02,2,Febrero,true,true,2026
+2026-03,3,Marzo,true,true,2026
+2026-04,4,Abril,true,true,2026
+2026-05,5,Mayo,true,true,2026
+2026-06,6,Junio,true,true,2026
+2026-07,7,Julio,true,true,2026
+2026-08,8,Agosto,true,true,2026
+2026-09,9,Septiembre,true,true,2026
+2026-10,10,Octubre,false,false,2026
+2026-11,11,Noviembre,false,false,2026
+2026-12,12,Diciembre,false,false,2026
