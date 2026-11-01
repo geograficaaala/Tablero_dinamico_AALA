@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync,existsSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+const base=new URL('../../',import.meta.url);
+const read=rel=>readFileSync(fileURLToPath(new URL(rel,base)),'utf8');
+test('HTML consume JS/CSS externos',()=>{const html=read('public/tul.html');assert.match(html,/src="\.\.\/src\/programs\/tul\/dashboard\.mjs"/);assert.match(html,/href="\.\.\/src\/styles\/programs\/tul\.css"/);assert.doesNotMatch(html,/const MONTHLY_DATA|const ANNUAL_GOALS/);});
+test('importaciones de header y footer apuntan a módulos con exportaciones',async()=>{const js=read('src/programs/tul/dashboard.mjs');const matches=[...js.matchAll(/from '([^']+)'/g)].map(x=>x[1]);for(const m of matches){const u=new URL(m,new URL('src/programs/tul/dashboard.mjs',base));assert.ok(existsSync(fileURLToPath(u)),`Falta ${m}`);}const header=await import('../../src/components/header.js');const footer=await import('../../src/components/footer/footer.js');assert.equal(typeof header.mountProgramHeader,'function');assert.equal(typeof footer.mountFooter,'function');});
+test('logo del programa y geoportal presentes',()=>{const html=read('public/tul.html');assert.ok(existsSync(fileURLToPath(new URL('public/assets/logos/siembra-de-tul.png',base))));assert.match(html,/a1342628ff9e473f870f0f11ce49bf01/);});
+test('datos y módulos se publican sin modificaciones de rutas',()=>{for(const rel of ['data/tul/2026/resultados_mensuales_2026.csv','src/styles/branding.css','src/programs/tul/data-controller.mjs'])assert.ok(existsSync(fileURLToPath(new URL(rel,base))));});
