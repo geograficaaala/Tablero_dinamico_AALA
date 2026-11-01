@@ -52,7 +52,8 @@ def main():
     survival = read_csv('supervivencia_2026.csv')
     assert all(row['periodo_clave'].startswith('2026-') for row in total)
     assert all(int(row['mes_num']) in range(1, 13) for row in total)
-    primary = compare(total, source['effective'], lambda r: r['periodo_clave'], {'logros_texto', 'alertas_texto', 'fuente_texto', 'estatus_reporte', 'is_latest_data_month'})
+    reference_effective = [{**row, 'pct_meta_arboles': float(row['arboles_sembrados_acum']) / 90000} for row in source['effective']]
+    primary = compare(total, reference_effective, lambda r: r['periodo_clave'], {'logros_texto', 'alertas_texto', 'fuente_texto', 'estatus_reporte', 'is_latest_data_month'})
     more = compare(extra, source['complementary'], lambda r: (r['periodo_clave'], r['kpi_id']), {'fuente'})
     months = {r['periodo_clave'] for r in total}
     assert months.issubset({f'2026-{x:02}' for x in range(1, 13)})
@@ -62,7 +63,16 @@ def main():
     assert all(r['periodo_clave'] in months for r in metas + origin + survival)
     assert len(total) == 9 and primary == 9
     assert len(extra) == 81 and more == 81
-    assert len(read_csv('indicadores_institucionales_2026.csv')) == 54
+    assert all(math.isclose(float(r['pct_meta_arboles']), float(r['arboles_sembrados_acum']) / 90000, rel_tol=0, abs_tol=1e-10) for r in total)
+    assert all(float(r['meta_arboles']) == 90000 for r in total)
+    assert all(float(r['arboles_meta_anual']) == 90000 for r in metas)
+    institutional = read_csv('indicadores_institucionales_2026.csv')
+    trees = [r for r in institutional if r['subindicador_id'] == 'arboles_sembrados']
+    assert len(trees) == 9
+    assert all(float(r['meta_anual']) == 90000 for r in trees)
+    assert all(math.isclose(float(r['pct_meta_anual']), float(r['valor_acumulado']) / 90000, rel_tol=0, abs_tol=1e-10) for r in trees)
+    assert all(int(float(r['valor_acumulado'])) == int(float(next(t for t in total if t['periodo_clave'] == r['periodo_clave'])['arboles_sembrados_acum'])) for r in trees)
+    assert len(institutional) == 54
     assert all(r['aprobado_para_publicacion'] == 'true' for r in origin)
     assert {r['periodo_clave'] for r in origin} == months
     assert all('estimaci' not in r['tipo_fuente'].lower() for r in origin)
@@ -79,7 +89,7 @@ def main():
     assert all(r['estatus_reporte'] == 'Datos aprobados para publicación' for r in total[-3:])
     assert next(r for r in survival if r['periodo_clave'] == '2026-09')['porcentaje_mostrado'] == '68'
     assert next(r for r in total if r['periodo_clave'] == '2026-09')['arboles_sembrados_acum'] == '35000'
-    print(f'OK: {primary} meses, {more} KPI complementarios, 54 indicadores institucionales, 13 definiciones y 12 períodos; cifras iguales a referencia original y publicación aprobada.')
+    print(f'OK: {primary} meses, {more} KPI complementarios, 54 indicadores institucionales, 13 definiciones y 12 períodos; cifras conservadas salvo meta y porcentajes de árboles actualizados a 90,000.')
 
 if __name__ == '__main__':
     main()
