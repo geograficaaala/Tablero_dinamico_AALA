@@ -1,0 +1,15 @@
+{
+  "anio": 2026,
+  "reglas": {
+    "porcentaje_anual": "max(0,min(100,round(resultado_acumulado/meta_anual*100)))",
+    "porcentaje_mensual": "meta_mensual>0 ? porcentaje_acotado : (resultado_mes>0 ? 100 : 0)",
+    "semaforo_interno": {
+      "cumple": "porcentaje>=100",
+      "avance": "85<=porcentaje<100",
+      "rezago": "porcentaje<85"
+    },
+    "color_visible": "azul_institucional"
+  },
+  "metas_anuales_y_mensuales": "Se leen exclusivamente de las tablas originales",
+  "nota": "Los porcentajes visibles se acotan a 100 incluso cuando el acumulado supera la meta anual. La evaluación interna no altera los valores."
+}
