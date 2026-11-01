@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Tablero dinámico 2026 del programa Siembra de Tul de AALA">
+<title>Siembra de Tul · AALA</title>
+<link rel="stylesheet" href="../src/styles/programs/tul.css">
+<link rel="stylesheet" href="../src/styles/branding.css">
+</head>
+<body class="view-full">
+<div id="tulHeaderMount"></div>
+<div class="wrap">
+<div class="exec-only">
+<section class="section">
+<article class="card panel">
+<div class="section-head">
+<div>
+<h2>Resumen ejecutivo</h2>
+<p id="execPeriodText">Lectura ejecutiva del programa.</p>
+</div>
+</div>
+<div class="kpis" id="execKpiGrid"></div>
+</article>
+</section>
+</div>
+<div class="full-only">
+<section class="hero" id="resumen">
+<div class="card hero-main">
+<div class="hero-copy-text">
+<h1>Siembra de Tul</h1>
+<p class="hero-lead">
+              En el lago de Atitlán se han identificado dos tipos de tul: <strong>Schoenoplectus californicus</strong>, comúnmente conocido como tul macho, utilizado para la elaboración de artesanías como petates y sopladores; y <strong>Typha domingensis</strong>, conocido como tul hembra, utilizado principalmente para amarrar cangrejos de agua dulce.
+            </p>
+<p class="hero-lead">
+              El tul es una planta autóctona que se encuentra en las orillas del Lago y posee cualidades que disminuyen la contaminación, pues sus raíces filtran el agua de manera natural. Además de oxigenar al Lago, el tul ofrece ecosistemas a numerosas especies acuáticas y aves migratorias.
+            </p>
+<p class="hero-lead">
+              Las siembras y podas estratégicas del programa están focalizadas en zonas degradadas o en sitios donde la permanencia de las masas tulares naturalmente establecidas ha sido comprometida. Estas acciones buscan recuperar cobertura vegetal, fortalecer la resiliencia ambiental de la orilla y conservar funciones ecológicas clave para el Lago de Atitlán.
+            </p>
+</div>
+</div>
+<aside aria-label="Identidad visual del programa" class="card hero-side">
+<div class="logo-frame">
+<img alt="Logo del programa Siembra de Tul" class="hero-logo" src="./assets/logos/siembra-de-tul.png"/>
+</div>
+</aside>
+</section>
+<section class="section metric-section" id="indicadoresAnuales">
+<div class="section-head">
+<div>
+<h2>Metas anuales y avance acumulado</h2>
+</div>
+</div>
+<div class="kpis" id="annualKpiGrid"></div>
+</section>
+<section class="section metric-section" id="indicadoresMensuales">
+<div class="section-head">
+<div>
+<h2>Metas mensuales</h2>
+</div>
+</div>
+<div class="kpis" id="monthlyKpiGrid"></div>
+</section>
+<section class="section" id="programacion">
+<div class="section-head">
+<div>
+<h2>Programación de jornadas 2026</h2>
+</div>
+</div>
+<article class="card panel">
+<div class="calendar-grid" id="calendarGrid"></div>
+</article>
+</section>
+<section class="section">
+<article class="card panel">
+<div class="section-head">
+<div>
+<h2>Cobertura territorial acumulada</h2>
+</div>
+</div>
+<div class="territory-list" id="territoryList"></div>
+</article>
+</section>
+<section class="section" id="geoportal">
+<div class="section-head">
+<div>
+<h2>Geoportal oficial de Tul</h2>
+</div>
+</div>
+<article class="card iframe-shell">
+<div class="iframe-box">
+<iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://experience.arcgis.com/experience/a1342628ff9e473f870f0f11ce49bf01/" title="Geoportal oficial de Tul">
+</iframe>
+</div>
+</article>
+</section>
+<section class="section" id="analisisMes">
+<div class="section-head">
+<div>
+<h2>Análisis del mes</h2>
+</div>
+</div>
+<article class="card panel analysis-panel" id="monthlyAnalysis"></article>
+</section>
+</div>
+</div>
+<div id="tulFooterMount"></div>
+<div id="tulError" class="aala-page-message" role="alert" hidden></div>
+<div id="tulPresentation" class="aala-presentation" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Presentación de Siembra de Tul"></div>
+<script type="module" src="../src/programs/tul/dashboard.mjs"></script>
+</body>
+</html>
