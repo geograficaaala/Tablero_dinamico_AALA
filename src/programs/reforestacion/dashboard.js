@@ -377,7 +377,7 @@ function renderExecutive(row){
     <div class="exec-strip-card"><small>Cartografía</small><strong>${escapeHtml(formatPercent(row.pct_cartografia_acum))}</strong></div>
     <div class="exec-strip-card"><small>Especies activas</small><strong>${escapeHtml(formatNumber(row.especies_acumuladas_proxy,0))}</strong></div>
     <div class="exec-strip-card"><small>Área intervenida del mes</small><strong>${escapeHtml(formatByUnit(row.area_intervenida_ha_mes,'ha',2))}</strong></div>
-    <div class="exec-strip-card"><small>Estatus del reporte</small><strong>${escapeHtml(row.estatus_reporte || '—')}</strong></div>
+    <div class="exec-strip-card"><small>Árboles reforestados</small><strong>${escapeHtml(formatNumber(row.arboles_sembrados_acum,0))}</strong></div>
   `);
 }
 
@@ -393,8 +393,7 @@ function renderAlerts(row){
   setHtml('execAlertPanel', html);
   document.getElementById('narrativePanel').innerHTML = `
     <div class="alert blue"><strong>Logros:</strong> ${escapeHtml(row.logros_texto || 'Sin narrativa registrada.')}</div>
-    <div class="alert green"><strong>Fuentes:</strong> ${escapeHtml(sourceLabel(row.fuente_texto))}</div>
-    <div class="alert yellow"><strong>Estatus:</strong> ${escapeHtml(row.estatus_reporte || '—')}</div>
+
   `;
 }
 
@@ -411,7 +410,7 @@ function renderDiagnostics(row){
     <p>En <strong>${escapeHtml(row.mes_label)} ${escapeHtml(row.anio)}</strong>, el programa registra <strong>${escapeHtml(formatByUnit(row.ha_monitoreadas_kpi_acum,'ha',2))}</strong> monitoreadas, <strong>${escapeHtml(formatByUnit(row.arboles_sembrados_acum,'árboles'))}</strong> árboles sembrados, un avance del sistema forestal digital de <strong>${escapeHtml(formatPercent(row.pct_meta_sig))}</strong> y <strong>${escapeHtml(formatByUnit(row.plantas_netas_acum,'plantas'))}</strong> plantas acumuladas en vivero.</p>
     <p>El componente con mayor avance relativo es <strong>${escapeHtml(lead.title)}</strong>, con <strong>${escapeHtml(formatPercent(lead.pct))}</strong> de cumplimiento de su meta anual y un acumulado de <strong>${escapeHtml(lead.id === 'sig' ? formatPercent(lead.pct) + ' de avance' : formatByUnit(lead.value, lead.unit))}</strong>.</p>
     <p>El componente con mayor rezago relativo es <strong>${escapeHtml(lag.title)}</strong>, con <strong>${escapeHtml(formatPercent(lag.pct))}</strong> de avance. ${escapeHtml(row.alertas_texto || 'Se recomienda revisar el calendario operativo y reforzar la captura de evidencia del período.')}</p>
-    <p>La lectura del mes reporta: <strong>${escapeHtml(row.logros_texto || 'Sin logros narrativos cargados')}</strong>. Fuente consolidada del tablero: <strong>${escapeHtml(sourceLabel(row.fuente_texto))}</strong>.</p>`;
+    <p>La lectura del mes reporta: <strong>${escapeHtml(row.logros_texto || 'Sin logros narrativos cargados')}</strong>.</p>`;
   setHtml('diagnosticPanel', html);
   setHtml('execDiagnosticPanel', html);
 }
@@ -750,7 +749,7 @@ function renderSourceNotice(row){
 }
 function resumenCorreoReforestando(){
  const r=getSelectedRow();
- return `Reforestando Atitlán — ${r.mes_label} 2026\nHectáreas monitoreadas: ${r.ha_monitoreadas_kpi_acum} / ${r.meta_ha} ha\nÁrboles reforestados: ${r.arboles_sembrados_acum} / ${r.meta_arboles}\nSistema forestal digital: ${formatPercent(r.pct_meta_sig)}\nPlantas nativas: ${r.plantas_netas_acum} / ${r.meta_plantas}\nFuente: ${r.fuente_texto||''}`;
+ return `Reforestando Atitlán — ${r.mes_label} 2026\nHectáreas monitoreadas: ${r.ha_monitoreadas_kpi_acum} / ${r.meta_ha} ha\nÁrboles reforestados: ${r.arboles_sembrados_acum} / ${r.meta_arboles}\nSistema forestal digital: ${formatPercent(r.pct_meta_sig)}\nPlantas nativas: ${r.plantas_netas_acum} / ${r.meta_plantas}`;
 }
 window.setReforestaPeriod = period => setPeriod(period);
 window.reforestaResumenCorreo = () => resumenCorreoReforestando();
