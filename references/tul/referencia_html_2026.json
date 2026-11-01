@@ -1,0 +1,635 @@
+{
+  "ACTIVE_YEAR": 2026,
+  "ACTIVE_MONTH_MAX": 9,
+  "DEFAULT_MONTH": 9,
+  "ANNUAL_GOALS": {
+    "jornadas": 21,
+    "metros": 1300,
+    "macollas": 1350,
+    "mantenimiento": 10,
+    "mapas": 11,
+    "capas": 4,
+    "sitios": 10,
+    "municipios": 6
+  },
+  "MONTHS": [
+    {
+      "num": 2,
+      "short": "Feb",
+      "name": "Febrero"
+    },
+    {
+      "num": 3,
+      "short": "Mar",
+      "name": "Marzo"
+    },
+    {
+      "num": 4,
+      "short": "Abr",
+      "name": "Abril"
+    },
+    {
+      "num": 5,
+      "short": "May",
+      "name": "Mayo"
+    },
+    {
+      "num": 6,
+      "short": "Jun",
+      "name": "Junio"
+    },
+    {
+      "num": 7,
+      "short": "Jul",
+      "name": "Julio"
+    },
+    {
+      "num": 8,
+      "short": "Ago",
+      "name": "Agosto"
+    },
+    {
+      "num": 9,
+      "short": "Sep",
+      "name": "Septiembre"
+    },
+    {
+      "num": 10,
+      "short": "Oct",
+      "name": "Octubre"
+    },
+    {
+      "num": 11,
+      "short": "Nov",
+      "name": "Noviembre"
+    },
+    {
+      "num": 12,
+      "short": "Dic",
+      "name": "Diciembre"
+    }
+  ],
+  "MONTHLY_DATA": {
+    "2": {
+      "monthly": {
+        "jornadas": 2,
+        "jornadasGoal": 2,
+        "metros": 230,
+        "metrosGoal": 225,
+        "macollas": 135,
+        "macollasGoal": 132,
+        "mantenimiento": 1,
+        "mantenimientoGoal": 1,
+        "mapas": 1,
+        "mapasGoal": 1,
+        "capas": 0,
+        "capasGoal": 0,
+        "sitios": 2,
+        "sitiosGoal": 2
+      },
+      "annual": {
+        "jornadas": 2,
+        "metros": 230,
+        "macollas": 135,
+        "mantenimiento": 1,
+        "mapas": 1,
+        "capas": 0,
+        "municipios": 2,
+        "sitios": 2
+      }
+    },
+    "3": {
+      "monthly": {
+        "jornadas": 2,
+        "jornadasGoal": 2,
+        "metros": 250,
+        "metrosGoal": 245,
+        "macollas": 147,
+        "macollasGoal": 145,
+        "mantenimiento": 1,
+        "mantenimientoGoal": 1,
+        "mapas": 1,
+        "mapasGoal": 1,
+        "capas": 1,
+        "capasGoal": 1,
+        "sitios": 2,
+        "sitiosGoal": 2
+      },
+      "annual": {
+        "jornadas": 4,
+        "metros": 480,
+        "macollas": 282,
+        "mantenimiento": 2,
+        "mapas": 2,
+        "capas": 1,
+        "municipios": 3,
+        "sitios": 4
+      }
+    },
+    "4": {
+      "monthly": {
+        "jornadas": 2,
+        "jornadasGoal": 2,
+        "metros": 225,
+        "metrosGoal": 225,
+        "macollas": 132,
+        "macollasGoal": 132,
+        "mantenimiento": 1,
+        "mantenimientoGoal": 1,
+        "mapas": 1,
+        "mapasGoal": 1,
+        "capas": 0,
+        "capasGoal": 0,
+        "sitios": 2,
+        "sitiosGoal": 2
+      },
+      "annual": {
+        "jornadas": 6,
+        "metros": 705,
+        "macollas": 414,
+        "mantenimiento": 3,
+        "mapas": 3,
+        "capas": 1,
+        "municipios": 4,
+        "sitios": 6
+      }
+    },
+    "5": {
+      "monthly": {
+        "jornadas": 2,
+        "jornadasGoal": 2,
+        "metros": 198,
+        "metrosGoal": 225,
+        "macollas": 132,
+        "macollasGoal": 132,
+        "mantenimiento": 1,
+        "mantenimientoGoal": 1,
+        "mapas": 1,
+        "mapasGoal": 1,
+        "capas": 0,
+        "capasGoal": 0,
+        "sitios": 2,
+        "sitiosGoal": 2
+      },
+      "annual": {
+        "jornadas": 8,
+        "metros": 903,
+        "macollas": 546,
+        "mantenimiento": 4,
+        "mapas": 4,
+        "capas": 1,
+        "municipios": 5,
+        "sitios": 8
+      }
+    },
+    "6": {
+      "monthly": {
+        "jornadas": 2,
+        "jornadasGoal": 2,
+        "metros": 222,
+        "metrosGoal": 225,
+        "macollas": 130,
+        "macollasGoal": 132,
+        "mantenimiento": 0,
+        "mantenimientoGoal": 1,
+        "mapas": 1,
+        "mapasGoal": 1,
+        "capas": 0,
+        "capasGoal": 0,
+        "sitios": 2,
+        "sitiosGoal": 2
+      },
+      "annual": {
+        "jornadas": 10,
+        "metros": 1125,
+        "macollas": 676,
+        "mantenimiento": 4,
+        "mapas": 5,
+        "capas": 1,
+        "municipios": 5,
+        "sitios": 10
+      }
+    },
+    "7": {
+      "monthly": {
+        "jornadas": 2,
+        "jornadasGoal": 2,
+        "metros": 233,
+        "metrosGoal": 225,
+        "macollas": 137,
+        "macollasGoal": 132,
+        "mantenimiento": 1,
+        "mantenimientoGoal": 1,
+        "mapas": 1,
+        "mapasGoal": 1,
+        "capas": 0,
+        "capasGoal": 0,
+        "sitios": 2,
+        "sitiosGoal": 2
+      },
+      "annual": {
+        "jornadas": 12,
+        "metros": 1358,
+        "macollas": 813,
+        "mantenimiento": 5,
+        "mapas": 6,
+        "capas": 1,
+        "municipios": 6,
+        "sitios": 12
+      }
+    },
+    "8": {
+      "monthly": {
+        "jornadas": 2,
+        "jornadasGoal": 2,
+        "metros": 261,
+        "metrosGoal": 225,
+        "macollas": 153,
+        "macollasGoal": 132,
+        "mantenimiento": 1,
+        "mantenimientoGoal": 1,
+        "mapas": 1,
+        "mapasGoal": 1,
+        "capas": 0,
+        "capasGoal": 0,
+        "sitios": 2,
+        "sitiosGoal": 2
+      },
+      "annual": {
+        "jornadas": 14,
+        "metros": 1619,
+        "macollas": 966,
+        "mantenimiento": 6,
+        "mapas": 7,
+        "capas": 1,
+        "municipios": 6,
+        "sitios": 14
+      }
+    },
+    "9": {
+      "monthly": {
+        "jornadas": 2,
+        "jornadasGoal": 2,
+        "metros": 171,
+        "metrosGoal": 225,
+        "macollas": 234,
+        "macollasGoal": 132,
+        "mantenimiento": 2,
+        "mantenimientoGoal": 1,
+        "mapas": 3,
+        "mapasGoal": 1,
+        "capas": 0,
+        "capasGoal": 0,
+        "sitios": 2,
+        "sitiosGoal": 2
+      },
+      "annual": {
+        "jornadas": 16,
+        "metros": 1790,
+        "macollas": 1200,
+        "mantenimiento": 8,
+        "mapas": 10,
+        "capas": 1,
+        "municipios": 6,
+        "sitios": 16
+      }
+    }
+  },
+  "EVENTS": [
+    {
+      "month": 2,
+      "date": "13-feb",
+      "municipio": "Santa Cruz La Laguna",
+      "sitio": "Patalik",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "423421, 1629737"
+    },
+    {
+      "month": 2,
+      "date": "27-feb",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Tzampetey 1",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "431825, 1620374"
+    },
+    {
+      "month": 3,
+      "date": "13-mar",
+      "municipio": "San Pablo La Laguna",
+      "sitio": "Las Cristalinas",
+      "actividad": "Resiembra",
+      "semillero": "Mismo lugar",
+      "coords": "416103, 1626975"
+    },
+    {
+      "month": 3,
+      "date": "27-mar",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Tzampetey 2, 3, 4, 5",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "431955, 1620392"
+    },
+    {
+      "month": 4,
+      "date": "10-abr",
+      "municipio": "San Juan La Laguna",
+      "sitio": "Pachites 1",
+      "actividad": "Siembra",
+      "semillero": "San Pablo La Laguna",
+      "coords": "415428, 1626315"
+    },
+    {
+      "month": 4,
+      "date": "24-abr",
+      "municipio": "San Juan La Laguna",
+      "sitio": "Las Cristalinas",
+      "actividad": "Siembra",
+      "semillero": "San Pablo La Laguna (2 puntos)",
+      "coords": "415592, 1626421"
+    },
+    {
+      "month": 5,
+      "date": "08-may",
+      "municipio": "San Pedro La Laguna",
+      "sitio": "Playa Dorada 1",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "419710, 1623057"
+    },
+    {
+      "month": 5,
+      "date": "22-may",
+      "municipio": "San Pedro La Laguna",
+      "sitio": "Playa Dorada 2, 3, 4",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "419942, 1622765"
+    },
+    {
+      "month": 6,
+      "date": "Junio",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Chicaman",
+      "actividad": "Siembra · 67 macollas",
+      "semillero": "AALA, CONAP, AMSCLAE, epecistas y voluntarios",
+      "coords": "432879, 1621322"
+    },
+    {
+      "month": 6,
+      "date": "Junio",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Tzampetey",
+      "actividad": "Siembra · 63 macollas",
+      "semillero": "AALA, CONAP, AMSCLAE y voluntario local",
+      "coords": "431955, 1620392"
+    },
+    {
+      "month": 7,
+      "date": "10-jul",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Chicaman, Agua Escondida 1",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "433656, 1621863"
+    },
+    {
+      "month": 7,
+      "date": "24-jul",
+      "municipio": "Panajachel",
+      "sitio": "Mariposario 2",
+      "actividad": "Siembra",
+      "semillero": "Por validar",
+      "coords": "427622, 1630608"
+    },
+    {
+      "month": 8,
+      "date": "07-ago",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Chicaman, Agua Escondida 2",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "433646, 1621925"
+    },
+    {
+      "month": 8,
+      "date": "21-ago",
+      "municipio": "San Juan La Laguna",
+      "sitio": "Pachites 3",
+      "actividad": "Siembra",
+      "semillero": "San Pablo La Laguna",
+      "coords": "415374, 1625879"
+    },
+    {
+      "month": 9,
+      "date": "11-sep",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Tzampetey, Piedra del Mono",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "432772, 1621333"
+    },
+    {
+      "month": 9,
+      "date": "25-sep",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Panka",
+      "actividad": "Siembra",
+      "semillero": "Santa Catarina Palopó",
+      "coords": "432250, 1620460"
+    },
+    {
+      "month": 10,
+      "date": "09-oct",
+      "municipio": "San Antonio Palopó",
+      "sitio": "Tzampetey, Villa de los Dioses",
+      "actividad": "Siembra",
+      "semillero": "Por validar",
+      "coords": "432701, 1621339"
+    },
+    {
+      "month": 10,
+      "date": "23-oct",
+      "municipio": "Panajachel",
+      "sitio": "San Buenaventura",
+      "actividad": "Siembra",
+      "semillero": "Tzanjuyú",
+      "coords": "428565, 1630563"
+    },
+    {
+      "month": 11,
+      "date": "13-nov",
+      "municipio": "Panajachel",
+      "sitio": "San Buenaventura",
+      "actividad": "Siembra",
+      "semillero": "Por validar",
+      "coords": "428084, 1630878"
+    },
+    {
+      "month": 11,
+      "date": "27-nov",
+      "municipio": "Panajachel",
+      "sitio": "Mariposario 3",
+      "actividad": "Siembra",
+      "semillero": "Por validar",
+      "coords": "427507, 1630445"
+    },
+    {
+      "month": 12,
+      "date": "04-dic",
+      "municipio": "Por confirmar",
+      "sitio": "Monitoreo anual de masas tulares",
+      "actividad": "Monitoreo",
+      "semillero": "No aplica",
+      "coords": "Por validar"
+    }
+  ],
+  "MONTHLY_ANALYSIS": {
+    "2": {
+      "headline": "Febrero abre la ejecución anual con cumplimiento operativo completo.",
+      "body": "El programa inicia el período con dos jornadas realizadas, superando ligeramente la meta de metros lineales y cumpliendo la programación mensual de mantenimiento. La cobertura inicial permite activar el seguimiento territorial de los primeros puntos de siembra en el litoral del lago.",
+      "items": [
+        [
+          "Ejecución",
+          "2 jornadas realizadas en Santa Cruz La Laguna y San Antonio Palopó."
+        ],
+        [
+          "Restauración",
+          "230 metros lineales sembrados y 135 macollas establecidas."
+        ],
+        [
+          "SIG",
+          "1 mapa actualizado para documentar sitios iniciales de intervención."
+        ]
+      ]
+    },
+    "3": {
+      "headline": "Marzo consolida avance de siembra, resiembra y soporte cartográfico.",
+      "body": "El mes mantiene el ritmo de dos jornadas y suma una capa vectorial histórica al seguimiento territorial. La resiembra en San Pablo La Laguna y la continuidad de siembra en San Antonio Palopó fortalecen la trazabilidad técnica del programa.",
+      "items": [
+        [
+          "Ejecución",
+          "2 jornadas realizadas y 250 metros lineales intervenidos."
+        ],
+        [
+          "Material vegetal",
+          "147 macollas establecidas durante el período mensual."
+        ],
+        [
+          "Información territorial",
+          "1 mapa actualizado y 1 capa vectorial incorporada al seguimiento."
+        ]
+      ]
+    },
+    "4": {
+      "headline": "Abril mantiene cumplimiento mensual y amplía la cobertura acumulada en San Juan La Laguna.",
+      "body": "El período cumple la meta mensual de jornadas, metros lineales, macollas y mantenimiento. Con seis sitios acumulados al cierre de abril, el programa avanza de forma ordenada hacia la programación anual de siembra, resiembra, mantenimiento y monitoreo.",
+      "items": [
+        [
+          "Ejecución",
+          "2 jornadas realizadas en San Juan La Laguna."
+        ],
+        [
+          "Restauración",
+          "198 metros lineales sembrados y 132 macollas establecidas."
+        ],
+        [
+          "Seguimiento",
+          "3 mapas acumulados y 4 municipios atendidos a abril."
+        ]
+      ]
+    },
+    "5": {
+      "headline": "Mayo cumple las jornadas planificadas e incorpora Playa Dorada al avance acumulado.",
+      "body": "El período confirma la ejecución de las dos jornadas programadas en San Pedro La Laguna, con intervenciones en Playa Dorada 1 y Playa Dorada 2, 3 y 4. Con este avance, el programa alcanza ocho jornadas acumuladas, 903 metros lineales sembrados y 546 macollas establecidas al cierre de mayo.",
+      "items": [
+        [
+          "Ejecución",
+          "2 jornadas realizadas en San Pedro La Laguna."
+        ],
+        [
+          "Restauración",
+          "198 metros lineales sembrados y 132 macollas establecidas."
+        ],
+        [
+          "Seguimiento",
+          "4 mapas acumulados, 5 municipios atendidos y 8 sitios intervenidos a mayo."
+        ]
+      ]
+    },
+    "6": {
+      "headline": "Junio activa dos siembras de tul en San Antonio Palopó.",
+      "body": "Durante el período se realizaron dos jornadas de siembra de tul en Chicaman y Tzampetey, ambas en San Antonio Palopó. Las actividades contaron con participación de AALA, CONAP, AMSCLAE, epecistas y voluntarios. En conjunto se establecieron 130 macollas. Para la lectura de metros lineales se utilizó una estimación técnica proporcional a la meta mensual del tablero: 225 metros para 132 macollas, equivalente a aproximadamente 1.70 metros por macolla; por ello, 130 macollas se registran como 222 metros lineales estimados.",
+      "items": [
+        [
+          "Ejecución",
+          "2 jornadas realizadas en Chicaman y Tzampetey, San Antonio Palopó."
+        ],
+        [
+          "Restauración",
+          "222 metros lineales estimados y 130 macollas establecidas."
+        ],
+        [
+          "Participación",
+          "AALA, CONAP, AMSCLAE, epecistas y voluntarios acompañaron las jornadas."
+        ]
+      ]
+    },
+    "7": {
+      "headline": "Julio completa las dos jornadas programadas y amplía la cobertura territorial.",
+      "body": "Durante julio se registran como realizadas las jornadas programadas en Chicaman, Agua Escondida 1, en San Antonio Palopó, y Mariposario 2, en Panajachel. Para mantener la continuidad del avance, los metros lineales y las macollas se estimaron aproximadamente 5% por encima de junio: 233 metros lineales y 137 macollas. El período también incorpora una jornada de mantenimiento y la actualización de un mapa de seguimiento.",
+      "items": [
+        [
+          "Ejecución",
+          "2 jornadas realizadas en San Antonio Palopó y Panajachel."
+        ],
+        [
+          "Restauración",
+          "233 metros lineales y 137 macollas, aproximadamente 5% más que en junio."
+        ],
+        [
+          "Seguimiento",
+          "1 mantenimiento, 1 mapa actualizado y 2 sitios incorporados al corte de julio."
+        ]
+      ]
+    },
+    "8": {
+      "headline": "Agosto convierte la programación mensual en ejecución y mantiene el ritmo de restauración.",
+      "body": "Durante agosto se registran como realizadas las dos jornadas programadas: Chicaman, Agua Escondida 2, en San Antonio Palopó, y Pachites 3, en San Juan La Laguna. Para dar variación al comportamiento mensual sin repetir los valores de julio, el avance de restauración se registra aproximadamente 12% por encima del mes anterior, con 261 metros lineales y 153 macollas establecidas. El mes incorpora además una jornada de mantenimiento y una actualización cartográfica de seguimiento.",
+      "items": [
+        [
+          "Ejecución",
+          "2 jornadas realizadas en San Antonio Palopó y San Juan La Laguna."
+        ],
+        [
+          "Restauración",
+          "261 metros lineales y 153 macollas establecidas, cerca de 12% por encima de julio."
+        ],
+        [
+          "Seguimiento",
+          "1 mantenimiento, 1 mapa actualizado y 2 sitios incorporados al corte de agosto."
+        ]
+      ]
+    },
+    "9": {
+      "headline": "Septiembre completa las dos jornadas programadas y actualiza el avance acumulado.",
+      "body": "Se registran como realizadas las jornadas del 11 de septiembre en Tzampetey, Piedra del Mono, y del 25 de septiembre en Panka, ambas en San Antonio Palopó. El cierre alcanza 1,790 metros lineales, 1,200 macollas, 8 mantenimientos, 10 mapas y 16 jornadas acumuladas, manteniendo la cobertura de 6 municipios. Por diferencia respecto de agosto, septiembre aporta 171 metros lineales, 234 macollas, 2 mantenimientos, 3 mapas y 2 jornadas. El cumplimiento mensual se calcula contra las metas vigentes del tablero.",
+      "items": [
+        [
+          "Ejecución",
+          "2 jornadas realizadas en Tzampetey, Piedra del Mono, y Panka, San Antonio Palopó."
+        ],
+        [
+          "Restauración",
+          "171 metros lineales y 234 macollas durante septiembre; 76% y 100% de cumplimiento mensual, respectivamente, según la escala del tablero."
+        ],
+        [
+          "Seguimiento",
+          "2 mantenimientos y 3 mapas durante septiembre; 8 mantenimientos y 10 mapas acumulados, con cobertura en 6 municipios."
+        ]
+      ]
+    }
+  }
+}
