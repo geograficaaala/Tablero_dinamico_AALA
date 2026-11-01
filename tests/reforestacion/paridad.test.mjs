@@ -35,6 +35,13 @@ const complementary=csv(load('data/reforestacion/2026/actividades_complementaria
   assert.equal(metas[8].arboles_meta_anual,'90000');
   assert.equal(Number(metas[8].ha_meta_anual),35);
   assert.equal(Number(metas[8].plantas_meta_anual),10000);
+  assert.ok(months.every(r=>Number(r.meta_arboles)===90000));
+  assert.ok(months.every(r=>Math.abs(Number(r.pct_meta_arboles)-Number(r.arboles_sembrados_acum)/90000)<1e-10));
+  const institucional=csv(load('data/reforestacion/2026/indicadores_institucionales_2026.csv'));
+  const arboles=institucional.filter(r=>r.subindicador_id==='arboles_sembrados');
+  assert.equal(arboles.length,9);
+  assert.ok(arboles.every(r=>Number(r.meta_anual)===90000));
+  assert.ok(arboles.every(r=>Math.abs(Number(r.pct_meta_anual)-Number(r.valor_acumulado)/90000)<1e-10));
   assert.ok(complementary.every(r=>r.meta_mensual!==undefined));
  });
  test('descripciones y detalles mensuales desde CSV',()=>{
