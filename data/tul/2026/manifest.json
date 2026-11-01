@@ -1,0 +1,16 @@
+{
+  "programa": "tul",
+  "anio": 2026,
+  "corte_publicado": "2026-09",
+  "primer_mes_publicado": 2,
+  "ultimo_mes_publicado": 9,
+  "tablas": [
+    "periodos_2026.csv",
+    "resultados_mensuales_2026.csv",
+    "metas_anuales_2026.csv",
+    "jornadas_2026.csv",
+    "analisis_mensual_2026.csv",
+    "analisis_detalles_2026.csv"
+  ],
+  "origen": "docs/index_tul.html del repositorio AALA-dashboard-main"
+}
