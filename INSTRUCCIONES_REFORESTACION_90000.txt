@@ -1,0 +1,13 @@
+ACTUALIZACIÓN — REFORESTANDO ATITLÁN 2026
+
+Meta anual de árboles: 90,000.
+
+Resultados de septiembre:
+Árboles reforestados: 35,000.
+Cumplimiento anual: 38.89 %.
+
+Sube el contenido del ZIP a la raíz de Tablero_dinamico_AALA respetando las rutas y reemplazando los archivos existentes. No subas el ZIP como un único archivo.
+
+Después haz commit en main y verifica el Action Publicar dashboards AALA.
+
+Esta actualización modifica únicamente la infraestructura de Reforestación y su tarjeta en el índice. No sustituye el índice institucional ni modifica los otros cinco programas.
