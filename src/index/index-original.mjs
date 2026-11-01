@@ -273,7 +273,7 @@ function goToProgramCarousel(index, behavior = 'smooth'){
   updateProgramCarouselControls(nextIndex);
 }
 
-function initProgramCarousel(){
+function initProgramCarousel(initialProgramId = null){
   const viewport = document.getElementById('programCarouselViewport');
   const dots = document.getElementById('programCarouselDots');
   const prev = document.getElementById('programCarouselPrev');
@@ -281,10 +281,12 @@ function initProgramCarousel(){
   const items = programCarouselItems();
   if (!viewport || !dots || !prev || !next || !items.length) return;
 
-  programCarouselIndex = 0;
+  window.clearTimeout(programCarouselScrollTimer);
+  const preferredIndex = initialProgramId === null ? 0 : items.findIndex(item => item.dataset.programId === initialProgramId);
+  programCarouselIndex = Math.max(0, preferredIndex);
   dots.innerHTML = items.map((item, index) => {
     const name = item.querySelector('.program-title')?.textContent?.trim() || `Programa ${index + 1}`;
-    return `<button type="button" class="program-carousel-dot${index === 0 ? ' active' : ''}" aria-label="Ver ${name}" aria-current="${index === 0 ? 'true' : 'false'}"></button>`;
+    return `<button type="button" class="program-carousel-dot${index === programCarouselIndex ? ' active' : ''}" aria-label="Ver ${name}" aria-current="${index === programCarouselIndex ? 'true' : 'false'}"></button>`;
   }).join('');
 
   Array.from(dots.children).forEach((dot, index) => {
@@ -328,8 +330,8 @@ function initProgramCarousel(){
     }, 80);
   };
 
-  viewport.scrollTo({ left: 0, behavior: 'auto' });
-  updateProgramCarouselControls(0);
+  viewport.scrollTo({ left: programCarouselItemLeft(items[programCarouselIndex], viewport), behavior: 'instant' });
+  updateProgramCarouselControls(programCarouselIndex);
 }
 
 window.addEventListener('resize', () => {
@@ -407,7 +409,7 @@ function programCard(p){
   const cardClass = hasMonthlyColumn ? 'card program-card' : 'card program-card no-monthly';
   const scoreHeader = p.scoreHeader || 'Cumplimiento promedio con respecto a metas mensuales';
   return `
-    <article class="${cardClass}">
+    <article class="${cardClass}" data-program-id="${escapeHtml(p.id)}">
       <div class="program-head">
         <div>
           <div class="program-kicker">Indicadores priorizados</div>
@@ -549,10 +551,22 @@ function renderNoData(program){
 function paintMonthButtons(){
   const root=document.getElementById('programMonthButtons');
   if(!root) return;
-  root.innerHTML=MONTH_NAMES.map((name,index)=>`<button type="button" class="program-month-btn ${index + 1 === selectedMonth ? 'active' : ''}" data-month="${index + 1}" aria-pressed="${index + 1 === selectedMonth}">${name.slice(0,3)}</button>`).join('');
-  root.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>renderProgramMonth(Number(button.dataset.month))));
+  if(root.children.length !== MONTH_NAMES.length){
+    root.innerHTML=MONTH_NAMES.map((name,index)=>`<button type="button" class="program-month-btn" data-month="${index + 1}" aria-pressed="false">${name.slice(0,3)}</button>`).join('');
+    root.addEventListener('click',event=>{
+      const button=event.target.closest('button[data-month]');
+      if(button && root.contains(button)) renderProgramMonth(Number(button.dataset.month));
+    });
+  }
+  root.querySelectorAll('button').forEach(button=>{
+    const active=Number(button.dataset.month)===selectedMonth;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-pressed',String(active));
+  });
 }
 function renderProgramMonth(month){
+  const currentItems=programCarouselItems();
+  const activeProgramId=currentItems[programCarouselIndex]?.dataset.programId || null;
   selectedMonth=month;
   paintMonthButtons();
   const label=document.getElementById('programMonthLabel');
@@ -561,7 +575,7 @@ function renderProgramMonth(month){
   const grid=document.getElementById('programGrid');
   if(grid){
     grid.innerHTML=data.map(p=>!p.periodKey?renderNoData(p):programCard(p)).join('');
-    initProgramCarousel();
+    initProgramCarousel(activeProgramId);
   }
   const valid=data.filter(p=>finite(p.score));
   if(valid.length) {
