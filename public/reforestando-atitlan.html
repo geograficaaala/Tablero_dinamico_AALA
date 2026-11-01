@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Reforestando Atitlán · AALA</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+
+
+
+<link href="../src/styles/programs/reforestacion.css" rel="stylesheet"/><link href="../src/styles/branding.css" rel="stylesheet"/></head>
+<body class="view-full">
+<div class="aala-source-warning" id="sourceBanner" role="status"></div><div id="reforestacionHeaderMount"></div>
+<div id="vizTooltip"></div>
+<div class="wrap">
+<div class="exec-only">
+<div class="exec-toolbar">
+<div class="card filter">
+<label>Período seleccionado</label>
+<div class="pill" id="execPeriodPill">—</div>
+</div>
+<div class="card filter">
+<label>Meta anual principal</label>
+<div class="pill" id="execGoalsPill">Metas de 2026</div>
+</div>
+<button class="view-btn present-btn" onclick="switchView('full')">Ver tablero completo</button>
+</div>
+<div class="exec-hero-row">
+<div class="exec-status-card">
+<div>
+<div class="es-label">Estado del programa</div>
+<div class="es-title">Reforestando Atitlán para un Futuro Verde</div>
+<div class="exec-status-badge" id="execStatusBadge">Cargando…</div>
+</div>
+<div class="exec-period-info" id="execPeriodInfo">— período —</div>
+</div>
+<div class="exec-kpi-grid" id="execKpiGrid"></div>
+</div>
+<div class="exec-strip" id="execStrip"></div>
+<div class="exec-row-2">
+<div class="card panel panel-accent" id="execBarPanel">
+<h3>Flujo operativo acumulado</h3>
+<p class="sub">Lectura de monitoreo, siembra, sistema forestal digital y vivero.</p>
+<div class="viz-wrap" id="execBarChart"></div>
+<div class="interp" id="execBarInterp"></div>
+</div>
+<div class="card panel panel-accent">
+<h3>Alertas operativas</h3>
+<p class="sub">Indicadores que requieren seguimiento o evidencias adicionales.</p>
+<div id="execAlertPanel"></div>
+</div>
+</div>
+<div class="section">
+<article class="card diagnostic" id="execDiagnosticPanel"></article>
+</div>
+</div>
+<div class="full-only">
+<section class="hero" id="resumen">
+<div class="card hero-main">
+<div class="hero-copy hero-copy-text">
+<h1>Reforestando Atitlán para un Futuro Verde</h1>
+<p class="hero-lead">El proyecto <strong>Reforestando Atitlán para un Futuro Verde</strong> es una iniciativa de reforestación y restauración ecológica enfocada en recuperar áreas degradadas y zonas de recarga hídrica en la Cuenca del Lago de Atitlán.</p>
+<p class="hero-lead">La cuenca, hogar de más de 350,000 habitantes, enfrenta deforestación, erosión de suelos y pérdida de biodiversidad por presión agrícola, incendios forestales y crecimiento urbano.</p>
+<p class="hero-lead">El programa busca reforestar con especies adaptadas a las zonas de intervención y con especies nativas, restaurando funciones ecológicas del bosque, conservación de biodiversidad y sostenibilidad de recursos naturales para las comunidades locales.</p>
+<p class="hero-lead">Desde 2016, el proyecto ha logrado plantar más de 1.7 millones de árboles en alrededor de 1,000 hectáreas, fortaleciendo la interconectividad de corredores biológicos en la región.</p>
+<p class="hero-lead">Los monitoreos anuales registran una supervivencia promedio del <span id="heroSurvival">—</span>, reflejando aportes a la restauración de áreas degradadas, estabilización de suelos y protección de fuentes hídricas.</p>
+</div>
+</div>
+<aside aria-label="Identidad visual del programa" class="card hero-side">
+<div class="logo-frame">
+<img alt="Logo de Reforestando Atitlán" class="hero-logo" src="./assets/logos/reforestando-atitlan.png"/>
+</div>
+</aside>
+</section>
+<section class="section metric-section" id="metasAnuales">
+<div class="section-head"><div><h2>Metas anuales y avance acumulado</h2></div></div>
+<div class="kpis" id="kpiGrid"></div>
+</section>
+<section class="section survival-section" id="supervivenciaPromedio">
+<article class="card panel survival-card">
+<div class="survival-copy">
+<div class="survival-kicker">Supervivencia monitoreada</div>
+<h2>Supervivencia promedio</h2>
+<p>Referencia técnica del programa para las áreas monitoreadas durante 2026. Esta lectura ayuda a saber qué tan bien se están manteniendo los árboles reforestados en campo.</p>
+</div>
+<div aria-label="Supervivencia promedio monitoreada 2026: 71.7%" class="survival-value">
+<strong>71.7%</strong>
+<span>Enero–junio 2026</span>
+<div class="survival-bar"><i style="width:71.7%"></i></div>
+<small>7 de cada 10 árboles monitoreados permanecen vivos.</small>
+</div>
+</article>
+</section>
+<section class="section metric-section" id="metasMensuales">
+<div class="section-head"><div><h2>Metas mensuales</h2><p>Resultados del mes seleccionado contra las metas mensuales del programa.</p></div></div>
+<div class="kpis kpis-complementary" id="kpiComplementGrid"></div>
+</section>
+<section class="section" id="mapasSig">
+<article class="card panel panel-accent">
+<div class="section-head">
+<div>
+<h2>Mapas del programa</h2>
+</div>
+</div>
+<div class="map-grid">
+<article class="card map-card">
+<h3>Portal Forestal del Eje de Bosques CODEMA-Sololá</h3>
+<p class="sub">Geoportal web de seguimiento forestal y cartografía temática del eje de bosques.</p>
+<div class="map-frame">
+<iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://geograficaaala.github.io/Geoportal-de-Reforestaciones-del-departamento-de-Solol-/" title="Portal Forestal del Eje de Bosques CODEMA-Sololá"></iframe>
+</div>
+<div class="map-actions"><a href="https://geograficaaala.github.io/Geoportal-de-Reforestaciones-del-departamento-de-Solol-/" rel="noreferrer noopener" target="_blank">Abrir portal completo</a></div>
+</article>
+<article class="card map-card">
+<h3>Geoportal de reforestaciones y cobertura del programa AALA-REFORESTANDO</h3>
+<p class="sub">Experiencia cartográfica interactiva para visualizar reforestaciones, cobertura y soporte espacial del programa.</p>
+<div class="map-frame">
+<iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://experience.arcgis.com/experience/6ed3991c0b944dc396eb6891f1de784d/" title="Geoportal de reforestaciones y cobertura del programa AALA-REFORESTANDO"></iframe>
+</div>
+<div class="map-actions"><a href="https://experience.arcgis.com/experience/6ed3991c0b944dc396eb6891f1de784d/" rel="noreferrer noopener" target="_blank">Abrir geoportal completo</a></div>
+</article>
+</div>
+<div class="map-note">Si algún navegador bloquea el embebido de uno de los mapas, usa el botón de apertura directa para verlo en pestaña nueva.</div>
+</article>
+</section>
+<section class="section">
+<article class="card diagnostic" id="diagnosticPanel"></article>
+</section>
+</div>
+</div>
+<div id="reforestacionFooterMount"></div>
+
+
+<div aria-hidden="true" class="compat-hidden">
+<select id="periodSelect"></select>
+<div id="alertPanel"></div>
+<div id="narrativePanel"></div>
+<div id="lineChart"></div>
+<div id="lineInterp"></div>
+<div id="barChart"></div>
+<div id="barInterp"></div>
+</div>
+<div aria-hidden="true" class="presentation-overlay" id="presentationOverlay">
+<div class="presentation-chrome">
+<div class="presentation-meta" id="presentationMeta"></div>
+<div class="presentation-actions">
+<button class="presentation-btn" onclick="gotoPresentationSlide(presentationIndex-1)" type="button">← Anterior</button>
+<button class="presentation-btn" onclick="gotoPresentationSlide(presentationIndex+1)" type="button">Siguiente →</button>
+<button class="presentation-btn primary" onclick="closePresentation()" type="button">× Cerrar</button>
+</div>
+</div>
+<div class="presentation-stage-wrap">
+<div class="presentation-stage">
+<div class="presentation-track" id="presentationTrack"></div>
+</div>
+<div class="presentation-dots" id="presentationDots"></div>
+</div>
+</div>
+
+<script src="../src/programs/reforestacion/bootstrap.mjs" type="module"></script></body>
+</html>
