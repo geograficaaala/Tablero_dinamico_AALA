@@ -1,0 +1,167 @@
+[
+  {
+    "id": "atitlan_recicla",
+    "name": "Atitlán Recicla",
+    "modelId": "atitlan_recicla",
+    "dashboard": "atitlan-recicla.html",
+    "hasMonthlyColumn": true,
+    "scoreHeader": "Cumplimiento promedio con respecto a metas mensuales",
+    "indicators": [
+      {
+        "index": 0,
+        "temporality": "Este indicador tiene por temporalidad desde enero a noviembre de 2026",
+        "label": "Recolección de 17,920 quintales de materiales reciclables."
+      },
+      {
+        "index": 3,
+        "temporality": "Este indicador tiene por temporalidad desde enero a noviembre de 2026",
+        "label": "Generación de Q448,000 en ingresos brutos por comercialización."
+      },
+      {
+        "index": 4,
+        "temporality": "Este indicador tiene por temporalidad desde enero a noviembre de 2026",
+        "label": "Ingreso medio diario de Q135 por lideresa activa en comercialización."
+      }
+    ]
+  },
+  {
+    "id": "conservando_atitlan",
+    "name": "Conservando Atitlán",
+    "modelId": "conservando_atitlan",
+    "dashboard": "conservando-atitlan.html",
+    "hasMonthlyColumn": true,
+    "scoreHeader": "Cumplimiento promedio con respecto a metas mensuales",
+    "indicators": [
+      {
+        "index": 1,
+        "temporality": "Este indicador tiene por temporalidad desde enero a diciembre de 2026",
+        "label": "Recolección de 80,000 litros de aceite usado de cocina."
+      },
+      {
+        "index": 2,
+        "temporality": "Este indicador tiene por temporalidad desde enero a diciembre de 2026",
+        "label": "Protección de 80,000,000 litros de agua por manejo adecuado de aceite usado."
+      },
+      {
+        "index": 3,
+        "temporality": "Este indicador tiene por temporalidad desde enero a diciembre de 2026",
+        "label": "Producción de 65,040 jabones durante 2026."
+      },
+      {
+        "index": 4,
+        "temporality": "Este indicador tiene por temporalidad desde enero a diciembre de 2026",
+        "label": "Venta de 51,600 jabones durante 2026."
+      }
+    ]
+  },
+  {
+    "id": "fortalecimiento_municipal",
+    "name": "Fortalecimiento Municipal",
+    "modelId": "fortalecimiento_municipal",
+    "dashboard": "fortalecimiento-municipal.html",
+    "hasMonthlyColumn": false,
+    "scoreHeader": "Cumplimiento promedio con respecto a meta anual",
+    "indicators": [
+      {
+        "index": 4,
+        "temporality": "Este indicador tiene por periodo de enero a diciembre de 2026, considerando los plazos y procedimientos administrativos propios de las municipalidades",
+        "label": "15 municipalidades de la Cuenca del Lago de Atitlán con capacidad instalada en los temas de SNIP (Sistema nacional de inversión pública), SIG (Sistemas de Información Geográfica), recolección digital de datos y cumplimiento legal ambiental."
+      },
+      {
+        "index": 0,
+        "temporality": "Este indicador tiene por periodo de enero a diciembre de 2026, considerando los plazos y procedimientos administrativos propios de las municipalidades",
+        "label": "6 Estudios de caracterización de desechos y residuos sólidos y o aguas residuales."
+      },
+      {
+        "index": 1,
+        "temporality": "Este indicador tiene por periodo de enero a diciembre de 2026, considerando los plazos y procedimientos administrativos propios de las municipalidades",
+        "label": "5 PIRDES Municipales (Planes de Manejo integrales de residuos y desechos sólidos)"
+      },
+      {
+        "index": 2,
+        "temporality": "Este indicador tiene por periodo de enero a diciembre de 2026, considerando los plazos y procedimientos administrativos propios de las municipalidades",
+        "label": "20 Asistencias técnicas municipales en aguas residuales."
+      }
+    ]
+  },
+  {
+    "id": "educando_para_conservar",
+    "name": "Educando para Conservar",
+    "modelId": "educando_para_conservar",
+    "dashboard": "educando-para-conservar.html",
+    "hasMonthlyColumn": true,
+    "scoreHeader": "Cumplimiento promedio con respecto a metas mensuales",
+    "indicators": [
+      {
+        "index": 0,
+        "temporality": "Este indicador tiene por temporalidad desde marzo a septiembre de 2026",
+        "label": "Capacidades pedagógicas instaladas de los 7 módulos del Material de Referencia Educando para Conservar en 121 docentes de los niveles ordinario, básico y diversificado de 50 centros educativos de 13 municipios de la cuenca del Lago de Atitlán."
+      },
+      {
+        "index": 3,
+        "temporality": "Este indicador tiene por temporalidad desde marzo a septiembre de 2026",
+        "label": "3,514 estudiantes de los niveles ordinario, básico y diversificado de 50 centros educativos de la Cuenca del Lago de Atitlán, capacitados en los 7 módulos del Material de Referencia Educando para Conservar."
+      },
+      {
+        "index": 5,
+        "temporality": "Este indicador tiene por temporalidad desde marzo a octubre de 2026",
+        "label": "Participación de 120 jóvenes de 12 municipios de la cuenca del Lago de Atitlán en el Diplomado de Gestión Ambiental y Liderazgo Juvenil."
+      },
+      {
+        "index": 4,
+        "temporality": "Este indicador tiene por temporalidad desde enero a octubre de 2026",
+        "label": "128 actividades en campo de educación ambiental y aprendizaje práctico durante 2026."
+      }
+    ]
+  },
+  {
+    "id": "reforestacion",
+    "name": "Reforestando Atitlán",
+    "modelId": "reforestacion",
+    "dashboard": "reforestando-atitlan.html",
+    "hasMonthlyColumn": true,
+    "scoreHeader": "Cumplimiento promedio con respecto a metas mensuales",
+    "indicators": [
+      {
+        "index": 0,
+        "temporality": "Este indicador tiene por temporalidad desde enero a julio de 2026",
+        "label": "35 hectáreas monitoreadas de las reforestaciones realizadas en 2025 en Sololá y la Cuenca del Lago de Atitlán, con su respectiva cartografía."
+      },
+      {
+        "index": 2,
+        "temporality": "Este indicador tiene por temporalidad desde junio a noviembre de 2026",
+        "label": "90,000 árboles reforestados durante 2026 en el departamento de Sololá y la Cuenca del Lago de Atitlán."
+      },
+      {
+        "index": 3,
+        "temporality": "Este indicador tiene por temporalidad desde enero a diciembre de 2026",
+        "label": "1 unidad de análisis SIG creada con especialización en cartografía forestal temática a través del eje de la CODEMA-Sololá."
+      },
+      {
+        "index": 4,
+        "temporality": "Este indicador tiene por temporalidad desde enero a noviembre de 2026",
+        "label": "10,000 plantas forestales de 10 especies nativas producidas en el vivero AALA durante 2026."
+      }
+    ]
+  },
+  {
+    "id": "manejo_tul",
+    "name": "Siembra de tul",
+    "modelId": "tul",
+    "dashboard": "tul.html",
+    "hasMonthlyColumn": true,
+    "scoreHeader": "Cumplimiento promedio con respecto a metas mensuales",
+    "indicators": [
+      {
+        "index": 4,
+        "temporality": "Este indicador tiene por temporalidad desde febrero a diciembre de 2026",
+        "label": "21 jornadas anuales de siembra y mantenimiento de tul en los municipios ribereños del Lago de Atitlán."
+      },
+      {
+        "index": 0,
+        "temporality": "Este indicador tiene por temporalidad desde febrero a diciembre de 2026",
+        "label": "1,300 metros lineales de tul sembrados a lo largo de las orillas del Lago de Atitlán durante 2026."
+      }
+    ]
+  }
+]
