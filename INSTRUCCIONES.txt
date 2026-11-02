@@ -1,0 +1,28 @@
+MODERNIZACIÓN VISUAL AALA — PILOTO EDUCANDO PARA CONSERVAR
+
+Instalación
+1. Descomprimir el ZIP en tu computadora.
+2. Subir los nueve archivos de la estructura a la raíz de geograficaaala/Tablero_dinamico_AALA, respetando las rutas.
+3. Reemplazar únicamente los archivos que ya existan y confirmar en la rama main.
+4. Verificar el Action "Publicar dashboards AALA".
+5. Abrir https://geograficaaala.github.io/Tablero_dinamico_AALA/public/educando-para-conservar.html y recargar con Ctrl + F5.
+
+Cambios incluidos
+- Diseño pastel con azul, celeste, beige y marfil.
+- Tipografía Tinos con alternativa Times New Roman.
+- Logo institucional a la izquierda, títulos centrados y sin puntos separadores.
+- Botones con iconos, meses alineados a la izquierda y presentación funcional.
+- Footer con descripción y contactos solicitados, conservando las cinco páginas de redes y sitio institucional.
+- Transiciones suaves y contadores animados en los KPI.
+- Prueba adicional en tests/educando_para_conservar/paridad.test.mjs.
+
+Alcance
+La implementación de los componentes reutilizables se activa inicialmente en Educando para Conservar.
+No se modifican CSV, metas, configuraciones ni fórmulas oficiales de otros programas.
+El índice general y los otros cinco dashboards no cambian con este paquete.
+
+Comprobaciones
+- 87 pruebas de Node aprobadas en la copia integrada de trabajo.
+- Validador de datos de Educando aprobado.
+- Navegador aislado: carga de indicadores, meses, vistas, presentación, footer y móviles, sin errores de JavaScript.
+- La versión publicada en GitHub Pages requiere comprobación final después de instalar.
