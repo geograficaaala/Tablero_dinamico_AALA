@@ -4,6 +4,8 @@ root = Path(__file__).resolve().parents[2]
 dist = root / 'dist'
 html = (root / 'public/index.html').read_text(encoding='utf-8')
 html = html.replace('href="../src/styles/index-original.css"', 'href="./src/styles/index-original.css"')
+html = html.replace('href="../src/styles/themes/aala-pastel.css"', 'href="./src/styles/themes/aala-pastel.css"')
+html = html.replace('src="../src/components/aala-visual-universal.mjs"', 'src="./src/components/aala-visual-universal.mjs"')
 html = html.replace('src="../src/index/index-original.mjs"', 'src="./src/index/index-original.mjs"')
 html = html.replace('src="./assets/logos/', 'src="./public/assets/logos/')
 for name in ('chatbot-config.js', 'chatbot-data.js', 'chatbot.js'):
