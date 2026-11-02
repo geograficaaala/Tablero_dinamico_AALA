@@ -30,9 +30,9 @@ vm.runInContext(src,ctx,{timeout:6000});
 await new Promise(resolve=>setTimeout(resolve,300));
 
 test('la carga inicial renderiza cifras y metas desde CSV',()=>{
-  assert.match(element('kpiGrid').innerHTML,/35,000|35000/);
+  assert.match(element('kpiGrid').innerHTML,/30\.00 ha|30,00 ha/);
   assert.match(element('kpiGrid').innerHTML,/90,000|90000/);
-  assert.match(element('kpiComplementGrid').innerHTML,/Mapas digitales/);
+  assert.match(element('kpiComplementGrid').innerHTML,/Seguimiento cartográfico de mapas/);
   assert.equal(element('sourceBanner').textContent,'');
   assert.match(element('heroSurvival').textContent,/68/);
   assert.ok(element('reforestacionHeaderMount')!==undefined);
@@ -52,4 +52,11 @@ test('resumen ejecutivo y presentación se generan con el mes seleccionado',()=>
   ctx.openPresentation();
   assert.match(element('presentationTrack').innerHTML,/Reforestando Atitlán/i);
   assert.match(ctx.window.reforestaResumenCorreo(),/Septiembre 2026/);
+});
+
+test('octubre aparece como período más reciente con seguimiento cartográfico',()=>{
+ ctx.window.setReforestaPeriod('2026-10');
+ assert.match(element('kpiGrid').innerHTML,/7,500|7500/);
+ assert.match(element('kpiComplementGrid').innerHTML,/Mapa de seguimiento/);
+ assert.match(ctx.window.reforestaResumenCorreo(),/Octubre 2026/);
 });

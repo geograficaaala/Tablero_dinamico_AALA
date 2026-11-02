@@ -22,24 +22,24 @@ const csv = text => {
 const months=csv(load('data/reforestacion/2026/total_mes_2026.csv'));
 const complementary=csv(load('data/reforestacion/2026/actividades_complementarias_2026.csv'));
 
- test('series originales y cortes enero-septiembre',()=>{
+ test('series originales y corte de octubre',()=>{
   assert.deepEqual(months.slice(0,9).map(r=>r.periodo_clave),Array.from({length:9},(_,i)=>`2026-${String(i+1).padStart(2,'0')}`));
   assert.equal(months.find(r=>r.periodo_clave==='2026-09').arboles_sembrados_acum,'35000');
   assert.equal(Number(months.find(r=>r.periodo_clave==='2026-09').ha_monitoreadas_kpi_acum),17.97);
  });
  test('nueve indicadores complementarios por mes original',()=>{
-  for(let m=1;m<=9;m++)assert.equal(complementary.filter(r=>r.periodo_clave===`2026-${String(m).padStart(2,'0')}`).length,9);
+  for(let m=1;m<=10;m++)assert.equal(complementary.filter(r=>r.periodo_clave===`2026-${String(m).padStart(2,'0')}`).length,9);
  });
  test('metas anuales y mensuales separadas',()=>{
   const metas=csv(load('data/reforestacion/2026/metas_referencia_2026.csv'));
-  assert.equal(metas[8].arboles_meta_anual,'90000');
+  assert.equal(metas[9].arboles_meta_anual,'90000');
   assert.equal(Number(metas[8].ha_meta_anual),35);
   assert.equal(Number(metas[8].plantas_meta_anual),10000);
   assert.ok(months.every(r=>Number(r.meta_arboles)===90000));
   assert.ok(months.every(r=>Math.abs(Number(r.pct_meta_arboles)-Number(r.arboles_sembrados_acum)/90000)<1e-10));
   const institucional=csv(load('data/reforestacion/2026/indicadores_institucionales_2026.csv'));
   const arboles=institucional.filter(r=>r.subindicador_id==='arboles_sembrados');
-  assert.equal(arboles.length,9);
+  assert.equal(arboles.length,10);
   assert.ok(arboles.every(r=>Number(r.meta_anual)===90000));
   assert.ok(arboles.every(r=>Math.abs(Number(r.pct_meta_anual)-Number(r.valor_acumulado)/90000)<1e-10));
   assert.ok(complementary.every(r=>r.meta_mensual!==undefined));
@@ -49,7 +49,7 @@ const complementary=csv(load('data/reforestacion/2026/actividades_complementaria
  });
  test('todos los meses publicados están aprobados y sin alertas de estimación',()=>{
   const origin=csv(load('data/reforestacion/2026/procedencia_2026.csv'));
-  assert.equal(origin.length,9);
+  assert.equal(origin.length,10);
   assert.ok(origin.every(r=>r.aprobado_para_publicacion==='true'));
   assert.ok(origin.every(r=>!/estimaci|provisional|sin respaldo|sin informe/i.test(r.tipo_fuente+' '+r.detalle_fuente+' '+r.alerta_original)));
   const approved=months.filter(r=>Number(r.mes_num)>=7);
@@ -63,7 +63,7 @@ const complementary=csv(load('data/reforestacion/2026/actividades_complementaria
   assert.equal(catalog.length,13);
   assert.equal(new Set(catalog.map(r=>r.indicador_id)).size,13);
   assert.equal(periods.length,12);
-  assert.equal(periods.filter(r=>r.publicado==='true').length,9);
+  assert.equal(periods.filter(r=>r.publicado==='true').length,10);
   assert.equal(contract.estado_datos,'aprobados_para_publicacion');
  });
  test('estructura y rutas de módulos contra repo real',()=>{
@@ -86,3 +86,16 @@ const complementary=csv(load('data/reforestacion/2026/actividades_complementaria
   assert.doesNotMatch(html,/<style\b/i);
   assert.doesNotMatch(html,/COMPLEMENTARY_KPI_SEED/);
  });
+
+test('octubre conserva los valores principales y los títulos de seguimiento',()=>{
+ const oct=months.find(r=>r.periodo_clave==='2026-10');
+ assert.equal(Number(oct.ha_monitoreadas_kpi_acum),30);
+ assert.equal(Number(oct.arboles_sembrados_acum),90000);
+ assert.equal(Number(oct.plantas_netas_acum),7500);
+ assert.equal(Number(oct.pct_meta_arboles),1);
+ const octExtra=complementary.filter(r=>r.periodo_clave==='2026-10');
+ assert.equal(octExtra.length,9);
+ const maps=octExtra.find(r=>r.kpi_id==='sig_mapas_generados');
+ assert.equal(JSON.parse(maps.detalle_render).length,7);
+ assert.equal(maps.valor_mes,'7');
+});
