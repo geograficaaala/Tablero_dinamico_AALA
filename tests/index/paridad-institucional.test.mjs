@@ -9,10 +9,11 @@ const oficial = read('config/index/indicadores_institucionales_2026.json');
 const cortes = read('data/index/2026/cortes_publicados.json');
 const withoutDashboard = ({ dashboard, ...rest }) => rest;
 
-test('nueve meses, seis programas y 189 registros de indicadores originales', () => {
-  assert.deepEqual(Object.keys(cortes).sort(), ['1','2','3','4','5','6','7','8','9']);
+test('nueve meses históricos completos y octubre exclusivo de Atitlán Recicla', () => {
+  assert.deepEqual(Object.keys(cortes).sort(), ['1','10','2','3','4','5','6','7','8','9']);
   assert.equal(oficial.length, 6);
-  assert.equal(Object.values(cortes).reduce((sum, list) => sum + list.reduce((total, p) => total + p.metrics.length, 0), 0), 189);
+  assert.equal(Array.from({length:9},(_,i)=>cortes[String(i+1)]).reduce((sum, list) => sum + list.reduce((total, p) => total + p.metrics.length, 0), 0), 189);
+  assert.deepEqual(cortes['10'].map(p => p.id), ['atitlan_recicla']);
 });
 
 test('54 tarjetas mantienen íntegros los textos y resultados aprobados', () => {
@@ -44,6 +45,15 @@ test('indicadores prioritarios de septiembre no se sustituyen ni se resumen', ()
   assert.match(reforestacion.metrics[1].acumDisplay, /35,000 \/ 90,000/);
 });
 
-test('sin cortes de octubre hasta aprobar oficialmente la actualización', () => {
-  assert.equal(cortes['10'], undefined);
+test('octubre mantiene el tercer indicador de ingreso diario y los porcentajes oficiales', () => {
+  const corte = construirTarjetasInstitucionales(oficial.filter(p => p.id === 'atitlan_recicla'), cortes, 10, d => d.dashboard)[0];
+  assert.equal(corte.periodKey, '2026-10');
+  assert.equal(corte.metrics[2].label, 'Ingreso medio diario de Q135 por lideresa activa en comercialización.');
+  assert.equal(corte.metrics[0].acumDisplay, '17,621.53 / 17,920 qq');
+  assert.equal(corte.metrics[1].acumDisplay, 'Q375,474.91 / Q448,000 GTQ');
+  assert.equal(corte.metrics[2].acumDisplay, 'Q253.7 diarios por lideresa en octubre');
+  assert.match(corte.metrics[0].monthlyDisplay, /110\.9%/);
+  assert.match(corte.metrics[1].monthlyDisplay, /98\.4%/);
+  assert.match(corte.metrics[2].monthlyDisplay, /187\.9%/);
+  assert.equal(cortes['10'].length, 1);
 });
