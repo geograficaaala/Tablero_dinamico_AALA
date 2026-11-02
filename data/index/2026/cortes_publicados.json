@@ -2307,6 +2307,71 @@
           "barPct": 120
         }
       ]
+    },
+    {
+      "latestLabel": "Octubre",
+      "periodKey": "2026-10",
+      "score": 101.07357142857143,
+      "sourceSummary": "Reforestando Atitlán · octubre 2026",
+      "id": "reforestacion",
+      "metrics": [
+        {
+          "acumDisplay": "30 / 35 ha monitoreadas",
+          "pct": 85.71428571428571,
+          "pctDisplay": "85.7% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 85.71428571428571,
+          "monthlyDisplay": "12.03 ha en octubre · sin meta mensual publicada",
+          "monthlyPct": null,
+          "subIndicators": [
+            {
+              "label": "Hectáreas monitoreadas",
+              "valueDisplay": "30 / 35 ha",
+              "barPct": 85.71428571428571
+            },
+            {
+              "label": "Cobertura cartográfica de monitoreo",
+              "valueDisplay": "30 / 35 ha",
+              "barPct": 85.71428571428571
+            }
+          ]
+        },
+        {
+          "acumDisplay": "90,000 / 90,000 árboles",
+          "pct": 100,
+          "pctDisplay": "100.0% de avance acumulado hasta octubre · Meta anual alcanzada",
+          "barPct": 100,
+          "monthlyDisplay": "55,000 árboles en octubre · sin meta mensual publicada",
+          "monthlyPct": null
+        },
+        {
+          "acumDisplay": "143.6% de consolidación acumulada",
+          "pct": 143.57999999999998,
+          "pctDisplay": "143.6% de avance acumulado de consolidación",
+          "barPct": 100,
+          "monthlyDisplay": "Seguimiento del sistema forestal digital en octubre",
+          "monthlyPct": null
+        },
+        {
+          "acumDisplay": "7,500 / 10,000 plantas",
+          "pct": 75,
+          "pctDisplay": "75.0% en plantas y 100.0% en especies",
+          "barPct": 75,
+          "monthlyDisplay": "4,500 plantas en octubre · sin meta mensual publicada",
+          "monthlyPct": null,
+          "subIndicators": [
+            {
+              "label": "Plantas forestales",
+              "valueDisplay": "7,500 / 10,000 plantas",
+              "barPct": 75
+            },
+            {
+              "label": "Especies nativas activas",
+              "valueDisplay": "10 / 10 especies",
+              "barPct": 100
+            }
+          ]
+        }
+      ]
     }
   ]
 }
