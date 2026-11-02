@@ -2274,6 +2274,39 @@
           "monthlyPct": 93.75
         }
       ]
+    },
+    {
+      "latestLabel": "Octubre",
+      "periodKey": "2026-10",
+      "score": 95.83333333333334,
+      "sourceSummary": "Avance de octubre de 2026",
+      "id": "fortalecimiento_municipal",
+      "metrics": [
+        {
+          "acumDisplay": "18/15 municipalidades",
+          "pct": 120.0,
+          "pctDisplay": "120.0% de avance",
+          "barPct": 120.0
+        },
+        {
+          "acumDisplay": "5/6 estudios",
+          "pct": 83.33333333333334,
+          "pctDisplay": "83.3% de avance",
+          "barPct": 83.33333333333334
+        },
+        {
+          "acumDisplay": "3/5 planes integrales",
+          "pct": 60.0,
+          "pctDisplay": "60.0% de avance",
+          "barPct": 60.0
+        },
+        {
+          "acumDisplay": "24/20 asistencias técnicas",
+          "pct": 120,
+          "pctDisplay": "120.0% de avance",
+          "barPct": 120
+        }
+      ]
     }
   ]
 }
