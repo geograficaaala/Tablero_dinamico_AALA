@@ -36,4 +36,4 @@ jobs:
       - name: Validar tablas y precálculos
         run: python scripts/atitlan_recicla/validate_data.py
       - name: Validar indicadores y fórmulas
-        run: node --test tests/atitlan_recicla/paridad.test.mjs
+        run: node --test tests/atitlan_recicla/paridad.test.mjs tests/atitlan_recicla/octubre.test.mjs
