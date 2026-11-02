@@ -1,9 +1,9 @@
 {
   "programa": "tul",
   "anio": 2026,
-  "corte_publicado": "2026-09",
+  "corte_publicado": "2026-10",
   "primer_mes_publicado": 2,
-  "ultimo_mes_publicado": 9,
+  "ultimo_mes_publicado": 10,
   "tablas": [
     "periodos_2026.csv",
     "resultados_mensuales_2026.csv",
