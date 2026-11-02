@@ -17,7 +17,7 @@ export const programs = [
 const money = v => `Q ${fmt(v)}`;
 const num = v => Number(v);
 const fmt = v => new Intl.NumberFormat('es-GT',{maximumFractionDigits:Math.abs(Number(v)) < 10 && Number(v)%1 ? 2 : 1}).format(Number(v));
-const ratio = (a,b) => b > 0 ? a/b : null;
+const ratio = (a,b) => a===null||a===undefined||b===null||b===undefined?null:(b>0?a/b:null);
 const percent = r => r === null || !Number.isFinite(r) ? '—' : `${fmt(r*100)} %`;
 const escape = v => String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const dateKey = m => `2026-${String(m).padStart(2,'0')}`;
@@ -151,8 +151,8 @@ async function loadTul(){
     return snapshot.annual.map(a=>{
       const m=byMonth.get(a.id);
       return metric(a.label,a.unit,m?.value??null,m?.goal??null,a.value,a.goal,{
-        monthlyPct:m?m.pct/100:null,annualPct:a.pct/100,
-        monthNote:m?'':'Sin meta mensual publicada'
+        monthlyPct:m?.pct==null?null:m.pct/100,annualPct:a.pct/100,
+        monthNote:m?.value==null?'Sin registro mensual':''
       });
     });
   }};
