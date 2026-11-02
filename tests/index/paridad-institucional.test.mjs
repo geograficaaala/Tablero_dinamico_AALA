@@ -9,11 +9,11 @@ const oficial = read('config/index/indicadores_institucionales_2026.json');
 const cortes = read('data/index/2026/cortes_publicados.json');
 const withoutDashboard = ({ dashboard, ...rest }) => rest;
 
-test('nueve meses históricos completos y octubre exclusivo de Atitlán Recicla', () => {
+test('nueve meses históricos completos y octubre de Atitlán Recicla y Conservando Atitlán', () => {
   assert.deepEqual(Object.keys(cortes).sort(), ['1','10','2','3','4','5','6','7','8','9']);
   assert.equal(oficial.length, 6);
   assert.equal(Array.from({length:9},(_,i)=>cortes[String(i+1)]).reduce((sum, list) => sum + list.reduce((total, p) => total + p.metrics.length, 0), 0), 189);
-  assert.deepEqual(cortes['10'].map(p => p.id), ['atitlan_recicla']);
+  assert.deepEqual(cortes['10'].map(p => p.id), ['atitlan_recicla', 'conservando_atitlan']);
 });
 
 test('54 tarjetas mantienen íntegros los textos y resultados aprobados', () => {
@@ -55,5 +55,5 @@ test('octubre mantiene el tercer indicador de ingreso diario y los porcentajes o
   assert.match(corte.metrics[0].monthlyDisplay, /110\.9%/);
   assert.match(corte.metrics[1].monthlyDisplay, /98\.4%/);
   assert.match(corte.metrics[2].monthlyDisplay, /187\.9%/);
-  assert.equal(cortes['10'].length, 1);
+  assert.equal(cortes['10'].length, 2);
 });
