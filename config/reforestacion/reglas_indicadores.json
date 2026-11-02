@@ -28,7 +28,8 @@
       "2026-06",
       "2026-07",
       "2026-08",
-      "2026-09"
+      "2026-09",
+      "2026-10"
     ],
     "tabla_aprobacion": "procedencia_2026.csv",
     "criterio": "Todos los períodos publicados de 2026 se aceptan como datos válidos para el dashboard"
