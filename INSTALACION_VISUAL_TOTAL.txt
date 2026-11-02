@@ -1,0 +1,22 @@
+TABLERO DINAMICO AALA — ACTUALIZACION VISUAL INTEGRAL
+
+Contenido: indice institucional, seis dashboards, fuentes CSV, controladores, componentes, estilos y workflows.
+
+Repositorio: https://github.com/geograficaaala/Tablero_dinamico_AALA
+
+INSTALACION RECOMENDADA
+1. Descarga el paquete Actualizacion_Visual_Total_AALA_2026.zip.
+2. Descomprime el ZIP. El contenido ya corresponde a las rutas internas de tu repositorio.
+3. Copia el contenido sobre una copia local actualizada de Tablero_dinamico_AALA, reemplazando los archivos coincidentes.
+4. Haz commit a main y verifica el Action Publicar dashboards AALA.
+5. Abre https://geograficaaala.github.io/Tablero_dinamico_AALA/ y recarga con Ctrl+F5.
+
+ALTERNATIVA
+El paquete Tablero_dinamico_AALA_Visual_Integral_2026.zip contiene el repositorio entero como respaldo de reconstruccion. No lo subas como un solo archivo a GitHub; debes descomprimirlo.
+
+NOTAS
+- Se conservan los datos mensuales y reglas de indicadores.
+- Se integra la meta anual de 90,000 arboles en Reforestacion.
+- Se conserva la seleccion de programa cuando cambia el mes en el indice.
+- CSS y JS de identidad institucional son compartidos por los seis programas.
+- Comprobar en GitHub Pages la apariencia y navegacion definitivas.
