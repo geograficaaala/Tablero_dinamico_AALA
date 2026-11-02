@@ -26,6 +26,9 @@ required = [
     'src/index/index-original.mjs',
     'src/index/index-data.mjs',
     'config/index/tarjetas.json',
+    'config/index/indicadores_institucionales_2026.json',
+    'data/index/2026/cortes_publicados.json',
+    'src/index/indicadores-institucionales.mjs',
 ]
 missing = [name for name in required if not (dist / name).is_file()]
 if missing:
