@@ -45,7 +45,16 @@ def check():
             assert int(float(row['valor_calculado_desde_actividades'])) == len(keys), f'Conteo incorrecto: {period} {source}'
             is_override = source in REF['overrides_originales'].get(period, {})
             assert (row['origen_valor'] == 'ajuste_publicado_en_html_original') == is_override, f'Fuente incorrecta: {period} {source}'
-    assert len(notes) >= 9, 'Faltan notas de los meses originales'
+    oct_activities = [a for a in activities if a['periodo'] == '2026-10']
+    assert len(oct_activities) == 10, 'Octubre debe contener diez registros de actividades'
+    assert Counter(a['componente'] for a in oct_activities) == Counter({'asistencias': 5, 'estudios': 1, 'pirdes': 1, 'reuniones': 3}), 'Componentes de octubre distintos al Excel'
+    assert sum(a['estado'] == 'confirmado' for a in oct_activities if a['componente'] == 'asistencias') == 1, 'La asistencia municipal de octubre no coincide'
+    expected_oct = {'estudios':5, 'pirdes':3, 'asistencias':24, 'reuniones':8, 'capacidad':18}
+    for component, expected in expected_oct.items():
+        row = next((k for k in kpis if k['periodo'] == '2026-10' and k['componente'] == component), None)
+        assert row and float(row['valor_publicado']) == expected, f'Octubre incorrecto para {component}'
+    assert '2026-10' in published, 'Octubre no está publicado'
+    assert len(notes) >= 10, 'Faltan notas de octubre'
     assert any(n['periodo'] == '2026-09' and n['nota'] == REF['notas_originales']['2026-09'] for n in notes), 'Cambió la nota de septiembre'
     print(f'OK: {len(baseline)} actividades originales, 45 indicadores comparados y cinco metas de referencia. Períodos publicados: {len(published)}.')
 
