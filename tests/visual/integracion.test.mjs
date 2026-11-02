@@ -32,3 +32,19 @@ test('portada generada usa rutas de GitHub Pages correctas', () => {
   const workflow=source('.github/workflows/publicar-atitlan-recicla.yml');
   assert.ok(workflow.includes('tests/visual/integracion.test.mjs'));
 });
+
+
+test('footer original restaurado con logo institucional y contacto', () => {
+  const footer = source('src/components/aala-institutional-footer.mjs');
+  for (const required of ['footer-wrap','footer-brand','footer-col','footer-mark','chill_lago.png','+502 2362 3195','amigoatitlan@gmail.com','Lago de Atitlán, Sololá, Guatemala']) assert.ok(footer.includes(required), `Falta ${required}`);
+  assert.ok(existsSync('public/assets/logos/chill_lago.png'));
+});
+
+test('tema celeste blanco y componentes sin degradados de fondo', () => {
+  const styles = source('src/styles/themes/aala-pastel.css');
+  assert.match(styles, /font-family:\s*var\(--aala-v2-font\)/);
+  assert.match(styles, /'Nunito'/);
+  assert.match(styles, /background-image:none\s*!important/);
+  assert.match(styles, /\.ribbon-item\s*,/);
+  assert.match(styles, /footer\.site-footer\.aala-v2-footer/);
+});
