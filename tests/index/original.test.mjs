@@ -8,7 +8,7 @@ const read = name => fs.readFileSync(name,'utf8');
 const html=read('public/index.html');
 const css=read('src/styles/index-original.css');
 const js=read('src/index/index-original.mjs');
-const descriptors=JSON.parse(read('config/index/tarjetas.json'));
+const descriptors=JSON.parse(read('config/index/indicadores_institucionales_2026.json'));
 
 test('estructura visual y textos del índice original',()=>{
   for(const fragment of ['id="page-resumen"','id="page-programas"','class="hero-shell"','class="dashboard-ribbon','class="storyboard"','class="panorama-stage"','id="coverageMap"','id="coverageFilters"','id="programGrid"','id="programMonthButtons"','id="programCarouselViewport"','class="site-footer"']){
@@ -31,7 +31,7 @@ test('las seis tarjetas utilizan páginas existentes y controladores vigentes',(
   assert.equal(programs.length,6);
   for(const item of descriptors){
     assert.ok(fs.existsSync(`public/${item.dashboard}`),item.dashboard);
-    assert.ok(programs.some(program=>program.id===item.modelId),item.id);
+    assert.ok(programs.some(program=>program.id===(item.id==='manejo_tul'?'tul':item.id)),item.id);
     assert.ok(item.indicators.length>0,item.id);
   }
 });
@@ -44,8 +44,8 @@ test('el índice usa la cobertura original y conserva los enlaces sociales',()=>
 
 test('sin precálculos numéricos mensuales dentro de JavaScript',()=>{
   assert.ok(!js.includes('PROGRAM_MONTH_SNAPSHOTS'));
-  assert.ok(js.includes('loadedModels'));
-  assert.ok(js.includes('makeMetric'));
+  assert.ok(js.includes('construirProgramaInstitucional'));
+  assert.ok(js.includes('cortes_publicados.json'));
   assert.ok(js.includes('renderProgramMonth'));
   assert.ok(js.includes('initCoverageMap'));
 });
