@@ -1,0 +1,11 @@
+mes_clave,municipio,fechas,litros_reportados,inmuebles_con_entrega,inmuebles_con_registro,litros_suma_detalle,diferencia_redondeo
+2026-10,Sololá,"01, 07, 14, 15, 21 y 29 de octubre de 2026",1665,18,24,1666,-1
+2026-10,Panajachel,"08, 13, 20 y 27 de octubre de 2026",2307,27,62,2305,2
+2026-10,Santa Catarina Palopó,20 de octubre de 2026,132,3,5,133,-1
+2026-10,San Andrés Semetabaj,13 de octubre de 2026,104,5,5,104,0
+2026-10,San Lucas Tolimán,13 y 27 de octubre de 2026,469,3,4,468,1
+2026-10,Santiago Atitlán,13 y 27 de octubre de 2026,804,15,18,804,0
+2026-10,San Pedro La Laguna,14 de octubre de 2026,19,1,2,19,0
+2026-10,San Juan La Laguna,14 y 30 de octubre de 2026,740,10,15,741,-1
+2026-10,San Marcos La Laguna,14 de octubre de 2026,132,4,4,133,-1
+2026-10,Santa Lucía Utatlán,14 y 30 de octubre de 2026,700,7,9,701,-1
