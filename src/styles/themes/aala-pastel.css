@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap");
 body.aala-v2 {
   --aala-v2-navy: #294d69;
   --aala-v2-blue: #537f9e;
@@ -290,3 +291,497 @@ body.aala-v2.aala-index footer.site-footer.aala-v2-footer .aala-v2-footer-inner 
 
 body.aala-v2 .aala-v2-action.active,
 body.aala-v2 .aala-v2-action.aala-action-active { background: #dcebf1 !important; border-color: #8ebbd0 !important; color: #264e69 !important; }
+body.aala-v2.aala-index {
+  --aala-v2-navy: #244a69;
+  --lake-deep: #244a69;
+  --text: #24435d;
+  --text-2: #435f77;
+  --font-body: 'Tinos', Georgia, serif;
+  --font-head: 'Tinos', Georgia, serif;
+  line-height: 1.45;
+}
+body.aala-v2.aala-index .header {
+  min-height: 76px;
+  padding: 10px clamp(18px, 3vw, 52px);
+  background: linear-gradient(105deg, #d5e8ef 0%, #edf2ef 58%, #f5eddf 100%) !important;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+body.aala-v2.aala-index .header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+body.aala-v2.aala-index .header-logo-img {
+  width: 55px;
+  height: 59px;
+  object-fit: contain;
+  flex: none;
+}
+body.aala-v2.aala-index .header .brand-kicker {
+  font-size: clamp(.91rem, 1.14vw, 1.08rem) !important;
+  line-height: 1.14;
+  letter-spacing: .05em;
+}
+body.aala-v2.aala-index .header .brand-title {
+  font-size: clamp(.88rem, 1.05vw, 1rem) !important;
+  line-height: 1.25;
+}
+body.aala-v2.aala-index .header .nav-tabs {
+  margin-left: auto;
+  flex: none;
+}
+body.aala-v2.aala-index .header .nav-tab {
+  font-size: .88rem !important;
+  padding: 10px 14px;
+}
+body.aala-v2.aala-index .hero-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(275px, .75fr);
+  gap: 22px;
+  padding: 28px 0 20px;
+  align-items: stretch;
+}
+body.aala-v2.aala-index .hero-main.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+  height: auto;
+  min-height: 344px;
+  padding: clamp(26px, 3vw, 48px) !important;
+  border-radius: 25px;
+  overflow: hidden;
+  background: linear-gradient(122deg, #375f7e, #5b88a2 62%, #83aab6) !important;
+  box-shadow: 0 12px 35px rgba(35,74,101,.10) !important;
+}
+body.aala-v2.aala-index .hero-main .eyebrow {
+  color: #e2eff5 !important;
+  font-size: .8rem !important;
+  letter-spacing: .11em;
+  margin-bottom: 13px;
+  opacity: 1;
+}
+body.aala-v2.aala-index .hero-main .hero-title {
+  font-family: 'Tinos', Georgia, serif !important;
+  font-size: clamp(2.3rem, 3.1vw, 3.55rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.07 !important;
+  letter-spacing: -.025em;
+  text-align: center !important;
+  color: #fff !important;
+  max-width: 22ch !important;
+  margin: 0 auto 23px !important;
+  overflow-wrap: normal;
+}
+body.aala-v2.aala-index .hero-main .hero-copy,
+body.aala-v2.aala-index .hero-main p.hero-copy {
+  display: block;
+  font-size: clamp(.99rem, 1.15vw, 1.12rem) !important;
+  font-family: 'Tinos', Georgia, serif !important;
+  font-weight: 400;
+  line-height: 1.5 !important;
+  color: #f8fcff !important;
+  text-align: justify !important;
+  text-justify: inter-word;
+  max-width: 72ch;
+  margin: 0 !important;
+  overflow-wrap: break-word;
+}
+body.aala-v2.aala-index .hero-main .hero-copy strong {
+  font-weight: 700;
+  color: #fff !important;
+}
+body.aala-v2.aala-index .hero-side.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px !important;
+  border-radius: 25px;
+  background: linear-gradient(150deg, #f2f7f7 0%, #f9f5ed 100%) !important;
+}
+body.aala-v2.aala-index .hero-logo-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 290px;
+  width: 100%;
+  padding: 26px;
+  background: rgba(255,255,255,.6);
+}
+body.aala-v2.aala-index .hero-logo {
+  max-height: 220px;
+  max-width: 82%;
+  width: auto;
+  object-fit: contain;
+}
+body.aala-v2.aala-index .dashboard-ribbon {
+  margin: 6px 0 26px;
+  border-radius: 23px;
+}
+body.aala-v2.aala-index .ribbon-item {
+  min-height: 135px;
+  padding: 23px 27px;
+}
+body.aala-v2.aala-index .ribbon-value {
+  font-size: clamp(2rem, 2.8vw, 3rem);
+  line-height: 1.1;
+}
+body.aala-v2.aala-index :is(.story-panel,.narrative-stage,.chart-stage) {
+  padding: clamp(22px, 2.6vw, 34px);
+}
+body.aala-v2.aala-index :is(.story-lead,.story-columns .prose,.narrative-stage .prose,.capsule,.story-point p) {
+  font-size: 1.03rem !important;
+  line-height: 1.55 !important;
+  color: #3c5870;
+  text-align: justify;
+}
+body.aala-v2.aala-index :is(.story-panel,.narrative-stage) .section-title {
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem) !important;
+  line-height: 1.16 !important;
+  margin-bottom: 20px;
+  color: #244e6b !important;
+}
+body.aala-v2.aala-index .program-month-toolbar,
+body.aala-v2.aala-index .period-rack {
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(40,76,99,.05);
+}
+body.aala-v2.aala-index .program-card {
+  padding: 30px clamp(20px, 2.7vw, 38px) 30px !important;
+  background: #fffdfb !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 25px rgba(43,79,101,.06) !important;
+}
+body.aala-v2.aala-index .program-card .program-title {
+  font-size: clamp(1.65rem, 2.1vw, 2.2rem) !important;
+  line-height: 1.13 !important;
+  color: #244e6e;
+}
+body.aala-v2.aala-index .program-card .prog-score-wrap {
+  margin: 18px 0 22px;
+  padding: 15px 18px;
+  background: #eef5f7;
+}
+body.aala-v2.aala-index .program-card .prog-score-value {
+  font-size: 1.52rem !important;
+}
+body.aala-v2.aala-index .program-card .metric-header {
+  gap: 14px;
+  padding: 8px 0 14px;
+}
+body.aala-v2.aala-index .program-card .metric-header span {
+  font-size: .76rem;
+  line-height: 1.4;
+  color: #52718a;
+}
+body.aala-v2.aala-index .program-card .metric-row {
+  gap: 14px;
+  padding: 17px 0;
+  align-items: start;
+}
+body.aala-v2.aala-index .program-card .metric-row .mname {
+  font-size: .99rem;
+  line-height: 1.4;
+  text-align: left;
+}
+body.aala-v2.aala-index .program-card :is(.metric-primary,.metric-subcopy,.metric-temporality) {
+  font-size: .9rem;
+  line-height: 1.42;
+}
+body.aala-v2.aala-index .program-card .prog-score-label {
+  font-size: .84rem;
+  letter-spacing: .055em;
+}
+body.aala-v2.aala-index .program-footer .btn {
+  border-radius: 12px;
+  padding: 12px 19px;
+  background: #517f9e !important;
+  color: #fff !important;
+  font-size: .94rem;
+}
+body.aala-v2.aala-index .program-footer .btn:hover { background: #315e7a !important; }
+@media (max-width: 1050px) {
+  body.aala-v2.aala-index .hero-shell { grid-template-columns: minmax(0, 1.35fr) minmax(240px, .78fr); }
+  body.aala-v2.aala-index .hero-main.card { padding: 27px !important; }
+  body.aala-v2.aala-index .hero-main .hero-title { font-size: clamp(2rem, 3.4vw, 2.8rem) !important; }
+  body.aala-v2.aala-index .hero-logo-card { min-height: 245px; }
+  body.aala-v2.aala-index .hero-logo { max-height: 180px; }
+}
+@media (max-width: 800px) {
+  body.aala-v2.aala-index .hero-shell { grid-template-columns: 1fr; }
+  body.aala-v2.aala-index .hero-main.card { min-height: 0; padding: 30px 25px !important; }
+  body.aala-v2.aala-index .hero-side.card { padding: 12px !important; }
+  body.aala-v2.aala-index .hero-logo-card { min-height: 170px; padding: 12px; }
+  body.aala-v2.aala-index .hero-logo { max-height: 136px; }
+  body.aala-v2.aala-index .header { flex-wrap: wrap; }
+  body.aala-v2.aala-index .header .nav-tabs { width: 100%; margin-left: 0; justify-content: center; }
+  body.aala-v2.aala-index .program-card .metric-header { display: none !important; }
+  body.aala-v2.aala-index .program-card .metric-row { grid-template-columns: 1fr !important; gap: 8px; }
+  body.aala-v2.aala-index .program-card .metric-row .mcol-pct,
+  body.aala-v2.aala-index .program-card .metric-row .mcol-monthly { display: grid !important; }
+  body.aala-v2.aala-index .program-card .metric-row .mname { font-weight: 700; }
+}
+@media (max-width: 480px) {
+  body.aala-v2.aala-index .hero-main.card { padding: 24px 18px !important; }
+  body.aala-v2.aala-index .hero-main .hero-title { font-size: clamp(2rem, 8vw, 2.55rem) !important; }
+  body.aala-v2.aala-index .hero-main .hero-copy { font-size: 1rem !important; line-height: 1.43 !important; }
+  body.aala-v2.aala-index .program-card { padding: 23px 16px 24px !important; }
+  body.aala-v2.aala-index .ribbon-item { padding: 20px 18px; }
+}
+body.aala-v2.aala-index .program-card .program-head {
+  margin: 0 !important;
+  padding: 4px 0 8px !important;
+}
+body.aala-v2.aala-index .program-card .prog-score-wrap {
+  margin: 10px 0 18px !important;
+  padding: 14px 0 16px !important;
+}
+
+
+
+body.aala-v2 {
+  --aala-v2-font: 'Nunito', 'Trebuchet MS', Arial, sans-serif;
+  --font-head: var(--aala-v2-font);
+  --font-body: var(--aala-v2-font);
+  --aala-v2-navy: #28536d;
+  --aala-v2-blue: #5d97b7;
+  --aala-v2-sky: #d9edf5;
+  --aala-v2-paper: #ffffff;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f2f9fc;
+  --surface-3: #e9f5fa;
+  --text: #2c5066;
+  --text-2: #476a7e;
+  --line: #d5e8f0;
+  --line-soft: #e6f0f4;
+  background: #ffffff !important;
+  background-image: none !important;
+  color: #2c5066 !important;
+  font-family: var(--aala-v2-font) !important;
+}
+body.aala-v2 :is(h1,h2,h3,h4,h5,h6,.hero-title,.section-title,.program-title,.es-title,.ribbon-label,.ribbon-value,.section-kicker,.section-divider,.prog-score-label,.aala-v2-header-titles,.aala-footer-name) {
+  font-family: var(--aala-v2-font) !important;
+  text-align: center !important;
+  letter-spacing: normal !important;
+  color: #28536d !important;
+}
+body.aala-v2 main :is(h1,h2,h3,h4,h5,h6,.section-title,.section-divider,.program-title),
+body.aala-v2.aala-index .story-panel .section-title {
+  width: 100%;
+  text-align: center !important;
+}
+body.aala-v2 :is(p,.hero-copy,.hero-lead,.story-lead,.story-columns .prose,.footer-copy,.analysis-copy,.program-desc) {
+  font-family: var(--aala-v2-font) !important;
+  line-height: 1.45 !important;
+  color: #385c72;
+}
+body.aala-v2 main strong { color: #2d678c !important; font-weight: 800; }
+
+
+body.aala-v2 :is(.header,.aala-v2-header,.hero-main,.hero-side,.hero-logo-card,.card,.panel,.story-panel,.story-point,.signal-panel,.chart-stage,.narrative-stage,.dashboard-ribbon,.ribbon-item,.program-card,.coverage-card,.coverage-filter,.capsule,.exec-status-card,.fm-hero,.aala-header,.kpi-card,.kpi,.annual-kpi,.goal-card,.fm-kpi,.prog-score-wrap,.program-month-toolbar,.period-rack,.signal-stat,.signal-latest,.next-step) {
+  background-image: none !important;
+}
+body.aala-v2 :is(.card,.panel,.story-panel,.story-point,.hero-main,.hero-side,.hero-logo-card,.narrative-stage,.chart-stage,.coverage-card,.dashboard-ribbon,.ribbon-item,.program-card,.signal-stat,.signal-latest,.capsule,.exec-status-card,.goal-card,.fm-kpi,.kpi,.kpi-card,.annual-kpi,.prog-score-wrap,.program-month-toolbar,.next-step) {
+  box-shadow: none !important;
+  border: 0 !important;
+}
+body.aala-v2 :is(.card,.panel,.story-panel,.story-point,.hero-main,.hero-side,.hero-logo-card,.narrative-stage,.chart-stage,.coverage-card,.dashboard-ribbon,.ribbon-item,.program-card,.signal-stat,.signal-latest,.capsule,.exec-status-card,.goal-card,.fm-kpi,.kpi,.kpi-card,.annual-kpi,.next-step) {
+  background: #ffffff !important;
+}
+body.aala-v2 :is(.capsule,.story-point,.signal-stat,.signal-latest,.prog-score-wrap,.period-rack,.program-month-toolbar) {
+  background: transparent !important;
+  border: 0 !important;
+}
+body.aala-v2 :is(.card,.panel,.story-panel,.program-card,.hero-main,.hero-side,.story-point,.capsule,.chart-stage,.narrative-stage,.dashboard-ribbon,.coverage-card) :is(::before,::after) {
+  background-image: none !important;
+}
+body.aala-v2 .aala-v2-header,
+body.aala-v2.aala-index .header {
+  background: #e5f3f8 !important;
+  background-image: none !important;
+  border-bottom: 1px solid #cbe4ee !important;
+  box-shadow: none !important;
+}
+body.aala-v2 .aala-v2-header :is(.aala-v2-header-titles > div) { color:#28536d !important; }
+body.aala-v2 .aala-v2-months .month-pill,
+body.aala-v2.aala-index .month-pill { box-shadow:none !important; background:#f0f9fc !important; color:#315b75 !important; }
+body.aala-v2 .aala-v2-months .month-pill.active,
+body.aala-v2.aala-index .month-pill.active {background:#5b96b6 !important;color:white !important;}
+body.aala-v2 .aala-v2-action,
+body.aala-v2 .btn,
+body.aala-v2 .coverage-filter {background:#e7f4fa !important;color:#285b78 !important;background-image:none !important;box-shadow:none !important;border:1px solid #c8e1ed !important;}
+body.aala-v2 .aala-v2-action:hover,
+body.aala-v2 .btn:hover {background:#d4eaf4 !important;}
+body.aala-v2 :is(.mbar > span,.bar > span,.prog-score-fill,.metric-subfill,.signal-meter > span,.progress-fill,.progress > span,.goal-progress span,.kpi-pillar-fill,.fm-bar-fill) {
+  background:#78aac6 !important;
+  background-image:none !important;
+}
+body.aala-v2 .aala-v2-action svg {stroke:#356b8c;}
+
+
+body.aala-v2.aala-index .hero-shell {align-items:center !important;}
+body.aala-v2.aala-index .hero-main.card {
+  background:#ffffff !important;
+  background-image:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+  min-height:0 !important;
+  padding:clamp(18px,2.8vw,40px) !important;
+}
+body.aala-v2.aala-index .hero-main .hero-title {
+  color:#28536d !important;
+  font-family:var(--aala-v2-font) !important;
+  font-size:clamp(2rem,3vw,3.3rem) !important;
+  line-height:1.17 !important;
+  max-width:26ch !important;
+  text-align:center !important;
+}
+body.aala-v2.aala-index .hero-main .eyebrow {color:#5786a0 !important; text-align:center !important; align-self:center;}
+body.aala-v2.aala-index .hero-main .hero-copy,
+body.aala-v2.aala-index .hero-main .hero-copy strong {
+  color:#385e76 !important;
+  font-family:var(--aala-v2-font) !important;
+  line-height:1.48 !important;
+}
+body.aala-v2.aala-index .hero-main .hero-copy {max-width:76ch;margin:0 auto !important;}
+body.aala-v2.aala-index .hero-side.card,
+body.aala-v2.aala-index .hero-logo-card {background:#fff !important;border:0 !important;box-shadow:none !important;}
+body.aala-v2.aala-index .hero-logo-card::before,
+body.aala-v2.aala-index .hero-main::before,
+body.aala-v2.aala-index .hero-main::after,
+body.aala-v2.aala-index .story-panel::before,
+body.aala-v2.aala-index .signal-panel::before,
+body.aala-v2.aala-index .dashboard-ribbon::before,
+body.aala-v2.aala-index .ribbon-item::after {display:none !important;}
+body.aala-v2.aala-index .hero-logo {filter:none !important;}
+body.aala-v2.aala-index .dashboard-ribbon {background:#f2f9fc !important;border:0 !important;box-shadow:none !important;}
+body.aala-v2.aala-index .ribbon-item,
+body.aala-v2.aala-index .ribbon-item + .ribbon-item {text-align:center !important;background:transparent !important;border:0 !important;justify-items:center;}
+body.aala-v2.aala-index .ribbon-label,
+body.aala-v2.aala-index .ribbon-value,
+body.aala-v2.aala-index .ribbon-sub {
+  max-width:none !important;
+  width:100%;
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+body.aala-v2.aala-index .ribbon-value {font-size:clamp(2.3rem,3vw,3.3rem) !important;color:#315d79 !important;}
+body.aala-v2.aala-index :is(.story-panel,.narrative-stage,.chart-stage,.program-card) {
+  background:#fff !important;border:0 !important;box-shadow:none !important;
+}
+body.aala-v2.aala-index .program-card .prog-score-wrap {background:transparent !important;padding:14px 0 !important;border:0 !important;}
+body.aala-v2.aala-index .program-card .program-title {text-align:center !important;}
+body.aala-v2.aala-index .program-card .metric-row,
+body.aala-v2.aala-index .program-card .metric-header {border-bottom:1px solid #dbeaf1 !important;}
+body.aala-v2.aala-index .program-card .mname {text-align:left !important;}
+
+
+body.aala-v2 footer.site-footer.aala-v2-footer,
+body.aala-v2 .aala-v2-footer {
+  background: #254e68 !important;
+  background-image:none !important;
+  color:#ffffff !important;
+  border:0 !important;
+  margin-top:42px !important;
+  padding:26px clamp(16px,2.5vw,34px) 30px !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+body.aala-v2 .aala-v2-footer::before {display:none !important;}
+body.aala-v2 footer.site-footer.aala-v2-footer .aala-footer-name {
+  color:#fff !important;
+  text-align:center !important;
+  font:800 clamp(1.2rem,2vw,1.65rem)/1.2 var(--aala-v2-font) !important;
+  margin:0 auto 22px !important;
+  max-width:1350px;
+}
+body.aala-v2 footer.site-footer.aala-v2-footer .footer-wrap {
+  display:grid !important;
+  width:min(1500px,100%) !important;
+  max-width:1500px !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  grid-template-columns:minmax(155px,.68fr) minmax(300px,1.7fr) minmax(210px,.95fr) minmax(125px,.55fr) !important;
+  gap:clamp(15px,2vw,30px) !important;
+  align-items:start;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+body.aala-v2 footer.site-footer.aala-v2-footer :is(.footer-col,.footer-brand,.footer-mark) {
+  display:block !important;
+  max-width:none !important;
+  min-width:0;
+  background:transparent !important;
+  border:0 !important;
+  padding:0 !important;
+  box-shadow:none !important;
+}
+body.aala-v2 footer.site-footer.aala-v2-footer .footer-col h3 {
+  color:#d7ecf7 !important;
+  font:800 .88rem/1.3 var(--aala-v2-font) !important;
+  letter-spacing:.03em !important;
+  text-transform:none !important;
+  text-align:left !important;
+  margin:0 0 12px !important;
+}
+body.aala-v2 footer.site-footer.aala-v2-footer .footer-copy {
+  color:#f3f8fb !important;
+  font:500 .94rem/1.53 var(--aala-v2-font) !important;
+  text-align:justify !important;
+  margin:0 !important;
+  max-width:none !important;
+}
+body.aala-v2 footer.site-footer.aala-v2-footer .footer-links {
+  display:grid !important;
+  gap:10px !important;
+  min-width:0;
+}
+body.aala-v2 footer.site-footer.aala-v2-footer .footer-links :is(a,.aala-footer-address) {
+  display:flex !important;
+  align-items:flex-start !important;
+  gap:9px !important;
+  color:#fff !important;
+  font:600 .91rem/1.4 var(--aala-v2-font) !important;
+  text-decoration:none !important;
+  overflow-wrap:anywhere;
+}
+body.aala-v2 footer.site-footer.aala-v2-footer .social-icon,
+body.aala-v2 footer.site-footer.aala-v2-footer .social-icon svg {
+  display:inline-flex !important;
+  width:19px !important;
+  height:19px !important;
+  flex:none !important;
+  color:#e7f6ff !important;
+  stroke:#e7f6ff !important;
+}
+body.aala-v2 footer.site-footer.aala-v2-footer .footer-mark {justify-self:center !important;align-self:center !important;}
+body.aala-v2 footer.site-footer.aala-v2-footer .footer-mark img {
+  display:block !important;
+  width:clamp(125px,11vw,175px) !important;
+  max-width:100% !important;
+  height:auto !important;
+  filter:none !important;
+  opacity:1 !important;
+  object-fit:contain;
+}
+@media (max-width:1050px) {
+  body.aala-v2 footer.site-footer.aala-v2-footer .footer-wrap {
+    grid-template-columns:minmax(150px,1fr) minmax(250px,2fr) !important;
+  }
+  body.aala-v2 footer.site-footer.aala-v2-footer .footer-mark {justify-self:start !important;}
+}
+@media (max-width:620px) {
+  body.aala-v2 footer.site-footer.aala-v2-footer .footer-wrap {grid-template-columns:1fr !important;gap:24px !important;}
+  body.aala-v2 footer.site-footer.aala-v2-footer .footer-mark {justify-self:center !important;}
+  body.aala-v2 footer.site-footer.aala-v2-footer .footer-col h3 {text-align:center !important;}
+  body.aala-v2 footer.site-footer.aala-v2-footer .footer-links {justify-content:center !important;}
+  body.aala-v2 footer.site-footer.aala-v2-footer .footer-copy {font-size:.94rem !important;}
+  body.aala-v2.aala-index .dashboard-ribbon {grid-template-columns:1fr !important;}
+}
