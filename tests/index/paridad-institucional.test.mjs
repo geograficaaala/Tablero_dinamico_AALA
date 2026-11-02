@@ -10,10 +10,28 @@ const cuts = read('data/index/2026/cortes_publicados.json');
 const withoutDashboard = ({dashboard, ...rest}) => rest;
 
 test('nueve meses históricos y cuatro programas actualizados en octubre', () => {
-  assert.deepEqual(Object.keys(cuts).sort(), ['1','10','2','3','4','5','6','7','8','9']);
-  assert.equal(official.length, 6);
-  assert.equal(Array.from({length:9},(_,i)=>cuts[String(i+1)]).reduce((sum, list) => sum+list.reduce((n,p)=>n+p.metrics.length,0),0),189);
-  assert.deepEqual(cuts['10'].map(p=>p.id),['atitlan_recicla','conservando_atitlan','educando_para_conservar','fortalecimiento_municipal']);
+  const expectedMonths = Array.from({ length: 10 }, (_, index) => String(index + 1)).sort();
+  assert.deepEqual(Object.keys(cuts).sort(), expectedMonths, 'Deben existir los cortes de enero a octubre de 2026');
+  assert.equal(official.length, 6, 'Deben existir seis programas institucionales');
+  let historicalMetrics = 0;
+  for (let month = 1; month <= 9; month++) {
+    const programs = cuts[String(month)];
+    assert.ok(Array.isArray(programs) && programs.length === 6, `Falta información de un programa en el mes ${month}`);
+    historicalMetrics += programs.reduce((total, program) => total + program.metrics.length, 0);
+  }
+  assert.equal(historicalMetrics, 189, 'Los 189 indicadores históricos de enero a septiembre deben conservarse');
+  const october = cuts['10'];
+  assert.ok(Array.isArray(october), 'No existe el corte de octubre en data/index/2026/cortes_publicados.json');
+  const expectedIds = ['atitlan_recicla', 'conservando_atitlan', 'educando_para_conservar', 'fortalecimiento_municipal'];
+  const actualIds = october.map(program => program.id);
+  assert.equal(new Set(actualIds).size, actualIds.length, `Octubre contiene programas duplicados: ${actualIds.join(', ')}`);
+  assert.deepEqual([...actualIds].sort(), [...expectedIds].sort(), `Octubre debe contener cuatro programas; encontrados: ${actualIds.join(', ')}`);
+  for (const program of october) {
+    assert.equal(program.periodKey, '2026-10', `Período incorrecto de ${program.id}`);
+    const config = official.find(entry => entry.id === program.id);
+    assert.ok(config, `No existe configuración institucional para ${program.id}`);
+    assert.equal(program.metrics.length, config.indicators.length, `Indicadores incompletos de ${program.id}`);
+  }
 });
 
 test('los textos institucionales y 54 tarjetas históricas conservan su identidad', () => {
