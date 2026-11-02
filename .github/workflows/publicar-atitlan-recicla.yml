@@ -45,7 +45,7 @@ jobs:
       - run: node --test tests/reforestacion/paridad.test.mjs tests/reforestacion/funcional.test.mjs
       - run: python scripts/tul/validate_data.py
       - run: node --test tests/tul/paridad.test.mjs tests/tul/modulos.test.mjs tests/tul/arranque.test.mjs
-      - run: node --test tests/index/portal.test.mjs tests/index/original.test.mjs
+      - run: node --test tests/index/portal.test.mjs tests/index/original.test.mjs tests/index/paridad-institucional.test.mjs
       - run: node --test tests/index/datos.test.mjs
       - run: node --test tests/visual/integracion.test.mjs
       - run: |
