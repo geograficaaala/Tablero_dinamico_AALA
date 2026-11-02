@@ -1,5 +1,5 @@
 
-import { programs as sources } from './index-data.mjs';
+import { construirProgramaInstitucional } from './indicadores-institucionales.mjs';
 
 /* ────────────────────────────────
    NAVEGACIÓN POR TABS
@@ -496,53 +496,23 @@ function renderSummary(programs){
 
 const MONTH_NAMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 const APP_ROOT = new URL('../../', import.meta.url);
-const programsById = new Map(sources.map(item => [item.id, item]));
-const loadedModels = new Map();
 let descriptions = [];
+let officialMonths = {};
 let selectedMonth = 9;
 const finite = value => typeof value === 'number' && Number.isFinite(value);
-const percent = value => finite(value) ? value * 100 : null;
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-const numberWithUnit = (value, unit) => {
-  if (!finite(value)) return '—';
-  const u = String(unit || '');
-  const str = fmt(value, Number.isInteger(value) ? 0 : 2);
-  return u === 'GTQ' || u.includes('quetzal') ? `Q${str}` : `${str}${u ? ` ${u}` : ''}`;
-};
-function makeMetric(source, descriptor, month){
-  const annualHasGoal = finite(source.annualGoal) && source.annualGoal > 0;
-  const monthlyHasGoal = finite(source.monthlyGoal) && source.monthlyGoal > 0;
-  const annualPct = annualHasGoal && finite(source.annualPct) ? percent(source.annualPct) : null;
-  const monthlyPct = monthlyHasGoal && finite(source.monthlyPct) ? percent(source.monthlyPct) : null;
-  const annualValue = numberWithUnit(source.annual, source.unit);
-  const monthlyValue = numberWithUnit(source.monthly, source.unit);
-  const annualGoal = numberWithUnit(source.annualGoal, source.unit);
-  const monthlyGoal = numberWithUnit(source.monthlyGoal, source.unit);
-  const monthName = MONTH_NAMES[month - 1].toLowerCase();
-  return {
-    label: escapeHtml(source.name),
-    acumDisplay: annualHasGoal ? `${annualValue} / ${annualGoal}` : `${annualValue} · sin meta anual publicada`,
-    pct: annualPct,
-    barPct: annualPct,
-    pctDisplay: annualPct === null ? 'Sin porcentaje anual definido' : `${fmtPct(annualPct)} de avance acumulado hasta ${monthName} contra la meta anual`,
-    monthlyDisplay: finite(source.monthly) ? (monthlyPct !== null ? `${monthlyValue} / ${monthlyGoal} en ${monthName} · ${fmtPct(monthlyPct)}` : `${monthlyValue} en ${monthName} · sin meta mensual publicada`) : 'Sin resultado mensual publicado',
-    monthlyPct,
-    temporality: descriptor.temporality || source.yearNote || source.monthNote || ''
-  };
-}
-function makeProgram(descriptor, month){
-  const source = loadedModels.get(descriptor.modelId);
-  const sourceConfig = programsById.get(descriptor.modelId);
+function makeProgram(descriptor, month) {
+  const corte = (officialMonths[String(month)] || []).find(row => row.id === descriptor.id);
   const dashboard = new URL(`public/${descriptor.dashboard}`, APP_ROOT).href;
-  const available = source?.months?.has(month);
-  if (!available) return { id:descriptor.id, name:descriptor.name, dashboard, latestLabel:'Sin datos', periodKey:'', score:null, hasMonthlyColumn:descriptor.hasMonthlyColumn, scoreHeader:descriptor.scoreHeader, metrics:[] };
-  const rows = source.get(month);
-  const metrics = descriptor.indicators.map(d => rows[d.index] ? makeMetric(rows[d.index], d, month) : null).filter(Boolean);
-  const monthlyValues = metrics.map(m => m.monthlyPct).filter(finite);
-  const annualValues = metrics.map(m => m.pct).filter(finite);
-  const values = descriptor.hasMonthlyColumn === false || !monthlyValues.length ? annualValues : monthlyValues;
-  const score = values.length ? avg(values) : null;
-  return {id:descriptor.id,name:descriptor.name,dashboard,latestLabel:MONTH_NAMES[month - 1],periodKey:`2026-${String(month).padStart(2,'0')}`,score,hasMonthlyColumn:descriptor.hasMonthlyColumn,scoreHeader:descriptor.scoreHeader,metrics};
+  if (!corte) return {
+    id: descriptor.id, name: descriptor.name, dashboard,
+    latestLabel: 'Sin datos', periodKey: '', score: null,
+    hasMonthlyColumn: descriptor.hasMonthlyColumn,
+    scoreHeader: descriptor.scoreHeader, metrics: []
+  };
+  const result = construirProgramaInstitucional(descriptor, corte, dashboard);
+  result.metrics.forEach(m => { m.label = escapeHtml(m.label); });
+  return result;
 }
 function renderNoData(program){
   const card = programCard({...program, score:0});
@@ -591,13 +561,13 @@ function renderProgramMonth(month){
 }
 async function init(){
   try{
-    const response=await fetch(new URL('../../config/index/tarjetas.json', import.meta.url));
-    if(!response.ok) throw Error(`Catálogo institucional: ${response.status}`);
-    descriptions=await response.json();
-    await Promise.all(sources.map(async p=>{
-      try{loadedModels.set(p.id,await p.loader());}
-      catch(error){console.error(`No se pudo cargar ${p.name}:`,error);}
-    }));
+    const [catalogResponse, cutsResponse] = await Promise.all([
+      fetch(new URL('../../config/index/indicadores_institucionales_2026.json', import.meta.url)),
+      fetch(new URL('../../data/index/2026/cortes_publicados.json', import.meta.url))
+    ]);
+    if (!catalogResponse.ok || !cutsResponse.ok) throw Error('No se pudo cargar la información institucional.');
+    descriptions = await catalogResponse.json();
+    officialMonths = await cutsResponse.json();
     renderProgramMonth(9);
     await initCoverageMap();
   } catch(error){
