@@ -61,35 +61,40 @@ def main():
     assert len({r['periodo_clave'] for r in origin}) == len(origin)
     assert len({r['periodo_clave'] for r in survival}) == len(survival)
     assert all(r['periodo_clave'] in months for r in metas + origin + survival)
-    assert len(total) == 9 and primary == 9
-    assert len(extra) == 81 and more == 81
+    assert len(total) == 10 and primary == 9
+    assert len(extra) == 90 and more == 81
     assert all(math.isclose(float(r['pct_meta_arboles']), float(r['arboles_sembrados_acum']) / 90000, rel_tol=0, abs_tol=1e-10) for r in total)
     assert all(float(r['meta_arboles']) == 90000 for r in total)
     assert all(float(r['arboles_meta_anual']) == 90000 for r in metas)
     institutional = read_csv('indicadores_institucionales_2026.csv')
     trees = [r for r in institutional if r['subindicador_id'] == 'arboles_sembrados']
-    assert len(trees) == 9
+    assert len(trees) == 10
     assert all(float(r['meta_anual']) == 90000 for r in trees)
     assert all(math.isclose(float(r['pct_meta_anual']), float(r['valor_acumulado']) / 90000, rel_tol=0, abs_tol=1e-10) for r in trees)
     assert all(int(float(r['valor_acumulado'])) == int(float(next(t for t in total if t['periodo_clave'] == r['periodo_clave'])['arboles_sembrados_acum'])) for r in trees)
-    assert len(institutional) == 54
+    assert len(institutional) == 60
     assert all(r['aprobado_para_publicacion'] == 'true' for r in origin)
     assert {r['periodo_clave'] for r in origin} == months
     assert all('estimaci' not in r['tipo_fuente'].lower() for r in origin)
     assert sum(r['is_latest_data_month'] == 'True' for r in total) == 1
-    assert next(r for r in total if r['is_latest_data_month'] == 'True')['periodo_clave'] == '2026-09'
+    assert next(r for r in total if r['is_latest_data_month'] == 'True')['periodo_clave'] == '2026-10'
     catalog = read_csv('catalogo_indicadores_2026.csv')
     periods = read_csv('periodos_2026.csv')
     assert len(catalog) == 13 and len({r['indicador_id'] for r in catalog}) == 13
-    assert len(periods) == 12 and sum(r['publicado'] == 'true' for r in periods) == 9
-    assert all(r['publicado'] == 'false' for r in periods[9:])
+    assert len(periods) == 12 and sum(r['publicado'] == 'true' for r in periods) == 10
+    assert all(r['publicado'] == 'false' for r in periods[10:])
     contract = json.loads((ROOT / 'config/reforestacion/contrato_datos_2026.json').read_text(encoding='utf-8'))
     assert contract['estado_datos'] == 'aprobados_para_publicacion'
     assert len(contract['tablas']) == 9
-    assert all(r['estatus_reporte'] == 'Datos aprobados para publicación' for r in total[-3:])
+    assert all(r['estatus_reporte'] == 'Datos aprobados para publicación' for r in total[-4:])
     assert next(r for r in survival if r['periodo_clave'] == '2026-09')['porcentaje_mostrado'] == '68'
     assert next(r for r in total if r['periodo_clave'] == '2026-09')['arboles_sembrados_acum'] == '35000'
-    print(f'OK: {primary} meses, {more} KPI complementarios, 54 indicadores institucionales, 13 definiciones y 12 períodos; cifras conservadas salvo meta y porcentajes de árboles actualizados a 90,000.')
+    oct_row = next(r for r in total if r['periodo_clave'] == '2026-10')
+    assert float(oct_row['ha_monitoreadas_kpi_acum']) == 30
+    assert float(oct_row['arboles_sembrados_acum']) == 90000
+    assert float(oct_row['plantas_netas_acum']) == 7500
+    assert next(r for r in extra if r['periodo_clave']=='2026-10' and r['kpi_id']=='sig_mapas_generados')['valor_mes'] == '7'
+    print('OK: diez meses, 90 indicadores complementarios, 60 indicadores institucionales y metas anuales conservadas.')
 
 if __name__ == '__main__':
     main()
