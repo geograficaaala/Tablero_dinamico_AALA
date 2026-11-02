@@ -2192,6 +2192,47 @@
           "monthlyPct": 187.91056790123457
         }
       ]
+    },
+    {
+      "latestLabel": "Octubre",
+      "periodKey": "2026-10",
+      "score": 90.0104039201544,
+      "sourceSummary": "",
+      "id": "conservando_atitlan",
+      "metrics": [
+        {
+          "acumDisplay": "70,721 / 80,000 litros recolectados",
+          "pct": 88.40103500000001,
+          "pctDisplay": "88.4% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 88.40103500000001,
+          "monthlyDisplay": "7,072 / 6,670 litros recolectados en octubre · 106.0%",
+          "monthlyPct": 106.02698650674662
+        },
+        {
+          "acumDisplay": "70,720,828 / 80,000,000 litros de agua protegidos",
+          "pct": 88.401035,
+          "pctDisplay": "88.4% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 88.401035,
+          "monthlyDisplay": "7,072,000 / 6,670,000 litros de agua protegidos en octubre · 106.0%",
+          "monthlyPct": 106.02698650674662
+        },
+        {
+          "acumDisplay": "52,380 / 65,040 jabones producidos",
+          "pct": 80.5350553505535,
+          "pctDisplay": "80.5% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 80.5350553505535,
+          "monthlyDisplay": "5,500 / 5,420 jabones producidos en octubre · 101.5%",
+          "monthlyPct": 101.4760147601476
+        },
+        {
+          "acumDisplay": "17,750 / 51,600 jabones vendidos",
+          "pct": 34.39922480620155,
+          "pctDisplay": "34.4% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 34.39922480620155,
+          "monthlyDisplay": "2,000 / 4,300 jabones vendidos en octubre · 46.5%",
+          "monthlyPct": 46.51162790697674
+        }
+      ]
     }
   ]
 }
