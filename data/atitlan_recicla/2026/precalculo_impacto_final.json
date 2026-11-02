@@ -45,6 +45,11 @@
       "anio": 2026,
       "mes_num": 9,
       "mes": "SEP"
+    },
+    {
+      "anio": 2026,
+      "mes_num": 10,
+      "mes": "OCT"
     }
   ],
   "metrics": {
@@ -1583,6 +1588,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 888.2,
+          "pet": 62.07,
+          "vidrio": 434.72,
+          "ingreso_bruto_total": 19776.2,
+          "ingreso_bruto_mujeres": 19776.2,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 328.343667,
+          "participacion_actividades": 0.363636,
+          "participacion_comercializacion": 0.272727,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 8235.05,
+          "pet": 516.9,
+          "vidrio": 4215.63,
+          "ingreso_bruto_total": 172194.52,
+          "ingreso_bruto_mujeres": 172194.52,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 275.492449,
+          "participacion_actividades": 0.538384,
+          "participacion_comercializacion": 0.341414,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.491492,
+          "pet": 0.391411,
+          "vidrio": 0.416666,
+          "ingreso_bruto_total": 0.493447,
+          "ingreso_bruto_mujeres": 0.519717,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.467329,
+          "pet": 0.375908,
+          "vidrio": 0.418765,
+          "ingreso_bruto_total": 0.458605,
+          "ingreso_bruto_mujeres": 0.496941,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.544908,
+          "pet": 0.405686,
+          "vidrio": 0.427033,
+          "ingreso_bruto_total": 0.48558,
+          "ingreso_bruto_mujeres": 0.539523,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 2.432175,
+          "participacion_actividades": 0.484848,
+          "participacion_comercializacion": 0.454545,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.505218,
+          "pet": 0.337843,
+          "vidrio": 0.414109,
+          "ingreso_bruto_total": 0.422802,
+          "ingreso_bruto_mujeres": 0.469771,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.204068,
+          "participacion_actividades": 0.071785,
+          "participacion_comercializacion": 0.056902,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "Las Lagunas": {
@@ -2302,6 +2387,86 @@
           "ingreso_diario_lideresa": 0.399941,
           "participacion_actividades": 1.333333,
           "participacion_comercializacion": 1.522635,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 174.87,
+          "pet": 14.68,
+          "vidrio": 131.55,
+          "ingreso_bruto_total": 3408.71,
+          "ingreso_bruto_mujeres": 2171.16,
+          "ingreso_bruto_municipalidades": 1237.55,
+          "ingreso_diario_lideresa": 59.649267,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 0.8,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 1988.88,
+          "pet": 148.22,
+          "vidrio": 1411.44,
+          "ingreso_bruto_total": 39047.57,
+          "ingreso_bruto_mujeres": 20735.74,
+          "ingreso_bruto_municipalidades": 18311.83,
+          "ingreso_diario_lideresa": 54.55771,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 0.902222,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.096766,
+          "pet": 0.092572,
+          "vidrio": 0.126087,
+          "ingreso_bruto_total": 0.085053,
+          "ingreso_bruto_mujeres": 0.057058,
+          "ingreso_bruto_municipalidades": 0.610916,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.112866,
+          "pet": 0.107791,
+          "vidrio": 0.140207,
+          "ingreso_bruto_total": 0.103995,
+          "ingreso_bruto_mujeres": 0.059842,
+          "ingreso_bruto_municipalidades": 0.632181,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.107282,
+          "pet": 0.095948,
+          "vidrio": 0.129224,
+          "ingreso_bruto_total": 0.083697,
+          "ingreso_bruto_mujeres": 0.059232,
+          "ingreso_bruto_municipalidades": 0.303842,
+          "ingreso_diario_lideresa": 0.441846,
+          "participacion_actividades": 1.333333,
+          "participacion_comercializacion": 1.333333,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.122017,
+          "pet": 0.096876,
+          "vidrio": 0.138648,
+          "ingreso_bruto_total": 0.095876,
+          "ingreso_bruto_mujeres": 0.05657,
+          "ingreso_bruto_municipalidades": 0.449591,
+          "ingreso_diario_lideresa": 0.040413,
+          "participacion_actividades": 0.133333,
+          "participacion_comercializacion": 0.15037,
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
@@ -3027,6 +3192,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 239.38,
+          "pet": 16.83,
+          "vidrio": 139.06,
+          "ingreso_bruto_total": 5151.96,
+          "ingreso_bruto_mujeres": 4363.78,
+          "ingreso_bruto_municipalidades": 788.18,
+          "ingreso_diario_lideresa": 222.571111,
+          "participacion_actividades": 0.642857,
+          "participacion_comercializacion": 0.285714,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 2484.39,
+          "pet": 163.15,
+          "vidrio": 1345.61,
+          "ingreso_bruto_total": 50668.72,
+          "ingreso_bruto_mujeres": 40014.43,
+          "ingreso_bruto_municipalidades": 10654.29,
+          "ingreso_diario_lideresa": 158.901508,
+          "participacion_actividades": 0.642857,
+          "participacion_comercializacion": 0.335714,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.132463,
+          "pet": 0.106129,
+          "vidrio": 0.133285,
+          "ingreso_bruto_total": 0.12855,
+          "ingreso_bruto_mujeres": 0.11468,
+          "ingreso_bruto_municipalidades": 0.389084,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.140986,
+          "pet": 0.118649,
+          "vidrio": 0.133668,
+          "ingreso_bruto_total": 0.134946,
+          "ingreso_bruto_mujeres": 0.115479,
+          "ingreso_bruto_municipalidades": 0.367819,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.146859,
+          "pet": 0.11,
+          "vidrio": 0.136601,
+          "ingreso_bruto_total": 0.1265,
+          "ingreso_bruto_mujeres": 0.11905,
+          "ingreso_bruto_municipalidades": 0.193513,
+          "ingreso_diario_lideresa": 1.648675,
+          "participacion_actividades": 0.857143,
+          "participacion_comercializacion": 0.47619,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.152417,
+          "pet": 0.106634,
+          "vidrio": 0.132182,
+          "ingreso_bruto_total": 0.124411,
+          "ingreso_bruto_mujeres": 0.109165,
+          "ingreso_bruto_municipalidades": 0.261583,
+          "ingreso_diario_lideresa": 0.117705,
+          "participacion_actividades": 0.085714,
+          "participacion_comercializacion": 0.055952,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "Zona Sur": {
@@ -3746,6 +3991,86 @@
           "ingreso_diario_lideresa": 1.412734,
           "participacion_actividades": 1.253561,
           "participacion_comercializacion": 1.564282,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 504.7,
+          "pet": 65.0,
+          "vidrio": 338.0,
+          "ingreso_bruto_total": 11740.75,
+          "ingreso_bruto_mujeres": 11740.75,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 216.585,
+          "participacion_actividades": 0.923077,
+          "participacion_comercializacion": 0.769231,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 4913.21,
+          "pet": 546.8,
+          "vidrio": 3094.125,
+          "ingreso_bruto_total": 113564.1,
+          "ingreso_bruto_mujeres": 113564.1,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 193.305721,
+          "participacion_actividades": 0.938462,
+          "participacion_comercializacion": 0.921635,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.27928,
+          "pet": 0.409888,
+          "vidrio": 0.323963,
+          "ingreso_bruto_total": 0.29295,
+          "ingreso_bruto_mujeres": 0.308546,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.278819,
+          "pet": 0.397652,
+          "vidrio": 0.307359,
+          "ingreso_bruto_total": 0.302455,
+          "ingreso_bruto_mujeres": 0.327738,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.309632,
+          "pet": 0.424837,
+          "vidrio": 0.332024,
+          "ingreso_bruto_total": 0.288279,
+          "ingreso_bruto_mujeres": 0.320304,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 1.604333,
+          "participacion_actividades": 1.230769,
+          "participacion_comercializacion": 1.282051,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.301424,
+          "pet": 0.357386,
+          "vidrio": 0.303942,
+          "ingreso_bruto_total": 0.278842,
+          "ingreso_bruto_mujeres": 0.309819,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.143189,
+          "participacion_actividades": 0.125128,
+          "participacion_comercializacion": 0.153606,
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
@@ -4473,6 +4798,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 268.75,
+          "pet": 6.0,
+          "vidrio": 243.0,
+          "ingreso_bruto_total": 5281.5,
+          "ingreso_bruto_mujeres": 5281.5,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 174.8,
+          "participacion_actividades": 0.875,
+          "participacion_comercializacion": 0.75,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 2182.13,
+          "pet": 54.2,
+          "vidrio": 1965.825,
+          "ingreso_bruto_total": 45111.65,
+          "ingreso_bruto_mujeres": 45111.65,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 130.21303,
+          "participacion_actividades": 0.9125,
+          "participacion_comercializacion": 0.888889,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.148715,
+          "pet": 0.037836,
+          "vidrio": 0.232908,
+          "ingreso_bruto_total": 0.131782,
+          "ingreso_bruto_mujeres": 0.138797,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.123833,
+          "pet": 0.039416,
+          "vidrio": 0.195278,
+          "ingreso_bruto_total": 0.120146,
+          "ingreso_bruto_mujeres": 0.130189,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.164877,
+          "pet": 0.039216,
+          "vidrio": 0.238703,
+          "ingreso_bruto_total": 0.129681,
+          "ingreso_bruto_mujeres": 0.144087,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 1.294815,
+          "participacion_actividades": 1.166667,
+          "participacion_comercializacion": 1.25,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.133873,
+          "pet": 0.035425,
+          "vidrio": 0.193107,
+          "ingreso_bruto_total": 0.110766,
+          "ingreso_bruto_mujeres": 0.123071,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.096454,
+          "participacion_actividades": 0.121667,
+          "participacion_comercializacion": 0.148148,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "San Lucas Tolimán": {
@@ -5192,6 +5597,86 @@
           "ingreso_diario_lideresa": 1.897625,
           "participacion_actividades": 1.308641,
           "participacion_comercializacion": 1.651675,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 235.95,
+          "pet": 59.0,
+          "vidrio": 95.0,
+          "ingreso_bruto_total": 6459.25,
+          "ingreso_bruto_mujeres": 6459.25,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 258.37,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 0.8,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 2731.08,
+          "pet": 492.6,
+          "vidrio": 1128.3,
+          "ingreso_bruto_total": 68452.45,
+          "ingreso_bruto_mujeres": 68452.45,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 256.398411,
+          "participacion_actividades": 0.983333,
+          "participacion_comercializacion": 0.971905,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.130565,
+          "pet": 0.372052,
+          "vidrio": 0.091055,
+          "ingreso_bruto_total": 0.161169,
+          "ingreso_bruto_mujeres": 0.169748,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.154985,
+          "pet": 0.358236,
+          "vidrio": 0.112081,
+          "ingreso_bruto_total": 0.182309,
+          "ingreso_bruto_mujeres": 0.197549,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.144755,
+          "pet": 0.385621,
+          "vidrio": 0.09332,
+          "ingreso_bruto_total": 0.158599,
+          "ingreso_bruto_mujeres": 0.176217,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 1.913852,
+          "participacion_actividades": 1.333333,
+          "participacion_comercializacion": 1.333333,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.167551,
+          "pet": 0.321961,
+          "vidrio": 0.110835,
+          "ingreso_bruto_total": 0.168076,
+          "ingreso_bruto_mujeres": 0.186748,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.189925,
+          "participacion_actividades": 0.131111,
+          "participacion_comercializacion": 0.161984,
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
@@ -5917,6 +6402,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 124.8,
+          "pet": 7.9,
+          "vidrio": 47.0,
+          "ingreso_bruto_total": 2528.5,
+          "ingreso_bruto_mujeres": 2528.5,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 502.1,
+          "participacion_actividades": 0.833333,
+          "participacion_comercializacion": 0.166667,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 1356.35,
+          "pet": 76.68,
+          "vidrio": 456.88,
+          "ingreso_bruto_total": 25199.17,
+          "ingreso_bruto_mujeres": 22717.65,
+          "ingreso_bruto_municipalidades": 2481.52,
+          "ingreso_diario_lideresa": 267.81715,
+          "participacion_actividades": 0.833333,
+          "participacion_comercializacion": 0.233333,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.069059,
+          "pet": 0.049817,
+          "vidrio": 0.045048,
+          "ingreso_bruto_total": 0.06309,
+          "ingreso_bruto_mujeres": 0.066449,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.076971,
+          "pet": 0.055764,
+          "vidrio": 0.045385,
+          "ingreso_bruto_total": 0.067113,
+          "ingreso_bruto_mujeres": 0.065562,
+          "ingreso_bruto_municipalidades": 0.08567,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.076564,
+          "pet": 0.051634,
+          "vidrio": 0.046169,
+          "ingreso_bruto_total": 0.062084,
+          "ingreso_bruto_mujeres": 0.068981,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 3.719259,
+          "participacion_actividades": 1.111111,
+          "participacion_comercializacion": 0.277778,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.083212,
+          "pet": 0.050118,
+          "vidrio": 0.04488,
+          "ingreso_bruto_total": 0.061873,
+          "ingreso_bruto_mujeres": 0.061977,
+          "ingreso_bruto_municipalidades": 0.060926,
+          "ingreso_diario_lideresa": 0.198383,
+          "participacion_actividades": 0.111111,
+          "participacion_comercializacion": 0.038889,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "San Andrés Semetabaj": {
@@ -6636,6 +7201,86 @@
           "ingreso_diario_lideresa": 0.817952,
           "participacion_actividades": 0.444444,
           "participacion_comercializacion": 0.493827,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 15.29,
+          "pet": 0.71,
+          "vidrio": 8.68,
+          "ingreso_bruto_total": 324.46,
+          "ingreso_bruto_mujeres": 324.46,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 64.892,
+          "participacion_actividades": 0.333333,
+          "participacion_comercializacion": 0.333333,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 252.61,
+          "pet": 11.82,
+          "vidrio": 177.94,
+          "ingreso_bruto_total": 5312.72,
+          "ingreso_bruto_mujeres": 5312.72,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 105.8704,
+          "participacion_actividades": 0.333333,
+          "participacion_comercializacion": 0.3,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.008461,
+          "pet": 0.004477,
+          "vidrio": 0.00832,
+          "ingreso_bruto_total": 0.008096,
+          "ingreso_bruto_mujeres": 0.008527,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.014335,
+          "pet": 0.008596,
+          "vidrio": 0.017676,
+          "ingreso_bruto_total": 0.014149,
+          "ingreso_bruto_mujeres": 0.015332,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.00938,
+          "pet": 0.004641,
+          "vidrio": 0.008527,
+          "ingreso_bruto_total": 0.007967,
+          "ingreso_bruto_mujeres": 0.008852,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.480681,
+          "participacion_actividades": 0.444444,
+          "participacion_comercializacion": 0.555556,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.015498,
+          "pet": 0.007725,
+          "vidrio": 0.017479,
+          "ingreso_bruto_total": 0.013045,
+          "ingreso_bruto_mujeres": 0.014494,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.078423,
+          "participacion_actividades": 0.044444,
+          "participacion_comercializacion": 0.05,
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
@@ -7361,6 +8006,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 68.64,
+          "pet": 0.3,
+          "vidrio": 67.99,
+          "ingreso_bruto_total": 1510.82,
+          "ingreso_bruto_mujeres": 1510.82,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 100.721333,
+          "participacion_actividades": 0.6,
+          "participacion_comercializacion": 0.4,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 544.92,
+          "pet": 1.9,
+          "vidrio": 536.33,
+          "ingreso_bruto_total": 11984.06,
+          "ingreso_bruto_mujeres": 11984.06,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 96.2114,
+          "participacion_actividades": 0.6,
+          "participacion_comercializacion": 0.48,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.037982,
+          "pet": 0.001892,
+          "vidrio": 0.065166,
+          "ingreso_bruto_total": 0.037697,
+          "ingreso_bruto_mujeres": 0.039704,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.030924,
+          "pet": 0.001382,
+          "vidrio": 0.053277,
+          "ingreso_bruto_total": 0.031917,
+          "ingreso_bruto_mujeres": 0.034585,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.04211,
+          "pet": 0.001961,
+          "vidrio": 0.066788,
+          "ingreso_bruto_total": 0.037096,
+          "ingreso_bruto_mujeres": 0.041217,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.746084,
+          "participacion_actividades": 0.8,
+          "participacion_comercializacion": 0.666667,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.033431,
+          "pet": 0.001242,
+          "vidrio": 0.052685,
+          "ingreso_bruto_total": 0.029425,
+          "ingreso_bruto_mujeres": 0.032694,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.071268,
+          "participacion_actividades": 0.08,
+          "participacion_comercializacion": 0.08,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "Santa María Visitación": {
@@ -8077,6 +8802,86 @@
           "ingreso_bruto_total": 0.066275,
           "ingreso_bruto_mujeres": 0.0,
           "ingreso_bruto_municipalidades": 0.662699,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 7.4,
+          "pet": 2.6,
+          "vidrio": 2.0,
+          "ingreso_bruto_total": 215.0,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 215.0,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 72.51,
+          "pet": 30.2,
+          "vidrio": 25.44,
+          "ingreso_bruto_total": 2239.38,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 2239.38,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.004095,
+          "pet": 0.016396,
+          "vidrio": 0.001917,
+          "ingreso_bruto_total": 0.005365,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.106135,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.004115,
+          "pet": 0.021963,
+          "vidrio": 0.002527,
+          "ingreso_bruto_total": 0.005964,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.07731,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.00454,
+          "pet": 0.016993,
+          "vidrio": 0.001965,
+          "ingreso_bruto_total": 0.005279,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.052787,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.004448,
+          "pet": 0.019739,
+          "vidrio": 0.002499,
+          "ingreso_bruto_total": 0.005499,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.054981,
           "ingreso_diario_lideresa": 0.0,
           "participacion_actividades": 0.0,
           "participacion_comercializacion": 0.0,
@@ -8805,6 +9610,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 23.25,
+          "pet": 5.32,
+          "vidrio": 13.39,
+          "ingreso_bruto_total": 573.18,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 573.18,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 258.0,
+          "pet": 42.55,
+          "vidrio": 149.02,
+          "ingreso_bruto_total": 5933.39,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 5933.39,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.012866,
+          "pet": 0.033548,
+          "vidrio": 0.012834,
+          "ingreso_bruto_total": 0.014302,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.28295,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.014641,
+          "pet": 0.030944,
+          "vidrio": 0.014803,
+          "ingreso_bruto_total": 0.015802,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.204839,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.014264,
+          "pet": 0.034771,
+          "vidrio": 0.013153,
+          "ingreso_bruto_total": 0.014074,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.140727,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.015828,
+          "pet": 0.02781,
+          "vidrio": 0.014639,
+          "ingreso_bruto_total": 0.014569,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.145676,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "San Antonio Palopó": {
@@ -9523,6 +10408,86 @@
           "ingreso_bruto_municipalidades": 0.0,
           "ingreso_diario_lideresa": 0.0,
           "participacion_actividades": 0.592592,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 0.0,
+          "pet": 0.0,
+          "vidrio": 0.0,
+          "ingreso_bruto_total": 0.0,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 0.0,
+          "pet": 0.0,
+          "vidrio": 0.0,
+          "ingreso_bruto_total": 0.0,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.4,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.0,
+          "pet": 0.0,
+          "vidrio": 0.0,
+          "ingreso_bruto_total": 0.0,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.0,
+          "pet": 0.0,
+          "vidrio": 0.0,
+          "ingreso_bruto_total": 0.0,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.0,
+          "pet": 0.0,
+          "vidrio": 0.0,
+          "ingreso_bruto_total": 0.0,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.0,
+          "pet": 0.0,
+          "vidrio": 0.0,
+          "ingreso_bruto_total": 0.0,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.053333,
           "participacion_comercializacion": 0.0,
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
@@ -10249,6 +11214,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 14.51,
+          "pet": 1.23,
+          "vidrio": 12.12,
+          "ingreso_bruto_total": 290.84,
+          "ingreso_bruto_mujeres": 290.84,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 58.168,
+          "participacion_actividades": 0.25,
+          "participacion_comercializacion": 0.25,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 209.59,
+          "pet": 9.64,
+          "vidrio": 176.09,
+          "ingreso_bruto_total": 3730.31,
+          "ingreso_bruto_mujeres": 3730.31,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 66.3188,
+          "participacion_actividades": 0.35,
+          "participacion_comercializacion": 0.25,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.008029,
+          "pet": 0.007756,
+          "vidrio": 0.011617,
+          "ingreso_bruto_total": 0.007257,
+          "ingreso_bruto_mujeres": 0.007643,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.011894,
+          "pet": 0.007011,
+          "vidrio": 0.017492,
+          "ingreso_bruto_total": 0.009935,
+          "ingreso_bruto_mujeres": 0.010765,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.008902,
+          "pet": 0.008039,
+          "vidrio": 0.011906,
+          "ingreso_bruto_total": 0.007141,
+          "ingreso_bruto_mujeres": 0.007935,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.430874,
+          "participacion_actividades": 0.333333,
+          "participacion_comercializacion": 0.416667,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.012858,
+          "pet": 0.006301,
+          "vidrio": 0.017298,
+          "ingreso_bruto_total": 0.009159,
+          "ingreso_bruto_mujeres": 0.010177,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.049125,
+          "participacion_actividades": 0.046667,
+          "participacion_comercializacion": 0.041667,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "San Juan La Laguna": {
@@ -10968,6 +12013,86 @@
           "ingreso_diario_lideresa": 0.518742,
           "participacion_actividades": 1.135803,
           "participacion_comercializacion": 0.864197,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 90.15,
+          "pet": 3.9,
+          "vidrio": 60.25,
+          "ingreso_bruto_total": 1652.0,
+          "ingreso_bruto_mujeres": 1652.0,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 82.6,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 0.333333,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 540.18,
+          "pet": 12.53,
+          "vidrio": 417.11,
+          "ingreso_bruto_total": 9809.32,
+          "ingreso_bruto_mujeres": 9809.32,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 71.287117,
+          "participacion_actividades": 0.866667,
+          "participacion_comercializacion": 0.5,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.049885,
+          "pet": 0.024593,
+          "vidrio": 0.057748,
+          "ingreso_bruto_total": 0.04122,
+          "ingreso_bruto_mujeres": 0.043414,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.030655,
+          "pet": 0.009112,
+          "vidrio": 0.041434,
+          "ingreso_bruto_total": 0.026125,
+          "ingreso_bruto_mujeres": 0.028309,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.055307,
+          "pet": 0.02549,
+          "vidrio": 0.059185,
+          "ingreso_bruto_total": 0.040563,
+          "ingreso_bruto_mujeres": 0.045069,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.611852,
+          "participacion_actividades": 1.333333,
+          "participacion_comercializacion": 0.555556,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.03314,
+          "pet": 0.00819,
+          "vidrio": 0.040973,
+          "ingreso_bruto_total": 0.024086,
+          "ingreso_bruto_mujeres": 0.026761,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.052805,
+          "participacion_actividades": 0.115556,
+          "participacion_comercializacion": 0.083333,
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
@@ -11693,6 +12818,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 783.54,
+          "pet": 56.94,
+          "vidrio": 362.35,
+          "ingreso_bruto_total": 17833.36,
+          "ingreso_bruto_mujeres": 17833.36,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 844.263,
+          "participacion_actividades": 0.363636,
+          "participacion_comercializacion": 0.363636,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 7485.28,
+          "pet": 494.73,
+          "vidrio": 3622.43,
+          "ingreso_bruto_total": 158654.89,
+          "ingreso_bruto_mujeres": 158654.89,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 657.651417,
+          "participacion_actividades": 0.490909,
+          "participacion_comercializacion": 0.427272,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.433578,
+          "pet": 0.359062,
+          "vidrio": 0.347301,
+          "ingreso_bruto_total": 0.444971,
+          "ingreso_bruto_mujeres": 0.468659,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.42478,
+          "pet": 0.359785,
+          "vidrio": 0.359839,
+          "ingreso_bruto_total": 0.422545,
+          "ingreso_bruto_mujeres": 0.457867,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.480699,
+          "pet": 0.372157,
+          "vidrio": 0.355943,
+          "ingreso_bruto_total": 0.437876,
+          "ingreso_bruto_mujeres": 0.486519,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 6.2538,
+          "participacion_actividades": 0.484848,
+          "participacion_comercializacion": 0.606061,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.45922,
+          "pet": 0.323353,
+          "vidrio": 0.355838,
+          "ingreso_bruto_total": 0.389557,
+          "ingreso_bruto_mujeres": 0.432833,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.487149,
+          "participacion_actividades": 0.065454,
+          "participacion_comercializacion": 0.071212,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "Jaibalito": {
@@ -12412,6 +13617,86 @@
           "ingreso_diario_lideresa": 0.309768,
           "participacion_actividades": 1.333333,
           "participacion_comercializacion": 1.481482,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 9.31,
+          "pet": 0.41,
+          "vidrio": 6.93,
+          "ingreso_bruto_total": 187.04,
+          "ingreso_bruto_mujeres": 187.04,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 37.408,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 0.5,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 157.97,
+          "pet": 8.0,
+          "vidrio": 62.7,
+          "ingreso_bruto_total": 3166.18,
+          "ingreso_bruto_mujeres": 3166.18,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 41.3776,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 0.85,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.005152,
+          "pet": 0.002585,
+          "vidrio": 0.006642,
+          "ingreso_bruto_total": 0.004667,
+          "ingreso_bruto_mujeres": 0.004915,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.008965,
+          "pet": 0.005818,
+          "vidrio": 0.006228,
+          "ingreso_bruto_total": 0.008432,
+          "ingreso_bruto_mujeres": 0.009137,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.005712,
+          "pet": 0.00268,
+          "vidrio": 0.006807,
+          "ingreso_bruto_total": 0.004593,
+          "ingreso_bruto_mujeres": 0.005103,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.277096,
+          "participacion_actividades": 1.333333,
+          "participacion_comercializacion": 0.833333,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.009691,
+          "pet": 0.005229,
+          "vidrio": 0.006159,
+          "ingreso_bruto_total": 0.007774,
+          "ingreso_bruto_mujeres": 0.008638,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.03065,
+          "participacion_actividades": 0.133333,
+          "participacion_comercializacion": 0.141667,
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
@@ -13137,6 +14422,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 51.25,
+          "pet": 1.23,
+          "vidrio": 42.46,
+          "ingreso_bruto_total": 1041.75,
+          "ingreso_bruto_mujeres": 1041.75,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 103.845,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 0.666667,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 494.08,
+          "pet": 14.35,
+          "vidrio": 397.02,
+          "ingreso_bruto_total": 9931.24,
+          "ingreso_bruto_mujeres": 9931.24,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 86.8853,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 0.8,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.02836,
+          "pet": 0.007756,
+          "vidrio": 0.040697,
+          "ingreso_bruto_total": 0.025993,
+          "ingreso_bruto_mujeres": 0.027377,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.028038,
+          "pet": 0.010436,
+          "vidrio": 0.039439,
+          "ingreso_bruto_total": 0.02645,
+          "ingreso_bruto_mujeres": 0.028661,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.031442,
+          "pet": 0.008039,
+          "vidrio": 0.041709,
+          "ingreso_bruto_total": 0.025579,
+          "ingreso_bruto_mujeres": 0.02842,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.769222,
+          "participacion_actividades": 1.333333,
+          "participacion_comercializacion": 1.111111,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.030312,
+          "pet": 0.009379,
+          "vidrio": 0.039,
+          "ingreso_bruto_total": 0.024385,
+          "ingreso_bruto_mujeres": 0.027094,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.064359,
+          "participacion_actividades": 0.133333,
+          "participacion_comercializacion": 0.133333,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "Tzununá": {
@@ -13859,6 +15224,86 @@
           "surusic_ventas": 0.0,
           "surusic_vidrio": null
         }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 47.86,
+          "pet": 0.77,
+          "vidrio": 45.63,
+          "ingreso_bruto_total": 942.37,
+          "ingreso_bruto_mujeres": 942.37,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 37.6948,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 1.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 370.89,
+          "pet": 8.39,
+          "vidrio": 321.88,
+          "ingreso_bruto_total": 7638.32,
+          "ingreso_bruto_mujeres": 7638.32,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 35.41023,
+          "participacion_actividades": 1.0,
+          "participacion_comercializacion": 1.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.026484,
+          "pet": 0.004856,
+          "vidrio": 0.043735,
+          "ingreso_bruto_total": 0.023514,
+          "ingreso_bruto_mujeres": 0.024765,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.021048,
+          "pet": 0.006102,
+          "vidrio": 0.031974,
+          "ingreso_bruto_total": 0.020343,
+          "ingreso_bruto_mujeres": 0.022044,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.029362,
+          "pet": 0.005033,
+          "vidrio": 0.044823,
+          "ingreso_bruto_total": 0.023139,
+          "ingreso_bruto_mujeres": 0.025709,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.279221,
+          "participacion_actividades": 1.333333,
+          "participacion_comercializacion": 1.666667,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.022754,
+          "pet": 0.005484,
+          "vidrio": 0.031619,
+          "ingreso_bruto_total": 0.018755,
+          "ingreso_bruto_mujeres": 0.020838,
+          "ingreso_bruto_municipalidades": 0.0,
+          "ingreso_diario_lideresa": 0.02623,
+          "participacion_actividades": 0.133333,
+          "participacion_comercializacion": 0.166667,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
       }
     },
     "San Marcos La Laguna": {
@@ -14575,6 +16020,86 @@
           "ingreso_bruto_total": 0.558983,
           "ingreso_bruto_mujeres": 0.0,
           "ingreso_bruto_municipalidades": 5.58942,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        }
+      },
+      "2026|10": {
+        "monthly": {
+          "materiales_generales": 66.45,
+          "pet": 12.27,
+          "vidrio": 36.53,
+          "ingreso_bruto_total": 1237.55,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 1237.55,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "annual": {
+          "materiales_generales": 965.94,
+          "pet": 117.48,
+          "vidrio": 629.84,
+          "ingreso_bruto_total": 18311.83,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 18311.83,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareMonthly": {
+          "materiales_generales": 0.036771,
+          "pet": 0.077374,
+          "vidrio": 0.035013,
+          "ingreso_bruto_total": 0.030879,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.610916,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": 0.0
+        },
+        "shareAnnual": {
+          "materiales_generales": 0.054816,
+          "pet": 0.085436,
+          "vidrio": 0.062566,
+          "ingreso_bruto_total": 0.04877,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.632181,
+          "ingreso_diario_lideresa": null,
+          "participacion_actividades": null,
+          "participacion_comercializacion": null,
+          "surusic_ventas": 0,
+          "surusic_vidrio": 0
+        },
+        "progressMonthly": {
+          "materiales_generales": 0.040767,
+          "pet": 0.080196,
+          "vidrio": 0.035884,
+          "ingreso_bruto_total": 0.030386,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.303842,
+          "ingreso_diario_lideresa": 0.0,
+          "participacion_actividades": 0.0,
+          "participacion_comercializacion": 0.0,
+          "surusic_ventas": 0.0,
+          "surusic_vidrio": null
+        },
+        "progressAnnual": {
+          "materiales_generales": 0.05926,
+          "pet": 0.076784,
+          "vidrio": 0.06187,
+          "ingreso_bruto_total": 0.044962,
+          "ingreso_bruto_mujeres": 0.0,
+          "ingreso_bruto_municipalidades": 0.449591,
           "ingreso_diario_lideresa": 0.0,
           "participacion_actividades": 0.0,
           "participacion_comercializacion": 0.0,

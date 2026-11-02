@@ -1,6 +1,6 @@
 {
   "programa": "atitlan_recicla",
-  "corte": "2026-09",
+  "corte": "2026-10",
   "fuente": "Datos incrustados en HTML, identificador aala-excel-truth-ene-may-2026",
   "origen_declarado_en_html": "CDM 2026 - REVISADO Y ACTUALIZADO.xlsx",
   "fuente_html_sha256": "8487dee3ff3268151ec7f63953de68ee26daf76f586bd204db1b2538dcfa120c",
@@ -9,7 +9,7 @@
   "tablas": {
     "indicadores": {
       "file": "data/atitlan_recicla/2026/indicadores.csv",
-      "rows": 90,
+      "rows": 100,
       "columns": [
         "programa",
         "anio",
@@ -22,11 +22,11 @@
         "meta_anual",
         "unidad"
       ],
-      "sha256": "b23b779358e13fea8c6c5e132d18350b5fb78f1cf412f68607322b5924ff83c2"
+      "sha256": "9fb9ba491078b591645219d73324c94c1547db20fce50ae2280bac1671432b14"
     },
     "totalMes": {
       "file": "data/atitlan_recicla/2026/total_mes.csv",
-      "rows": 9,
+      "rows": 10,
       "columns": [
         "programa",
         "anio",
@@ -70,11 +70,11 @@
         "vidrio_azul_sky_surusic_unid",
         "vidrio_azul_montecarlo_surusic_unid"
       ],
-      "sha256": "88880b49636bcf03172c071fee3c4906b8547a489b740ece2722503452a0a20f"
+      "sha256": "25f9fb110a4e41d9604c8f1e00430b3b461e4454a4817e44e0ee448fa7ff06bd"
     },
     "zonaMes": {
       "file": "data/atitlan_recicla/2026/zona_mes.csv",
-      "rows": 36,
+      "rows": 40,
       "columns": [
         "programa",
         "anio",
@@ -119,11 +119,11 @@
         "vidrio_azul_sky_surusic_unid",
         "vidrio_azul_montecarlo_surusic_unid"
       ],
-      "sha256": "059f03eb91315b75cfea113579e533c4af62d6c6d26e25ef5fd1d24f6a2ebf0e"
+      "sha256": "f496d4abe373581fbc6df2fb22ff629ef881d0f9df629bf6249bfd0e73a9332d"
     },
     "territorioMes": {
       "file": "data/atitlan_recicla/2026/territorio_mes.csv",
-      "rows": 70,
+      "rows": 85,
       "columns": [
         "programa",
         "anio",
@@ -171,11 +171,11 @@
         "vidrio_azul_sky_surusic_unid",
         "vidrio_azul_montecarlo_surusic_unid"
       ],
-      "sha256": "b1109fb57d47d5014602cd91417385facfb63bc863fd7112774a313184c4c91f"
+      "sha256": "172e1cdba584a90c3d40b31e26ad71e870df18e597dc842940ed0868731c02c7"
     },
     "materialesResumen": {
       "file": "data/atitlan_recicla/2026/materiales_resumen.csv",
-      "rows": 27,
+      "rows": 30,
       "columns": [
         "programa",
         "anio",
@@ -187,11 +187,11 @@
         "ingreso_max",
         "ingreso"
       ],
-      "sha256": "68562f071adce134aee3dc6d2d48e56e694a620cf08372c96775cbd7a76ec591"
+      "sha256": "7246a92d5c0fecd58c43874cfc6a1d5fc34dab725365d1ee9f4d25a2cd41c129"
     },
     "materialesRaw": {
       "file": "data/atitlan_recicla/2026/materiales_detalle.csv",
-      "rows": 78,
+      "rows": 90,
       "columns": [
         "record_key",
         "programa",
@@ -217,9 +217,13 @@
         "ingreso_total_venta",
         "ingreso_cooperativa"
       ],
-      "sha256": "784732e2ea4787b35b39eb0ae7b23e60166adf3c89f25a660618ea7be7f04398"
+      "sha256": "33116fc0c26cf2478b77ef10fa2b773f13b629903ae35fed8113dab779bd65b0"
     }
   },
   "referencia_sha256": "f5868cb7b1726f121771ab302da519a3db3213dd3d3a959cc0b6c88d2635ac5a",
-  "precalculo_impacto_sha256": "708884f45fb74ab8b2cac0c2f13f00721151d7d19c251868167ff6fb0f3c3206"
+  "precalculo_impacto_sha256": "7c049519e86099953d87e72909308b177bf939d31506b8abf22a1b6bd0a3a142",
+  "origen_octubre": "OCTUBRE CDM 2026 - OCTUBRE VF (1).xlsx",
+  "regla_octubre": "Agre_TOTAL para valores consolidados; Agre_* para zonas; Datos_Impacto para municipios",
+  "control_octubre_fuente": "references/atitlan_recicla/octubre_2026_fuente.json",
+  "control_octubre_sha256": "e35e35344b25931c159b86285203d91c7346c94f76eab681c8b5394620eec0a4"
 }
