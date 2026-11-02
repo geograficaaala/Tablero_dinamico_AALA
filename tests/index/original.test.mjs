@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import vm from 'node:vm';
 import { programs } from '../../src/index/index-data.mjs';
 
 const read = name => fs.readFileSync(name,'utf8');
@@ -47,4 +48,45 @@ test('sin precálculos numéricos mensuales dentro de JavaScript',()=>{
   assert.ok(js.includes('makeMetric'));
   assert.ok(js.includes('renderProgramMonth'));
   assert.ok(js.includes('initCoverageMap'));
+});
+
+test('el cambio de mes conserva el programa activo en el carrusel',()=>{
+  const begin=js.indexOf('let programCarouselIndex = 0;');
+  const end=js.indexOf("window.addEventListener('resize'",begin);
+  assert.ok(begin>=0 && end>begin);
+  assert.ok(js.includes('initProgramCarousel(activeProgramId)'));
+  assert.ok(js.includes('currentItems[programCarouselIndex]?.dataset.programId'));
+  const ids=descriptors.map(d=>d.id);
+  const viewport={scrollLeft:0,getBoundingClientRect:()=>({left:0}),scrollTo({left}){this.scrollLeft=left;}};
+  let cards=ids.map((id,index)=>({
+    dataset:{programId:id},
+    getBoundingClientRect:()=>({left:index*360-viewport.scrollLeft}),
+    querySelector:()=>({textContent:id})
+  }));
+  const domDots={children:[],set innerHTML(html){
+    this.children=Array.from(html.matchAll(/<button /g)).map(()=>({
+      classList:{active:false,toggle(name,value){if(name==='active')this.active=value;}},
+      setAttribute(){},addEventListener(){}
+    }));
+  }};
+  const grid={querySelectorAll:()=>cards};
+  const prev={};
+  const next={};
+  const elements={programGrid:grid,programCarouselViewport:viewport,programCarouselDots:domDots,programCarouselPrev:prev,programCarouselNext:next};
+  const scope={
+    document:{getElementById:id=>elements[id]||null},
+    window:{clearTimeout(){},setTimeout(){}}
+  };
+  const context=vm.createContext(scope);
+  vm.runInContext(js.slice(begin,end),context);
+  vm.runInContext('initProgramCarousel()',context);
+  vm.runInContext('goToProgramCarousel(4, "instant")',context);
+  assert.equal(viewport.scrollLeft,1440);
+  assert.equal(domDots.children[4].classList.active,true);
+  cards=ids.map((id,index)=>({dataset:{programId:id},getBoundingClientRect:()=>({left:index*360-viewport.scrollLeft}),querySelector:()=>({textContent:id})}));
+  vm.runInContext('initProgramCarousel("'+ids[4]+'")',context);
+  assert.equal(viewport.scrollLeft,1440);
+  assert.equal(domDots.children[4].classList.active,true);
+  assert.equal(prev.disabled,false);
+  assert.equal(next.disabled,false);
 });
