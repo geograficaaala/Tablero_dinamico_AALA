@@ -1,0 +1,74 @@
+{
+  "periodo": "2026-10",
+  "fuentes": [
+    {
+      "documento": "10. Cuadro indicadores - Conservando Atitlán octubre 2026.docx",
+      "sha256": "81ad7004f0578c8da9b8d5aced0ccd692093b27dc567ffc0e4510b73b160e7c1"
+    },
+    {
+      "documento": "10. Informe Octubre 2026 Recolección de Aceite Usado.docx",
+      "sha256": "76ad9128e088681c7227faf01ca89f3815fea376d747d47e790094cac7aa46cc"
+    }
+  ],
+  "resultados": {
+    "litros_aceite_recolectados_mes": 7072,
+    "litros_agua_protegidos_mes": 7072000,
+    "municipios_visitados_mes": 10,
+    "jabones_hotel_producidos_mes": 5000,
+    "jabones_tocador_producidos_mes": 500,
+    "jabones_hotel_vendidos_mes": 2000,
+    "jabones_tocador_vendidos_mes": 0,
+    "ingresos_ventas_q_mes": 2200,
+    "publicaciones_redes_mes": 8,
+    "pruebas_jabon_liquido_mes": 1,
+    "velas_vendidas_mes": 450,
+    "ingresos_ventas_velas_q_mes": 7452,
+    "meta_aceite_mensual_mes": 6670,
+    "meta_agua_mensual_mes": 6670000
+  },
+  "municipios": [
+    {
+      "municipio": "Sololá",
+      "litros_reportados": "1665"
+    },
+    {
+      "municipio": "Panajachel",
+      "litros_reportados": "2307"
+    },
+    {
+      "municipio": "Santa Catarina Palopó",
+      "litros_reportados": "132"
+    },
+    {
+      "municipio": "San Andrés Semetabaj",
+      "litros_reportados": "104"
+    },
+    {
+      "municipio": "San Lucas Tolimán",
+      "litros_reportados": "469"
+    },
+    {
+      "municipio": "Santiago Atitlán",
+      "litros_reportados": "804"
+    },
+    {
+      "municipio": "San Pedro La Laguna",
+      "litros_reportados": "19"
+    },
+    {
+      "municipio": "San Juan La Laguna",
+      "litros_reportados": "740"
+    },
+    {
+      "municipio": "San Marcos La Laguna",
+      "litros_reportados": "132"
+    },
+    {
+      "municipio": "Santa Lucía Utatlán",
+      "litros_reportados": "700"
+    }
+  ],
+  "inmuebles_con_entrega_calculados": 93,
+  "resumen_fuente": "El valor de recolección del cuadro de indicadores coincide con la suma de los diez totales municipales del informe operativo. Los litros individuales se conservan sin corregir diferencias de redondeo.",
+  "nota_interna": "El informe registra 7,072 litros distribuidos en diez municipios. El detalle por establecimiento presenta pequeñas diferencias de redondeo frente a los totales municipales, que se conservan conforme al resumen oficial. Producción de jabones: 5,000 de hotel y 500 de tocador. Ventas de jabones: 2,000 de hotel y 0 de tocador, por Q2,200. Se registran 450 velas vendidas por Q7,452 en una operación separada de la venta de jabones. Ocho publicaciones en redes y segunda prueba de jabón líquido. Se respeta la meta mensual de 6,670 litros indicada en el informe de octubre."
+}
