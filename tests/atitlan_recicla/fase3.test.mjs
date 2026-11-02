@@ -17,7 +17,7 @@ const localFetch = async url => {
 test('carga de datos externos y metas mensuales oficiales',async()=>{
   const model = await loadAtitlanModel(data.href,localFetch,goals.href);
   const monthly = JSON.parse(await readFile(goals,'utf8'));
-  assert.equal(model.periods.length,9);
+  assert.equal(model.periods.length,10);
   assert.equal(model.zones.length,5);
   for (const [id,meta] of Object.entries(monthly))assert.equal(model.metrics[id].meta,meta);
   assert.equal(model.getAnnualGoals(2026,9).materiales_generales.meta,17920);

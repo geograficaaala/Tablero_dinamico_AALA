@@ -38,9 +38,9 @@ function assertMatch(actual, expected, location) {
 
 test('cobertura del período y zonas de referencia', () => {
   assert.equal(reference.cases.length, 45);
-  assert.equal(model.periods.length, 9);
+  assert.equal(model.periods.length, 10);
   assert.deepEqual(model.zones, ['__all__', 'Kaqchikel', 'Las Lagunas', 'Tzolojya', 'Zona Sur']);
-  assert.deepEqual(model.lastPeriod, { anio: 2026, mes_num: 9, mes: 'SEP' });
+  assert.deepEqual(model.lastPeriod, { anio: 2026, mes_num: 10, mes: 'OCT' });
 });
 
 test('paridad de indicadores, tendencias, estados y metas del HTML original', () => {
@@ -51,7 +51,7 @@ test('paridad de indicadores, tendencias, estados y metas del HTML original', ()
     assert.deepEqual(Object.keys(actual), KPI_IDS);
     assertMatch(actual, caseData.kpis, `${location}.kpis`);
     assertMatch(model.getProgramStatus(anio, mes_num, zona), caseData.status, `${location}.status`);
-    assertMatch(model.getTrend(anio, zona, 'materiales_generales'), caseData.trend, `${location}.trend`);
+    assertMatch(model.getTrend(anio, zona, 'materiales_generales').filter(row => row.mes_num <= 9), caseData.trend, `${location}.trend`);
     if (zona === '__all__') {
       const goals = model.getAnnualGoals(anio, mes_num);
       assertMatch(goals, caseData.annual, `${location}.annual`);
@@ -82,7 +82,7 @@ test('el parche final es el origen de los indicadores zonales', () => {
 
 test('zonas equivalentes y filtro mensual', () => {
   assertMatch(model.getKpis(2026, 5, 'Kaqchiquel'), model.getKpis(2026, 5, 'Kaqchikel'), 'alias');
-  assert.equal(model.getTrend(2026, 'Kaqchikel', 'materiales_generales').length, 9);
+  assert.equal(model.getTrend(2026, 'Kaqchikel', 'materiales_generales').length, 10);
   assert.throws(() => model.getMetric(2026, 5, '__all__', 'no_existe'), RangeError);
 });
 
