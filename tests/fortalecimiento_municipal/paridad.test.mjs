@@ -37,8 +37,8 @@ test('agosto y septiembre mantienen ajustes históricos sin recalcularlos', () =
 });
 
 test('filtros históricos acumulados, mensuales, componentes y búsqueda', () => {
-  assert.equal(controller.periodos.length, 9);
-  assert.equal(controller.ultimoPeriodo, '2026-09');
+  assert.equal(controller.periodos.length, 10);
+  assert.equal(controller.ultimoPeriodo, '2026-10');
   assert.equal(controller.actividadesMes('2026-09').length, records.actividades.filter(row => row.periodo === '2026-09').length);
   assert.equal(controller.actividades('2026-09', { componente: 'todos' }).length, 102);
   assert.equal(controller.actividades('2026-09', { componente: 'estudios', estado: 'confirmado' }).length, 10);
@@ -73,4 +73,19 @@ test('rutas y exportaciones de módulos externos reales', async () => {
 
 test('CSV con comillas y descripciones con saltos de línea', () => {
   assert.deepEqual(parseCSV('clave,nota\r\na,"texto, con coma\ny segunda línea"\r\n'), [{ clave: 'a', nota: 'texto, con coma\ny segunda línea' }]);
+});
+
+
+test('octubre conserva el histórico y añade diez actividades con clasificación diferenciada', () => {
+  const corte = Object.fromEntries(controller.indicadores('2026-10').map(row => [row.componente, row.valor_publicado]));
+  assert.deepEqual(corte, {estudios:5,pirdes:3,asistencias:24,reuniones:8,capacidad:18});
+  const oct = controller.actividadesMes('2026-10');
+  assert.equal(oct.length,10);
+  assert.equal(oct.filter(row => row.componente==='asistencias').length,5);
+  assert.equal(oct.filter(row => row.componente==='asistencias' && row.estado==='confirmado').length,1);
+  assert.equal(oct.filter(row => row.componente==='estudios' && row.estado==='confirmado').length,0);
+  assert.equal(oct.filter(row => row.componente==='pirdes' && row.estado==='confirmado').length,0);
+  assert.equal(oct.filter(row => row.componente==='reuniones' && row.estado==='confirmado').length,0);
+  assert.equal(controller.actividades('2026-10',{componente:'todos'}).length,112);
+  assert.equal(Number(((120+5/6*100+3/5*100+24/20*100)/4).toFixed(1)),95.8);
 });
