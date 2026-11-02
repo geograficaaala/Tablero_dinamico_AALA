@@ -91,7 +91,7 @@ test('la carga por red funciona sin duplicar los CSV en public',async()=>{
   };
   const fakeFetch=async url=>({ok:true,text:async()=>archivos[url.split('/').at(-1)]});
   const recibido=await cargarDatosConservando('../data/conservando_atitlan/2026',fakeFetch);
-  assert.equal(recibido.datos.length,9);
+  assert.equal(recibido.datos.length,10);
   assert.equal(recibido.metas.length,18);
-  assert.equal(recibido.fuentes.length,9);
+  assert.equal(recibido.fuentes.length,10);
 });
