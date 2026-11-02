@@ -22,7 +22,9 @@
     "publicaciones_redes_mes",
     "pruebas_jabon_liquido_mes",
     "velas_vendidas_mes",
-    "ingresos_ventas_velas_q_mes"
+    "ingresos_ventas_velas_q_mes",
+    "meta_aceite_mensual_mes",
+    "meta_agua_mensual_mes"
   ],
   "campos_requeridos": [
     "mes_clave",
