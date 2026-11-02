@@ -22,7 +22,7 @@ export const INDICATORS=[
   ['jornadas','Jornadas de siembra','Jornadas del mes','jornadas'],
   ['municipios','Municipios atendidos',null,'municipios']
 ].map(([id,label,monthly,unit])=>({id,label,monthly,unit}));
-export function percent(v,g,monthly=false){return monthly&&g===0?(v>0?100:0):g?Math.max(0,Math.min(100,Math.round(v/g*100))):0;}
+export function percent(v,g,monthly=false){if(v===null||v===undefined||g===null||g===undefined)return null;return monthly&&g===0?(v>0?100:0):g?Math.max(0,Math.min(100,Math.round(v/g*100))):0;}
 const n=v=>v===''||v===undefined?null:Number(v);
 export function composeTulData(tables){
   const periods=tables.periodos.map(r=>({month:Number(r.mes),name:r.nombre,status:r.estado}));

@@ -8,11 +8,22 @@ const fmt=value=>new Intl.NumberFormat('es-GT').format(value);
 const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const monthName=m=>dataset.periods.find(p=>p.month===m)?.name||'';
 
+function numberWithUnit(value,unit){
+  if(value===null||value===undefined)return '—';
+  return fmt(value)+(unit==='m'?' m':` ${unit}`);
+}
 function card(d,monthly=false,index=0){
-  const value=fmt(d.value)+(d.unit==='m'?' m':'');
-  const unit=d.unit==='m'?' m':` ${d.unit}`;
-  const readings=monthly?[['Resultado del mes',fmt(d.value)+unit],['Meta mensual',fmt(d.goal)+unit],['Cumplimiento mensual',`${d.pct}%`]]:[['Resultado acumulado',fmt(d.value)+unit],[d.id==='municipios'?'Meta de referencia':'Meta anual',fmt(d.goal)+unit],[d.id==='municipios'?'Cobertura territorial':'Cumplimiento acumulado',`${d.pct}%`]];
-  return `<article class="card kpi clean-kpi ${monthly?'kpi-monthly-card':''}" style="--delay:${index*45}ms">${monthly?`<div class="kpi-monthly-title">${esc(d.monthly)}</div><div class="kpi-top"><div class="kpi-value">${esc(value)}</div></div>`:`<div class="kpi-top"><div><div class="kpi-label">${esc(d.label)}</div><div class="kpi-value">${esc(value)}</div></div></div>`}<div class="kpi-readings">${readings.map(([label,v])=>`<div class="kpi-meta"><span>${esc(label)}</span><strong>${esc(v)}</strong></div>`).join('')}</div><div class="progress"><span style="width:${d.pct}%"></span></div></article>`;
+  const display=numberWithUnit(d.value,d.unit);
+  const progress=d.pct===null?'':`<div class="progress"><span style="width:${d.pct}%"></span></div>`;
+  const readings=monthly?[
+    ['Resultado del mes',display],['Meta mensual',numberWithUnit(d.goal,d.unit)],
+    ['Cumplimiento mensual',d.pct===null?'—':`${d.pct}%`]
+  ]:[
+    ['Resultado acumulado',display],
+    [d.id==='municipios'?'Meta de referencia':'Meta anual',numberWithUnit(d.goal,d.unit)],
+    [d.id==='municipios'?'Cobertura territorial':'Cumplimiento acumulado',d.pct===null?'—':`${d.pct}%`]
+  ];
+  return `<article class="card kpi clean-kpi ${monthly?'kpi-monthly-card':''}" style="--delay:${index*45}ms">${monthly?`<div class="kpi-monthly-title">${esc(d.monthly)}</div><div class="kpi-top"><div class="kpi-value">${esc(display)}</div></div>`:`<div class="kpi-top"><div><div class="kpi-label">${esc(d.label)}</div><div class="kpi-value">${esc(display)}</div></div></div>`}<div class="kpi-readings">${readings.map(([label,v])=>`<div class="kpi-meta"><span>${esc(label)}</span><strong>${esc(v)}</strong></div>`).join('')}</div>${progress}</article>`;
 }
 function calendar(){
   el('calendarGrid').innerHTML=dataset.periods.filter(p=>p.month>=2).map(p=>{
@@ -38,7 +49,7 @@ function switchView(next){
   for(const [id,active] of [['btnFull',next!=='exec'],['btnExec',next==='exec']]){el(id).classList.toggle('active',active);el(id).classList.toggle('aala-action-active',active);}
 }
 function buildSlides(d){
-  const metrics=items=>`<div class="aala-presentation-grid">${items.map(x=>`<div class="aala-presentation-metric"><span>${esc(x.label)}</span><strong>${fmt(x.value)}${x.unit==='m'?' m':''}</strong><span>Meta: ${fmt(x.goal)} · ${x.pct}%</span></div>`).join('')}</div>`;
+  const metrics=items=>`<div class="aala-presentation-grid">${items.map(x=>`<div class="aala-presentation-metric"><span>${esc(x.label)}</span><strong>${esc(numberWithUnit(x.value,x.unit))}</strong><span>Meta: ${esc(numberWithUnit(x.goal,x.unit))} · ${x.pct===null?'—':`${x.pct}%`}</span></div>`).join('')}</div>`;
   return [`<h1>Siembra de Tul</h1><p>${esc(monthName(month))} de 2026 · Asociación Amigos del Lago de Atitlán</p>`,`<h1>Avance acumulado</h1>${metrics(d.annual.slice(0,3))}`,`<h1>Indicadores de seguimiento</h1>${metrics(d.annual.slice(3))}`,`<h1>Resultados del mes</h1>${metrics(d.monthly.slice(0,3))}`,`<h1>Cobertura territorial</h1><div class="aala-presentation-grid">${d.territory.slice(0,6).map(([place,count])=>`<div class="aala-presentation-metric"><span>${esc(place)}</span><strong>${count}</strong><span>Jornadas</span></div>`).join('')}</div>`,`<h1>Análisis mensual</h1><h2>${esc(d.analysis.headline)}</h2><p>${esc(d.analysis.body)}</p>`];
 }
 function drawSlide(){
@@ -51,7 +62,7 @@ function openPresentation(){slides=buildSlides(getTulMonth(dataset,month));slide
 function closePresentation(){el('tulPresentation').hidden=true;el('tulPresentation').setAttribute('aria-hidden','true');document.body.classList.remove('tul-presenting');el('btnPresentation').focus();}
 function mail(){
   const d=getTulMonth(dataset,month);
-  const lines=[`Siembra de Tul · ${monthName(month)} 2026`,'','Avance anual',...d.annual.map(x=>`${x.label}: ${fmt(x.value)} / ${fmt(x.goal)} (${x.pct}%)`),'','Resultados del mes',...d.monthly.map(x=>`${x.monthly}: ${fmt(x.value)} / ${fmt(x.goal)} (${x.pct}%)`),'',d.analysis.headline,d.analysis.body];
+  const lines=[`Siembra de Tul · ${monthName(month)} 2026`,'','Avance anual',...d.annual.map(x=>`${x.label}: ${numberWithUnit(x.value,x.unit)} / ${numberWithUnit(x.goal,x.unit)} (${x.pct===null?'—':`${x.pct}%`})`),'','Resultados del mes',...d.monthly.map(x=>`${x.monthly}: ${numberWithUnit(x.value,x.unit)} / ${numberWithUnit(x.goal,x.unit)} (${x.pct===null?'—':`${x.pct}%`})`),'',d.analysis.headline,d.analysis.body];
   window.location.href=`mailto:?subject=${encodeURIComponent(`Resumen Tul ${monthName(month)} 2026`)}&body=${encodeURIComponent(lines.join('\n'))}`;
 }
 async function main(){
