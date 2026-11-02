@@ -16,7 +16,7 @@ test('las siete páginas consumen la identidad visual compartida', () => {
 });
 
 test('módulos visuales y rutas de importación existentes', () => {
-  for(const file of ['src/components/aala-icons.mjs','src/components/aala-institutional-footer.mjs','src/components/aala-institutional-header.mjs','src/components/aala-visual-universal.mjs','src/styles/themes/aala-pastel.css']) assert.ok(existsSync(file));
+  for(const file of ['src/components/aala-icons.mjs','src/components/aala-institutional-footer.mjs','src/components/aala-institutional-header.mjs','src/components/aala-page-motion.mjs','src/components/aala-visual-universal.mjs','src/styles/themes/aala-pastel.css']) assert.ok(existsSync(file), `No existe el módulo: ${file}`);
   const shell=source('src/components/aala-visual-universal.mjs');
   for(const id of ['btnFull','btnExec','btnPresentation','btnMail','monthPills'])assert.ok(shell.includes(id));
   assert.match(shell,/originalLogo/);
