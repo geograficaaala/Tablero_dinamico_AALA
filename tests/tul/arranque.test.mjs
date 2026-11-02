@@ -24,11 +24,13 @@ test('arranque real del módulo: monta header, footer, KPI, selector y presentac
   assert.match(document.getElementById('tulFooterMount').innerHTML,/LinkedIn/);
   assert.equal((document.getElementById('annualKpiGrid').innerHTML.match(/<article class="card kpi/g)||[]).length,6);
   assert.equal((document.getElementById('monthlyKpiGrid').innerHTML.match(/<article class="card kpi/g)||[]).length,5);
-  assert.match(document.getElementById('monthlyAnalysis').innerHTML,/Septiembre/);
+  assert.match(document.getElementById('monthlyAnalysis').innerHTML,/Octubre|octubre/);
   const buttons=document.getElementById('monthPills').buttons;
   assert.equal(buttons.length,12);
   assert.equal(buttons[0].disabled,true);
-  assert.equal(buttons[9].disabled,true);
+  assert.equal(buttons[9].disabled,false);
+  assert.equal(buttons[10].disabled,true);
+  assert.match(document.getElementById('calendarGrid').innerHTML,/Tzampetey, Villa de los Dioses/);
   buttons[1].click();
   assert.match(document.getElementById('annualKpiGrid').innerHTML,/230/);
   document.getElementById('btnExec').click();
