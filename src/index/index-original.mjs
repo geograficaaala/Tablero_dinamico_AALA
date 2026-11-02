@@ -498,7 +498,7 @@ const MONTH_NAMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','A
 const APP_ROOT = new URL('../../', import.meta.url);
 let descriptions = [];
 let officialMonths = {};
-let selectedMonth = 9;
+let selectedMonth = 10;
 const finite = value => typeof value === 'number' && Number.isFinite(value);
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 function makeProgram(descriptor, month) {
@@ -516,7 +516,7 @@ function makeProgram(descriptor, month) {
 }
 function renderNoData(program){
   const card = programCard({...program, score:0});
-  return card.replace('<div class="prog-score-wrap">','<div class="prog-score-wrap" data-unavailable="true">').replace(/<span class="prog-score-value">.*?<\/span>/,'<span class="prog-score-value">—</span>').replace(/<div class="metric-list">[\s\S]*?<div class="program-footer">/,`<div class="metric-list"><div class="empty">Sin datos publicados para ${MONTH_NAMES[selectedMonth].toLowerCase()} de 2026.</div></div><div class="program-footer">`);
+  return card.replace('<div class="prog-score-wrap">','<div class="prog-score-wrap" data-unavailable="true">').replace(/<span class="prog-score-value">.*?<\/span>/,'<span class="prog-score-value">—</span>').replace(/<div class="metric-list">[\s\S]*?<div class="program-footer">/,`<div class="metric-list"><div class="empty">Sin datos publicados para ${MONTH_NAMES[selectedMonth-1].toLowerCase()} de 2026.</div></div><div class="program-footer">`);
 }
 function paintMonthButtons(){
   const root=document.getElementById('programMonthButtons');
@@ -569,6 +569,8 @@ function renderProgramMonth(month){
   }
 }
 async function init(){
+  const monthLabel = document.getElementById('programMonthLabel');
+  if (monthLabel) monthLabel.textContent = 'Tarjetas institucionales a octubre de 2026.';
   try{
     const [catalogResponse, cutsResponse] = await Promise.all([
       fetch(new URL('../../config/index/indicadores_institucionales_2026.json', import.meta.url)),
@@ -577,7 +579,7 @@ async function init(){
     if (!catalogResponse.ok || !cutsResponse.ok) throw Error('No se pudo cargar la información institucional.');
     descriptions = await catalogResponse.json();
     officialMonths = await cutsResponse.json();
-    renderProgramMonth(9);
+    renderProgramMonth(10);
     await initCoverageMap();
   } catch(error){
     console.error(error);
