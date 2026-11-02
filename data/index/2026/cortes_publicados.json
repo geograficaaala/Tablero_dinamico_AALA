@@ -1310,7 +1310,7 @@
     {
       "latestLabel": "Junio",
       "periodKey": "2026-06",
-      "score": 109.96763193193382,
+      "score": 111.53013193193382,
       "sourceSummary": "Kobo · junio 2026",
       "id": "educando_para_conservar",
       "metrics": [
@@ -1339,12 +1339,12 @@
           "monthlyPct": 111.66666666666667
         },
         {
-          "acumDisplay": "61 / 128 actividades",
-          "pct": 47.65625,
-          "pctDisplay": "47.7% de avance acumulado hasta junio contra la meta anual",
-          "barPct": 47.65625,
-          "monthlyDisplay": "21 / 16 actividades en junio · 131.2%",
-          "monthlyPct": 131.25
+          "acumDisplay": "62 / 128 actividades",
+          "pct": 48.4375,
+          "pctDisplay": "48.4% de avance acumulado hasta junio contra la meta anual",
+          "barPct": 48.4375,
+          "monthlyDisplay": "22 / 16 actividades en junio · 137.5%",
+          "monthlyPct": 137.5
         }
       ]
     },
@@ -1579,10 +1579,10 @@
           "monthlyPct": 106.66666666666667
         },
         {
-          "acumDisplay": "86 / 128 actividades",
-          "pct": 67.1875,
-          "pctDisplay": "67.2% de avance acumulado hasta julio contra la meta anual",
-          "barPct": 67.1875,
+          "acumDisplay": "87 / 128 actividades",
+          "pct": 67.96875,
+          "pctDisplay": "68.0% de avance acumulado hasta julio contra la meta anual",
+          "barPct": 67.96875,
           "monthlyDisplay": "25 / 16 actividades en julio · 156.2%",
           "monthlyPct": 156.25
         }
@@ -1819,10 +1819,10 @@
           "monthlyPct": 76.66666666666667
         },
         {
-          "acumDisplay": "112 / 128 actividades",
-          "pct": 87.5,
-          "pctDisplay": "87.5% de avance acumulado hasta agosto contra la meta anual",
-          "barPct": 87.5,
+          "acumDisplay": "113 / 128 actividades",
+          "pct": 88.28125,
+          "pctDisplay": "88.3% de avance acumulado hasta agosto contra la meta anual",
+          "barPct": 88.28125,
           "monthlyDisplay": "26 / 16 actividades en agosto · 162.5%",
           "monthlyPct": 162.5
         }
@@ -2059,10 +2059,10 @@
           "monthlyPct": 113.33333333333333
         },
         {
-          "acumDisplay": "132 / 128 actividades",
-          "pct": 103.125,
-          "pctDisplay": "103.1% de avance acumulado hasta septiembre contra la meta anual",
-          "barPct": 103.125,
+          "acumDisplay": "133 / 128 actividades",
+          "pct": 103.90625,
+          "pctDisplay": "103.9% de avance acumulado hasta septiembre contra la meta anual",
+          "barPct": 103.90625,
           "monthlyDisplay": "20 / 16 actividades en septiembre · 125.0%",
           "monthlyPct": 125.0
         }
@@ -2231,6 +2231,47 @@
           "barPct": 34.39922480620155,
           "monthlyDisplay": "2,000 / 4,300 jabones vendidos en octubre · 46.5%",
           "monthlyPct": 46.51162790697674
+        }
+      ]
+    },
+    {
+      "latestLabel": "Octubre",
+      "periodKey": "2026-10",
+      "score": 93.75,
+      "sourceSummary": "",
+      "id": "educando_para_conservar",
+      "metrics": [
+        {
+          "acumDisplay": "7/7 módulos desarrollados",
+          "pct": 100.0,
+          "pctDisplay": "100.0% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 100.0,
+          "monthlyDisplay": "Ciclo pedagógico concluido en septiembre",
+          "monthlyPct": null
+        },
+        {
+          "acumDisplay": "7/7 módulos desarrollados",
+          "pct": 100.0,
+          "pctDisplay": "100.0% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 100.0,
+          "monthlyDisplay": "Ciclo pedagógico concluido en septiembre",
+          "monthlyPct": null
+        },
+        {
+          "acumDisplay": "12/12 momentos formativos desarrollados",
+          "pct": 100.0,
+          "pctDisplay": "100.0% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 100.0,
+          "monthlyDisplay": "Cierre del diplomado en octubre: 85 asistentes, 8 proyectos y 4 capitales semilla entregados",
+          "monthlyPct": null
+        },
+        {
+          "acumDisplay": "148 / 128 actividades",
+          "pct": 115.625,
+          "pctDisplay": "115.6% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 115.625,
+          "monthlyDisplay": "15 / 16 actividades en octubre · 93.8%",
+          "monthlyPct": 93.75
         }
       ]
     }
