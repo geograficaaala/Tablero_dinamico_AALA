@@ -548,16 +548,25 @@ function renderProgramMonth(month){
     initProgramCarousel(activeProgramId);
   }
   const valid=data.filter(p=>finite(p.score));
-  if(valid.length) {
+  if(valid.length===descriptions.length) {
     renderSummary(valid);
   } else {
-    const score=document.getElementById('kpiHealthHero');
-    if(score) score.textContent='—';
-    const last=document.getElementById('kpiLatest');
-    if(last) last.textContent='Sin datos';
+    const latestText=valid.length ? MONTH_NAMES[month-1] : 'Sin datos';
+    for(const id of ['kpiLatest','kpiLatestHero']) {
+      const node=document.getElementById(id);
+      if(node) node.textContent=latestText;
+    }
+    for(const id of ['kpiHealth','kpiHealthHero','kpiOnTrack','kpiAlert']) {
+      const node=document.getElementById(id);
+      if(node) node.textContent='—';
+    }
+    for(const id of ['kpiHealthSub','kpiHealthStatus','kpiHealthContext']) {
+      const node=document.getElementById(id);
+      if(node) node.textContent=valid.length ? `Actualización parcial: ${valid.length} de ${descriptions.length} programas` : 'Sin datos publicados';
+    }
+    const meter=document.getElementById('healthMeterFill');
+    if(meter) meter.style.width='0%';
   }
-  const latest=document.getElementById('kpiLatestHero');
-  if(latest) latest.textContent=valid.length ? MONTH_NAMES[month - 1]:'Sin datos';
 }
 async function init(){
   try{
