@@ -9,7 +9,7 @@ const official = read('config/index/indicadores_institucionales_2026.json');
 const cuts = read('data/index/2026/cortes_publicados.json');
 const withoutDashboard = ({dashboard, ...rest}) => rest;
 
-test('nueve meses históricos y cuatro programas actualizados en octubre', () => {
+test('nueve meses históricos y cinco programas actualizados en octubre', () => {
   const expectedMonths = Array.from({ length: 10 }, (_, index) => String(index + 1)).sort();
   assert.deepEqual(Object.keys(cuts).sort(), expectedMonths, 'Deben existir los cortes de enero a octubre de 2026');
   assert.equal(official.length, 6, 'Deben existir seis programas institucionales');
@@ -22,10 +22,10 @@ test('nueve meses históricos y cuatro programas actualizados en octubre', () =>
   assert.equal(historicalMetrics, 189, 'Los 189 indicadores históricos de enero a septiembre deben conservarse');
   const october = cuts['10'];
   assert.ok(Array.isArray(october), 'No existe el corte de octubre en data/index/2026/cortes_publicados.json');
-  const expectedIds = ['atitlan_recicla', 'conservando_atitlan', 'educando_para_conservar', 'fortalecimiento_municipal'];
+  const expectedIds = ['atitlan_recicla', 'conservando_atitlan', 'educando_para_conservar', 'fortalecimiento_municipal', 'reforestacion'];
   const actualIds = october.map(program => program.id);
   assert.equal(new Set(actualIds).size, actualIds.length, `Octubre contiene programas duplicados: ${actualIds.join(', ')}`);
-  assert.deepEqual([...actualIds].sort(), [...expectedIds].sort(), `Octubre debe contener cuatro programas; encontrados: ${actualIds.join(', ')}`);
+  assert.deepEqual([...actualIds].sort(), [...expectedIds].sort(), `Octubre debe contener cinco programas; encontrados: ${actualIds.join(', ')}`);
   for (const program of october) {
     assert.equal(program.periodKey, '2026-10', `Período incorrecto de ${program.id}`);
     const config = official.find(entry => entry.id === program.id);
@@ -110,4 +110,15 @@ test('octubre conserva las descripciones oficiales de Fortalecimiento Municipal'
   assert.equal(Number(fm.score.toFixed(1)),95.8);
   const sept=construirTarjetasInstitucionales(official,cuts,9,d=>d.dashboard).find(p=>p.id==='fortalecimiento_municipal');
   for(let i=0;i<4;i++) assert.equal(fm.metrics[i].label,sept.metrics[i].label);
+});
+
+test('octubre muestra reforestación con los mismos valores y textos institucionales',()=>{
+ const oct=construirTarjetasInstitucionales(official,cuts,10,d=>d.dashboard).find(p=>p.id==='reforestacion');
+ assert.ok(oct);
+ assert.equal(oct.metrics.length,4);
+ assert.equal(oct.metrics[0].acumDisplay,'30 / 35 ha monitoreadas');
+ assert.equal(oct.metrics[1].acumDisplay,'90,000 / 90,000 árboles');
+ assert.equal(oct.metrics[3].acumDisplay,'7,500 / 10,000 plantas');
+ const sept=construirTarjetasInstitucionales(official,cuts,9,d=>d.dashboard).find(p=>p.id==='reforestacion');
+ for(let i=0;i<4;i++)assert.equal(oct.metrics[i].label,sept.metrics[i].label);
 });
