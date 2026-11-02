@@ -47,6 +47,7 @@ jobs:
       - run: node --test tests/tul/paridad.test.mjs tests/tul/modulos.test.mjs tests/tul/arranque.test.mjs
       - run: node --test tests/index/portal.test.mjs tests/index/original.test.mjs
       - run: node --test tests/index/datos.test.mjs
+      - run: node --test tests/visual/integracion.test.mjs
       - run: |
           mkdir -p dist
           cp -R public src data config dist/
