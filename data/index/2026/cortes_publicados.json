@@ -2372,6 +2372,31 @@
           ]
         }
       ]
+    },
+    {
+      "latestLabel": "Octubre",
+      "periodKey": "2026-10",
+      "score": null,
+      "sourceSummary": "Actualización del programa · octubre 2026",
+      "id": "manejo_tul",
+      "metrics": [
+        {
+          "acumDisplay": "18 / 21 jornadas anuales",
+          "pct": 85.71428571428571,
+          "pctDisplay": "85.7% de avance acumulado hasta octubre contra la meta anual",
+          "barPct": 85.71428571428571,
+          "monthlyDisplay": "2 / 2 jornadas en octubre · 100.0%",
+          "monthlyPct": 100
+        },
+        {
+          "acumDisplay": "1,790 / 1,300 metros lineales sembrados",
+          "pct": 100,
+          "pctDisplay": "100.0% de avance acumulado hasta octubre · Meta anual alcanzada",
+          "barPct": 100,
+          "monthlyDisplay": "—",
+          "monthlyPct": null
+        }
+      ]
     }
   ]
 }
