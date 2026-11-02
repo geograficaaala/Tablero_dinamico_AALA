@@ -9,11 +9,11 @@ const official = read('config/index/indicadores_institucionales_2026.json');
 const cuts = read('data/index/2026/cortes_publicados.json');
 const withoutDashboard = ({dashboard, ...rest}) => rest;
 
-test('nueve meses históricos y tres programas actualizados en octubre', () => {
+test('nueve meses históricos y cuatro programas actualizados en octubre', () => {
   assert.deepEqual(Object.keys(cuts).sort(), ['1','10','2','3','4','5','6','7','8','9']);
   assert.equal(official.length, 6);
   assert.equal(Array.from({length:9},(_,i)=>cuts[String(i+1)]).reduce((sum, list) => sum+list.reduce((n,p)=>n+p.metrics.length,0),0),189);
-  assert.deepEqual(cuts['10'].map(p=>p.id),['atitlan_recicla','conservando_atitlan','educando_para_conservar']);
+  assert.deepEqual(cuts['10'].map(p=>p.id),['atitlan_recicla','conservando_atitlan','educando_para_conservar','fortalecimiento_municipal']);
 });
 
 test('los textos institucionales y 54 tarjetas históricas conservan su identidad', () => {
@@ -79,4 +79,17 @@ test('octubre mantiene Atitlán Recicla y Conservando Atitlán y añade Educaci�
   assert.match(epc.metrics[2].monthlyDisplay,/4 capitales semilla entregados/);
   assert.match(epc.metrics[3].monthlyDisplay,/15 \/ 16 actividades en octubre · 93\.8%/);
   assert.equal(epc.score,93.75);
+});
+
+
+test('octubre conserva las descripciones oficiales de Fortalecimiento Municipal',()=>{
+  const oct=construirTarjetasInstitucionales(official,cuts,10,d=>d.dashboard);
+  const fm=oct.find(p=>p.id==='fortalecimiento_municipal');
+  assert.ok(fm);
+  assert.equal(fm.metrics.length,4);
+  assert.equal(fm.metrics[3].acumDisplay,'24/20 asistencias técnicas');
+  assert.equal(fm.metrics[3].pctDisplay,'120.0% de avance');
+  assert.equal(Number(fm.score.toFixed(1)),95.8);
+  const sept=construirTarjetasInstitucionales(official,cuts,9,d=>d.dashboard).find(p=>p.id==='fortalecimiento_municipal');
+  for(let i=0;i<4;i++) assert.equal(fm.metrics[i].label,sept.metrics[i].label);
 });
