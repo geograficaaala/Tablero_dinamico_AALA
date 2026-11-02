@@ -66,6 +66,21 @@ def validar():
             ('jabones_vendidos_mes','jabones_hotel_vendidos_mes','jabones_tocador_vendidos_mes')
         ]:
             exigir(numero(fila, total) == numero(fila, a) + numero(fila, b), f"{fila['mes_clave']}: {total} no coincide con sus componentes")
+    if '2026-10' in periodos:
+        referencia = json.loads((ROOT / 'references/conservando_atitlan/octubre_2026_fuentes.json').read_text(encoding='utf-8'))
+        octubre = next(r for r in datos if r['mes_clave'] == '2026-10')
+        exigir(referencia['periodo'] == '2026-10', 'Referencia de octubre incorrecta')
+        for campo, esperado in referencia['resultados'].items():
+            exigir(numero(octubre, campo) == Decimal(str(esperado)), f'Octubre: {campo} no coincide con el informe')
+        with (DATA / 'recoleccion_municipios_2026.csv').open(encoding='utf-8', newline='') as f:
+            municipios = list(csv.DictReader(f))
+        with (DATA / 'recoleccion_inmuebles_octubre_2026.csv').open(encoding='utf-8', newline='') as f:
+            inmuebles = list(csv.DictReader(f))
+        exigir(len(municipios) == 10, 'Octubre: faltan municipios')
+        exigir(len(inmuebles) == 148, 'Octubre: faltan establecimientos del informe')
+        exigir(sum(numero(r, 'litros_reportados') for r in municipios) == Decimal('7072'), 'Octubre: el total municipal no coincide')
+        exigir(sum(numero(r, 'inmuebles_con_entrega') for r in municipios) == numero(octubre, 'inmuebles_atendidos_mes'), 'Octubre: número de establecimientos diferente')
+        exigir(sum(numero(r, 'litros_reportados') > 0 for r in inmuebles) == numero(octubre, 'inmuebles_atendidos_mes'), 'Octubre: entregas positivas diferentes')
     claves = [r['clave'] for r in metas]
     exigir(len(claves) == len(set(claves)) == 18, 'Deben existir 18 metas oficiales sin duplicados')
     exigir(next((r['valor'] for r in metas if r['clave'] == 'pruebasMeses'), '') == '3|4|5', 'Revisar meses de pruebas')
