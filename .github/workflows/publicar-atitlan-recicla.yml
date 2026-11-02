@@ -35,9 +35,10 @@ jobs:
           python-version: '3.12'
       - run: python scripts/atitlan_recicla/validate_data.py
       - run: python scripts/index/actualizar_cortes_atitlan.py
+      - run: python scripts/index/actualizar_cortes_conservando.py
       - run: node --test tests/atitlan_recicla/paridad.test.mjs tests/atitlan_recicla/fase3.test.mjs tests/atitlan_recicla/octubre.test.mjs
       - run: python scripts/conservando_atitlan/validate_data.py
-      - run: node --test tests/conservando_atitlan/paridad.test.mjs tests/conservando_atitlan/html.test.mjs tests/conservando_atitlan/modulos.test.mjs
+      - run: node --test tests/conservando_atitlan/paridad.test.mjs tests/conservando_atitlan/html.test.mjs tests/conservando_atitlan/modulos.test.mjs tests/conservando_atitlan/octubre.test.mjs
       - run: python scripts/fortalecimiento_municipal/validate_data.py
       - run: node --test tests/fortalecimiento_municipal/paridad.test.mjs
       - run: python scripts/educando_para_conservar/validate_data.py
