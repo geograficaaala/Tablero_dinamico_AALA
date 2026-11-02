@@ -88,8 +88,10 @@ function annualPctText(progress){
 
 function computeStrategicMetrics(){
   const row=selectedRow(), months=monthsElapsed();
-  const oilMonthlyGoal=GOALS.aceiteAnual/12, waterMonthlyGoal=GOALS.aguaAnual/12;
+  const oilMonthlyGoal=toNum(row?.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12, waterMonthlyGoal=toNum(row?.meta_agua_mensual_mes)||GOALS.aguaAnual/12;
   const colectaAccum=countMonthsWith(r=>toNum(r[JORNADA_RECOLECCION_FIELD])>0);
+  const oilExpectedAtCut=rowsToPeriod().reduce((total,r)=>total+(toNum(r.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12),0);
+  const waterExpectedAtCut=rowsToPeriod().reduce((total,r)=>total+(toNum(r.meta_agua_mensual_mes)||GOALS.aguaAnual/12),0);
   const aceiteAccum=sumMonths('litros_aceite_recolectados_mes');
   const aguaAccum=sumMonths('litros_agua_protegidos_mes');
   const jabProdAccum=sumMonths('jabones_producidos_mes');
@@ -116,11 +118,11 @@ function computeStrategicMetrics(){
     {id:'aceite',title:'Aceite usado recolectado',
       value:`${fmtN(aceiteAccum,2)}`,unit:'litros',
       status:'green', expectedText:`meta anual: ${fmtN(GOALS.aceiteAnual,2)} litros`,line1:annualPctText(aceiteProgress),line2:'',
-      progress:aceiteProgress,ratioVsExpected:aceiteAccum/(oilMonthlyGoal*months),goalType:'annual'},
+      progress:aceiteProgress,ratioVsExpected:aceiteAccum/oilExpectedAtCut,goalType:'annual'},
     {id:'agua',title:'Agua protegida acumulada',
       value:`${fmtI(aguaAccum)}`,unit:'litros',
       status:'green', expectedText:`meta anual: ${fmtI(GOALS.aguaAnual)} litros`,line1:annualPctText(aguaProgress),line2:'',
-      progress:aguaProgress,ratioVsExpected:aguaAccum/(waterMonthlyGoal*months),goalType:'annual'},
+      progress:aguaProgress,ratioVsExpected:aguaAccum/waterExpectedAtCut,goalType:'annual'},
     {id:'jabones-prod',title:'Jabones producidos',
       value:`${fmtI(jabProdAccum)}`,unit:'jabones',
       status:'green', expectedText:`meta anual: ${fmtI(GOALS.jabonesProducidosAnual)} jabones`,line1:annualPctText(jabProdProgress),line2:'',
@@ -146,7 +148,7 @@ function computeStrategicMetrics(){
 
 function computeMonthlyMetrics(){
   const row=selectedRow();
-  const oilMonthlyGoal=GOALS.aceiteAnual/12, waterMonthlyGoal=GOALS.aguaAnual/12;
+  const oilMonthlyGoal=toNum(row?.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12, waterMonthlyGoal=toNum(row?.meta_agua_mensual_mes)||GOALS.aguaAnual/12;
   const ventasMes=toNum(row?.ingresos_ventas_q_mes);
   const inmueblesGoal=GOALS.inmueblesMensual||150;
   const inmueblesMes=toNum(row?.inmuebles_atendidos_mes);

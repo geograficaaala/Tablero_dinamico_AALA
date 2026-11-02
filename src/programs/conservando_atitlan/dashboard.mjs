@@ -161,7 +161,7 @@ function renderDiagnostic(strategic,monthly){
   const aguaAccum=sumMonths('litros_agua_protegidos_mes');
   const jabProd=sumMonths('jabones_producidos_mes'), jabVend=sumMonths('jabones_vendidos_mes');
   const ventasAccum=sumMonths('ingresos_ventas_q_mes');
-  const oilMonthlyGoal=GOALS.aceiteAnual/12;
+  const oilMonthlyGoal=toNum(row?.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12;
   const aceiteRatio=toNum(row?.litros_aceite_recolectados_mes)/oilMonthlyGoal;
 
   const prose=document.getElementById('diagnosticProse');
@@ -305,13 +305,15 @@ function buildMonthPills(){
 
 function goalSeriesForIndicator(id){
   const map={
-    litros_aceite_recolectados_mes:GOALS.aceiteAnual/12,
-    litros_agua_protegidos_mes:GOALS.aguaAnual/12,
+    litros_aceite_recolectados_mes:(toNum(selectedRow()?.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12),
+    litros_agua_protegidos_mes:(toNum(selectedRow()?.meta_agua_mensual_mes)||GOALS.aguaAnual/12),
     jabones_producidos_mes:GOALS.jabonesProducidosMensual,
     jabones_vendidos_mes:GOALS.jabonesVendidosMensual,
     inmuebles_atendidos_mes:GOALS.inmueblesMensual,
     municipios_visitados_mes:GOALS.municipiosMetaMes
   };
+  if(id==='litros_aceite_recolectados_mes') return state.total.map(r=>toNum(r.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12);
+  if(id==='litros_agua_protegidos_mes') return state.total.map(r=>toNum(r.meta_agua_mensual_mes)||GOALS.aguaAnual/12);
   if(id==='pruebas_jabon_liquido_mes') return state.total.map(r=>GOALS.pruebasMeses.includes(monthNumber(r.mes_clave))?1:0);
   if(map[id]) return state.total.map(()=>map[id]);
   return null;
@@ -392,8 +394,8 @@ function fmtCompact(v){
 
 function progressMetricAbsolute(metricId, months){
   if(metricId==='colectas') return {actual:countMonthsWith(r=>toNum(r[JORNADA_RECOLECCION_FIELD])>0), expected:months, target:GOALS.colectasAnual, unit:'jornadas_recoleccion'};
-  if(metricId==='aceite') return {actual:sumMonths('litros_aceite_recolectados_mes'), expected:(GOALS.aceiteAnual/12)*months, target:GOALS.aceiteAnual, unit:'litros'};
-  if(metricId==='agua') return {actual:sumMonths('litros_agua_protegidos_mes'), expected:(GOALS.aguaAnual/12)*months, target:GOALS.aguaAnual, unit:'litros_int'};
+  if(metricId==='aceite') return {actual:sumMonths('litros_aceite_recolectados_mes'), expected:rowsToPeriod().reduce((sum,r)=>sum+(toNum(r.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12),0), target:GOALS.aceiteAnual, unit:'litros'};
+  if(metricId==='agua') return {actual:sumMonths('litros_agua_protegidos_mes'), expected:rowsToPeriod().reduce((sum,r)=>sum+(toNum(r.meta_agua_mensual_mes)||GOALS.aguaAnual/12),0), target:GOALS.aguaAnual, unit:'litros_int'};
   if(metricId==='jabones-prod') return {actual:sumMonths('jabones_producidos_mes'), expected:GOALS.jabonesProducidosMensual*months, target:GOALS.jabonesProducidosAnual, unit:'jabones'};
   if(metricId==='jabones-vend') return {actual:sumMonths('jabones_vendidos_mes'), expected:GOALS.jabonesVendidosMensual*months, target:GOALS.jabonesVendidosAnual, unit:'jabones'};
   if(metricId==='pruebas') return {actual:countMonthsWith(r=>toNum(r.pruebas_jabon_liquido_mes)>0), expected:expectedPruebasAtCut(months), target:GOALS.pruebasAnual, unit:'pruebas'};
@@ -581,7 +583,7 @@ function renderExec(strategic,monthly){
   const aguaAccum=sumMonths('litros_agua_protegidos_mes');
   const jabProd=sumMonths('jabones_producidos_mes'), jabVend=sumMonths('jabones_vendidos_mes');
   const ventasAccum=sumMonths('ingresos_ventas_q_mes');
-  const oilMonthlyGoal=GOALS.aceiteAnual/12, waterMonthlyGoal=GOALS.aguaAnual/12;
+  const oilMonthlyGoal=toNum(row?.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12, waterMonthlyGoal=toNum(row?.meta_agua_mensual_mes)||GOALS.aguaAnual/12;
 
   const EXEC_INDICATORS = [
     {id:'aceite', label:'Aceite recolectado',    val:toNum(row?.litros_aceite_recolectados_mes), unit:'litros', meta:oilMonthlyGoal,        pct:toNum(row?.litros_aceite_recolectados_mes)/oilMonthlyGoal,        sparkId:'litros_aceite_recolectados_mes'},
@@ -702,6 +704,7 @@ function buildPresentation(strategic,monthly){
   const lbl=periodLabel(state.period), row=selectedRow();
   const months=monthsElapsed();
   const aceiteAccum=sumMonths('litros_aceite_recolectados_mes'), aguaAccum=sumMonths('litros_agua_protegidos_mes');
+  const oilMonthlyGoal=toNum(row?.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12;
   const jabProd=sumMonths('jabones_producidos_mes'), jabVend=sumMonths('jabones_vendidos_mes');
   const ventasAccum=sumMonths('ingresos_ventas_q_mes');
   const sRatios=strategic.filter(m=>m.goalType!=='none'&&Number.isFinite(m.ratioVsExpected)).map(m=>m.ratioVsExpected);
@@ -718,7 +721,7 @@ function buildPresentation(strategic,monthly){
 
   const slides=[];
 
-  slides.push(`<div class="pres-slide"><div class="pres-inner"><div class="pres-kicker">Reporte · ${escapeHtml(lbl)}</div><div class="pres-title-row"><div><h2>Conservando Atitlán</h2><p>Programa de recolección de aceite usado, producción de jabón artesanal y protección del agua de la cuenca del Lago de Atitlán. Asociación Amigos del Lago de Atitlán.</p></div><div class="pres-brand-badge"><img src="./assets/logos/conservando-atitlan.png" alt="Conservando Atitlán"></div></div><div class="pres-card-grid pres-card-grid-4"><div class="pres-card"><small>Aceite acumulado</small><strong>${escapeHtml(fmtN(aceiteAccum,2))}</strong><p>litros · ${escapeHtml(fmtPct(aceiteAccum/GOALS.aceiteAnual))} del año</p>${chipHtml(statusFromRatio(aceiteAccum/(GOALS.aceiteAnual/12*months),true),fmtPct(aceiteAccum/(GOALS.aceiteAnual/12*months))+' del esperado')}</div><div class="pres-card"><small>Agua protegida</small><strong>${escapeHtml(fmtI(aguaAccum))}</strong><p>litros acumulados</p>${chipHtml(statusFromRatio(aguaAccum/(GOALS.aguaAnual/12*months),true),fmtPct(aguaAccum/(GOALS.aguaAnual/12*months))+' del esperado')}</div><div class="pres-card"><small>Jabones producidos</small><strong>${escapeHtml(fmtI(jabProd))}</strong><p>${escapeHtml(fmtPct(jabProd/GOALS.jabonesProducidosAnual))} del objetivo anual</p>${chipHtml(statusFromRatio(jabProd/(GOALS.jabonesProducidosMensual*months),true),labelFromStatus(statusFromRatio(jabProd/(GOALS.jabonesProducidosMensual*months),true)))}</div><div class="pres-card"><small>Ventas acumuladas de Jabones</small><strong>${escapeHtml(fmtQ(ventasAccum))}</strong><p>Mes: ${escapeHtml(fmtQ(toNum(row?.ingresos_ventas_q_mes)))}</p>${chipHtml('blue','Informativo')}</div></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><span style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid var(--line-soft);font-size:.81rem;font-weight:700;color:var(--text-2)"> ${escapeHtml(fmtN(toNum(row?.litros_aceite_recolectados_mes),2))} L aceite en el mes</span><span style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid var(--line-soft);font-size:.81rem;font-weight:700;color:var(--text-2)"> ${escapeHtml(fmtI(toNum(row?.jabones_producidos_mes)))} jabones producidos</span><span style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid var(--line-soft);font-size:.81rem;font-weight:700;color:var(--text-2)"> ${escapeHtml(fmtI(toNum(row?.municipios_visitados_mes)))} municipios</span><span style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:rgba(36,109,181,.12);border:1px solid rgba(0,0,0,.08);font-size:.81rem;font-weight:800;color:#246db5"> ${escapeHtml(chipTextFromStatus(sStatus))}</span></div></div></div>`);
+  slides.push(`<div class="pres-slide"><div class="pres-inner"><div class="pres-kicker">Reporte · ${escapeHtml(lbl)}</div><div class="pres-title-row"><div><h2>Conservando Atitlán</h2><p>Programa de recolección de aceite usado, producción de jabón artesanal y protección del agua de la cuenca del Lago de Atitlán. Asociación Amigos del Lago de Atitlán.</p></div><div class="pres-brand-badge"><img src="./assets/logos/conservando-atitlan.png" alt="Conservando Atitlán"></div></div><div class="pres-card-grid pres-card-grid-4"><div class="pres-card"><small>Aceite acumulado</small><strong>${escapeHtml(fmtN(aceiteAccum,2))}</strong><p>litros · ${escapeHtml(fmtPct(aceiteAccum/GOALS.aceiteAnual))} del año</p>${chipHtml(statusFromRatio(aceiteAccum/(rowsToPeriod().reduce((s,r)=>s+(toNum(r.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12),0)),true),fmtPct(aceiteAccum/(rowsToPeriod().reduce((s,r)=>s+(toNum(r.meta_aceite_mensual_mes)||GOALS.aceiteAnual/12),0)))+' del esperado')}</div><div class="pres-card"><small>Agua protegida</small><strong>${escapeHtml(fmtI(aguaAccum))}</strong><p>litros acumulados</p>${chipHtml(statusFromRatio(aguaAccum/(rowsToPeriod().reduce((s,r)=>s+(toNum(r.meta_agua_mensual_mes)||GOALS.aguaAnual/12),0)),true),fmtPct(aguaAccum/(rowsToPeriod().reduce((s,r)=>s+(toNum(r.meta_agua_mensual_mes)||GOALS.aguaAnual/12),0)))+' del esperado')}</div><div class="pres-card"><small>Jabones producidos</small><strong>${escapeHtml(fmtI(jabProd))}</strong><p>${escapeHtml(fmtPct(jabProd/GOALS.jabonesProducidosAnual))} del objetivo anual</p>${chipHtml(statusFromRatio(jabProd/(GOALS.jabonesProducidosMensual*months),true),labelFromStatus(statusFromRatio(jabProd/(GOALS.jabonesProducidosMensual*months),true)))}</div><div class="pres-card"><small>Ventas acumuladas de Jabones</small><strong>${escapeHtml(fmtQ(ventasAccum))}</strong><p>Mes: ${escapeHtml(fmtQ(toNum(row?.ingresos_ventas_q_mes)))}</p>${chipHtml('blue','Informativo')}</div></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><span style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid var(--line-soft);font-size:.81rem;font-weight:700;color:var(--text-2)"> ${escapeHtml(fmtN(toNum(row?.litros_aceite_recolectados_mes),2))} L aceite en el mes</span><span style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid var(--line-soft);font-size:.81rem;font-weight:700;color:var(--text-2)"> ${escapeHtml(fmtI(toNum(row?.jabones_producidos_mes)))} jabones producidos</span><span style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid var(--line-soft);font-size:.81rem;font-weight:700;color:var(--text-2)"> ${escapeHtml(fmtI(toNum(row?.municipios_visitados_mes)))} municipios</span><span style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:rgba(36,109,181,.12);border:1px solid rgba(0,0,0,.08);font-size:.81rem;font-weight:800;color:#246db5"> ${escapeHtml(chipTextFromStatus(sStatus))}</span></div></div></div>`);
 
   slides.push(`<div class="pres-slide"><div class="pres-inner"><div class="pres-kicker">Indicadores estratégicos · ${escapeHtml(lbl)}</div><div class="pres-title-row"><div><h2>Metas anuales y avance acumulado</h2><p>Lectura sencilla de las metas anuales del programa, con avance por indicador.</p></div></div><div class="pres-card-grid pres-card-grid-4" style="flex:1;align-content:start">
       ${strategic.slice(0,4).map(m=>presKpiCard(m)).join('')}
@@ -732,7 +735,7 @@ function buildPresentation(strategic,monthly){
 
   slides.push(`<div class="pres-slide"><div class="pres-inner"><div class="pres-kicker">Tendencia histórica · ${escapeHtml(lbl)}</div><div class="pres-title-row"><div><h2>Aceite recolectado por mes</h2><p>Serie histórica mensual con referencia de meta. El mes destacado (azul oscuro) corresponde a ${escapeHtml(lbl)}. </p></div></div><div style="flex:1;background:rgba(255,255,255,.72);border-radius:18px;border:1px solid var(--line-soft);padding:14px 10px;overflow:hidden">
       ${trendSvg}
-    </div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex-shrink:0"><div class="pres-card"><small>Aceite del mes</small><strong>${escapeHtml(fmtN(toNum(row?.litros_aceite_recolectados_mes),2))}</strong><p>litros recolectados</p></div><div class="pres-card"><small>Meta mensual</small><strong>${escapeHtml(fmtN(GOALS.aceiteAnual/12,2))}</strong><p>litros de referencia</p></div><div class="pres-card"><small>Acumulado anual</small><strong>${escapeHtml(fmtN(aceiteAccum,2))}</strong><p>litros · ${escapeHtml(fmtPct(aceiteAccum/GOALS.aceiteAnual))} del año</p></div></div></div></div>`);
+    </div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex-shrink:0"><div class="pres-card"><small>Aceite del mes</small><strong>${escapeHtml(fmtN(toNum(row?.litros_aceite_recolectados_mes),2))}</strong><p>litros recolectados</p></div><div class="pres-card"><small>Meta mensual</small><strong>${escapeHtml(fmtN(oilMonthlyGoal,2))}</strong><p>litros de referencia</p></div><div class="pres-card"><small>Acumulado anual</small><strong>${escapeHtml(fmtN(aceiteAccum,2))}</strong><p>litros · ${escapeHtml(fmtPct(aceiteAccum/GOALS.aceiteAnual))} del año</p></div></div></div></div>`);
 
   slides.push(`<div class="pres-slide"><div class="pres-inner"><div class="pres-kicker">Cadena de valor · ${escapeHtml(lbl)}</div><div class="pres-title-row"><div><h2>Jabones producidos y vendidos</h2><p>Lectura directa por tipo de jabón: cuánto se produjo, cuánto se vendió y cuál fue la conversión.</p></div></div><div style="flex:1;background:rgba(255,255,255,.72);border-radius:18px;border:1px solid var(--line-soft);padding:14px 10px;overflow:hidden">
       ${soapSvg}
