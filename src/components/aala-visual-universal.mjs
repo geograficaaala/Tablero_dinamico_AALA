@@ -1,3 +1,4 @@
+import { installReportActions } from '../reports/report-ui.mjs';
 import { aalaIcon } from './aala-icons.mjs';
 import { mountInstitutionalFooter } from './aala-institutional-footer.mjs';
 
@@ -160,3 +161,5 @@ function main() {
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',main,{once:true});
 else main();
+
+installReportActions();
