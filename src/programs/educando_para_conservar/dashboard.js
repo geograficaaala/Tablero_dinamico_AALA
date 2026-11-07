@@ -977,38 +977,18 @@ const PATHS = {
 
     function monthlyAnalysisMarkup(row){
       const monthText = `${monthName(row.mes_num)} ${row.anio || ''}`.trim();
-      const coverage = monthlyCoverageChartItems(row);
-      const coverageAvg = coverage.length ? coverage.reduce((acc,item)=>acc+Number(item.pct||0),0)/coverage.length : 0;
-      const bestCoverage = coverage.slice().sort((a,b)=>Number(b.pct||0)-Number(a.pct||0))[0];
-      const lowestCoverage = coverage.slice().sort((a,b)=>Number(a.pct||0)-Number(b.pct||0))[0];
-      const activities = monthlyActivityChartItems(row);
-      const activeActivities = activities.filter(item => item.status !== 'pending' && Number(item.actual||0) > 0);
-      const activityTotal = activities.reduce((acc,item)=>acc+Number(item.actual||0),0);
-      const activityText = activeActivities.length
-        ? activeActivities.slice(0,4).map(item => `${item.label}: ${fmt(item.actual)}`).join(' · ')
-        : 'sin actividades operativas registradas para este mes';
-      const annual = annualOperationalRows(row).filter(item => !(item.status === 'pending' && Number(item.actual||0) === 0));
-      const annualAvg = annual.length ? annual.reduce((acc,item)=>acc+Number(item.pct||0),0)/annual.length : 0;
-      return `
-        <section class="section present-slide" id="analisis-mes">
-          <div class="section-head">
-            <div>
-              <div class="section-title">Análisis del mes</div>
-            </div>
-          </div>
-          <article class="card epc-analysis-card">
-            <h3>${esc(monthText)}</h3>
-            <p>Durante <strong>${esc(monthText)}</strong>, EPC reporta <strong>${fmt(row.estudiantes_epc_mes||0)}</strong> estudiantes, <strong>${fmt(row.docentes_mes||0)}</strong> docentes, <strong>${fmt(row.centros_mes||0)}</strong> centros educativos y <strong>${fmt(row.municipios_mes||0)}</strong> municipios con cobertura pedagógica registrada.</p>
-            <p>El cumplimiento mensual promedio de cobertura es de <strong>${fmtPct(coverageAvg)}</strong>. El indicador más alto del mes es <strong>${esc(bestCoverage?.label || '—')}</strong> con <strong>${esc(bestCoverage?.pctLabel || '—')}</strong>; el indicador que requiere mayor seguimiento es <strong>${esc(lowestCoverage?.label || '—')}</strong> con <strong>${esc(lowestCoverage?.pctLabel || '—')}</strong>.</p>
-            <p>En actividades operativas, el mes registra <strong>${fmt(activityTotal)}</strong> acciones en total: <strong>${esc(activityText)}</strong>.</p>
-            <div class="epc-analysis-grid">
-              <div class="epc-analysis-block"><strong>Cobertura pedagógica</strong><span>${fmt(row.estudiantes_epc_mes||0)} estudiantes · ${fmt(row.docentes_mes||0)} docentes</span></div>
-              <div class="epc-analysis-block"><strong>Presencia territorial</strong><span>${fmt(row.centros_mes||0)} centros · ${fmt(row.municipios_mes||0)} municipios</span></div>
-              <div class="epc-analysis-block"><strong>Actividades del mes</strong><span>${fmt(activityTotal)} acciones registradas</span></div>
-              <div class="epc-analysis-block"><strong>Promedio anual activo</strong><span>${fmtPct(annualAvg)} de avance acumulado</span></div>
-            </div>
-          </article>
-        </section>`;
+      const coverage=monthlyCoverageChartItems(row);
+      const coverageAvg=coverage.length?coverage.reduce((acc,item)=>acc+Number(item.pct||0),0)/coverage.length:0;
+      const best=coverage.slice().sort((a,b)=>Number(b.pct||0)-Number(a.pct||0))[0];
+      const activities=monthlyActivityChartItems(row);
+      const activityTotal=activities.reduce((acc,item)=>acc+Number(item.actual||0),0);
+      const logged=activities.filter(item=>Number(item.actual||0)>0).map(item=>`${esc(item.label)} registró <strong>${fmt(item.actual)}</strong>`).join('; ');
+      const annual=annualOperationalRows(row).filter(item=>!(item.status==='pending'&&Number(item.actual||0)===0));
+      const annualAvg=annual.length?annual.reduce((acc,item)=>acc+Number(item.pct||0),0)/annual.length:0;
+      const completedCycle=Number(row.mes_num)>9
+        ? 'El ciclo escolar atendido por el programa concluyó en <strong>septiembre de 2026</strong>; por ello, la ausencia de actividades escolares de aula en octubre o meses posteriores no representa por sí sola un incumplimiento. En este tramo se revisan las actividades de seguimiento previstas para el calendario correspondiente.'
+        : 'Las actividades escolares se interpretan dentro del calendario pedagógico definido, cuya etapa lectiva concluye en <strong>septiembre de 2026</strong>.';
+      return `<section class="section present-slide" id="analisis-mes"><div class="section-head"><div><div class="section-title">Análisis del mes</div></div></div><article class="card epc-analysis-card"><p class="aala-diagnostic-prose">En <strong>${esc(monthText)}</strong>, Educando para Conservar registra <strong>${fmt(row.estudiantes_epc_mes||0)} estudiantes</strong>, <strong>${fmt(row.docentes_mes||0)} docentes</strong>, <strong>${fmt(row.centros_mes||0)} centros educativos</strong> y <strong>${fmt(row.municipios_mes||0)} municipios</strong> asociados a la cobertura pedagógica informada para ese mes. Estas categorías describen poblaciones y espacios atendidos, por lo que sus valores no se suman entre sí. El promedio de cumplimiento mensual de los componentes de cobertura es de <strong>${fmtPct(coverageAvg)}</strong> y se obtiene de indicadores con metas específicas, no de una proporción global única del programa. ${best?`Dentro de las referencias registradas, ${esc(best.label)} presenta el porcentaje de cobertura más alto, con <strong>${esc(best.pctLabel)}</strong>.`:''} En las actividades operativas se consignan <strong>${fmt(activityTotal)} acciones</strong> para el corte consultado. ${logged?`Entre las acciones con resultados documentados, ${logged}.`:'No se registran acciones operativas nuevas en las categorías comparadas durante el mes.'} ${completedCycle} Esto permite separar la ejecución educativa concluida de las gestiones ambientales y de monitoreo que puedan continuar después de la etapa escolar. En el balance acumulado, el promedio de avance de los indicadores operativos con referencia disponible es de <strong>${fmtPct(annualAvg)}</strong>. Las actividades de formación, las acciones ambientales complementarias y el seguimiento territorial responden a metas y temporalidades distintas; por esa razón deben analizarse individualmente antes de construir conclusiones institucionales. La revisión mensual permite observar la cobertura, los contenidos desarrollados y los procesos de continuidad sin presentar ceros de una etapa concluida como déficit de ejecución. El diagnóstico de <strong>${esc(row.anio||2026)}</strong> se basa exclusivamente en las cifras documentadas por el tablero y conserva la separación entre resultados del mes y avances acumulados.</p></article></section>`;
     }
 
     function computeProgramStatus(row){
