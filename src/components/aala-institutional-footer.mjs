@@ -12,9 +12,9 @@ const links = [
 export function mountInstitutionalFooter(mount) {
   mount.innerHTML = `
     <footer class="site-footer aala-v2-footer">
-      <div class="aala-footer-name">Asociación Amigos del Lago de Atitlán</div>
       <div class="footer-wrap aala-v2-footer-inner">
         <section class="footer-brand" aria-label="Objetivo institucional">
+          <h2 class="aala-footer-name">Asociación Amigos del Lago de Atitlán</h2>
           <p class="footer-copy">${description}</p>
         </section>
         <section class="footer-col aala-footer-social" aria-label="Redes sociales">

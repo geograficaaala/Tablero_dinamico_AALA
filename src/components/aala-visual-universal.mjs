@@ -90,10 +90,22 @@ function removeLabels() {
   }
 }
 
+// En pantallas estrechas, deja visible el mes seleccionado sin desplazar la página.
+function revealSelectedMonth() {
+  for (const rack of document.querySelectorAll('.aala-v2-months')) {
+    const selected = rack.querySelector('.month-pill.active, .month-pill[aria-pressed="true"]');
+    if (!selected || rack.scrollWidth <= rack.clientWidth) continue;
+    const track = rack.getBoundingClientRect();
+    const pill = selected.getBoundingClientRect();
+    if (pill.left < track.left + 4) rack.scrollLeft -= track.left + 8 - pill.left;
+    else if (pill.right > track.right - 4) rack.scrollLeft += pill.right - track.right + 8;
+  }
+}
 function initShell() {
   document.querySelectorAll('.aala-header').forEach(enhanceHeader);
   document.querySelectorAll('footer.site-footer').forEach(enhanceFooter);
   removeLabels();
+  revealSelectedMonth();
 }
 
 function refreshShell() {
