@@ -1,0 +1,48 @@
+:root { color-scheme:light; }
+* { box-sizing:border-box; }
+body { margin:0; background:#edf3f8; color:#161616; }
+.report-toolbar, .report-mail-help, .report-status { font-family:Arial,Helvetica,sans-serif; }
+.report-toolbar { position:sticky; top:0; z-index:10; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; padding:12px 26px; background:white; border-bottom:1px solid #d9e4ef; box-shadow:0 1px 7px #22395518; }
+.report-toolbar-title { display:flex; flex-direction:column; gap:3px; font-size:13px; }
+.report-toolbar-title span { color:#526478; font-size:12px; }
+.report-toolbar-actions { display:flex; flex-wrap:wrap; align-items:center; gap:9px; }
+.report-toolbar a, .report-toolbar button { border:1px solid #a9c4dd; border-radius:5px; padding:9px 12px; background:#e9f3fb; color:#153d65; font-size:13px; font-weight:600; cursor:pointer; text-decoration:none; }
+.report-toolbar button:disabled { opacity:.5; cursor:not-allowed; }
+.report-mail-help { max-width:850px; margin:16px auto 0; padding:12px 16px; background:white; border-left:3px solid #8db5db; font-size:13px; line-height:1.5; }
+.report-status { text-align:center; font-size:13px; padding:18px; }
+.report-error { color:#a12828; }
+.report-error:empty { display:none; }
+.report-paper { width:210mm; min-height:297mm; margin:24px auto 48px; padding:20mm; background:#fff; box-shadow:0 6px 22px #11283e24; }
+.report-paper, .report-paper * { font-family:"Times New Roman",Times,"Liberation Serif",serif; }
+.report-paper { font-size:11pt; line-height:1; text-align:justify; }
+.report-paper p { margin:0 0 9pt; line-height:1; text-align:justify; }
+.report-heading { text-align:center; margin-bottom:17pt; }
+.report-heading p { text-align:center; margin:0 0 5pt; font-size:11pt; }
+.report-heading h1 { font-size:12pt; font-weight:700; text-align:center; margin:8pt 0 6pt; line-height:1.1; text-transform:uppercase; }
+.report-logo { max-width:56px; max-height:55px; width:auto; height:auto; display:block; object-fit:contain; margin:0 auto 9pt; }
+.report-section { margin:0 0 12pt; }
+.report-section h2 { font-size:11pt; line-height:1.05; text-align:left; margin:13pt 0 8pt; font-weight:bold; break-after:avoid; }
+.report-section h3 { font-size:11pt; text-align:left; margin:10pt 0 6pt; line-height:1.05; font-weight:bold; break-after:avoid; }
+.report-subproduct h4 { font-size:11pt; font-weight:bold; margin:8pt 0 4pt; break-after:avoid; }
+.indicator-block { break-inside:avoid-page; }
+.report-paper table { border-collapse:collapse; border-spacing:0; width:100%; font-size:9.3pt; line-height:1.05; margin:8pt 0 12pt; table-layout:auto; }
+.report-paper th, .report-paper td { padding:4pt 5pt; vertical-align:top; border:0.35pt solid #aaa; overflow-wrap:anywhere; }
+.report-paper th { background:#f1f4f7; text-align:left; font-weight:bold; }
+.report-paper thead { display:table-header-group; }
+.report-paper tr { break-inside:avoid; }
+.report-end { margin-top:20pt; font-size:9pt; text-align:center; }
+@media(max-width:850px){ .report-paper{ width:auto; min-height:0; margin:12px; padding:18px; }.report-toolbar{padding:10px 12px;} .report-paper table{font-size:9pt;} }
+@media print {
+  @page {
+    size:A4;
+    margin:18mm 18mm 19mm 18mm;
+    @bottom-right { content:"AALA | Página " counter(page); font-family:"Times New Roman",Times,serif; font-size:9pt; color:#444; }
+  }
+  html,body { margin:0 !important; padding:0 !important; width:auto !important; height:auto !important; background:white !important; }
+  .report-toolbar,.report-mail-help,.report-status { display:none !important; }
+  .report-paper { width:auto; min-height:0; margin:0; padding:0; border:0; box-shadow:none; font-size:11pt; line-height:1; }
+  .report-section,.indicator-block { orphans:3; widows:3; }
+  .report-paper p { orphans:3; widows:3; }
+  a { color:inherit; text-decoration:none; }
+  .report-end { break-before:avoid; }
+}
