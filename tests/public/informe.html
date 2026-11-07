@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Informe institucional · AALA</title>
+<link rel="stylesheet" href="../src/styles/reports.css">
+</head>
+<body>
+<nav class="report-toolbar" aria-label="Herramientas de informe">
+  <div class="report-toolbar-title"><strong>Informe institucional AALA</strong><span id="reportHeading"></span></div>
+  <div class="report-toolbar-actions">
+    <a id="backButton" href="./index.html">Volver al programa</a>
+    <button id="printButton" type="button" disabled>Imprimir / Guardar PDF</button>
+    <button id="mailButton" type="button" disabled>Preparar correo</button>
+  </div>
+</nav>
+<div id="mailHelp" class="report-mail-help" hidden>Para enviar el PDF como archivo adjunto: usa «Imprimir / Guardar PDF», elige «Guardar como PDF» y adjunta el archivo al correo que se prepara. El navegador no permite adjuntarlo automáticamente a un correo.</div>
+<p id="loading" class="report-status" role="status">Preparando el informe del período seleccionado… <span id="periodLabel"></span></p>
+<p id="error" class="report-status report-error" role="alert"></p>
+<main class="report-paper" id="document" aria-label="Informe institucional"></main>
+<script type="module" src="../src/reports/report-browser.mjs"></script>
+</body>
+</html>
