@@ -42,3 +42,20 @@ test('pie institucional organiza misión, redes y contacto en ese orden',()=>{
  assert.ok(objetivo>=0 && redes>objetivo && contacto>redes);
  assert.match(f,/El objetivo de la Asociación Amigos del Lago de Atitlán/);
 });
+
+test('el índice tiene contraste legible y un único párrafo de lectura institucional',()=>{
+ const css=source('src/styles/aala-refinamientos-2026.css');
+ const index=source('public/index.html');
+ assert.match(css,/hero-main\.card p\.hero-copy/);
+ assert.match(css,/color:#35546a!important/);
+ assert.equal((index.match(/class="prose aala-integrated-reading"/g)||[]).length,1);
+ assert.doesNotMatch(index,/<p class="prose">\s*Aquí no se mezclan/);
+});
+test('las tarjetas de metas anuales están delimitadas y los botones no se esconden',()=>{
+ const css=source('src/styles/aala-refinamientos-2026.css');
+ assert.match(css,/annual-goals-grid \.goal-card/);
+ assert.match(css,/border-top:3px solid/);
+ assert.match(css,/grid-template-rows:42px 34px/);
+ assert.match(css,/color:#fff!important;background:#2c648d/);
+ assert.match(source('src/components/aala-visual-universal.mjs'),/revealSelectedMonth/);
+});
