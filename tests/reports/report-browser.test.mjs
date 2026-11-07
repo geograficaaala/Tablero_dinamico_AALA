@@ -8,7 +8,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 
 function mockBrowser(program){
   const els={};
-  for(const id of ['printButton','mailButton','backButton','periodLabel','document','reportHeading','error','loading','mailHelp']){
+  for(const id of ['printButton','backButton','periodLabel','document','reportHeading','error','loading']){
     els[id]={id,innerHTML:'',textContent:'',href:'',hidden:false,disabled:true,addEventListener(){}};
   }
   globalThis.document={title:'',getElementById:id=>els[id]};
@@ -22,7 +22,7 @@ function mockBrowser(program){
   return els;
 }
 
-test('la página imprimible carga y renderiza los seis programas de octubre sin datos incrustados',async()=>{
+test('la página imprimible carga los seis programas de octubre y conserva un solo botón de envío en el encabezado',async()=>{
   for(const program of PROGRAM_IDS){
     const els=mockBrowser(program);
     await import(`../../src/reports/report-browser.mjs?test=${program}`);
@@ -33,6 +33,11 @@ test('la página imprimible carga y renderiza los seis programas de octubre sin 
     assert.match(els.document.innerHTML,/6\. Seguimiento entre períodos/);
     assert.match(els.document.innerHTML,/Seguimiento complementario 8\./);
     assert.equal(els.printButton.disabled,false);
-    assert.equal(els.mailButton.disabled,false);
   }
+  const printableHtml=fs.readFileSync(path.join(root,'public/informe.html'),'utf8');
+  const printableJs=fs.readFileSync(path.join(root,'src/reports/report-browser.mjs'),'utf8');
+  const headerJs=fs.readFileSync(path.join(root,'src/reports/report-ui.mjs'),'utf8');
+  assert.doesNotMatch(printableHtml,/id=[\"']mailButton[\"']/);
+  assert.doesNotMatch(printableJs,/mailButton|mailHelp/);
+  assert.match(headerJs,/#btnMail/);
 });
