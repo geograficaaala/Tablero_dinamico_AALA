@@ -402,17 +402,11 @@ function renderTable(){
 }
 
 function renderDiagnostics(row){
-  const strongest = KPI_CONFIG.map(cfg => ({id: cfg.id, title: cfg.title, pct: safeNumber(row[cfg.pctField]), unit: cfg.unit, value: row[cfg.valueField]})).sort((a,b) => b.pct - a.pct);
-  const lead = strongest[0];
-  const lag = strongest[strongest.length-1];
-  const html = `
-    <h3>Análisis del mes</h3>
-    <p>En <strong>${escapeHtml(row.mes_label)} ${escapeHtml(row.anio)}</strong>, el programa registra <strong>${escapeHtml(formatByUnit(row.ha_monitoreadas_kpi_acum,'ha',2))}</strong> monitoreadas, <strong>${escapeHtml(formatByUnit(row.arboles_sembrados_acum,'árboles'))}</strong> árboles sembrados, un avance del sistema forestal digital de <strong>${escapeHtml(formatPercent(row.pct_meta_sig))}</strong> y <strong>${escapeHtml(formatByUnit(row.plantas_netas_acum,'plantas'))}</strong> plantas acumuladas en vivero.</p>
-    <p>El componente con mayor avance relativo es <strong>${escapeHtml(lead.title)}</strong>, con <strong>${escapeHtml(formatPercent(lead.pct))}</strong> de cumplimiento de su meta anual y un acumulado de <strong>${escapeHtml(lead.id === 'sig' ? formatPercent(lead.pct) + ' de avance' : formatByUnit(lead.value, lead.unit))}</strong>.</p>
-    <p>El componente con mayor rezago relativo es <strong>${escapeHtml(lag.title)}</strong>, con <strong>${escapeHtml(formatPercent(lag.pct))}</strong> de avance. ${escapeHtml(row.alertas_texto || 'Se recomienda revisar el calendario operativo y reforzar la captura de evidencia del período.')}</p>
-    <p>La lectura del mes reporta: <strong>${escapeHtml(row.logros_texto || 'Sin logros narrativos cargados')}</strong>.</p>`;
-  setHtml('diagnosticPanel', html);
-  setHtml('execDiagnosticPanel', html);
+  const ranked=KPI_CONFIG.map(cfg=>({id:cfg.id,title:cfg.title,pct:safeNumber(row[cfg.pctField]),unit:cfg.unit,value:row[cfg.valueField]})).sort((a,b)=>b.pct-a.pct);
+  const lead=ranked[0], lag=ranked[ranked.length-1];
+  const html=`<p class="aala-diagnostic-prose">El seguimiento de Reforestando Atitlán para <strong>${escapeHtml(row.mes_label)} ${escapeHtml(row.anio)}</strong> presenta un acumulado de <strong>${escapeHtml(formatByUnit(row.arboles_sembrados_acum,'árboles'))}</strong> sembrados. Para interpretar esta cifra debe distinguirse el avance anual de los árboles incorporados específicamente durante el mes, así como las actividades de seguimiento que se desarrollan después de la siembra. Los datos de monitoreo de cobertura registran <strong>${escapeHtml(formatByUnit(row.ha_monitoreadas_kpi_acum,'ha',2))}</strong>, una medida territorial diferente del conteo de árboles y de los registros de producción de viveros. El sistema forestal digital presenta un avance de <strong>${escapeHtml(formatPercent(row.pct_meta_sig))}</strong>, mientras los viveros reportan <strong>${escapeHtml(formatByUnit(row.plantas_netas_acum,'plantas'))}</strong> netas acumuladas en la referencia del período. Estos resultados documentan dimensiones complementarias de la gestión forestal: cobertura y monitoreo territorial, reforestación, disponibilidad de plantas y registro cartográfico. En la comparación de metas, el indicador con mayor avance relativo es ${escapeHtml(lead.title)}, que alcanza <strong>${escapeHtml(formatPercent(lead.pct))}</strong> de su objetivo de referencia; el de menor avance relativo es ${escapeHtml(lag.title)}, con <strong>${escapeHtml(formatPercent(lag.pct))}</strong>. La diferencia entre ambos debe evaluarse según su calendario de ejecución y la naturaleza del producto medido, sin interpretar los porcentajes como unidades de trabajo equivalentes. ${row.logros_texto?`Entre los avances documentados para este corte se señala: ${escapeHtml(row.logros_texto)}.`:''} ${row.alertas_texto?`Las observaciones de seguimiento registradas indican: ${escapeHtml(row.alertas_texto)}.`:''} En la revisión de resultados también es relevante atender la continuidad de las acciones de mantenimiento, la trazabilidad de los árboles establecidos y el alcance de las labores de monitoreo. Los registros del tablero constituyen el respaldo del análisis mensual y deben examinarse junto con sus metas anuales para evitar duplicaciones entre actividades, superficies y plantas. El balance del ejercicio <strong>${escapeHtml(row.anio)}</strong> conserva, por tanto, los indicadores propios del programa sin combinar métricas de distinta unidad.</p>`;
+  setHtml('diagnosticPanel',html);
+  setHtml('execDiagnosticPanel',html);
 }
 
 function renderLineChart(){
