@@ -1,4 +1,3 @@
-import { APPS_SCRIPT_WEBAPP_URL } from './report-config.mjs';
 import { parseCSV } from '../core/csv.mjs';
 import { REPORT_PROFILES, PROGRAM_IDS } from './report-profiles.mjs';
 import { buildReport, periodName } from './report-core.mjs';
@@ -86,25 +85,10 @@ function renderReport(r){
   document.title=`Informe ${r.name} · ${r.periodName} · AALA`;
   $('reportHeading').textContent=`${r.name} · ${r.periodName}`;
   $('printButton').disabled=false;
-  $('mailButton').disabled=false;
   built=r;
 }
-function prepareEmail(){
-  if(!built)return;
-  if(!APPS_SCRIPT_WEBAPP_URL){
-    $('mailHelp').hidden=false;
-    $('mailHelp').textContent='El envío automático no está configurado. Añade la URL /exec de Apps Script en src/reports/report-config.mjs.';
-    return;
-  }
-  const url=new URL(APPS_SCRIPT_WEBAPP_URL);
-  url.searchParams.set('programa',built.program);
-  url.searchParams.set('mes',built.period);
-  window.open(url.toString(),'_blank','noopener,noreferrer');
-}
-
 async function boot(){
   $('printButton').addEventListener('click',()=>{if(built)window.print();});
-  $('mailButton').addEventListener('click',prepareEmail);
   if(!PROGRAM_IDS.includes(program)||!/^2026-(0[1-9]|1[0-2])$/.test(period||'')){
     $('error').textContent='No se recibió un programa o mes válido desde el dashboard.';return;
   }
@@ -122,7 +106,6 @@ async function boot(){
     const sources=Object.fromEntries(required.map((file,i)=>[file,all[i]]));
     renderReport(buildReport({definitions,cuts,program,period,sources}));
     $('loading').hidden=true;
-    if(query.get('accion')==='correo')prepareEmail();
   }catch(error){
     $('loading').hidden=true;
     $('error').textContent=error.message;
