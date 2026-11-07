@@ -1,3 +1,4 @@
+import { APPS_SCRIPT_WEBAPP_URL } from './report-config.mjs';
 const FILES = {
   'atitlan-recicla.html':'atitlan_recicla',
   'conservando-atitlan.html':'conservando_atitlan',
@@ -20,9 +21,19 @@ function launch(action){
   const period=currentPeriod();
   if(!period){window.alert('Selecciona primero un mes con datos publicados.');return;}
   const params=new URLSearchParams({programa:PROGRAM,mes:period});
-  if(action==='mail')params.set('accion','correo');
+  if(action==='mail'){
+    if(!APPS_SCRIPT_WEBAPP_URL){
+      window.alert('El envío automático todavía no está configurado. Falta añadir la URL /exec de Apps Script en src/reports/report-config.mjs.');
+      return;
+    }
+    const url=new URL(APPS_SCRIPT_WEBAPP_URL);
+    url.searchParams.set('programa',PROGRAM);
+    url.searchParams.set('mes',period);
+    window.open(url.toString(),'_blank','noopener,noreferrer');
+    return;
+  }
   const url=`./informe.html?${params.toString()}`;
-  window.location.assign(url);
+  window.open(url,'_blank','noopener,noreferrer');
 }
 function enhance(){
   if(!PROGRAM)return;
@@ -36,7 +47,7 @@ function enhance(){
     actions.querySelector('#btnMail').before(btn);
   }
   const mail=actions.querySelector('#btnMail');
-  mail.setAttribute('aria-label','Preparar informe por correo electrónico');
+  mail.setAttribute('aria-label','Abrir formulario de envío automático del informe');
   const label=mail.querySelector('span:last-child');
   if(label && label.textContent!=='Enviar informe por correo')label.textContent='Enviar informe por correo';
   else if(!mail.querySelector('svg') && mail.textContent!=='Enviar informe por correo')mail.textContent='Enviar informe por correo';

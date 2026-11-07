@@ -1,3 +1,4 @@
+import { APPS_SCRIPT_WEBAPP_URL } from './report-config.mjs';
 import { parseCSV } from '../core/csv.mjs';
 import { REPORT_PROFILES, PROGRAM_IDS } from './report-profiles.mjs';
 import { buildReport, periodName } from './report-core.mjs';
@@ -90,12 +91,17 @@ function renderReport(r){
 }
 function prepareEmail(){
   if(!built)return;
-  const url=new URL(location.href);url.searchParams.delete('accion');
-  const subject=`Informe institucional de ${built.name} · ${built.periodName}`;
-  const body=`Buen día:\n\nComparto el informe mensual de ${built.name}, correspondiente a ${built.periodName}.\n\nPuede consultar el informe en:\n${url.href}\n\nSaludos cordiales,\nAsociación Amigos del Lago de Atitlán`;
-  $('mailHelp').hidden=false;
-  window.location.href=`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  if(!APPS_SCRIPT_WEBAPP_URL){
+    $('mailHelp').hidden=false;
+    $('mailHelp').textContent='El envío automático no está configurado. Añade la URL /exec de Apps Script en src/reports/report-config.mjs.';
+    return;
+  }
+  const url=new URL(APPS_SCRIPT_WEBAPP_URL);
+  url.searchParams.set('programa',built.program);
+  url.searchParams.set('mes',built.period);
+  window.open(url.toString(),'_blank','noopener,noreferrer');
 }
+
 async function boot(){
   $('printButton').addEventListener('click',()=>{if(built)window.print();});
   $('mailButton').addEventListener('click',prepareEmail);
@@ -116,7 +122,7 @@ async function boot(){
     const sources=Object.fromEntries(required.map((file,i)=>[file,all[i]]));
     renderReport(buildReport({definitions,cuts,program,period,sources}));
     $('loading').hidden=true;
-    if(query.get('accion')==='correo')$('mailHelp').hidden=false;
+    if(query.get('accion')==='correo')prepareEmail();
   }catch(error){
     $('loading').hidden=true;
     $('error').textContent=error.message;
