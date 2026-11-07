@@ -14,14 +14,14 @@ export function mountInstitutionalFooter(mount) {
     <footer class="site-footer aala-v2-footer">
       <div class="aala-footer-name">Asociación Amigos del Lago de Atitlán</div>
       <div class="footer-wrap aala-v2-footer-inner">
+        <section class="footer-brand" aria-label="Objetivo institucional">
+          <p class="footer-copy">${description}</p>
+        </section>
         <section class="footer-col aala-footer-social" aria-label="Redes sociales">
           <h3>Redes y sitio web</h3>
           <div class="footer-links">
             ${links.map(([url,label,icon])=>`<a href="${url}" target="_blank" rel="noopener noreferrer"><span class="social-icon">${aalaIcon(icon)}</span><span>${label}</span></a>`).join('')}
           </div>
-        </section>
-        <section class="footer-brand" aria-label="Objetivo institucional">
-          <p class="footer-copy">${description}</p>
         </section>
         <section class="footer-col aala-footer-contact" aria-label="Contacto">
           <h3>Contacto</h3>

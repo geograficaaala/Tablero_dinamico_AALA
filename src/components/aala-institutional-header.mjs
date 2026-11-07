@@ -2,10 +2,10 @@ import { aalaIcon } from './aala-icons.mjs';
 
 const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 const actions = [
-  ['btnFull', 'Tablero completo', 'dashboard'],
+  ['btnFull', 'Tablero', 'dashboard'],
   ['btnExec', 'Resumen ejecutivo', 'executive'],
   ['btnPresentation', 'Modo presentación', 'presentation'],
-  ['btnMail', 'Enviar resumen por correo electrónico', 'mail']
+  ['btnMail', 'Enviar por correo', 'mail']
 ];
 
 export function mountInstitutionalHeader(mount, handlers, options={}) {

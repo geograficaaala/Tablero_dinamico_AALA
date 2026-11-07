@@ -11,7 +11,7 @@ const titles = {
   'tul.html': 'Siembra de Tul'
 };
 const icons = { btnFull:'dashboard', btnExec:'executive', btnPresentation:'presentation', btnMail:'mail' };
-const labels = { btnFull:'Tablero completo', btnExec:'Resumen ejecutivo', btnPresentation:'Modo presentación', btnMail:'Enviar resumen por correo electrónico' };
+const labels = { btnFull:'Tablero', btnExec:'Resumen ejecutivo', btnPresentation:'Modo presentación', btnMail:'Enviar por correo' };
 
 function enhanceHeader(header) {
   if (header.dataset.aalaVisualReady === 'true') return;
