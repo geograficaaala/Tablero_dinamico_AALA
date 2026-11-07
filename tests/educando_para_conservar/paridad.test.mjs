@@ -46,10 +46,10 @@ test('el HTML usa el controlador externo y los módulos compartidos reales', () 
   const js = readFileSync('src/programs/educando_para_conservar/dashboard.js', 'utf8');
   assert.match(html, /bootstrap\.mjs/);
   assert.doesNotMatch(html, /const SEPTIEMBRE_INDICADORES/);
-  assert.match(bootstrap, /components\/header\.js/);
-  assert.match(bootstrap, /components\/footer\/footer\.js/);
+  assert.match(bootstrap, /components\/aala-institutional-header\.mjs/);
+  assert.match(bootstrap, /components\/aala-institutional-footer\.mjs/);
   assert.match(js, /\.\.\/data\/educando_para_conservar\/2026\/total_mes\.csv/);
-  for (const file of ['src/components/header.js', 'src/components/footer/footer.js', 'src/core/csv.mjs', 'public/assets/logos/educando-para-conservar.png']) assert.ok(existsSync(file), file);
+  for (const file of ['src/components/aala-institutional-header.mjs', 'src/components/aala-institutional-footer.mjs', 'src/core/csv.mjs', 'public/assets/logos/educando-para-conservar.png']) assert.ok(existsSync(file), file);
 });
 
 test('portal y publicación incluyen Educando para Conservar', () => {
