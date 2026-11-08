@@ -21,7 +21,7 @@ test('encabezado de programa conserva acciones y sitúa los controles',()=>{
  assert.match(css,/\.aala-v2-month-container/);
  assert.match(css,/\.aala-v2-actions/);
  assert.match(css,/overflow-x:auto/);
- assert.match(source('src/reports/report-ui.mjs'),/btn.textContent='Modo informe'/);
+ assert.match(source('src/reports/report-ui.mjs'),/btn\.textContent='Modo informe'/);
 });
 test('los diagnósticos son prosa continua derivada del mes',()=>{
  for(const path of [

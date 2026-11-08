@@ -32,22 +32,49 @@ test('conserva los nombres y directorios de fotografía acordados', () => {
   }
 });
 
-test('solo fondos en secciones existentes y las seis tarjetas; sin insertar cintillos', () => {
+test('se mantienen portada y fondo panorámico en las tres secciones existentes', () => {
   const js = read('src/components/aala-photo-strips.mjs');
   const css = read('src/styles/aala-fotografias.css');
-  assert.match(js, /installWelcomeImage\(\)/);
-  for(const marker of ['.storyboard', '.panorama-stage', '.coverage-section', 'in2.jpg', 'in3.jpg', 'in4.jpg']) assert.ok(js.includes(marker));
-  for(const [id, photo] of Object.entries({atitlan_recicla:'pp1.jpg', conservando_atitlan:'pp2.jpg', educando_para_conservar:'pp3.jpg', fortalecimiento_municipal:'pp4.jpg', reforestacion:'pp5.jpg', manejo_tul:'pp6.jpg'})) {
-    assert.match(js, new RegExp(`${id}: '${photo.replace('.', '\\.')}?'`));
+  for (const [section, filename] of [['.storyboard','in2.jpg'],['.panorama-stage','in3.jpg'],['.coverage-section','in4.jpg']]) {
+    assert.ok(js.includes(section));
+    assert.ok(js.includes(filename));
   }
-  assert.match(js, /new MutationObserver\(sync\)/);
-  assert.doesNotMatch(js.slice(js.indexOf('export function installAalaPhotos()'), js.indexOf('if (typeof document')), /createStrip\(/);
-  assert.match(css, /--aala-card-photo/);
-  assert.match(css, /background-size:\s*cover\s*!important/);
+  assert.match(js, /preloadPhoto\('index', 'in1\.jpg'/);
+  assert.match(css, /\.aala-photo-welcome-background/);
+  assert.match(css, /\.aala-photo-scene--loaded::before/);
+  assert.match(css, /left: calc\(50% - 50vw\)/);
+  assert.match(css, /width: 100vw/);
+  assert.match(css, /\.hero-side\s*\{\s*display: none !important/);
+  assert.doesNotMatch(js, /createStrip\(|installProgramStrip\(/);
 });
 
-test('el segundo módulo queda inactivo y no inserta elementos duplicados', () => {
+test('los fondos del carrusel dependen del ID real y no del orden visual', async () => {
+  const { AALA_PROGRAM_PHOTOS } = await import('../../src/components/aala-photo-strips.mjs');
+  const expected = {
+    atitlan_recicla: 'pp1.jpg',
+    conservando_atitlan: 'pp2.jpg',
+    educando_para_conservar: 'pp3.jpg',
+    fortalecimiento_municipal: 'pp4.jpg',
+    reforestacion: 'pp5.jpg',
+    manejo_tul: 'pp6.jpg'
+  };
+  for (const [id, filename] of Object.entries(expected)) assert.equal(AALA_PROGRAM_PHOTOS[id], filename);
+  const js = read('src/components/aala-photo-strips.mjs');
+  const css = read('src/styles/aala-fotografias.css');
+  assert.match(js, /\.program-carousel-dot/);
+  assert.match(js, /aria-current/);
+  assert.match(js, /new MutationObserver\(syncPhoto\)/);
+  assert.match(css, /\.aala-carousel-backdrop-layer\.is-active/);
+  assert.doesNotMatch(js, /programGrid\.innerHTML|insertAdjacentHTML/);
+  assert.doesNotMatch(js, /report-config|monthPills|KpiGrid|metas_2026/);
+});
+
+test('el módulo cargado en las siete páginas activa la fotografía una sola vez', () => {
   const js = read('src/components/aala-fotografias.mjs');
+  const universal = read('src/components/aala-visual-universal.mjs');
+  assert.match(universal, /installPhotoGallery/);
   assert.match(js, /export function installPhotoGallery\(\)/);
-  assert.doesNotMatch(js, /insertAdjacentElement|prepend\(|appendChild\(/);
+  assert.match(js, /import \{ installAalaPhotos \}/);
+  assert.match(js, /aala-fotografias\.css/);
+  assert.doesNotMatch(js, /insertAdjacentElement|appendChild\(/);
 });
