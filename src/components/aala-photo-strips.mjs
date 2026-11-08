@@ -91,136 +91,61 @@ function installWelcomeImage() {
   });
 }
 
+// La portada conserva exactamente el diseño y el módulo fotográfico aprobado.
+// Las otras fotografías se usan solamente como fondos de contenido existente.
+const INDEX_EDITORIAL_PHOTOS = Object.freeze([
+  ['#page-resumen .storyboard', 'in2.jpg'],
+  ['#page-resumen .panorama-stage', 'in3.jpg'],
+  ['#page-resumen .coverage-section', 'in4.jpg']
+]);
 
-// Las imágenes de fondo deben precargarse inmediatamente, no con loading="lazy":
-// un Image() desconectado del DOM puede no iniciar la descarga si es diferido.
-const PROGRAM_IMAGE_MAP = Object.freeze({
-  atitlan_recicla: ['pp1.jpg','Atitlán Recicla'],
-  conservando_atitlan: ['pp2.jpg','Conservando Atitlán'],
-  educando_para_conservar: ['pp3.jpg','Educando para Conservar'],
-  fortalecimiento_municipal: ['pp4.jpg','Fortalecimiento Municipal'],
-  reforestacion: ['pp5.jpg','Reforestando Atitlán'],
-  manejo_tul: ['pp6.jpg','Siembra de Tul'],
-  tul: ['pp6.jpg','Siembra de Tul']
+const PROJECT_PHOTOS = Object.freeze({
+  atitlan_recicla: 'pp1.jpg',
+  conservando_atitlan: 'pp2.jpg',
+  educando_para_conservar: 'pp3.jpg',
+  fortalecimiento_municipal: 'pp4.jpg',
+  reforestacion: 'pp5.jpg',
+  manejo_tul: 'pp6.jpg'
 });
 
-function preloadImage(folder, file) {
-  return new Promise(resolve => {
-    const image = new Image();
-    image.decoding = 'async';
-    image.onload = () => resolve(photoURL(folder, file));
-    image.onerror = () => resolve(null);
-    image.src = photoURL(folder, file);
-  });
-}
-
-function addEditorialBackground(selector, file) {
-  const section = document.querySelector(selector);
-  if (!section || section.dataset.aalaEditorial) return;
-  section.dataset.aalaEditorial = 'true';
-  preloadImage('index', file).then(url => {
-    if (!url || !section.isConnected) return;
-    section.style.setProperty('--aala-editorial-bg', `url("${url}")`);
-    section.classList.add('aala-editorial-has-photo');
-  });
-}
-
-function createProgramBanner() {
-  const page = document.getElementById('page-programas');
-  if (!page) return null;
-  let banner = page.querySelector('[data-aala-program-banner]');
-  if (banner) return banner;
-  banner = document.createElement('section');
-  banner.className = 'aala-program-banner';
-  banner.dataset.aalaProgramBanner = 'true';
-  banner.setAttribute('aria-label', 'Imagen y nombre del programa seleccionado');
-  banner.innerHTML = `
-    <div class="aala-program-banner-photo" aria-hidden="true"></div>
-    <div class="aala-program-banner-veil" aria-hidden="true"></div>
-    <div class="aala-program-banner-inner">
-      <p class="aala-program-banner-eyebrow">Programas y proyectos</p>
-      <h2 class="aala-program-banner-title">Atitlán Recicla</h2>
-      <p class="aala-program-banner-description">Resultados e indicadores institucionales del programa seleccionado.</p>
-    </div>`;
-  page.insertBefore(banner, page.firstChild);
-  return banner;
-}
-
-let currentBannerProgram = null;
-let bannerImageRequest = 0;
-function setProgramBanner(programId, title) {
-  const banner = createProgramBanner();
-  if (!banner) return;
-  const selection = PROGRAM_IMAGE_MAP[programId] || PROGRAM_IMAGE_MAP.atitlan_recicla;
-  const normalizedProgram = PROGRAM_IMAGE_MAP[programId] ? programId : 'atitlan_recicla';
-  if (currentBannerProgram === normalizedProgram) return;
-  currentBannerProgram = normalizedProgram;
-  const request = ++bannerImageRequest;
-  banner.querySelector('.aala-program-banner-title').textContent = title || selection[1];
-  banner.classList.remove('aala-program-banner--photo');
-  banner.style.removeProperty('--aala-program-banner-image');
-  preloadImage('programas-y-proyectos', selection[0]).then(url => {
-    if (request !== bannerImageRequest || !banner.isConnected) return;
-    if (!url) return;
-    banner.style.setProperty('--aala-program-banner-image', `url("${url}")`);
-    banner.classList.add('aala-program-banner--photo');
-  });
-}
-
-function activeCarouselItem() {
-  const grid = document.getElementById('programGrid');
-  const viewport = document.getElementById('programCarouselViewport');
-  if (!grid || !viewport) return null;
-  const cards = Array.from(grid.querySelectorAll('.program-card[data-program-id]'));
-  if (!cards.length) return null;
-  const viewportLeft = viewport.getBoundingClientRect().left;
-  return cards.reduce((closest, card) => {
-    const dist = Math.abs(card.getBoundingClientRect().left - viewportLeft);
-    if (!closest || dist < closest.dist) return {card, dist};
-    return closest;
-  }, null)?.card || cards[0];
-}
-
-function syncBannerFromCarousel() {
-  const card = activeCarouselItem();
-  if (!card) return;
-  const name = card.querySelector('.program-title')?.textContent?.trim();
-  setProgramBanner(card.dataset.programId, name);
-}
-
-function installIndexPhotos() {
-  // Eliminar los cintillos antiguos solamente en el índice. En los seis
-  // programas se mantiene su fotografía discreta de dos imágenes.
-  document.querySelectorAll('#page-resumen .aala-photo-strip, #page-programas .aala-photo-strip')
-    .forEach(strip => strip.remove());
-  installWelcomeImage();
-  addEditorialBackground('#page-resumen .storyboard', 'in2.jpg');
-  addEditorialBackground('#page-resumen .panorama-stage', 'in3.jpg');
-  addEditorialBackground('#page-resumen .coverage-section', 'in4.jpg');
-  createProgramBanner();
-  const viewport = document.getElementById('programCarouselViewport');
-  const grid = document.getElementById('programGrid');
-  if (!viewport || !grid) return;
-  let scrollFrame = 0;
-  viewport.addEventListener('scroll', () => {
-    if (scrollFrame) cancelAnimationFrame(scrollFrame);
-    scrollFrame = requestAnimationFrame(() => {
-      scrollFrame = 0;
-      syncBannerFromCarousel();
+function installIndexEditorialPhotos() {
+  for (const [selector, filename] of INDEX_EDITORIAL_PHOTOS) {
+    const section = document.querySelector(selector);
+    if (!section) continue;
+    loadPhoto('index', filename, (src) => {
+      if (!section.isConnected) return;
+      section.style.setProperty('--aala-editorial-photo', `url("${src}")`);
+      section.classList.add('aala-editorial-photo-loaded');
     });
-  }, { passive: true });
-  const observer = new MutationObserver(syncBannerFromCarousel);
+  }
+}
+
+function applyProgramCardPhotos() {
+  const grid = document.getElementById('programGrid');
+  if (!grid) return;
+  for (const card of grid.querySelectorAll('.program-card[data-program-id]')) {
+    if (card.dataset.aalaPhotoPrepared === 'true') continue;
+    card.dataset.aalaPhotoPrepared = 'true';
+    const filename = PROJECT_PHOTOS[card.dataset.programId];
+    if (!filename) continue;
+    loadPhoto('programas-y-proyectos', filename, (src) => {
+      if (!card.isConnected) return;
+      card.style.setProperty('--aala-project-photo', `url("${src}")`);
+      card.classList.add('aala-project-photo-loaded');
+    });
+  }
+}
+
+function installIndexPhotography() {
+  installWelcomeImage();
+  installIndexEditorialPhotos();
+  const grid = document.getElementById('programGrid');
+  if (!grid) return;
+  applyProgramCardPhotos();
+  // Los seis proyectos se reconstruyen al cambiar el mes; sus fotos acompañan
+  // las tarjetas existentes sin modificar la navegación ni los datos.
+  const observer = new MutationObserver(applyProgramCardPhotos);
   observer.observe(grid, { childList: true });
-  // Cambios de mes, botones, flechas y puntos de carrusel sin depender del
-  // módulo del índice ni alterar su funcionamiento.
-  document.getElementById('programCarouselPrev')?.addEventListener('click', () => requestAnimationFrame(syncBannerFromCarousel));
-  document.getElementById('programCarouselNext')?.addEventListener('click', () => requestAnimationFrame(syncBannerFromCarousel));
-  document.getElementById('programCarouselDots')?.addEventListener('click', () => requestAnimationFrame(syncBannerFromCarousel));
-  window.addEventListener('aala:program-card-change', e => {
-    const detail = e.detail || {};
-    if (detail.programId) setProgramBanner(detail.programId, detail.name);
-  });
-  syncBannerFromCarousel();
 }
 
 function programHero(page) {
@@ -249,7 +174,7 @@ function installProgramStrip(page) {
 export function installAalaPhotos() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
   if (page === 'index.html') {
-    installIndexPhotos();
+    installIndexPhotography();
     return;
   }
   if (!AALA_PHOTO_SETS[page]) return;
