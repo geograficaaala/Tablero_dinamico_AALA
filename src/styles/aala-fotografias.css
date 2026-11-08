@@ -516,3 +516,37 @@ body.aala-v2.aala-index #page-programas .program-carousel .program-card {
 body.aala-v2.aala-index #page-programas .program-carousel .program-card :is(h2,h3,h4,p,span,strong,small,button,a,li,dt,dd) {
   color: inherit !important;
 }
+
+
+/* AALA · Ajuste final: selector mensual legible sobre in4 y fondo pegado al header.
+   No cambia tarjeta, KPIs, carrusel ni estilos de otras páginas. */
+body.aala-v2.aala-index #page-programas .program-month-toolbar {
+  margin-top: 0 !important; /* evita el espacio blanco colapsado encima del fondo */
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.aala-v2.aala-index #page-programas .program-month-copy strong,
+body.aala-v2.aala-index #page-programas .program-month-copy span,
+body.aala-v2.aala-index #page-programas #programMonthLabel {
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+body.aala-v2.aala-index #page-programas .program-month-buttons {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+body.aala-v2.aala-index #page-programas .program-month-btn,
+body.aala-v2.aala-index #page-programas #programMonthButtons button {
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+body.aala-v2.aala-index #page-programas #programMonthButtons button.active,
+body.aala-v2.aala-index #page-programas #programMonthButtons button[aria-pressed="true"] {
+  color: #ffffff !important;
+  background: #315e83 !important;
+  text-shadow: none;
+}
+body.aala-v2.aala-index #page-programas #programMonthButtons button:not(.active):hover {
+  background: rgba(255,255,255,.16) !important;
+}
