@@ -1,8 +1,10 @@
-const BASE_PUBLIC = new URL('../../public/fotografias/', import.meta.url);
-const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-
-export const AALA_PHOTO_SETS = {
-  'index.html': { folder: 'index', prefix: 'in', label: 'Portada institucional de AALA' },
+/**
+ * Cintillos fotográficos AALA. No modifica datos, KPIs, navegación ni informes.
+ * Las fotografías se buscan en public/fotografias/<carpeta>/<prefijo>N.jpg
+ * El módulo funciona aunque algunas o todas las imágenes aún no estén publicadas.
+ */
+export const AALA_PHOTO_SETS = Object.freeze({
+  'index.html': { folder: 'index', prefix: 'in', label: 'Asociación Amigos del Lago de Atitlán' },
   'programas-y-proyectos': { folder: 'programas-y-proyectos', prefix: 'pp', label: 'Programas y proyectos de AALA' },
   'atitlan-recicla.html': { folder: 'atitlan-recicla', prefix: 'ar', label: 'Atitlán Recicla' },
   'conservando-atitlan.html': { folder: 'conservando-atitlan', prefix: 'ca', label: 'Conservando Atitlán' },
@@ -10,48 +12,31 @@ export const AALA_PHOTO_SETS = {
   'fortalecimiento-municipal.html': { folder: 'fortalecimiento-municipal', prefix: 'fm', label: 'Fortalecimiento Municipal' },
   'reforestando-atitlan.html': { folder: 'reforestando-atitlan', prefix: 'ra', label: 'Reforestando Atitlán' },
   'tul.html': { folder: 'tul', prefix: 'tu', label: 'Siembra de Tul' }
-};
+});
 
-const PROGRAM_HERO_PHOTO = {
-  atitlan_recicla: 1,
-  conservando_atitlan: 2,
-  educando_para_conservar: 3,
-  fortalecimiento_municipal: 4,
-  reforestacion: 5,
-  tul: 6
-};
-
-const PROGRAM_FALLBACK_TEXT = {
-  atitlan_recicla: 'Recuperación de materiales, comercialización y lectura institucional del desempeño del programa.',
-  conservando_atitlan: 'Seguimiento a la recolección de aceite, producción de jabones y resultados de conservación del programa.',
-  educando_para_conservar: 'Indicadores educativos, acompañamiento ambiental y metas institucionales del proceso formativo.',
-  fortalecimiento_municipal: 'Avance institucional de estudios, PIRDES, fortalecimiento técnico y coordinación con municipalidades.',
-  reforestacion: 'Indicadores de reforestación, viveros, monitoreo y cobertura territorial del esfuerzo forestal institucional.',
-  tul: 'Lectura breve de las jornadas, sitios atendidos y resultados del programa de restauración de tul.'
-};
-
-export function photoURL(folder, file) {
-  return new URL(`${folder}/${file}`, BASE_PUBLIC).href;
+export function photoURL(folder, filename) {
+  // Usar import.meta.url evita fallos tanto en dominio propio como en GitHub Pages con subruta.
+  return new URL(`../../public/fotografias/${folder}/${filename}`, import.meta.url).href;
 }
 
-function loadPhoto(folder, file, onLoad, onError = () => {}) {
-  const img = new Image();
-  img.decoding = 'async';
-  img.loading = 'lazy';
-  img.addEventListener('load', () => onLoad(photoURL(folder, file)), { once: true });
-  img.addEventListener('error', onError, { once: true });
-  img.src = photoURL(folder, file);
+function loadPhoto(folder, fileName, callback) {
+  const probe = new Image();
+  probe.decoding = 'async';
+  probe.onload = () => callback(photoURL(folder, fileName));
+  probe.onerror = () => {}; // La imagen todavía no existe: mantener el espacio neutro.
+  probe.src = photoURL(folder, fileName);
 }
 
-function photoTile(group, number, variant) {
-  const tile = document.createElement('article');
-  tile.className = `aala-photo-tile aala-photo-tile--${variant}`;
-  tile.dataset.photoNumber = String(number);
-  const waiting = document.createElement('div');
+function photoTile(group, number, type) {
+  const name = `${group.prefix}${number}.jpg`;
+  const tile = document.createElement('div');
+  tile.className = 'aala-photo-tile';
+  tile.dataset.photo = name;
+  const waiting = document.createElement('span');
   waiting.className = 'aala-photo-pending';
-  waiting.textContent = 'Espacio listo para fotografía';
+  waiting.textContent = 'Espacio fotográfico';
   tile.append(waiting);
-  loadPhoto(group.folder, `${group.prefix}${number}.jpg`, (src) => {
+  loadPhoto(group.folder, name, (src) => {
     if (!tile.isConnected) return;
     const img = document.createElement('img');
     img.src = src;
@@ -106,94 +91,136 @@ function installWelcomeImage() {
   });
 }
 
-function scenicSection(selector, number, tone = 'light') {
+
+// Las imágenes de fondo deben precargarse inmediatamente, no con loading="lazy":
+// un Image() desconectado del DOM puede no iniciar la descarga si es diferido.
+const PROGRAM_IMAGE_MAP = Object.freeze({
+  atitlan_recicla: ['pp1.jpg','Atitlán Recicla'],
+  conservando_atitlan: ['pp2.jpg','Conservando Atitlán'],
+  educando_para_conservar: ['pp3.jpg','Educando para Conservar'],
+  fortalecimiento_municipal: ['pp4.jpg','Fortalecimiento Municipal'],
+  reforestacion: ['pp5.jpg','Reforestando Atitlán'],
+  manejo_tul: ['pp6.jpg','Siembra de Tul'],
+  tul: ['pp6.jpg','Siembra de Tul']
+});
+
+function preloadImage(folder, file) {
+  return new Promise(resolve => {
+    const image = new Image();
+    image.decoding = 'async';
+    image.onload = () => resolve(photoURL(folder, file));
+    image.onerror = () => resolve(null);
+    image.src = photoURL(folder, file);
+  });
+}
+
+function addEditorialBackground(selector, file) {
   const section = document.querySelector(selector);
-  if (!section || section.dataset.aalaPhotoEditorial) return;
-  section.dataset.aalaPhotoEditorial = String(number);
-  section.classList.add('aala-photo-editorial', `aala-photo-editorial--${tone}`);
-  const group = AALA_PHOTO_SETS['index.html'];
-  loadPhoto(group.folder, `in${number}.jpg`, (src) => {
-    if (!section.isConnected) return;
-    section.style.setProperty('--aala-editorial-photo', `url("${src}")`);
-    section.classList.add('aala-photo-editorial--loaded');
+  if (!section || section.dataset.aalaEditorial) return;
+  section.dataset.aalaEditorial = 'true';
+  preloadImage('index', file).then(url => {
+    if (!url || !section.isConnected) return;
+    section.style.setProperty('--aala-editorial-bg', `url("${url}")`);
+    section.classList.add('aala-editorial-has-photo');
   });
 }
 
-function installIndexEditorialSections() {
-  scenicSection('#page-resumen .storyboard', 2, 'light');
-  scenicSection('#page-resumen .panorama-stage', 3, 'warm');
-  scenicSection('#page-resumen .coverage-section', 4, 'light');
-}
-
-function ensureProgramHero() {
-  const wrap = document.querySelector('#page-programas > .wrap');
-  const toolbar = document.querySelector('#page-programas .program-month-toolbar');
-  if (!wrap || !toolbar) return null;
-  let hero = wrap.querySelector('[data-aala-program-hero]');
-  if (hero) return hero;
-  hero = document.createElement('section');
-  hero.className = 'aala-program-hero';
-  hero.dataset.aalaProgramHero = 'true';
-  hero.innerHTML = `
-    <div class="aala-program-hero-media" aria-hidden="true"></div>
-    <div class="aala-program-hero-overlay" aria-hidden="true"></div>
-    <div class="aala-program-hero-shell">
-      <div class="aala-program-hero-copy">
-        <div class="aala-program-hero-kicker">Programas y proyectos</div>
-        <h2 class="aala-program-hero-title">Programas institucionales</h2>
-        <p class="aala-program-hero-text">Selecciona un programa para revisar sus indicadores, metas y avance institucional.</p>
-        <div class="aala-program-hero-period" id="aalaProgramHeroPeriod">Período de lectura institucional</div>
-      </div>
+function createProgramBanner() {
+  const page = document.getElementById('page-programas');
+  if (!page) return null;
+  let banner = page.querySelector('[data-aala-program-banner]');
+  if (banner) return banner;
+  banner = document.createElement('section');
+  banner.className = 'aala-program-banner';
+  banner.dataset.aalaProgramBanner = 'true';
+  banner.setAttribute('aria-label', 'Imagen y nombre del programa seleccionado');
+  banner.innerHTML = `
+    <div class="aala-program-banner-photo" aria-hidden="true"></div>
+    <div class="aala-program-banner-veil" aria-hidden="true"></div>
+    <div class="aala-program-banner-inner">
+      <p class="aala-program-banner-eyebrow">Programas y proyectos</p>
+      <h2 class="aala-program-banner-title">Atitlán Recicla</h2>
+      <p class="aala-program-banner-description">Resultados e indicadores institucionales del programa seleccionado.</p>
     </div>`;
-  wrap.insertBefore(hero, toolbar);
-  return hero;
+  page.insertBefore(banner, page.firstChild);
+  return banner;
 }
 
-function updateProgramHero(detail = {}) {
-  const hero = ensureProgramHero();
-  if (!hero) return;
-  const title = hero.querySelector('.aala-program-hero-title');
-  const copy = hero.querySelector('.aala-program-hero-text');
-  const period = hero.querySelector('.aala-program-hero-period');
-  const programId = detail.programId || 'atitlan_recicla';
-  const number = PROGRAM_HERO_PHOTO[programId] || Number(detail.index) || 1;
-  const group = AALA_PHOTO_SETS['programas-y-proyectos'];
-  if (title) title.textContent = detail.name || 'Programas institucionales';
-  if (copy) copy.textContent = detail.description || PROGRAM_FALLBACK_TEXT[programId] || 'Indicadores, metas y resultados del programa.';
-  if (period) {
-    const monthIndex = Number(detail.month) - 1;
-    period.textContent = Number.isFinite(monthIndex) && monthIndex >= 0 && monthIndex < MONTHS.length
-      ? `Período de lectura: ${MONTHS[monthIndex]} de 2026`
-      : 'Período de lectura institucional';
-  }
-  loadPhoto(group.folder, `pp${number}.jpg`, (src) => {
-    if (!hero.isConnected) return;
-    hero.style.setProperty('--aala-program-hero-image', `url("${src}")`);
-    hero.classList.add('aala-program-hero--loaded');
-  }, () => {
-    hero.classList.remove('aala-program-hero--loaded');
-    hero.style.removeProperty('--aala-program-hero-image');
+let currentBannerProgram = null;
+let bannerImageRequest = 0;
+function setProgramBanner(programId, title) {
+  const banner = createProgramBanner();
+  if (!banner) return;
+  const selection = PROGRAM_IMAGE_MAP[programId] || PROGRAM_IMAGE_MAP.atitlan_recicla;
+  const normalizedProgram = PROGRAM_IMAGE_MAP[programId] ? programId : 'atitlan_recicla';
+  if (currentBannerProgram === normalizedProgram) return;
+  currentBannerProgram = normalizedProgram;
+  const request = ++bannerImageRequest;
+  banner.querySelector('.aala-program-banner-title').textContent = title || selection[1];
+  banner.classList.remove('aala-program-banner--photo');
+  banner.style.removeProperty('--aala-program-banner-image');
+  preloadImage('programas-y-proyectos', selection[0]).then(url => {
+    if (request !== bannerImageRequest || !banner.isConnected) return;
+    if (!url) return;
+    banner.style.setProperty('--aala-program-banner-image', `url("${url}")`);
+    banner.classList.add('aala-program-banner--photo');
   });
 }
 
-function installProgramHeroBridge() {
-  ensureProgramHero();
-  window.addEventListener('aala:program-card-change', (event) => updateProgramHero(event.detail || {}));
-  const initialCard = document.querySelector('#programGrid .program-card');
-  if (initialCard) {
-    updateProgramHero({
-      index: 1,
-      programId: initialCard.dataset.programId,
-      name: initialCard.querySelector('.program-title')?.textContent?.trim(),
-      month: 10
-    });
-  }
+function activeCarouselItem() {
+  const grid = document.getElementById('programGrid');
+  const viewport = document.getElementById('programCarouselViewport');
+  if (!grid || !viewport) return null;
+  const cards = Array.from(grid.querySelectorAll('.program-card[data-program-id]'));
+  if (!cards.length) return null;
+  const viewportLeft = viewport.getBoundingClientRect().left;
+  return cards.reduce((closest, card) => {
+    const dist = Math.abs(card.getBoundingClientRect().left - viewportLeft);
+    if (!closest || dist < closest.dist) return {card, dist};
+    return closest;
+  }, null)?.card || cards[0];
 }
 
-function installIndexPhotography() {
+function syncBannerFromCarousel() {
+  const card = activeCarouselItem();
+  if (!card) return;
+  const name = card.querySelector('.program-title')?.textContent?.trim();
+  setProgramBanner(card.dataset.programId, name);
+}
+
+function installIndexPhotos() {
+  // Eliminar los cintillos antiguos solamente en el índice. En los seis
+  // programas se mantiene su fotografía discreta de dos imágenes.
+  document.querySelectorAll('#page-resumen .aala-photo-strip, #page-programas .aala-photo-strip')
+    .forEach(strip => strip.remove());
   installWelcomeImage();
-  installIndexEditorialSections();
-  installProgramHeroBridge();
+  addEditorialBackground('#page-resumen .storyboard', 'in2.jpg');
+  addEditorialBackground('#page-resumen .panorama-stage', 'in3.jpg');
+  addEditorialBackground('#page-resumen .coverage-section', 'in4.jpg');
+  createProgramBanner();
+  const viewport = document.getElementById('programCarouselViewport');
+  const grid = document.getElementById('programGrid');
+  if (!viewport || !grid) return;
+  let scrollFrame = 0;
+  viewport.addEventListener('scroll', () => {
+    if (scrollFrame) cancelAnimationFrame(scrollFrame);
+    scrollFrame = requestAnimationFrame(() => {
+      scrollFrame = 0;
+      syncBannerFromCarousel();
+    });
+  }, { passive: true });
+  const observer = new MutationObserver(syncBannerFromCarousel);
+  observer.observe(grid, { childList: true });
+  // Cambios de mes, botones, flechas y puntos de carrusel sin depender del
+  // módulo del índice ni alterar su funcionamiento.
+  document.getElementById('programCarouselPrev')?.addEventListener('click', () => requestAnimationFrame(syncBannerFromCarousel));
+  document.getElementById('programCarouselNext')?.addEventListener('click', () => requestAnimationFrame(syncBannerFromCarousel));
+  document.getElementById('programCarouselDots')?.addEventListener('click', () => requestAnimationFrame(syncBannerFromCarousel));
+  window.addEventListener('aala:program-card-change', e => {
+    const detail = e.detail || {};
+    if (detail.programId) setProgramBanner(detail.programId, detail.name);
+  });
+  syncBannerFromCarousel();
 }
 
 function programHero(page) {
@@ -222,10 +249,12 @@ function installProgramStrip(page) {
 export function installAalaPhotos() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
   if (page === 'index.html') {
-    installIndexPhotography();
+    installIndexPhotos();
     return;
   }
   if (!AALA_PHOTO_SETS[page]) return;
+  // Educando vuelve a construir el HTML al cambiar de mes: reinstalar el cintillo
+  // si el controlador reemplaza su contenido, sin modificar sus resultados.
   const initial = installProgramStrip(page);
   if (initial && page !== 'educando-para-conservar.html') return;
   const root = document.querySelector('main');
