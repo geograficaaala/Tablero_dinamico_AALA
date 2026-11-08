@@ -85,3 +85,120 @@ body[data-aala-portada] :is(section.hero .hero-side, section.hero .hero-logo-car
     height: auto !important;
   }
 }
+
+
+/* AALA · Correcciones de lectura en portadas de los seis programas.
+   No afecta a indicadores, gráficas, encabezado global ni al pie. */
+
+/* Todas las identidades gráficas se muestran sobre la fotografía sin recuadro. */
+body[data-aala-portada] section.hero :is(
+  .hero-logo-card, .hero-logo-card-inner, .hero-side, .logo-frame, .program-logo-card,
+  .logo-only, .hero-brand, .hero-brand-logo
+),
+body[data-aala-portada="fm"] section.fm-hero .fm-hero-image {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+body[data-aala-portada] section.hero :is(
+  .hero-logo-card, .hero-logo-card-inner, .hero-side, .logo-frame, .program-logo-card
+)::before,
+body[data-aala-portada] section.hero :is(
+  .hero-logo-card, .hero-logo-card-inner, .hero-side, .logo-frame, .program-logo-card
+)::after {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+body[data-aala-portada] section.hero :is(
+  .hero-logo-card img, .hero-logo-card-inner img, .hero-side img, .logo-frame img,
+  .program-logo-card img, .hero-inline-logo, .hero-logo
+),
+body[data-aala-portada="fm"] section.fm-hero .fm-hero-image img {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+/* Títulos, párrafos y destacados blancos (incluye las reglas de h1 con gradientes). */
+body[data-aala-portada] section.hero :is(
+  h1, h2, .hero-title, .hero-copy, .hero-main,
+  .hero-narrative, .hero-narrative p, .hero-narrative strong,
+  .hero-lead, .hero-lead strong, .hero-lead span,
+  .hero-copy-text p, .hero-copy-text strong, .hero-eyebrow, .hero-kicker
+),
+body[data-aala-portada="fm"] section.fm-hero :is(
+  h1, h2, p, p strong, .fm-overline
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-image: none !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.43) !important;
+}
+/* Conservar capa de contraste, sin recortar los fondos de portada. */
+body[data-aala-portada] :is(section.hero, section.fm-hero)::before {
+  background-position: center center, center center !important;
+  background-size: cover, cover !important;
+}
+/* Reforestando y Tul: una portada de proporción panorámica,
+   con un párrafo continuo, sin espacios artificiales ni columnas estrechas. */
+body[data-aala-portada="ra"] #resumen.hero,
+body[data-aala-portada="tu"] #resumen.hero {
+  min-height: 400px !important;
+  align-items: center !important;
+  gap: clamp(16px,2vw,32px) !important;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+}
+body[data-aala-portada="ra"] #resumen .hero-copy-text,
+body[data-aala-portada="tu"] #resumen .hero-copy-text {
+  max-width: none !important;
+}
+body[data-aala-portada="ra"] #resumen .hero-lead,
+body[data-aala-portada="tu"] #resumen .hero-lead {
+  line-height: 1 !important;
+  margin: 0 !important;
+  text-align: left !important;
+  text-justify: auto !important;
+  font-size: clamp(.87rem,1.03vw,.99rem) !important;
+  hyphens: none !important;
+}
+body[data-aala-portada="ra"] #resumen .hero-main h1,
+body[data-aala-portada="tu"] #resumen .hero-main h1,
+body[data-aala-portada="tu"] #resumen .hero-copy-text h1 {
+  margin: 0 0 16px !important;
+  line-height: 1.06 !important;
+  font-size: clamp(2rem,3.8vw,3.7rem) !important;
+}
+@media (max-width: 760px) {
+  body[data-aala-portada="ra"] #resumen.hero,
+  body[data-aala-portada="tu"] #resumen.hero {
+    min-height: 0 !important;
+    padding: 20px 0 !important;
+  }
+  body[data-aala-portada="ra"] #resumen .hero-lead,
+  body[data-aala-portada="tu"] #resumen .hero-lead { line-height: 1 !important; }
+}
+
+
+/* Prioridad sobre estilos antiguos con ID, fondos tipográficos o gradientes. */
+body[data-aala-portada] :is(#resumen, #heroSection, section.hero) :is(
+  h1, h2, p, span, strong, b, .hero-title, .hero-lead, .hero-eyebrow, .hero-narrative
+),
+body[data-aala-portada="fm"] #fmHero :is(h1, h2, p, span, strong, .fm-overline) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.43) !important;
+}
+body[data-aala-portada] :is(#resumen, #heroSection, section.hero) h1,
+body[data-aala-portada="fm"] #fmHero h1 {
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+}

@@ -550,3 +550,32 @@ body.aala-v2.aala-index #page-programas #programMonthButtons button[aria-pressed
 body.aala-v2.aala-index #page-programas #programMonthButtons button:not(.active):hover {
   background: rgba(255,255,255,.16) !important;
 }
+
+
+/* AALA · Contraste de elementos azules en las tarjetas del índice. */
+body.aala-v2.aala-index #page-programas .program-card .metric-number,
+body.aala-v2.aala-index #page-programas .program-card .program-footer .btn {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+body.aala-v2.aala-index #page-programas .program-card .program-footer .btn svg {
+  color: #ffffff !important;
+  stroke: currentColor !important;
+}
+body.aala-v2.aala-index #page-programas .program-month-btn.active,
+body.aala-v2.aala-index #page-programas .program-carousel-arrow:hover:not(:disabled) {
+  color: #ffffff !important;
+}
+
+/* El fondo fotográfico de ambas pestañas llega sin franja blanca al footer. */
+body.aala-v2.aala-index :is(#page-resumen, #page-programas) {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+body.aala-v2.aala-index :is(#page-resumen, #page-programas) > .wrap {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+body.aala-v2.aala-index footer.site-footer[data-aala-refined="true"] {
+  margin-top: 0 !important;
+}
