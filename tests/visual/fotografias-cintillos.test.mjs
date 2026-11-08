@@ -32,31 +32,26 @@ test('conserva los nombres y directorios de fotografía acordados', () => {
   }
 });
 
-test('se mantienen portada y fondo panorámico en las tres secciones existentes', () => {
+test('la portada conserva in1 y el resumen utiliza solo una imagen compartida in2', () => {
   const js = read('src/components/aala-photo-strips.mjs');
   const css = read('src/styles/aala-fotografias.css');
-  for (const [section, filename] of [['.storyboard','in2.jpg'],['.panorama-stage','in3.jpg'],['.coverage-section','in4.jpg']]) {
-    assert.ok(js.includes(section));
-    assert.ok(js.includes(filename));
-  }
   assert.match(js, /preloadPhoto\('index', 'in1\.jpg'/);
-  assert.match(css, /\.aala-photo-welcome-background/);
-  assert.match(css, /\.aala-photo-scene--loaded::before/);
-  assert.match(css, /left: calc\(50% - 50vw\)/);
-  assert.match(css, /width: 100vw/);
-  assert.match(css, /\.hero-side\s*\{\s*display: none !important/);
-  assert.doesNotMatch(js, /createStrip\(|installProgramStrip\(/);
+  assert.match(js, /installSharedSummaryBackground/);
+  assert.match(js, /preloadPhoto\('index', 'in2\.jpg'/);
+  assert.doesNotMatch(js, /preloadPhoto\('index', 'in3\.jpg'/);
+  assert.doesNotMatch(js, /preloadPhoto\('index', 'in4\.jpg'/);
+  assert.match(css, /#page-resumen\.aala-shared-summary-photo--loaded/);
+  assert.match(css, /aala-shared-summary-photo/);
+  assert.match(css, /aala-photo-scene--loaded::before/);
+  assert.match(css, /display: none !important/);
 });
 
-test('los dos cintillos contienen las seis fotografías y no alteran el carrusel', async () => {
+test('los dos cintillos muestran estáticas las seis imágenes sin alterar el carrusel', async () => {
   const { AALA_PROGRAM_PHOTOS } = await import('../../src/components/aala-photo-strips.mjs');
   const expected = {
-    atitlan_recicla: 'pp1.jpg',
-    conservando_atitlan: 'pp2.jpg',
-    educando_para_conservar: 'pp3.jpg',
-    fortalecimiento_municipal: 'pp4.jpg',
-    reforestacion: 'pp5.jpg',
-    manejo_tul: 'pp6.jpg'
+    atitlan_recicla: 'pp1.jpg', conservando_atitlan: 'pp2.jpg',
+    educando_para_conservar: 'pp3.jpg', fortalecimiento_municipal: 'pp4.jpg',
+    reforestacion: 'pp5.jpg', manejo_tul: 'pp6.jpg'
   };
   for (const [id, filename] of Object.entries(expected)) assert.equal(AALA_PROGRAM_PHOTOS[id], filename);
   const js = read('src/components/aala-photo-strips.mjs');
@@ -65,24 +60,26 @@ test('los dos cintillos contienen las seis fotografías y no alteran el carrusel
   assert.match(js, /'pp6\.jpg'\]\)/);
   assert.match(js, /actions\.insertBefore\(createMarquee\('left'\)/);
   assert.match(js, /viewport\.after\(createMarquee\('right'\)\)/);
-  assert.match(css, /@keyframes aala-marquee-move-left/);
-  assert.match(css, /@keyframes aala-marquee-move-right/);
-  assert.match(css, /animation-duration: 92s/);
+  assert.doesNotMatch(js, /for \(let copy = 0/);
+  assert.match(css, /animation: none !important/);
+  assert.match(css, /grid-template-columns: repeat\(6, minmax\(0, 1fr\)\)/);
   assert.doesNotMatch(js, /programGrid\.innerHTML|insertAdjacentHTML/);
   assert.doesNotMatch(js, /report-config|monthPills|KpiGrid|metas_2026/);
 });
 
-test('el texto se revela al hacer scroll y las fotos permanecen visibles', () => {
+test('las tarjetas quedan sobre un único fondo in5 y mantienen la aparición al scroll', () => {
   const js = read('src/components/aala-photo-strips.mjs');
   const css = read('src/styles/aala-fotografias.css');
+  assert.match(js, /installProgramsBackground/);
+  assert.match(js, /preloadPhoto\('index', 'in5\.jpg'/);
+  assert.match(css, /#page-programas\.aala-programs-background--loaded/);
+  assert.match(css, /program-carousel > \.aala-photo-marquee--right/);
+  assert.match(css, /margin-top: 0 !important/);
   assert.match(js, /new IntersectionObserver/);
   assert.match(js, /installScrollTextReveal/);
   assert.match(js, /observer\.unobserve\(entry\.target\)/);
   assert.match(css, /aala-reveal-visible/);
   assert.match(css, /prefers-reduced-motion: reduce/);
-  assert.match(css, /aala-summary-bridge-photo/);
-  assert.match(css, /#page-resumen \.storyboard,/);
-  assert.match(css, /margin-bottom: 0 !important/);
 });
 
 test('el módulo cargado en las siete páginas activa la fotografía una sola vez', () => {
