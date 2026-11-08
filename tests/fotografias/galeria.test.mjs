@@ -31,18 +31,21 @@ test('los seis programas usan las carpetas y códigos acordados, sin afectar sus
   }
 });
 
-test('el índice usa in1 como fondo y cintillos in2-in4 y pp1-pp3', () => {
+test('el índice conserva in1 y redistribuye in2, in3 e in4 como fondos, sin cintillos', () => {
   const script = load('src/components/aala-fotografias.mjs');
   assert.match(script, /photoUrl\('index', 'in1\.jpg'\)/);
-  assert.match(script, /folder:\s*'index', code:\s*'in', indices:\s*\[2, 3, 4\]/);
-  assert.match(script, /folder:\s*'programas-y-proyectos', code:\s*'pp', indices:\s*\[1, 2, 3\]/);
+  for (const name of ['in2.jpg', 'in3.jpg', 'in4.jpg']) assert.ok(script.includes(name));
+  assert.match(script, /INDEX_PHOTO_TARGETS/);
+  assert.match(script, /PROGRAM_PHOTOS/);
+  const indexPart = script.split('function installIndex() {')[1].split('function installProgram()')[0];
+  assert.doesNotMatch(indexPart, /createRibbon\(/);
 });
 
-test('las fotografías faltantes dejan espacio neutro y hay diseño adaptable', () => {
+test('la integración conserva fallbacks de imágenes y estilos adaptables', () => {
   const script = load('src/components/aala-fotografias.mjs');
   const css = load('src/styles/aala-fotografias.css');
   assert.match(script, /img\.onerror\s*=\s*\(\)\s*=>\s*\{\}/);
-  assert.match(css, /aala-photo-placeholder/);
-  assert.match(css, /@media \(max-width:520px\)/);
-  assert.match(css, /prefers-reduced-motion:reduce/);
+  assert.match(css, /aala-project-banner-image/);
+  assert.match(css, /@media \(max-width: 600px\)/);
+  assert.match(css, /prefers-reduced-motion: reduce/);
 });
