@@ -1,7 +1,7 @@
 /**
- * Cintillos fotográficos AALA. No modifica datos, KPIs, navegación ni informes.
- * Las fotografías se buscan en public/fotografias/<carpeta>/<prefijo>N.jpg
- * El módulo funciona aunque algunas o todas las imágenes aún no estén publicadas.
+ * AALA · Fondos fotográficos institucionales.
+ * No modifica tarjetas, indicadores, navegación, datos ni dimensiones del índice.
+ * Utiliza exclusivamente fondos decorativos sobre secciones existentes.
  */
 export const AALA_PHOTO_SETS = Object.freeze({
   'index.html': { folder: 'index', prefix: 'in', label: 'Asociación Amigos del Lago de Atitlán' },
@@ -14,87 +14,8 @@ export const AALA_PHOTO_SETS = Object.freeze({
   'tul.html': { folder: 'tul', prefix: 'tu', label: 'Siembra de Tul' }
 });
 
-export function photoURL(folder, filename) {
-  // Usar import.meta.url evita fallos tanto en dominio propio como en GitHub Pages con subruta.
-  return new URL(`../../public/fotografias/${folder}/${filename}`, import.meta.url).href;
-}
-
-function loadPhoto(folder, fileName, callback) {
-  const probe = new Image();
-  probe.decoding = 'async';
-  probe.onload = () => callback(photoURL(folder, fileName));
-  probe.onerror = () => {}; // La imagen todavía no existe: mantener el espacio neutro.
-  probe.src = photoURL(folder, fileName);
-}
-
-function photoTile(group, number, type) {
-  const name = `${group.prefix}${number}.jpg`;
-  const tile = document.createElement('div');
-  tile.className = 'aala-photo-tile';
-  tile.dataset.photo = name;
-  const waiting = document.createElement('span');
-  waiting.className = 'aala-photo-pending';
-  waiting.textContent = 'Espacio fotográfico';
-  tile.append(waiting);
-  loadPhoto(group.folder, name, (src) => {
-    if (!tile.isConnected) return;
-    const img = document.createElement('img');
-    img.src = src;
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.alt = `Fotografía de ${group.label}`;
-    img.addEventListener('load', () => {
-      tile.classList.add('aala-photo-loaded');
-      waiting.remove();
-    }, { once: true });
-    img.addEventListener('error', () => img.remove(), { once: true });
-    tile.append(img);
-  });
-  return tile;
-}
-
-function createStrip(group, numbers, variant, title) {
-  const section = document.createElement('section');
-  section.className = `aala-photo-strip aala-photo-strip--${variant}`;
-  section.setAttribute('aria-label', `Fotografías de ${group.label}`);
-  section.dataset.aalaPhotoStrip = group.folder;
-  if (title) {
-    const h = document.createElement('h2');
-    h.className = 'aala-photo-heading';
-    h.textContent = title;
-    section.append(h);
-  }
-  const grid = document.createElement('div');
-  grid.className = 'aala-photo-strip-grid';
-  for (const number of numbers) grid.append(photoTile(group, number, variant));
-  section.append(grid);
-  return section;
-}
-
-function installWelcomeImage() {
-  const hero = document.querySelector('#page-resumen .hero-shell');
-  if (!hero || hero.dataset.aalaPhotoWelcome) return;
-  hero.dataset.aalaPhotoWelcome = 'true';
-  const group = AALA_PHOTO_SETS['index.html'];
-  loadPhoto(group.folder, 'in1.jpg', (src) => {
-    if (!hero.isConnected) return;
-    const background = document.createElement('div');
-    background.className = 'aala-photo-welcome-background';
-    background.setAttribute('aria-hidden', 'true');
-    background.style.backgroundImage = `url("${src}")`;
-    const shade = document.createElement('div');
-    shade.className = 'aala-photo-welcome-shade';
-    shade.setAttribute('aria-hidden', 'true');
-    hero.prepend(shade);
-    hero.prepend(background);
-    hero.classList.add('aala-photo-welcome--loaded');
-  });
-}
-
-
-// SOLO fondos sobre elementos que el HTML existente ya tiene.
-// No se crean cintillos, secciones, encabezados ni nuevos contenedores.
-const PHOTOS_BY_PROGRAM = Object.freeze({
+// Estos ID provienen del catálogo institucional y NO equivalen al orden del carrusel.
+export const AALA_PROGRAM_PHOTOS = Object.freeze({
   atitlan_recicla: 'pp1.jpg',
   conservando_atitlan: 'pp2.jpg',
   educando_para_conservar: 'pp3.jpg',
@@ -104,70 +25,139 @@ const PHOTOS_BY_PROGRAM = Object.freeze({
   tul: 'pp6.jpg'
 });
 
-function attachImageBackground(element, folder, name, cssVariable, readyClass) {
-  if (!element || !name) return;
-  if (element.dataset.aalaPhoto === name) return;
-  element.dataset.aalaPhoto = name;
-  loadPhoto(folder, name, (src) => {
-    if (!element.isConnected || element.dataset.aalaPhoto !== name) return;
-    element.style.setProperty(cssVariable, `url("${src}")`);
-    element.classList.add(readyClass);
+export function photoURL(folder, filename) {
+  // Compatible con dominio propio y repositorios GitHub Pages con subruta.
+  return new URL(`../../public/fotografias/${folder}/${filename}`, import.meta.url).href;
+}
+
+function preloadPhoto(folder, filename, onLoad, onError = () => {}) {
+  const probe = new Image();
+  probe.decoding = 'async';
+  probe.onload = () => onLoad(photoURL(folder, filename));
+  probe.onerror = onError;
+  probe.src = photoURL(folder, filename);
+}
+
+// La fotografía inicial conserva exactamente su imagen, capa oscura y tamaño aprobados.
+function installWelcomeImage() {
+  const hero = document.querySelector('#page-resumen .hero-shell');
+  if (!hero || hero.dataset.aalaPhotoWelcome === 'true') return;
+  hero.dataset.aalaPhotoWelcome = 'true';
+  preloadPhoto('index', 'in1.jpg', (src) => {
+    if (!hero.isConnected) return;
+    if (!hero.querySelector('.aala-photo-welcome-background')) {
+      const background = document.createElement('div');
+      background.className = 'aala-photo-welcome-background';
+      background.setAttribute('aria-hidden', 'true');
+      const shade = document.createElement('div');
+      shade.className = 'aala-photo-welcome-shade';
+      shade.setAttribute('aria-hidden', 'true');
+      hero.prepend(shade);
+      hero.prepend(background);
+    }
+    hero.querySelector('.aala-photo-welcome-background').style.backgroundImage = `url("${src}")`;
+    hero.classList.add('aala-photo-welcome--loaded');
   });
 }
 
-function installIndexBackgrounds() {
-  installWelcomeImage(); // In1: misma presentación original aprobada.
-  for (const [selector, name] of [
-    ['#page-resumen .storyboard', 'in2.jpg'],
-    ['#page-resumen .panorama-stage', 'in3.jpg'],
-    ['#page-resumen .coverage-section', 'in4.jpg']
-  ]) {
-    attachImageBackground(document.querySelector(selector), 'index', name,
-      '--aala-section-photo', 'aala-section-photo-ready');
-  }
+const INDEX_SCENES = [
+  ['#page-resumen .storyboard', 'in2.jpg'],
+  ['#page-resumen .panorama-stage', 'in3.jpg'],
+  ['#page-resumen .coverage-section', 'in4.jpg']
+];
 
-  const grid = document.getElementById('programGrid');
-  if (!grid) return;
-  const sync = () => {
-    for (const card of grid.querySelectorAll('.program-card[data-program-id]')) {
-      const id = card.dataset.programId;
-      const filename = PHOTOS_BY_PROGRAM[id];
-      attachImageBackground(card, 'programas-y-proyectos', filename,
-        '--aala-card-photo', 'aala-card-photo-ready');
+function installIndexScenes() {
+  for (const [selector, filename] of INDEX_SCENES) {
+    const section = document.querySelector(selector);
+    if (!section || section.dataset.aalaScenePhoto === filename) continue;
+    section.dataset.aalaScenePhoto = filename;
+    preloadPhoto('index', filename, (src) => {
+      if (!section.isConnected) return;
+      section.style.setProperty('--aala-scene-image', `url("${src}")`);
+      section.classList.add('aala-photo-scene--loaded');
+    });
+  }
+}
+
+// La decoración vive dentro del carrusel pero NO participa en el layout.
+function buildCarouselBackdrop(carousel) {
+  let scene = carousel.querySelector(':scope > .aala-carousel-backdrop');
+  if (scene) return scene;
+  scene = document.createElement('div');
+  scene.className = 'aala-carousel-backdrop';
+  scene.setAttribute('aria-hidden', 'true');
+  const layerA = document.createElement('div');
+  layerA.className = 'aala-carousel-backdrop-layer';
+  const layerB = document.createElement('div');
+  layerB.className = 'aala-carousel-backdrop-layer';
+  scene.append(layerA, layerB);
+  carousel.prepend(scene);
+  return scene;
+}
+
+function currentProgramId(grid, dots) {
+  const cards = [...grid.querySelectorAll('.program-card[data-program-id]')];
+  if (!cards.length) return '';
+  const allDots = [...dots.querySelectorAll('.program-carousel-dot')];
+  const activeIndex = allDots.findIndex(dot => dot.getAttribute('aria-current') === 'true' || dot.classList.contains('active'));
+  const index = activeIndex >= 0 ? activeIndex : 0;
+  return cards[Math.min(index, cards.length - 1)].dataset.programId || '';
+}
+
+function installCarouselBackground() {
+  const carousel = document.querySelector('#page-programas .program-carousel');
+  const grid = document.querySelector('#page-programas #programGrid');
+  const dots = document.querySelector('#page-programas #programCarouselDots');
+  if (!carousel || !grid || !dots || carousel.dataset.aalaBackdropInstalled === 'true') return;
+  carousel.dataset.aalaBackdropInstalled = 'true';
+
+  const backdrop = buildCarouselBackdrop(carousel);
+  const layers = [...backdrop.querySelectorAll('.aala-carousel-backdrop-layer')];
+  let currentFile = '';
+  let activeLayer = -1;
+  let requestId = 0;
+
+  function syncPhoto() {
+    const programId = currentProgramId(grid, dots);
+    const filename = AALA_PROGRAM_PHOTOS[programId] || '';
+    if (filename === currentFile) return;
+    currentFile = filename;
+    const thisRequest = ++requestId;
+    if (!filename) {
+      for (const layer of layers) layer.classList.remove('is-active');
+      return;
     }
-  };
-  sync();
-  // Al cambiar el mes el carrusel reconstruye tarjetas; no se toca su lógica.
-  new MutationObserver(sync).observe(grid, { childList: true });
-}
-
-function programHero(page) {
-  switch (page) {
-    case 'atitlan-recicla.html': return document.querySelector('.program-main > .full-only > section.hero');
-    case 'conservando-atitlan.html': return document.querySelector('#fullView #heroSection');
-    case 'educando-para-conservar.html': return document.querySelector('#fullView > section.hero');
-    case 'fortalecimiento-municipal.html': return document.querySelector('#fmHero');
-    case 'reforestando-atitlan.html': return document.querySelector('section.hero#resumen');
-    case 'tul.html': return document.querySelector('.full-only > section.hero#resumen');
-    default: return null;
+    preloadPhoto('programas-y-proyectos', filename, (src) => {
+      if (!carousel.isConnected || thisRequest !== requestId) return;
+      const nextIndex = activeLayer === 0 ? 1 : 0;
+      const nextLayer = layers[nextIndex];
+      nextLayer.style.backgroundImage = `url("${src}")`;
+      nextLayer.classList.add('is-active');
+      if (activeLayer >= 0) layers[activeLayer].classList.remove('is-active');
+      activeLayer = nextIndex;
+    }, () => {
+      if (thisRequest !== requestId) return;
+      for (const layer of layers) layer.classList.remove('is-active');
+      activeLayer = -1;
+    });
   }
-}
 
-function installProgramStrip(page) {
-  const hero = programHero(page);
-  if (!hero) return false;
-  const sibling = hero.nextElementSibling;
-  if (sibling?.dataset?.aalaPhotoStrip) return true;
-  const group = AALA_PHOTO_SETS[page];
-  const tul = page === 'tul.html';
-  hero.after(createStrip(group, tul ? [1] : [1, 2], tul ? 'tul' : 'program', 'Actividad del programa'));
-  return true;
+  // El carrusel actualiza aria-current al usar flechas, puntos o desplazamiento táctil.
+  // Solo observamos sus señales; no interceptamos ni reemplazamos sus eventos.
+  new MutationObserver(syncPhoto).observe(dots, {
+    childList: true, subtree: true, attributes: true, attributeFilter: ['aria-current', 'class']
+  });
+  new MutationObserver(syncPhoto).observe(grid, { childList: true });
+  syncPhoto();
 }
 
 export function installAalaPhotos() {
+  if (typeof document === 'undefined' || typeof window === 'undefined') return;
   const page = window.location.pathname.split('/').pop() || 'index.html';
-  if (page === 'index.html') installIndexBackgrounds();
-  // Páginas individuales: sin cambios de estructura ni cintillos adicionales.
+  if (page !== 'index.html') return;
+  installWelcomeImage();
+  installIndexScenes();
+  installCarouselBackground();
 }
 
 if (typeof document !== 'undefined') {
