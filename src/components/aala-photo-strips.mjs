@@ -1,6 +1,7 @@
 /**
- * Fondos fotográficos AALA.
- * Integra fotografías de fondo sin alterar la estructura del tablero.
+ * Cintillos fotográficos AALA. No modifica datos, KPIs, navegación ni informes.
+ * Las fotografías se buscan en public/fotografias/<carpeta>/<prefijo>N.jpg
+ * El módulo funciona aunque algunas o todas las imágenes aún no estén publicadas.
  */
 export const AALA_PHOTO_SETS = Object.freeze({
   'index.html': { folder: 'index', prefix: 'in', label: 'Asociación Amigos del Lago de Atitlán' },
@@ -13,115 +14,160 @@ export const AALA_PHOTO_SETS = Object.freeze({
   'tul.html': { folder: 'tul', prefix: 'tu', label: 'Siembra de Tul' }
 });
 
-const INDEX_SECTION_PHOTOS = [
-  ['#page-resumen .storyboard', 'in2.jpg'],
-  ['#page-resumen .panorama-stage', 'in3.jpg'],
-  ['#page-resumen .coverage-section', 'in4.jpg']
-];
+export function photoURL(folder, filename) {
+  // Usar import.meta.url evita fallos tanto en dominio propio como en GitHub Pages con subruta.
+  return new URL(`../../public/fotografias/${folder}/${filename}`, import.meta.url).href;
+}
 
-const PROGRAM_CARD_PHOTOS = Object.freeze({
+function loadPhoto(folder, fileName, callback) {
+  const probe = new Image();
+  probe.decoding = 'async';
+  probe.onload = () => callback(photoURL(folder, fileName));
+  probe.onerror = () => {}; // La imagen todavía no existe: mantener el espacio neutro.
+  probe.src = photoURL(folder, fileName);
+}
+
+function photoTile(group, number, type) {
+  const name = `${group.prefix}${number}.jpg`;
+  const tile = document.createElement('div');
+  tile.className = 'aala-photo-tile';
+  tile.dataset.photo = name;
+  const waiting = document.createElement('span');
+  waiting.className = 'aala-photo-pending';
+  waiting.textContent = 'Espacio fotográfico';
+  tile.append(waiting);
+  loadPhoto(group.folder, name, (src) => {
+    if (!tile.isConnected) return;
+    const img = document.createElement('img');
+    img.src = src;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = `Fotografía de ${group.label}`;
+    img.addEventListener('load', () => {
+      tile.classList.add('aala-photo-loaded');
+      waiting.remove();
+    }, { once: true });
+    img.addEventListener('error', () => img.remove(), { once: true });
+    tile.append(img);
+  });
+  return tile;
+}
+
+function createStrip(group, numbers, variant, title) {
+  const section = document.createElement('section');
+  section.className = `aala-photo-strip aala-photo-strip--${variant}`;
+  section.setAttribute('aria-label', `Fotografías de ${group.label}`);
+  section.dataset.aalaPhotoStrip = group.folder;
+  if (title) {
+    const h = document.createElement('h2');
+    h.className = 'aala-photo-heading';
+    h.textContent = title;
+    section.append(h);
+  }
+  const grid = document.createElement('div');
+  grid.className = 'aala-photo-strip-grid';
+  for (const number of numbers) grid.append(photoTile(group, number, variant));
+  section.append(grid);
+  return section;
+}
+
+function installWelcomeImage() {
+  const hero = document.querySelector('#page-resumen .hero-shell');
+  if (!hero || hero.dataset.aalaPhotoWelcome) return;
+  hero.dataset.aalaPhotoWelcome = 'true';
+  const group = AALA_PHOTO_SETS['index.html'];
+  loadPhoto(group.folder, 'in1.jpg', (src) => {
+    if (!hero.isConnected) return;
+    const background = document.createElement('div');
+    background.className = 'aala-photo-welcome-background';
+    background.setAttribute('aria-hidden', 'true');
+    background.style.backgroundImage = `url("${src}")`;
+    const shade = document.createElement('div');
+    shade.className = 'aala-photo-welcome-shade';
+    shade.setAttribute('aria-hidden', 'true');
+    hero.prepend(shade);
+    hero.prepend(background);
+    hero.classList.add('aala-photo-welcome--loaded');
+  });
+}
+
+
+// SOLO fondos sobre elementos que el HTML existente ya tiene.
+// No se crean cintillos, secciones, encabezados ni nuevos contenedores.
+const PHOTOS_BY_PROGRAM = Object.freeze({
   atitlan_recicla: 'pp1.jpg',
   conservando_atitlan: 'pp2.jpg',
   educando_para_conservar: 'pp3.jpg',
   fortalecimiento_municipal: 'pp4.jpg',
   reforestacion: 'pp5.jpg',
-  reforestando_atitlan: 'pp5.jpg',
+  manejo_tul: 'pp6.jpg',
   tul: 'pp6.jpg'
 });
 
-export function photoURL(folder, filename) {
-  return new URL(`../../public/fotografias/${folder}/${filename}`, import.meta.url).href;
-}
-
-function loadPhoto(folder, fileName, onLoad, onError = () => {}) {
-  const probe = new Image();
-  probe.decoding = 'async';
-  probe.onload = () => onLoad(photoURL(folder, fileName));
-  probe.onerror = onError;
-  probe.src = photoURL(folder, fileName);
-}
-
-function applyBackgroundPhoto(node, folder, fileName, cssVar, readyClass) {
-  if (!node || !fileName) return;
-  const applied = node.dataset[readyClass];
-  if (applied === fileName) return;
-  loadPhoto(folder, fileName, (src) => {
-    if (!node.isConnected) return;
-    node.style.setProperty(cssVar, `url("${src}")`);
-    node.classList.add(readyClass);
-    node.dataset[readyClass] = fileName;
+function attachImageBackground(element, folder, name, cssVariable, readyClass) {
+  if (!element || !name) return;
+  if (element.dataset.aalaPhoto === name) return;
+  element.dataset.aalaPhoto = name;
+  loadPhoto(folder, name, (src) => {
+    if (!element.isConnected || element.dataset.aalaPhoto !== name) return;
+    element.style.setProperty(cssVariable, `url("${src}")`);
+    element.classList.add(readyClass);
   });
 }
 
-function installWelcomeImage() {
-  const hero = document.querySelector('#page-resumen .hero-shell');
-  if (!hero) return;
-  applyBackgroundPhoto(hero, AALA_PHOTO_SETS['index.html'].folder, 'in1.jpg', '--aala-photo-welcome-image', 'aala-photo-welcome--loaded');
-}
+function installIndexBackgrounds() {
+  installWelcomeImage(); // In1: misma presentación original aprobada.
+  for (const [selector, name] of [
+    ['#page-resumen .storyboard', 'in2.jpg'],
+    ['#page-resumen .panorama-stage', 'in3.jpg'],
+    ['#page-resumen .coverage-section', 'in4.jpg']
+  ]) {
+    attachImageBackground(document.querySelector(selector), 'index', name,
+      '--aala-section-photo', 'aala-section-photo-ready');
+  }
 
-function installIndexSectionBackgrounds() {
-  const folder = AALA_PHOTO_SETS['index.html'].folder;
-  INDEX_SECTION_PHOTOS.forEach(([selector, fileName]) => {
-    const section = document.querySelector(selector);
-    if (!section) return;
-    section.classList.add('aala-photo-section');
-    applyBackgroundPhoto(section, folder, fileName, '--aala-photo-section-image', 'aala-photo-section--loaded');
-  });
-}
-
-function normalizeProgramKey(value = '') {
-  return String(value)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
-}
-
-function inferCardPhoto(card, index) {
-  const programId = normalizeProgramKey(card.dataset.programId || '');
-  if (PROGRAM_CARD_PHOTOS[programId]) return PROGRAM_CARD_PHOTOS[programId];
-
-  const title = normalizeProgramKey(card.querySelector('.program-title')?.textContent || '');
-  if (title.includes('atitlan_recicla')) return 'pp1.jpg';
-  if (title.includes('conservando_atitlan')) return 'pp2.jpg';
-  if (title.includes('educando_para_conservar')) return 'pp3.jpg';
-  if (title.includes('fortalecimiento')) return 'pp4.jpg';
-  if (title.includes('reforest')) return 'pp5.jpg';
-  if (title.includes('tul')) return 'pp6.jpg';
-
-  const fallback = ['pp1.jpg', 'pp2.jpg', 'pp3.jpg', 'pp4.jpg', 'pp5.jpg', 'pp6.jpg'];
-  return fallback[index] || null;
-}
-
-function decorateProgramCard(card, index) {
-  if (!card) return;
-  card.classList.add('aala-program-card-photo');
-  const fileName = inferCardPhoto(card, index);
-  applyBackgroundPhoto(card, AALA_PHOTO_SETS['programas-y-proyectos'].folder, fileName, '--aala-program-card-image', 'aala-program-card-photo--loaded');
-}
-
-function installProgramCardBackgrounds() {
-  const grid = document.querySelector('#page-programas #programGrid');
+  const grid = document.getElementById('programGrid');
   if (!grid) return;
-
-  const applyAll = () => {
-    const cards = Array.from(grid.querySelectorAll('.program-card'));
-    cards.forEach((card, index) => decorateProgramCard(card, index));
+  const sync = () => {
+    for (const card of grid.querySelectorAll('.program-card[data-program-id]')) {
+      const id = card.dataset.programId;
+      const filename = PHOTOS_BY_PROGRAM[id];
+      attachImageBackground(card, 'programas-y-proyectos', filename,
+        '--aala-card-photo', 'aala-card-photo-ready');
+    }
   };
+  sync();
+  // Al cambiar el mes el carrusel reconstruye tarjetas; no se toca su lógica.
+  new MutationObserver(sync).observe(grid, { childList: true });
+}
 
-  applyAll();
+function programHero(page) {
+  switch (page) {
+    case 'atitlan-recicla.html': return document.querySelector('.program-main > .full-only > section.hero');
+    case 'conservando-atitlan.html': return document.querySelector('#fullView #heroSection');
+    case 'educando-para-conservar.html': return document.querySelector('#fullView > section.hero');
+    case 'fortalecimiento-municipal.html': return document.querySelector('#fmHero');
+    case 'reforestando-atitlan.html': return document.querySelector('section.hero#resumen');
+    case 'tul.html': return document.querySelector('.full-only > section.hero#resumen');
+    default: return null;
+  }
+}
 
-  const observer = new MutationObserver(() => applyAll());
-  observer.observe(grid, { childList: true, subtree: true });
+function installProgramStrip(page) {
+  const hero = programHero(page);
+  if (!hero) return false;
+  const sibling = hero.nextElementSibling;
+  if (sibling?.dataset?.aalaPhotoStrip) return true;
+  const group = AALA_PHOTO_SETS[page];
+  const tul = page === 'tul.html';
+  hero.after(createStrip(group, tul ? [1] : [1, 2], tul ? 'tul' : 'program', 'Actividad del programa'));
+  return true;
 }
 
 export function installAalaPhotos() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
-  if (page !== 'index.html') return;
-  installWelcomeImage();
-  installIndexSectionBackgrounds();
-  installProgramCardBackgrounds();
+  if (page === 'index.html') installIndexBackgrounds();
+  // Páginas individuales: sin cambios de estructura ni cintillos adicionales.
 }
 
 if (typeof document !== 'undefined') {
