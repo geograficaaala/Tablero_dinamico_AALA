@@ -1,0 +1,50 @@
+name: Preparar carpetas de fotografías AALA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  crear-carpetas:
+    name: Crear carpetas y guardarlas en GitHub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: true
+
+      - name: Crear carpetas fotográficas
+        shell: bash
+        run: |
+          set -euo pipefail
+          for carpeta in \
+            index \
+            programas-y-proyectos \
+            atitlan-recicla \
+            conservando-atitlan \
+            educando-para-conservar \
+            fortalecimiento-municipal \
+            reforestando-atitlan \
+            tul
+          do
+            mkdir -p "public/fotografias/$carpeta"
+            touch "public/fotografias/$carpeta/.gitkeep"
+          done
+
+      - name: Guardar las carpetas si hay cambios
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- public/fotografias/
+          if git diff --cached --quiet; then
+            echo "Las carpetas ya existen; no hay cambios que guardar."
+          else
+            git commit -m "Preparar estructura de fotografías AALA"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
