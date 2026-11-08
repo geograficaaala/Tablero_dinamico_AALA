@@ -239,6 +239,19 @@ function programCarouselItemLeft(item, viewport){
   return item.getBoundingClientRect().left - viewport.getBoundingClientRect().left + viewport.scrollLeft;
 }
 
+function emitActiveProgramCard(){
+  const items = programCarouselItems();
+  const activeItem = items[programCarouselIndex];
+  if (!activeItem || typeof window === 'undefined' || typeof window.dispatchEvent !== 'function') return;
+  const detail = {
+    index: programCarouselIndex + 1,
+    month: selectedMonth,
+    programId: activeItem.dataset.programId || '',
+    name: activeItem.querySelector('.program-title')?.textContent?.trim() || `Programa ${programCarouselIndex + 1}`
+  };
+  window.dispatchEvent(new CustomEvent('aala:program-card-change', { detail }));
+}
+
 function updateProgramCarouselControls(index = programCarouselIndex){
   const items = programCarouselItems();
   if (!items.length) return;
@@ -258,6 +271,7 @@ function updateProgramCarouselControls(index = programCarouselIndex){
       dot.setAttribute('aria-current', active ? 'true' : 'false');
     });
   }
+  emitActiveProgramCard();
 }
 
 function goToProgramCarousel(index, behavior = 'smooth'){
