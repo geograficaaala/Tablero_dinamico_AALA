@@ -1,0 +1,87 @@
+/* AALA | Portadas individuales, solo área descriptiva de los seis programas.
+   Una foto por programa, a pantalla completa, sin extenderse a los KPI.
+   Rutas resueltas desde src/styles/. Fotos JPG suministradas por el usuario.
+   Si no existe todavía la foto, se ve un fondo azul oscuro temporal.
+*/
+body[data-aala-portada="ar"] { --aala-portada-foto: url("../../public/fotografias/atitlan-recicla/ar-portada.jpg"); }
+body[data-aala-portada="ca"] { --aala-portada-foto: url("../../public/fotografias/conservando-atitlan/ca-portada.jpg"); }
+body[data-aala-portada="ec"] { --aala-portada-foto: url("../../public/fotografias/educando-para-conservar/ec-portada.jpg"); }
+body[data-aala-portada="fm"] { --aala-portada-foto: url("../../public/fotografias/fortalecimiento-municipal/fm-portada.jpg"); }
+body[data-aala-portada="ra"] { --aala-portada-foto: url("../../public/fotografias/reforestando-atitlan/ra-portada.jpg"); }
+body[data-aala-portada="tu"] { --aala-portada-foto: url("../../public/fotografias/tul/tu-portada.jpg"); }
+
+/* Únicamente el bloque introductorio: se marca por los HTML de cada programa.
+   El pseudo-elemento ocupa 100vw, pero el texto mantiene su alineación.
+   No se cambia altura fija, estructura, tablas, pestañas ni métricas. */
+body[data-aala-portada] :is(section.hero, section.fm-hero) {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+body[data-aala-portada] :is(section.hero, section.fm-hero)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background-color: #193b54;
+  background-image:
+    linear-gradient(90deg, rgba(12,33,51,.83), rgba(13,42,62,.70) 65%, rgba(12,33,51,.77)),
+    var(--aala-portada-foto);
+  background-position: center, center;
+  background-size: cover, cover;
+  background-repeat: no-repeat;
+}
+/* Mantener cada caja por delante del fondo: nunca cubrir el contenido. */
+body[data-aala-portada] :is(section.hero, section.fm-hero) > * {
+  position: relative;
+  z-index: 1;
+}
+/* Quitar los paneles blancos solo de los textos de portada. */
+body[data-aala-portada] :is(section.hero .hero-main, section.fm-hero .fm-hero-text) {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+body[data-aala-portada] :is(section.hero .hero-main, section.fm-hero .fm-hero-text)::before,
+body[data-aala-portada] :is(section.hero .hero-main, section.fm-hero .fm-hero-text)::after {
+  display: none !important;
+}
+/* Título y texto legible tanto en fotos claras como oscuras. */
+body[data-aala-portada] :is(section.hero .hero-main, section.fm-hero .fm-hero-text) :is(h1, h2, p, span, strong, b, .hero-lead, .hero-eyebrow, .hero-narrative, .fm-overline) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.30) !important;
+}
+/* Fondo claro compacto solo detrás de logotipos para preservar su contraste.
+   No altera tamaño ni posición de los logos. */
+body[data-aala-portada] :is(section.hero .hero-logo-card img, section.hero .hero-side img, section.fm-hero .fm-hero-image img) {
+  background-color: rgba(255,255,255,.94);
+  border-radius: 10px;
+  box-shadow: 0 5px 22px rgba(7,25,42,.13);
+}
+/* El contenedor de logotipo no debe tapar la fotografía con un panel grande. */
+body[data-aala-portada] :is(section.hero .hero-side, section.hero .hero-logo-card, section.fm-hero .fm-hero-image) {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 680px) {
+  body[data-aala-portada] :is(section.hero, section.fm-hero)::before {
+    background-position: center, center;
+  }
+  /* La altura sigue la longitud real del texto para evitar cortes. */
+  body[data-aala-portada] :is(section.hero, section.fm-hero) {
+    height: auto !important;
+  }
+}
