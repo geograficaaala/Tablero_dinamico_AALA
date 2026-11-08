@@ -1,4 +1,5 @@
 import { installReportActions } from '../reports/report-ui.mjs';
+import { installPhotoGallery } from './aala-fotografias.mjs';
 import { aalaIcon } from './aala-icons.mjs';
 import { mountInstitutionalFooter } from './aala-institutional-footer.mjs';
 
@@ -106,6 +107,7 @@ function initShell() {
   document.querySelectorAll('footer.site-footer').forEach(enhanceFooter);
   removeLabels();
   revealSelectedMonth();
+  installPhotoGallery();
 }
 
 function refreshShell() {
