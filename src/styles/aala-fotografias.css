@@ -131,126 +131,60 @@ body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded .hero-logo-card {
   body.aala-v2 .aala-photo-tile img { transition: none !important; }
 }
 
+/* Segunda etapa segura: fondos dentro de las secciones existentes del índice.
+   No cambia anchos, columnas, tamaños, márgenes, posiciones ni la navegación. */
+body.aala-v2.aala-index #page-resumen :is(.storyboard,.panorama-stage,.coverage-section).aala-editorial-photo-loaded {
+  background-image:
+    linear-gradient(90deg, rgba(249,251,253,.91), rgba(249,251,253,.84)),
+    var(--aala-editorial-photo);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+  transition: background-color .4s ease;
+}
 
-/* ACTUALIZACIÓN DEL ÍNDICE: bloques editoriales sin alterar la maquetación. */
-body.aala-v2.aala-index #page-resumen .aala-photo-strip,
-body.aala-v2.aala-index #page-programas .aala-photo-strip {
+/* La imagen ppN aparece en la cabecera de la propia tarjeta del programa.
+   Las cifras y tablas que están debajo permanecen sin cambios. */
+body.aala-v2.aala-index #page-programas .program-card.aala-project-photo-loaded .program-head {
+  box-sizing: border-box;
+  min-height: clamp(165px, 22vw, 292px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-image:
+    linear-gradient(90deg, rgba(247,251,253,.94), rgba(247,251,253,.73) 58%, rgba(247,251,253,.55)),
+    var(--aala-project-photo);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: clamp(18px,3.2vw,44px);
+  border-radius: 5px;
+  overflow: hidden;
+  transition: background-color .3s ease;
+}
+body.aala-v2.aala-index #page-programas .program-card.aala-project-photo-loaded .program-head::before {
+  content: none !important;
   display: none !important;
 }
-body.aala-v2.aala-index :is(.storyboard, .panorama-stage, .coverage-section).aala-editorial-has-photo {
-  isolation: isolate;
+body.aala-v2.aala-index #page-programas .program-card.aala-project-photo-loaded .program-head .program-title {
   position: relative;
-}
-body.aala-v2.aala-index :is(.storyboard, .panorama-stage, .coverage-section).aala-editorial-has-photo::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--aala-editorial-bg) center / cover no-repeat;
-  opacity: .21;
-  filter: blur(2px);
-  z-index: -1;
-  pointer-events: none;
-  transition: opacity .55s ease;
-}
-body.aala-v2.aala-index :is(.storyboard, .panorama-stage, .coverage-section).aala-editorial-has-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(251, 253, 254, .23);
-  z-index: -1;
-  pointer-events: none;
-}
-/* La fotografía pasa a ser textura editorial: no forma una tarjeta ni un cintillo. */
-body.aala-v2.aala-index .storyboard.aala-editorial-has-photo,
-body.aala-v2.aala-index .panorama-stage.aala-editorial-has-photo,
-body.aala-v2.aala-index .coverage-section.aala-editorial-has-photo {
-  border-radius: 7px;
-  overflow: hidden;
-}
-
-/* Fondo dinámico en Programas y proyectos: FUERA de .wrap, ancho completo real. */
-body.aala-v2.aala-index #page-programas .aala-program-banner {
-  display: flex;
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  max-width: none;
-  min-height: clamp(260px, 35vw, 420px);
-  align-items: flex-end;
-  overflow: hidden;
-  margin: 0 0 clamp(22px, 3vw, 34px);
-  background: #e8f0f4;
-  color: #234f6e;
-}
-body.aala-v2.aala-index #page-programas .aala-program-banner-photo,
-body.aala-v2.aala-index #page-programas .aala-program-banner-veil {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-body.aala-v2.aala-index #page-programas .aala-program-banner-photo {
-  background: var(--aala-program-banner-image) center / cover no-repeat;
-  opacity: 0;
-  transition: opacity .5s ease, transform 1s ease;
-  transform: scale(1.015);
-}
-body.aala-v2.aala-index #page-programas .aala-program-banner--photo .aala-program-banner-photo {
-  opacity: 1;
-}
-body.aala-v2.aala-index #page-programas .aala-program-banner-veil {
-  background: linear-gradient(90deg, rgba(246,250,252,.90) 0%, rgba(245,249,251,.70) 50%, rgba(245,249,251,.45) 100%);
-  backdrop-filter: blur(2px);
-}
-body.aala-v2.aala-index #page-programas .aala-program-banner-inner {
   z-index: 1;
+  color: #173b6c !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.45);
+}
+body.aala-v2.aala-index #page-programas .program-card.aala-project-photo-loaded .program-head .program-kicker {
   position: relative;
-  width: min(1320px, calc(100% - 48px));
-  margin-inline: auto;
-  padding: clamp(36px, 5vw, 72px) 0;
+  z-index: 1;
+  color: #315f88 !important;
 }
-body.aala-v2.aala-index #page-programas .aala-program-banner-eyebrow {
-  margin: 0 0 12px;
-  color: #355f7d;
-  font-size: clamp(.79rem, 1vw, .92rem) !important;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  font-weight: 800;
-}
-body.aala-v2.aala-index #page-programas .aala-program-banner-title {
-  font-size: clamp(2.1rem, 5vw, 4.2rem) !important;
-  line-height: 1.07 !important;
-  letter-spacing: -.025em;
-  font-weight: 800 !important;
-  margin: 0 0 10px !important;
-  color: #244e6b !important;
-  max-width: 21ch;
-  text-align: left !important;
-}
-body.aala-v2.aala-index #page-programas .aala-program-banner-description {
-  font-size: clamp(.95rem, 1.4vw, 1.1rem) !important;
-  line-height: 1.5 !important;
-  max-width: 65ch;
-  margin: 0 !important;
-  color: #3a617a !important;
-  text-align: left !important;
-  text-align-last: left !important;
-}
-@media (max-width: 720px) {
-  body.aala-v2.aala-index #page-programas .aala-program-banner {
-    min-height: 245px;
-  }
-  body.aala-v2.aala-index #page-programas .aala-program-banner-inner {
-    width: calc(100% - 32px);
-    padding: 32px 0;
-  }
-  body.aala-v2.aala-index #page-programas .aala-program-banner-veil {
-    background: rgba(248,251,252,.80);
+@media (max-width: 600px) {
+  body.aala-v2.aala-index #page-programas .program-card.aala-project-photo-loaded .program-head {
+    min-height: 155px;
+    padding: 20px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  body.aala-v2.aala-index #page-programas .aala-program-banner-photo,
-  body.aala-v2.aala-index :is(.storyboard, .panorama-stage, .coverage-section).aala-editorial-has-photo::before {
-    transition: none !important;
-  }
+  body.aala-v2.aala-index #page-resumen .aala-editorial-photo-loaded,
+  body.aala-v2.aala-index #page-programas .program-card.aala-project-photo-loaded .program-head { transition: none; }
 }
