@@ -60,23 +60,33 @@ function installWelcomeImage() {
   });
 }
 
-const INDEX_SCENES = [
-  ['#page-resumen .storyboard', 'in2.jpg'],
-  ['#page-resumen .panorama-stage', 'in3.jpg'],
-  ['#page-resumen .coverage-section', 'in4.jpg']
-];
+// Una sola fotografía continua para TODO el resumen después de la portada.
+// No se repite la imagen dentro de cada sección.
+function installSharedSummaryBackground() {
+  const page = document.querySelector('#page-resumen');
+  if (!page || page.dataset.aalaSharedBackground === 'true') return;
+  page.dataset.aalaSharedBackground = 'true';
+  preloadPhoto('index', 'in2.jpg', (src) => {
+    if (!page.isConnected) return;
+    page.style.setProperty('--aala-shared-summary-photo', `url("${src}")`);
+    page.classList.add('aala-shared-summary-photo--loaded');
+    // Se conserva el formato de textos blancos aprobado en las tres secciones.
+    for (const selector of ['.storyboard', '.panorama-stage', '.coverage-section']) {
+      page.querySelector(selector)?.classList.add('aala-photo-scene--loaded');
+    }
+  });
+}
 
-function installIndexScenes() {
-  for (const [selector, filename] of INDEX_SCENES) {
-    const section = document.querySelector(selector);
-    if (!section || section.dataset.aalaScenePhoto === filename) continue;
-    section.dataset.aalaScenePhoto = filename;
-    preloadPhoto('index', filename, (src) => {
-      if (!section.isConnected) return;
-      section.style.setProperty('--aala-scene-image', `url("${src}")`);
-      section.classList.add('aala-photo-scene--loaded');
-    });
-  }
+// Una sola imagen de fondo detrás del carrusel y su selector mensual.
+function installProgramsBackground() {
+  const page = document.querySelector('#page-programas');
+  if (!page || page.dataset.aalaProgramsBackground === 'true') return;
+  page.dataset.aalaProgramsBackground = 'true';
+  preloadPhoto('index', 'in5.jpg', (src) => {
+    if (!page.isConnected) return;
+    page.style.setProperty('--aala-programs-background', `url("${src}")`);
+    page.classList.add('aala-programs-background--loaded');
+  });
 }
 
 // Cintillos fotográficos discretos. Son decorativos: no reemplazan tarjetas ni datos.
@@ -87,23 +97,20 @@ function createMarquee(direction) {
   strip.className = `aala-photo-marquee aala-photo-marquee--${direction}`;
   strip.setAttribute('aria-hidden', 'true');
   strip.dataset.aalaMarquee = direction;
-
   const track = document.createElement('div');
   track.className = 'aala-photo-marquee-track';
-  // Dos grupos idénticos permiten un bucle sin cortes visuales.
-  for (let copy = 0; copy < 2; copy++) {
-    const group = document.createElement('div');
-    group.className = 'aala-photo-marquee-group';
-    for (const filename of STRIP_PHOTOS) {
-      const img = document.createElement('img');
-      img.src = photoURL('programas-y-proyectos', filename);
-      img.alt = '';
-      img.decoding = 'async';
-      img.loading = 'eager';
-      group.append(img);
-    }
-    track.append(group);
+  // Una fila estática con las seis imágenes: sin duplicaciones ni desplazamiento.
+  const group = document.createElement('div');
+  group.className = 'aala-photo-marquee-group';
+  for (const filename of STRIP_PHOTOS) {
+    const img = document.createElement('img');
+    img.src = photoURL('programas-y-proyectos', filename);
+    img.alt = '';
+    img.decoding = 'async';
+    img.loading = 'eager';
+    group.append(img);
   }
+  track.append(group);
   strip.append(track);
   return strip;
 }
@@ -160,24 +167,13 @@ function installScrollTextReveal() {
   });
 }
 
-function extendWelcomeIntoSummary() {
-  const ribbon = document.querySelector('#page-resumen .dashboard-ribbon');
-  if (!ribbon || ribbon.dataset.aalaPhotoBridge === 'true') return;
-  ribbon.dataset.aalaPhotoBridge = 'true';
-  preloadPhoto('index', 'in1.jpg', src => {
-    if (!ribbon.isConnected) return;
-    ribbon.style.setProperty('--aala-summary-bridge-photo', `url("${src}")`);
-    ribbon.classList.add('aala-summary-bridge-loaded');
-  });
-}
-
 export function installAalaPhotos() {
   if (typeof document === 'undefined' || typeof window === 'undefined') return;
   const page = window.location.pathname.split('/').pop() || 'index.html';
   if (page !== 'index.html') return;
   installWelcomeImage();
-  installIndexScenes();
-  extendWelcomeIntoSummary();
+  installSharedSummaryBackground();
+  installProgramsBackground();
   installCarouselMarquees();
   installScrollTextReveal();
 }
