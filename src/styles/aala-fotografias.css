@@ -153,3 +153,136 @@ body.aala-v2.aala-index #page-programas .program-card.aala-card-photo-ready {
   background-position: center !important;
   background-repeat: no-repeat !important;
 }
+
+/* ===========================================================
+   AALA · Fondos editoriales definitivos (sin cambios de layout)
+   =========================================================== */
+
+/* Portada: conserva in1.jpg, su alto y su tratamiento original.
+   El logo institucional ya aparece en el header; se oculta el duplicado. */
+body.aala-v2.aala-index #page-resumen .hero-shell.aala-photo-welcome--loaded {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+body.aala-v2.aala-index #page-resumen .hero-shell.aala-photo-welcome--loaded > .hero-side {
+  display: none !important;
+}
+body.aala-v2.aala-index #page-resumen .hero-shell.aala-photo-welcome--loaded > .hero-main {
+  width: min(100%, 860px) !important;
+  max-width: 860px !important;
+  justify-self: center !important;
+  margin-inline: auto !important;
+}
+body.aala-v2.aala-index #page-resumen .hero-shell.aala-photo-welcome--loaded .hero-main p.hero-copy {
+  max-width: 750px !important;
+  margin-inline: auto !important;
+}
+
+/* Las otras tres secciones siguen teniendo el mismo tamaño y posición que antes.
+   Solo se dibuja una capa a pantalla completa DENTRO de su espacio existente. */
+body.aala-v2.aala-index #page-resumen :is(.storyboard, .panorama-stage, .coverage-section).aala-photo-scene--loaded {
+  position: relative !important;
+  isolation: isolate !important;
+  background: transparent !important;
+}
+body.aala-v2.aala-index #page-resumen :is(.storyboard, .panorama-stage, .coverage-section).aala-photo-scene--loaded::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(11,34,50,.85), rgba(18,45,61,.70) 65%, rgba(13,34,50,.77)),
+    var(--aala-scene-image) center center / cover no-repeat,
+    #284a61;
+}
+body.aala-v2.aala-index #page-resumen :is(.storyboard, .panorama-stage, .coverage-section).aala-photo-scene--loaded > * {
+  position: relative;
+  z-index: 1;
+}
+body.aala-v2.aala-index #page-resumen .storyboard.aala-photo-scene--loaded .story-panel,
+body.aala-v2.aala-index #page-resumen .panorama-stage.aala-photo-scene--loaded .narrative-stage {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+body.aala-v2.aala-index #page-resumen .storyboard.aala-photo-scene--loaded .story-panel::before {
+  display: none !important;
+}
+body.aala-v2.aala-index #page-resumen .storyboard.aala-photo-scene--loaded :is(.section-title,.section-kicker,.story-lead,.prose),
+body.aala-v2.aala-index #page-resumen .panorama-stage.aala-photo-scene--loaded :is(.section-title,.section-kicker,.prose),
+body.aala-v2.aala-index #page-resumen .coverage-section.aala-photo-scene--loaded > :is(.section-title,.section-kicker) {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18);
+}
+body.aala-v2.aala-index #page-resumen .storyboard.aala-photo-scene--loaded .story-point {
+  color: #fff !important;
+  border-color: rgba(255,255,255,.35) !important;
+  background: transparent !important;
+}
+body.aala-v2.aala-index #page-resumen .storyboard.aala-photo-scene--loaded .story-point :is(span,p) {
+  color: #fff !important;
+}
+body.aala-v2.aala-index #page-resumen .coverage-section.aala-photo-scene--loaded .coverage-card {
+  background: rgba(255,255,255,.97) !important;
+}
+
+/* Carrusel: la fotografía ocupa el ancho de la ventana DETRÁS de las tarjetas.
+   No se cambia el ancho, alto, padding ni scroll de las tarjetas. */
+body.aala-v2.aala-index #page-programas .program-carousel:has(> .aala-carousel-backdrop) {
+  isolation: isolate;
+}
+body.aala-v2.aala-index #page-programas .program-carousel > .aala-carousel-backdrop {
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #eaf0f3;
+}
+body.aala-v2.aala-index #page-programas .program-carousel > .aala-carousel-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(14,42,58,.40), rgba(31,68,86,.30));
+  pointer-events: none;
+}
+body.aala-v2.aala-index #page-programas .aala-carousel-backdrop-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity .75s ease;
+}
+body.aala-v2.aala-index #page-programas .aala-carousel-backdrop-layer.is-active {
+  opacity: 1;
+}
+body.aala-v2.aala-index #page-programas .program-carousel > :not(.aala-carousel-backdrop) {
+  position: relative;
+  z-index: 1;
+}
+body.aala-v2.aala-index #page-programas .program-carousel .program-card {
+  background: rgba(255,255,255,.90) !important;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+body.aala-v2.aala-index #page-programas .program-carousel .program-card:hover {
+  background: rgba(255,255,255,.95) !important;
+}
+@media (max-width: 860px) {
+  body.aala-v2.aala-index #page-resumen .hero-shell.aala-photo-welcome--loaded > .hero-main {
+    width: min(100%, 760px) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.aala-v2.aala-index #page-programas .aala-carousel-backdrop-layer {
+    transition: none !important;
+  }
+}
