@@ -419,7 +419,7 @@ body.aala-v2.aala-index #page-resumen .dashboard-ribbon {
   background-image: none !important;
 }
 
-/* Foto in5 como un fondo único para toda la pestaña de programas. */
+/* Foto in4 como un fondo único para toda la pestaña de programas. */
 body.aala-v2.aala-index #page-programas.aala-programs-background--loaded {
   background-image:
     linear-gradient(rgba(16, 38, 56, .66), rgba(16, 38, 56, .66)),
@@ -485,4 +485,34 @@ body.aala-v2.aala-index #page-programas .program-carousel-viewport {
   body.aala-v2.aala-index #page-programas .aala-photo-marquee {
     height: 68px !important;
   }
+}
+
+
+/* Ajuste solicitado: sin cintillos en programas y proyectos. */
+body.aala-v2.aala-index #page-programas .aala-photo-marquee {
+  display: none !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-actions {
+  margin-bottom: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding-bottom: 0 !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-viewport {
+  padding-top: 12px !important;
+}
+
+/* Tipografía blanca para la sección sobre fondo fotográfico. */
+body.aala-v2.aala-index #page-programas :is(.section-kicker, .section-title, .story-lead, .prose, .story-point, p, h2, h3):not(.program-card *):not(.program-carousel-arrow *):not(.program-carousel-dots *) {
+  color: #ffffff !important;
+}
+body.aala-v2.aala-index #page-programas .section-kicker,
+body.aala-v2.aala-index #page-programas .story-point {
+  text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel .program-card {
+  background: rgba(255,255,255,.96) !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel .program-card :is(h2,h3,h4,p,span,strong,small,button,a,li,dt,dd) {
+  color: inherit !important;
 }
