@@ -55,7 +55,7 @@ test('las tarjetas de metas anuales están delimitadas y los botones no se escon
  const css=source('src/styles/aala-refinamientos-2026.css');
  assert.match(css,/annual-goals-grid \.goal-card/);
  assert.match(css,/border-top:3px solid/);
- assert.match(css,/grid-template-rows:42px 34px/);
+ assert.match(css,/grid-template-rows:54px 34px/);
  assert.match(css,/color:#fff!important;background:#2c648d/);
  assert.match(source('src/components/aala-visual-universal.mjs'),/revealSelectedMonth/);
 });
