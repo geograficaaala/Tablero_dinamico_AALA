@@ -534,7 +534,59 @@ function paintMonthButtons(){
     button.setAttribute('aria-pressed',String(active));
   });
 }
+/* Animación numérica solo cuando cambia el mes, sin modificar datos ni unidades. */
+let previousRenderedMonth = null;
+let numberAnimationRevision = 0;
+function animateMonthCardValues(root) {
+  if (!root || !window.requestAnimationFrame ||
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+
+  const values = [];
+  const numberPattern = /-?\d[\d,]*(?:\.\d+)?/g;
+  root.querySelectorAll('.prog-score-value, .metric-primary, .metric-monthly-value, .metric-subcopy strong').forEach(element => {
+    for (const node of element.childNodes) {
+      if (node.nodeType !== 3) continue;
+      const original = node.textContent;
+      const tokens = [...original.matchAll(numberPattern)].map(match => {
+        const source = match[0];
+        const value = Number(source.replaceAll(',', ''));
+        const decimals = source.includes('.') ? source.length - source.lastIndexOf('.') - 1 : 0;
+        return { value, decimals, grouped: source.includes(',') };
+      });
+      if (tokens.some(item => Number.isFinite(item.value))) values.push({ node, original, tokens });
+    }
+  });
+  if (!values.length) return;
+
+  const revision = ++numberAnimationRevision;
+  const duration = 850;
+  let startTime = null;
+  function tick(now) {
+    if (revision !== numberAnimationRevision) return;
+    if (startTime === null) startTime = now;
+    const elapsed = Math.min(1, (now - startTime) / duration);
+    const progress = 1 - Math.pow(1 - elapsed, 3);
+    for (const {node, original, tokens} of values) {
+      if (!node.isConnected) continue;
+      let pos = 0;
+      node.textContent = elapsed === 1 ? original : original.replace(numberPattern, () => {
+        const {value, decimals, grouped} = tokens[pos++];
+        if (!Number.isFinite(value)) return '—';
+        const current = value * progress;
+        return grouped
+          ? current.toLocaleString('en-US', {minimumFractionDigits: decimals, maximumFractionDigits: decimals})
+          : current.toFixed(decimals);
+      });
+    }
+    if (elapsed < 1) window.requestAnimationFrame(tick);
+  }
+  window.requestAnimationFrame(tick);
+}
+
 function renderProgramMonth(month){
+  const animateValues = previousRenderedMonth !== null && previousRenderedMonth !== month;
+  previousRenderedMonth = month;
+  ++numberAnimationRevision; // Cancela una animación anterior al elegir otro mes.
   const currentItems=programCarouselItems();
   const activeProgramId=currentItems[programCarouselIndex]?.dataset.programId || null;
   selectedMonth=month;
@@ -546,6 +598,7 @@ function renderProgramMonth(month){
   if(grid){
     grid.innerHTML=data.map(p=>!p.periodKey?renderNoData(p):programCard(p)).join('');
     initProgramCarousel(activeProgramId);
+    if (animateValues) animateMonthCardValues(grid);
   }
   const valid=data.filter(p=>finite(p.score));
   if(valid.length===descriptions.length) {
