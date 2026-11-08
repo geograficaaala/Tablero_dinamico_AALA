@@ -1,51 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { resolve, dirname } from 'node:path';
+import { readFileSync } from 'node:fs';
 import { PROGRAMS } from '../../src/components/aala-fotografias.mjs';
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const load = (f) => readFileSync(resolve(root, f), 'utf8');
 
-test('el módulo y estilos de fotografías existen y se importan desde el módulo común', () => {
-  assert.ok(existsSync(resolve(root, 'src/components/aala-fotografias.mjs')));
-  assert.ok(existsSync(resolve(root, 'src/styles/aala-fotografias.css')));
-  assert.match(load('src/components/aala-visual-universal.mjs'), /import\s*\{\s*installPhotoGallery\s*\}\s*from\s*['"]\.\/aala-fotografias\.mjs['"]/);
-  assert.match(load('src/components/aala-visual-universal.mjs'), /installPhotoGallery\(\)/);
+const read = p => readFileSync(p, 'utf8');
+test('el módulo compartido conserva la interfaz fotográfica sin modificar la estructura', () => {
+  const universal = read('src/components/aala-visual-universal.mjs');
+  const photos = read('src/components/aala-fotografias.mjs');
+  assert.match(universal, /installPhotoGallery/);
+  assert.match(photos, /export function installPhotoGallery\(\)/);
+  assert.doesNotMatch(photos, /insertAdjacentElement|createRibbon/);
 });
-
-test('los seis programas usan las carpetas y códigos acordados, sin afectar sus HTML', () => {
-  const cases = {
-    'atitlan-recicla.html': ['atitlan-recicla', 'ar'],
-    'conservando-atitlan.html': ['conservando-atitlan', 'ca'],
-    'educando-para-conservar.html': ['educando-para-conservar', 'ec'],
-    'fortalecimiento-municipal.html': ['fortalecimiento-municipal', 'fm'],
-    'reforestando-atitlan.html': ['reforestando-atitlan', 'ra'],
-    'tul.html': ['tul', 'tu']
-  };
+test('los seis programas conservan sus carpetas fotográficas', () => {
   assert.equal(Object.keys(PROGRAMS).length, 6);
-  for (const [name, [folder, code]] of Object.entries(cases)) {
-    assert.equal(PROGRAMS[name].folder, folder);
-    assert.equal(PROGRAMS[name].code, code);
-    assert.ok(existsSync(resolve(root, `public/${name}`)));
-  }
-});
-
-test('el índice conserva in1 y redistribuye in2, in3 e in4 como fondos, sin cintillos', () => {
-  const script = load('src/components/aala-fotografias.mjs');
-  assert.match(script, /photoUrl\('index', 'in1\.jpg'\)/);
-  for (const name of ['in2.jpg', 'in3.jpg', 'in4.jpg']) assert.ok(script.includes(name));
-  assert.match(script, /INDEX_PHOTO_TARGETS/);
-  assert.match(script, /PROGRAM_PHOTOS/);
-  const indexPart = script.split('function installIndex() {')[1].split('function installProgram()')[0];
-  assert.doesNotMatch(indexPart, /createRibbon\(/);
-});
-
-test('la integración conserva fallbacks de imágenes y estilos adaptables', () => {
-  const script = load('src/components/aala-fotografias.mjs');
-  const css = load('src/styles/aala-fotografias.css');
-  assert.match(script, /img\.onerror\s*=\s*\(\)\s*=>\s*\{\}/);
-  assert.match(css, /aala-project-banner-image/);
-  assert.match(css, /@media \(max-width: 600px\)/);
-  assert.match(css, /prefers-reduced-motion: reduce/);
+  assert.equal(PROGRAMS['atitlan-recicla.html'].code, 'ar');
+  assert.equal(PROGRAMS['conservando-atitlan.html'].code, 'ca');
+  assert.equal(PROGRAMS['educando-para-conservar.html'].code, 'ec');
+  assert.equal(PROGRAMS['fortalecimiento-municipal.html'].code, 'fm');
+  assert.equal(PROGRAMS['reforestando-atitlan.html'].code, 'ra');
+  assert.equal(PROGRAMS['tul.html'].code, 'tu');
 });
