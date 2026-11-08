@@ -230,59 +230,165 @@ body.aala-v2.aala-index #page-resumen .coverage-section.aala-photo-scene--loaded
   background: rgba(255,255,255,.97) !important;
 }
 
-/* Carrusel: la fotografía ocupa el ancho de la ventana DETRÁS de las tarjetas.
-   No se cambia el ancho, alto, padding ni scroll de las tarjetas. */
-body.aala-v2.aala-index #page-programas .program-carousel:has(> .aala-carousel-backdrop) {
+/* Contigüidad: las áreas del resumen se encuentran sin franjas blancas entre sí. */
+body.aala-v2.aala-index #page-resumen .dashboard-ribbon {
+  box-sizing: border-box;
+  width: 100vw !important;
+  max-width: none !important;
+  margin: 0 0 0 calc(50% - 50vw) !important;
+  padding: 20px max(20px, calc((100vw - 1320px) / 2)) !important;
+  background-color: #284a61 !important;
+  background-image:
+    linear-gradient(90deg, rgba(11,34,50,.84), rgba(18,45,61,.67)),
+    var(--aala-summary-bridge-photo, linear-gradient(#284a61, #284a61)) !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+body.aala-v2.aala-index #page-resumen .dashboard-ribbon .ribbon-label,
+body.aala-v2.aala-index #page-resumen .dashboard-ribbon .ribbon-value,
+body.aala-v2.aala-index #page-resumen .dashboard-ribbon .ribbon-sub {
+  color: #fff !important;
+}
+body.aala-v2.aala-index #page-resumen .storyboard,
+body.aala-v2.aala-index #page-resumen .panorama-stage {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+body.aala-v2.aala-index #page-resumen .coverage-section {
+  margin-top: 0 !important;
+  border-top: 0 !important;
+}
+
+/* Cintillos de movimiento independiente, a ancho completo de la ventana. */
+body.aala-v2.aala-index #page-programas .program-carousel {
   isolation: isolate;
+  background: #fff !important;
 }
 body.aala-v2.aala-index #page-programas .program-carousel > .aala-carousel-backdrop {
-  position: absolute;
-  inset: 0 auto 0 50%;
-  width: 100vw;
-  transform: translateX(-50%);
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  background: #eaf0f3;
-}
-body.aala-v2.aala-index #page-programas .program-carousel > .aala-carousel-backdrop::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(14,42,58,.40), rgba(31,68,86,.30));
-  pointer-events: none;
-}
-body.aala-v2.aala-index #page-programas .aala-carousel-backdrop-layer {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: opacity .75s ease;
-}
-body.aala-v2.aala-index #page-programas .aala-carousel-backdrop-layer.is-active {
-  opacity: 1;
-}
-body.aala-v2.aala-index #page-programas .program-carousel > :not(.aala-carousel-backdrop) {
-  position: relative;
-  z-index: 1;
+  display: none !important;
 }
 body.aala-v2.aala-index #page-programas .program-carousel .program-card {
-  background: rgba(255,255,255,.90) !important;
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
+  background: #fff !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }
-body.aala-v2.aala-index #page-programas .program-carousel .program-card:hover {
-  background: rgba(255,255,255,.95) !important;
+body.aala-v2.aala-index #page-programas .program-carousel-actions {
+  position: relative;
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: none;
+  height: clamp(96px, 10vw, 142px);
+  margin: 0 0 16px calc(50% - 50vw);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  isolation: isolate;
 }
-@media (max-width: 860px) {
-  body.aala-v2.aala-index #page-resumen .hero-shell.aala-photo-welcome--loaded > .hero-main {
-    width: min(100%, 760px) !important;
+body.aala-v2.aala-index #page-programas .program-carousel-actions > .program-carousel-arrow {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 2px 10px rgba(0,0,0,.16);
+}
+body.aala-v2.aala-index #page-programas #programCarouselPrev { left: clamp(12px, 3vw, 52px); }
+body.aala-v2.aala-index #page-programas #programCarouselNext { right: clamp(12px, 3vw, 52px); }
+body.aala-v2.aala-index #page-programas .program-carousel-dots {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  border-radius: 20px;
+  background: rgba(255,255,255,.9);
+  padding: 6px 12px;
+}
+body.aala-v2.aala-index #page-programas .aala-photo-marquee {
+  box-sizing: border-box;
+  position: relative;
+  width: 100vw;
+  max-width: none;
+  height: clamp(82px, 9vw, 126px);
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+  pointer-events: none;
+  background: #e2ebf0;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-actions > .aala-photo-marquee {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  z-index: 0;
+}
+body.aala-v2.aala-index #page-programas .program-carousel > .aala-photo-marquee--right {
+  margin-top: 14px;
+}
+body.aala-v2.aala-index #page-programas .aala-photo-marquee-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+  animation: aala-marquee-move-left 84s linear infinite;
+}
+body.aala-v2.aala-index #page-programas .aala-photo-marquee--right .aala-photo-marquee-track {
+  animation-name: aala-marquee-move-right;
+  animation-duration: 92s;
+}
+body.aala-v2.aala-index #page-programas .aala-photo-marquee-group {
+  display: flex;
+  flex: none;
+  height: 100%;
+}
+body.aala-v2.aala-index #page-programas .aala-photo-marquee-group img {
+  box-sizing: border-box;
+  display: block;
+  flex: none;
+  height: 100%;
+  width: clamp(210px, 23vw, 340px);
+  object-fit: cover;
+  object-position: center;
+}
+@keyframes aala-marquee-move-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes aala-marquee-move-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+/* Solo entra el texto al llegar a la pantalla: las fotografías permanecen visibles. */
+@media (prefers-reduced-motion: no-preference) {
+  body.aala-v2.aala-index.aala-scroll-reveal-enabled #page-resumen .aala-reveal-text {
+    opacity: 0 !important;
+    transform: translate3d(0, 18px, 0) !important;
+    transition: opacity .66s ease, transform .66s ease !important;
+    animation: none !important;
+  }
+  body.aala-v2.aala-index.aala-scroll-reveal-enabled #page-resumen .aala-reveal-text.aala-reveal-visible {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  body.aala-v2.aala-index #page-programas .aala-carousel-backdrop-layer {
-    transition: none !important;
+  body.aala-v2.aala-index #page-programas .aala-photo-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 600px) {
+  body.aala-v2.aala-index #page-programas .program-carousel-actions {
+    height: 88px;
+  }
+  body.aala-v2.aala-index #page-programas .aala-photo-marquee {
+    height: 85px;
+  }
+  body.aala-v2.aala-index #page-programas .aala-photo-marquee-group img {
+    width: 170px;
   }
 }
