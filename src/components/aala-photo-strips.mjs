@@ -79,76 +79,96 @@ function installIndexScenes() {
   }
 }
 
-// La decoración vive dentro del carrusel pero NO participa en el layout.
-function buildCarouselBackdrop(carousel) {
-  let scene = carousel.querySelector(':scope > .aala-carousel-backdrop');
-  if (scene) return scene;
-  scene = document.createElement('div');
-  scene.className = 'aala-carousel-backdrop';
-  scene.setAttribute('aria-hidden', 'true');
-  const layerA = document.createElement('div');
-  layerA.className = 'aala-carousel-backdrop-layer';
-  const layerB = document.createElement('div');
-  layerB.className = 'aala-carousel-backdrop-layer';
-  scene.append(layerA, layerB);
-  carousel.prepend(scene);
-  return scene;
-}
+// Cintillos fotográficos discretos. Son decorativos: no reemplazan tarjetas ni datos.
+const STRIP_PHOTOS = Object.freeze(['pp1.jpg', 'pp2.jpg', 'pp3.jpg', 'pp4.jpg', 'pp5.jpg', 'pp6.jpg']);
 
-function currentProgramId(grid, dots) {
-  const cards = [...grid.querySelectorAll('.program-card[data-program-id]')];
-  if (!cards.length) return '';
-  const allDots = [...dots.querySelectorAll('.program-carousel-dot')];
-  const activeIndex = allDots.findIndex(dot => dot.getAttribute('aria-current') === 'true' || dot.classList.contains('active'));
-  const index = activeIndex >= 0 ? activeIndex : 0;
-  return cards[Math.min(index, cards.length - 1)].dataset.programId || '';
-}
+function createMarquee(direction) {
+  const strip = document.createElement('div');
+  strip.className = `aala-photo-marquee aala-photo-marquee--${direction}`;
+  strip.setAttribute('aria-hidden', 'true');
+  strip.dataset.aalaMarquee = direction;
 
-function installCarouselBackground() {
-  const carousel = document.querySelector('#page-programas .program-carousel');
-  const grid = document.querySelector('#page-programas #programGrid');
-  const dots = document.querySelector('#page-programas #programCarouselDots');
-  if (!carousel || !grid || !dots || carousel.dataset.aalaBackdropInstalled === 'true') return;
-  carousel.dataset.aalaBackdropInstalled = 'true';
-
-  const backdrop = buildCarouselBackdrop(carousel);
-  const layers = [...backdrop.querySelectorAll('.aala-carousel-backdrop-layer')];
-  let currentFile = '';
-  let activeLayer = -1;
-  let requestId = 0;
-
-  function syncPhoto() {
-    const programId = currentProgramId(grid, dots);
-    const filename = AALA_PROGRAM_PHOTOS[programId] || '';
-    if (filename === currentFile) return;
-    currentFile = filename;
-    const thisRequest = ++requestId;
-    if (!filename) {
-      for (const layer of layers) layer.classList.remove('is-active');
-      return;
+  const track = document.createElement('div');
+  track.className = 'aala-photo-marquee-track';
+  // Dos grupos idénticos permiten un bucle sin cortes visuales.
+  for (let copy = 0; copy < 2; copy++) {
+    const group = document.createElement('div');
+    group.className = 'aala-photo-marquee-group';
+    for (const filename of STRIP_PHOTOS) {
+      const img = document.createElement('img');
+      img.src = photoURL('programas-y-proyectos', filename);
+      img.alt = '';
+      img.decoding = 'async';
+      img.loading = 'eager';
+      group.append(img);
     }
-    preloadPhoto('programas-y-proyectos', filename, (src) => {
-      if (!carousel.isConnected || thisRequest !== requestId) return;
-      const nextIndex = activeLayer === 0 ? 1 : 0;
-      const nextLayer = layers[nextIndex];
-      nextLayer.style.backgroundImage = `url("${src}")`;
-      nextLayer.classList.add('is-active');
-      if (activeLayer >= 0) layers[activeLayer].classList.remove('is-active');
-      activeLayer = nextIndex;
-    }, () => {
-      if (thisRequest !== requestId) return;
-      for (const layer of layers) layer.classList.remove('is-active');
-      activeLayer = -1;
-    });
+    track.append(group);
   }
+  strip.append(track);
+  return strip;
+}
 
-  // El carrusel actualiza aria-current al usar flechas, puntos o desplazamiento táctil.
-  // Solo observamos sus señales; no interceptamos ni reemplazamos sus eventos.
-  new MutationObserver(syncPhoto).observe(dots, {
-    childList: true, subtree: true, attributes: true, attributeFilter: ['aria-current', 'class']
+function installCarouselMarquees() {
+  const carousel = document.querySelector('#page-programas .program-carousel');
+  const actions = document.querySelector('#page-programas .program-carousel-actions');
+  const viewport = document.querySelector('#page-programas #programCarouselViewport');
+  if (!carousel || !actions || !viewport || carousel.dataset.aalaMarqueesInstalled === 'true') return;
+  carousel.dataset.aalaMarqueesInstalled = 'true';
+
+  // El superior queda entre las flechas, detrás de ellas y de los puntos del carrusel.
+  actions.insertBefore(createMarquee('left'), actions.querySelector('#programCarouselDots'));
+  // El inferior aparece inmediatamente después de la tarjeta, a ancho completo.
+  viewport.after(createMarquee('right'));
+}
+
+// Las fotografías son estáticas; únicamente el texto aparece al llegar al viewport.
+function installScrollTextReveal() {
+  if (document.body.dataset.aalaScrollReveal === 'true') return;
+  document.body.dataset.aalaScrollReveal = 'true';
+  if (typeof IntersectionObserver === 'undefined' ||
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+
+  const selectors = [
+    '#page-resumen .hero-main .eyebrow',
+    '#page-resumen .hero-main .hero-title',
+    '#page-resumen .hero-main .hero-copy',
+    '#page-resumen .dashboard-ribbon .ribbon-item',
+    '#page-resumen .storyboard .section-title',
+    '#page-resumen .storyboard .story-lead',
+    '#page-resumen .storyboard .story-columns > .prose',
+    '#page-resumen .storyboard .story-point',
+    '#page-resumen .panorama-stage .section-kicker',
+    '#page-resumen .panorama-stage .section-title',
+    '#page-resumen .panorama-stage .aala-integrated-reading',
+    '#page-resumen .coverage-section > .section-kicker',
+    '#page-resumen .coverage-section > .section-title'
+  ];
+  const elements = [...new Set(selectors.flatMap(selector =>
+    [...document.querySelectorAll(selector)]))];
+  if (!elements.length) return;
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('aala-reveal-visible');
+      observer.unobserve(entry.target);
+    }
+  }, { threshold: .06, rootMargin: '0px 0px -4% 0px' });
+  document.body.classList.add('aala-scroll-reveal-enabled');
+  elements.forEach(element => {
+    element.classList.add('aala-reveal-text');
+    observer.observe(element);
   });
-  new MutationObserver(syncPhoto).observe(grid, { childList: true });
-  syncPhoto();
+}
+
+function extendWelcomeIntoSummary() {
+  const ribbon = document.querySelector('#page-resumen .dashboard-ribbon');
+  if (!ribbon || ribbon.dataset.aalaPhotoBridge === 'true') return;
+  ribbon.dataset.aalaPhotoBridge = 'true';
+  preloadPhoto('index', 'in1.jpg', src => {
+    if (!ribbon.isConnected) return;
+    ribbon.style.setProperty('--aala-summary-bridge-photo', `url("${src}")`);
+    ribbon.classList.add('aala-summary-bridge-loaded');
+  });
 }
 
 export function installAalaPhotos() {
@@ -157,7 +177,9 @@ export function installAalaPhotos() {
   if (page !== 'index.html') return;
   installWelcomeImage();
   installIndexScenes();
-  installCarouselBackground();
+  extendWelcomeIntoSummary();
+  installCarouselMarquees();
+  installScrollTextReveal();
 }
 
 if (typeof document !== 'undefined') {
