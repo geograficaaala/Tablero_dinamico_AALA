@@ -392,3 +392,97 @@ body.aala-v2.aala-index #page-programas .aala-photo-marquee-group img {
     width: 170px;
   }
 }
+
+/* ===========================================================
+   AALA · Ajuste final: fondo único y cintillos estáticos
+   No modifica HTML, indicadores ni controlador del carrusel.
+   =========================================================== */
+
+/* Una fotografía continua in2 para el resumen, detrás de las secciones.
+   La portada conserva in1 y el mismo diseño que ya está aprobado. */
+body.aala-v2.aala-index #page-resumen.aala-shared-summary-photo--loaded {
+  background-image:
+    linear-gradient(rgba(12, 34, 49, .76), rgba(12, 34, 49, .76)),
+    var(--aala-shared-summary-photo) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Las secciones no vuelven a dibujar fotos independientes. */
+body.aala-v2.aala-index #page-resumen :is(.storyboard, .panorama-stage, .coverage-section).aala-photo-scene--loaded::before {
+  display: none !important;
+  content: none !important;
+}
+body.aala-v2.aala-index #page-resumen .dashboard-ribbon {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Foto in5 como un fondo único para toda la pestaña de programas. */
+body.aala-v2.aala-index #page-programas.aala-programs-background--loaded {
+  background-image:
+    linear-gradient(rgba(16, 38, 56, .66), rgba(16, 38, 56, .66)),
+    var(--aala-programs-background) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel {
+  background: transparent !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel .program-card {
+  background: rgba(255, 255, 255, .97) !important;
+}
+
+/* Fotografías estáticas: una sola fila de seis imágenes, sin duplicaciones. */
+body.aala-v2.aala-index #page-programas .aala-photo-marquee-track,
+body.aala-v2.aala-index #page-programas .aala-photo-marquee--right .aala-photo-marquee-track {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  transform: none !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+body.aala-v2.aala-index #page-programas .aala-photo-marquee-group {
+  width: 100% !important;
+  min-width: 0 !important;
+  flex: 1 1 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0 !important;
+}
+body.aala-v2.aala-index #page-programas .aala-photo-marquee-group img {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-actions {
+  height: clamp(76px, 8vw, 105px) !important;
+}
+body.aala-v2.aala-index #page-programas .aala-photo-marquee {
+  height: clamp(72px, 7.5vw, 100px) !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-actions > .aala-photo-marquee {
+  height: 100% !important;
+}
+/* El cintillo inferior se coloca inmediatamente debajo de la tarjeta. */
+body.aala-v2.aala-index #page-programas .program-carousel > .aala-photo-marquee--right {
+  margin-top: 0 !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-viewport {
+  padding-bottom: 0 !important;
+}
+
+@media (max-width: 600px) {
+  body.aala-v2.aala-index #page-programas .program-carousel-actions {
+    height: 74px !important;
+  }
+  body.aala-v2.aala-index #page-programas .aala-photo-marquee {
+    height: 68px !important;
+  }
+}
