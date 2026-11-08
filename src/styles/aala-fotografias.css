@@ -1,0 +1,162 @@
+/* AALA | Cintillos institucionales de fotografías
+ * No modifica gráficos, KPI, navegación ni metas.
+ * Fotografías opcionales: si aún no existen, los marcos quedan neutros.
+ */
+body.aala-v2 .aala-photo-strip {
+  display:block;
+  position:relative;
+  width:100%;
+  margin:clamp(18px,2.8vw,34px) auto clamp(24px,3.6vw,44px);
+  padding:0;
+  border:0;
+  background:none;
+  box-shadow:none;
+  isolation:isolate;
+}
+body.aala-v2 .aala-photo-track {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(5px,.6vw,9px);
+  width:100%;
+  min-width:0;
+}
+body.aala-v2 .aala-photo-frame {
+  position:relative;
+  min-width:0;
+  height:clamp(154px,18vw,215px);
+  overflow:hidden;
+  background:#e4edf0;
+  border:0;
+  border-radius:2px;
+}
+body.aala-v2 .aala-photo-placeholder {
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  padding:12px;
+  background:linear-gradient(135deg,#e4edf0 0%,#f0f5f5 52%,#d9e7ec 100%);
+  color:#788d97;
+  text-align:center;
+}
+body.aala-v2 .aala-photo-placeholder span {
+  font-family:var(--aala-ui-type,'Nunito',sans-serif)!important;
+  font-size:clamp(.7rem,.85vw,.85rem)!important;
+  font-weight:600!important;
+  letter-spacing:.03em;
+}
+body.aala-v2 .aala-photo-img {
+  display:block;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+  border:0;
+  opacity:0;
+  animation:aala-photo-reveal .55s ease-out forwards;
+  transition:transform .6s ease;
+}
+@keyframes aala-photo-reveal {to {opacity:1;}}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  body.aala-v2 .aala-photo-frame:hover .aala-photo-img {transform:scale(1.025);}
+}
+
+/* Índice: fotografías panorámicas, sin tarjetas, y portada junto al texto institucional. */
+body.aala-v2.aala-index .aala-photo-strip--index,
+body.aala-v2.aala-index .aala-photo-strip--projects {
+  width:calc(100vw - 2px);
+  margin-left:calc(50% - 50vw + 1px);
+  margin-right:calc(50% - 50vw + 1px);
+  margin-top:clamp(24px,3vw,44px);
+  margin-bottom:clamp(38px,5vw,65px);
+  max-width:none;
+}
+body.aala-v2.aala-index .aala-photo-strip--index .aala-photo-track,
+body.aala-v2.aala-index .aala-photo-strip--projects .aala-photo-track {
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(3px,.4vw,8px);
+}
+body.aala-v2.aala-index .aala-photo-strip :is(.aala-photo-frame) {
+  height:clamp(175px,25vw,360px);
+  border-radius:0;
+}
+
+body.aala-v2.aala-index .hero-shell.aala-photo-hero {
+  position:relative!important;
+  isolation:isolate;
+  width:calc(100vw - 2px)!important;
+  max-width:none!important;
+  margin-left:calc(50% - 50vw + 1px)!important;
+  margin-right:calc(50% - 50vw + 1px)!important;
+  min-height:clamp(380px,39vw,565px);
+  padding:clamp(44px,5.8vw,88px) max(22px,calc((100vw - 1280px)/2))!important;
+  overflow:hidden;
+  background:#ebf1f4;
+}
+body.aala-v2.aala-index .aala-photo-hero-background {
+  position:absolute;inset:0;z-index:0;
+  background-position:center 50%;background-size:cover;
+  opacity:0;
+  transition:opacity .55s ease-out;
+  pointer-events:none;
+}
+body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .aala-photo-hero-background {opacity:1;}
+body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready::before {
+  content:""!important;
+  display:block!important;
+  position:absolute;inset:0;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(13,38,57,.81) 0%,rgba(19,48,65,.70) 55%,rgba(18,46,59,.51) 100%);
+}
+body.aala-v2.aala-index .aala-photo-hero > :not(.aala-photo-hero-background) {
+  position:relative;z-index:2;
+}
+body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .hero-main .eyebrow,
+body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .hero-main h1.hero-title {
+  color:#fff!important;
+  text-shadow:0 2px 16px rgba(5,20,31,.25)!important;
+}
+body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .hero-main.card p.hero-copy,
+body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .hero-main.card .hero-copy strong {
+  color:#f5f9fa!important;
+  text-shadow:0 1px 8px rgba(5,20,31,.26)!important;
+}
+body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready img.hero-logo {
+  filter:drop-shadow(0 3px 12px rgba(0,0,0,.35))!important;
+}
+
+/* Tul lleva un cintillo más bajo para que siga siendo una página informativa. */
+body.aala-v2 .aala-photo-strip--tul {margin-block:16px 24px;}
+body.aala-v2 .aala-photo-strip--tul .aala-photo-frame {height:clamp(105px,12vw,145px);}
+
+@media (max-width:860px) {
+  body.aala-v2.aala-index .hero-shell.aala-photo-hero {
+    min-height:0;
+    padding:32px 22px!important;
+    gap:10px!important;
+  }
+  body.aala-v2.aala-index .aala-photo-strip .aala-photo-frame {height:clamp(160px,29vw,235px);}
+  body.aala-v2 .aala-photo-strip--program .aala-photo-frame {height:clamp(140px,23vw,185px);}
+}
+@media (max-width:520px) {
+  body.aala-v2.aala-index .hero-shell.aala-photo-hero {
+    width:100%!important;
+    margin:0!important;
+    padding:28px 16px!important;
+  }
+  body.aala-v2.aala-index .aala-photo-strip--index,
+  body.aala-v2.aala-index .aala-photo-strip--projects {
+    width:100%;margin-inline:0;
+  }
+  body.aala-v2.aala-index .aala-photo-strip .aala-photo-track {gap:3px;}
+  body.aala-v2.aala-index .aala-photo-strip .aala-photo-frame {height:120px;}
+  body.aala-v2 .aala-photo-strip--program .aala-photo-frame {height:125px;}
+  body.aala-v2 .aala-photo-strip--tul .aala-photo-frame {height:95px;}
+  body.aala-v2 .aala-photo-placeholder span {font-size:.62rem!important;}
+}
+@media (prefers-reduced-motion:reduce) {
+  body.aala-v2 .aala-photo-img {animation:none;opacity:1;transition:none;}
+  body.aala-v2 .aala-photo-hero-background {transition:none;}
+}
+@media print {
+  body.aala-v2 .aala-photo-strip {display:none!important;}
+  body.aala-v2.aala-index .hero-shell.aala-photo-hero {min-height:0;width:auto!important;margin:0!important;}
+  body.aala-v2.aala-index .aala-photo-hero-background {display:none!important;}
+}
