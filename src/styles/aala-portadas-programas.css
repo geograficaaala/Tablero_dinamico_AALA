@@ -202,3 +202,177 @@ body[data-aala-portada="fm"] #fmHero h1 {
   -webkit-background-clip: border-box !important;
   background-clip: border-box !important;
 }
+
+/* ================================================================
+   AALA · Reencuadre editorial seguro de las seis portadas (2026-11)
+   SOLO los encabezados introductorios; KPI, datos y otras secciones
+   permanecen intactos. El fondo panorámico y sus rutas NO cambian.
+   ================================================================ */
+
+/* Llevar el contenido a una franja compacta centro-derecha, dejando
+   visible el lado izquierdo de las fotos, donde aparecen personas. */
+body[data-aala-portada] :is(section.hero, section.fm-hero) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(118px, 164px) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(12px, 1.5vw, 24px) !important;
+  box-sizing: border-box !important;
+  min-height: 400px !important;
+  padding: 22px clamp(34px, 8vw, 165px) 22px clamp(75px, 15vw, 290px) !important;
+  border: 0 !important;
+  overflow: visible !important;
+}
+
+/* Un único panel discreto detrás de los textos. No oscurece toda la
+   fotografía ni encierra los logotipos en cuadros opacos. */
+body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) > :is(.hero-main, .fm-hero-text) {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  padding: clamp(17px, 1.65vw, 25px) clamp(18px, 1.9vw, 29px) !important;
+  background: rgba(7, 29, 46, .65) !important;
+  background-image: none !important;
+  border: 1px solid rgba(255, 255, 255, .19) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 30px rgba(4, 19, 33, .14) !important;
+  color: #fff !important;
+}
+
+/* Blanco real, incluso en programas con títulos azules mediante IDs
+   o con -webkit-text-fill-color y efectos de gradiente. */
+body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) :is(.hero-main, .fm-hero-text) :is(h1, h2) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  font-size: clamp(1.9rem, 2.65vw, 3.15rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.025em !important;
+  text-align: center !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .4) !important;
+  margin: 0 0 12px !important;
+  max-width: 100% !important;
+}
+
+/* Descripción más compacta y con saltos naturales, sin justificar de
+   manera forzada y sin cambiar ni una palabra del contenido original. */
+body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) :is(
+  .hero-lead, .hero-lead p, .hero-narrative, .hero-narrative p,
+  .hero-copy-text p, .fm-hero-text p:not(.fm-overline)
+) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font-size: clamp(.79rem, .8vw, .91rem) !important;
+  line-height: 1.35 !important;
+  letter-spacing: normal !important;
+  text-align: left !important;
+  text-justify: auto !important;
+  hyphens: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+  max-width: none !important;
+}
+body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) :is(
+  .hero-lead strong, .hero-narrative strong, .fm-hero-text strong,
+  .hero-lead span, .hero-narrative span
+) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+/* Se conserva el interlineado 1.0 acordado en estas dos descripciones. */
+body[data-aala-portada="ra"] #resumen .hero-lead,
+body[data-aala-portada="tu"] #resumen .hero-lead { line-height: 1 !important; margin-bottom: 0 !important; }
+
+/* Los logos se acercan al bloque y se desplazan ligeramente a la
+   izquierda, sin tocar los archivos PNG ni añadir recuadros. */
+body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) > :is(
+  .hero-side, .hero-logo-card, .fm-hero-image
+) {
+  align-self: center !important;
+  justify-self: start !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 0 0 -24px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body[data-aala-portada] :is(section.hero, section.fm-hero) :is(
+  .hero-logo-card img, .hero-side img, .program-logo-card img,
+  .hero-inline-logo, .hero-logo, .fm-hero-image img
+) {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: auto !important;
+  max-width: 164px !important;
+  max-height: 144px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  animation: none !important;
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, .42)) !important;
+}
+/* Reubicar ligeramente el punto de enfoque hacia las personas de la
+   izquierda cuando cover recorte los laterales (sin editar fotografías). */
+body[data-aala-portada] :is(section.hero, section.fm-hero)::before {
+  background-position: center center, 30% center !important;
+}
+
+/* Adaptar el panel a tabletas: no dejar columnas comprimidas. */
+@media (max-width: 1100px) {
+  body[data-aala-portada] :is(section.hero, section.fm-hero) {
+    grid-template-columns: minmax(0, 1fr) minmax(100px, 132px) !important;
+    gap: 14px !important;
+    padding: 20px clamp(16px, 4vw, 45px) 20px clamp(20px, 7vw, 72px) !important;
+  }
+  body[data-aala-portada] :is(section.hero, section.fm-hero) :is(
+    .hero-logo-card img, .hero-side img, .program-logo-card img,
+    .hero-inline-logo, .hero-logo, .fm-hero-image img
+  ) { max-width: 130px !important; max-height: 120px !important; }
+}
+
+/* En móvil, los elementos se apilan para impedir superposiciones. */
+@media (max-width: 720px) {
+  body[data-aala-portada] :is(section.hero, section.fm-hero) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    min-height: 0 !important;
+    height: auto !important;
+    gap: 12px !important;
+    padding: 18px 12px 24px !important;
+  }
+  body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) > :is(.hero-main, .fm-hero-text) {
+    order: 2 !important;
+    padding: 17px 16px !important;
+  }
+  body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) > :is(
+    .hero-side, .hero-logo-card, .fm-hero-image
+  ) {
+    order: 1 !important;
+    justify-self: center !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+  body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) :is(.hero-main, .fm-hero-text) :is(h1, h2) {
+    font-size: clamp(1.65rem, 6vw, 2.25rem) !important;
+    line-height: 1.1 !important;
+  }
+  body[data-aala-portada] :is(section.hero, section.fm-hero) :is(
+    .hero-logo-card img, .hero-side img, .program-logo-card img,
+    .hero-inline-logo, .hero-logo, .fm-hero-image img
+  ) { max-width: 116px !important; max-height: 98px !important; }
+}
