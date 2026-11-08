@@ -48,7 +48,7 @@ test('se mantienen portada y fondo panorámico en las tres secciones existentes'
   assert.doesNotMatch(js, /createStrip\(|installProgramStrip\(/);
 });
 
-test('los fondos del carrusel dependen del ID real y no del orden visual', async () => {
+test('los dos cintillos contienen las seis fotografías y no alteran el carrusel', async () => {
   const { AALA_PROGRAM_PHOTOS } = await import('../../src/components/aala-photo-strips.mjs');
   const expected = {
     atitlan_recicla: 'pp1.jpg',
@@ -61,12 +61,28 @@ test('los fondos del carrusel dependen del ID real y no del orden visual', async
   for (const [id, filename] of Object.entries(expected)) assert.equal(AALA_PROGRAM_PHOTOS[id], filename);
   const js = read('src/components/aala-photo-strips.mjs');
   const css = read('src/styles/aala-fotografias.css');
-  assert.match(js, /\.program-carousel-dot/);
-  assert.match(js, /aria-current/);
-  assert.match(js, /new MutationObserver\(syncPhoto\)/);
-  assert.match(css, /\.aala-carousel-backdrop-layer\.is-active/);
+  assert.match(js, /STRIP_PHOTOS = Object\.freeze\(\['pp1\.jpg'/);
+  assert.match(js, /'pp6\.jpg'\]\)/);
+  assert.match(js, /actions\.insertBefore\(createMarquee\('left'\)/);
+  assert.match(js, /viewport\.after\(createMarquee\('right'\)\)/);
+  assert.match(css, /@keyframes aala-marquee-move-left/);
+  assert.match(css, /@keyframes aala-marquee-move-right/);
+  assert.match(css, /animation-duration: 92s/);
   assert.doesNotMatch(js, /programGrid\.innerHTML|insertAdjacentHTML/);
   assert.doesNotMatch(js, /report-config|monthPills|KpiGrid|metas_2026/);
+});
+
+test('el texto se revela al hacer scroll y las fotos permanecen visibles', () => {
+  const js = read('src/components/aala-photo-strips.mjs');
+  const css = read('src/styles/aala-fotografias.css');
+  assert.match(js, /new IntersectionObserver/);
+  assert.match(js, /installScrollTextReveal/);
+  assert.match(js, /observer\.unobserve\(entry\.target\)/);
+  assert.match(css, /aala-reveal-visible/);
+  assert.match(css, /prefers-reduced-motion: reduce/);
+  assert.match(css, /aala-summary-bridge-photo/);
+  assert.match(css, /#page-resumen \.storyboard,/);
+  assert.match(css, /margin-bottom: 0 !important/);
 });
 
 test('el módulo cargado en las siete páginas activa la fotografía una sola vez', () => {
