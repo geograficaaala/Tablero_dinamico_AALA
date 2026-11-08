@@ -1,162 +1,314 @@
-/* AALA | Cintillos institucionales de fotografías
- * No modifica gráficos, KPI, navegación ni metas.
- * Fotografías opcionales: si aún no existen, los marcos quedan neutros.
- */
+/* AALA · Espacios fotográficos discretos | No modifica gráficos ni KPI */
 body.aala-v2 .aala-photo-strip {
-  display:block;
-  position:relative;
-  width:100%;
-  margin:clamp(18px,2.8vw,34px) auto clamp(24px,3.6vw,44px);
-  padding:0;
-  border:0;
-  background:none;
-  box-shadow:none;
-  isolation:isolate;
+  width: 100%;
+  max-width: 1440px;
+  margin: clamp(24px, 4vw, 42px) auto;
+  padding: 0;
+  color: #284f6b;
 }
-body.aala-v2 .aala-photo-track {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(5px,.6vw,9px);
-  width:100%;
-  min-width:0;
+body.aala-v2 .aala-photo-heading {
+  margin: 0 0 13px;
+  text-align: center;
+  color: #294f6a;
+  font: 700 clamp(.95rem, 1.2vw, 1.06rem)/1.35 var(--aala-ui-type, 'Nunito', sans-serif) !important;
+  letter-spacing: .006em;
 }
-body.aala-v2 .aala-photo-frame {
-  position:relative;
-  min-width:0;
-  height:clamp(154px,18vw,215px);
-  overflow:hidden;
-  background:#e4edf0;
-  border:0;
-  border-radius:2px;
+body.aala-v2 .aala-photo-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  overflow: hidden;
+  border-radius: 6px;
 }
-body.aala-v2 .aala-photo-placeholder {
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  padding:12px;
-  background:linear-gradient(135deg,#e4edf0 0%,#f0f5f5 52%,#d9e7ec 100%);
-  color:#788d97;
-  text-align:center;
+body.aala-v2 .aala-photo-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 0;
+  height: clamp(145px, 19vw, 255px);
+  background: linear-gradient(140deg, #edf3f5, #dfe9ee);
+  border: 1px solid #dce8ee;
 }
-body.aala-v2 .aala-photo-placeholder span {
-  font-family:var(--aala-ui-type,'Nunito',sans-serif)!important;
-  font-size:clamp(.7rem,.85vw,.85rem)!important;
-  font-weight:600!important;
-  letter-spacing:.03em;
+body.aala-v2 .aala-photo-pending {
+  padding: 10px;
+  color: #7691a1;
+  text-align: center;
+  font: 600 .74rem/1.25 var(--aala-ui-type, 'Nunito', sans-serif) !important;
+  letter-spacing: .025em;
 }
-body.aala-v2 .aala-photo-img {
-  display:block;
-  width:100%;height:100%;
-  object-fit:cover;
-  object-position:center;
-  border:0;
-  opacity:0;
-  animation:aala-photo-reveal .55s ease-out forwards;
-  transition:transform .6s ease;
+body.aala-v2 .aala-photo-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  inset: 0;
+  transition: transform .55s ease;
 }
-@keyframes aala-photo-reveal {to {opacity:1;}}
-@media (hover:hover) and (prefers-reduced-motion:no-preference) {
-  body.aala-v2 .aala-photo-frame:hover .aala-photo-img {transform:scale(1.025);}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  body.aala-v2 .aala-photo-tile.aala-photo-loaded:hover img { transform: scale(1.025); }
+}
+/* En cada programa, un único cintillo de dos imágenes y altura contenida. */
+body.aala-v2 .aala-photo-strip--program,
+body.aala-v2 .aala-photo-strip--tul {
+  max-width: 1240px;
+  margin-block: 22px 31px;
+  padding-inline: clamp(0px, 1.5vw, 14px);
+}
+body.aala-v2 .aala-photo-strip--program .aala-photo-strip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+body.aala-v2 .aala-photo-strip--program .aala-photo-tile { height: clamp(115px, 13vw, 188px); }
+body.aala-v2 .aala-photo-strip--tul .aala-photo-strip-grid { grid-template-columns: 1fr; }
+body.aala-v2 .aala-photo-strip--tul .aala-photo-tile { height: clamp(95px, 10vw, 142px); }
+body.aala-v2 .aala-photo-strip--program .aala-photo-heading,
+body.aala-v2 .aala-photo-strip--tul .aala-photo-heading {font-size: .94rem !important;margin-bottom: 10px;}
+
+/* Portada del índice: la fotografía in1.jpg solo transforma el héroe si existe. */
+body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded {
+  position: relative !important;
+  isolation: isolate;
+  box-sizing: border-box;
+  width: 100vw !important;
+  max-width: none !important;
+  margin-left: calc(50% - 50vw) !important;
+  min-height: clamp(380px, 53vh, 630px) !important;
+  padding: clamp(45px, 5vw, 76px) max(27px, calc((100vw - 1320px)/2)) !important;
+  overflow: hidden;
+  background: #284a61;
+}
+body.aala-v2.aala-index .aala-photo-welcome-background,
+body.aala-v2.aala-index .aala-photo-welcome-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+body.aala-v2.aala-index .aala-photo-welcome-background {
+  background-position: center 48%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+body.aala-v2.aala-index .aala-photo-welcome-shade {
+  background: linear-gradient(90deg, rgba(11,34,50,.86) 0%, rgba(17,43,58,.68) 53%, rgba(16,40,54,.38) 100%);
+}
+body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded > :is(.hero-main,.hero-side) {
+  position: relative !important;
+  z-index: 1;
+}
+body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded .hero-main h1.hero-title,
+body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded .hero-main .eyebrow,
+body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded .hero-main p.hero-copy {
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.17);
+}
+body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded .hero-main p.hero-copy {
+  line-height: 1.55 !important;
+}
+body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded .hero-logo-card {
+  border-radius: 6px !important;
+  padding: 20px !important;
+  background: rgba(255,255,255,.86) !important;
+  max-width: 255px;
+  margin: auto;
+}
+@media (max-width: 860px) {
+  body.aala-v2 .aala-photo-strip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body.aala-v2 .aala-photo-strip--index .aala-photo-tile { height: clamp(120px, 25vw, 205px); }
+  body.aala-v2 .aala-photo-strip--index .aala-photo-tile:last-child { display: none; }
+  body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded { min-height: 0 !important; padding: 30px 22px !important; }
+  body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded .hero-logo-card { padding: 10px !important; }
+}
+@media (max-width: 520px) {
+  body.aala-v2 .aala-photo-strip--index .aala-photo-strip-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+  body.aala-v2 .aala-photo-strip--index .aala-photo-tile { height: 120px; }
+  body.aala-v2 .aala-photo-strip--program .aala-photo-tile { height: 115px; }
+  body.aala-v2 .aala-photo-strip--tul .aala-photo-tile { height: 105px; }
+  body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded { padding: 23px 17px !important; }
+  body.aala-v2.aala-index .hero-shell.aala-photo-welcome--loaded .hero-main p.hero-copy { line-height: 1.38 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.aala-v2 .aala-photo-tile img { transition: none !important; }
 }
 
-/* Índice: fotografías panorámicas, sin tarjetas, y portada junto al texto institucional. */
-body.aala-v2.aala-index .aala-photo-strip--index,
-body.aala-v2.aala-index .aala-photo-strip--projects {
-  width:calc(100vw - 2px);
-  margin-left:calc(50% - 50vw + 1px);
-  margin-right:calc(50% - 50vw + 1px);
-  margin-top:clamp(24px,3vw,44px);
-  margin-bottom:clamp(38px,5vw,65px);
-  max-width:none;
+
+/* Índice · bloques editoriales con fotografía difuminada */
+body.aala-v2.aala-index .aala-photo-editorial {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw) !important;
+  padding: clamp(36px, 5vw, 66px) max(22px, calc((100vw - 1320px) / 2));
 }
-body.aala-v2.aala-index .aala-photo-strip--index .aala-photo-track,
-body.aala-v2.aala-index .aala-photo-strip--projects .aala-photo-track {
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(3px,.4vw,8px);
+body.aala-v2.aala-index .aala-photo-editorial::before,
+body.aala-v2.aala-index .aala-photo-editorial::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity .65s ease, transform 1.1s ease;
 }
-body.aala-v2.aala-index .aala-photo-strip :is(.aala-photo-frame) {
-  height:clamp(175px,25vw,360px);
-  border-radius:0;
+body.aala-v2.aala-index .aala-photo-editorial::before {
+  opacity: 0;
+  background-image: var(--aala-editorial-photo);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: scale(1.03);
+}
+body.aala-v2.aala-index .aala-photo-editorial::after {
+  background: linear-gradient(135deg, rgba(249, 251, 252, .90), rgba(248, 250, 251, .82));
+}
+body.aala-v2.aala-index .aala-photo-editorial--warm::after {
+  background: linear-gradient(135deg, rgba(251, 248, 244, .86), rgba(248, 244, 237, .80));
+}
+body.aala-v2.aala-index .aala-photo-editorial--loaded::before { opacity: 1; }
+body.aala-v2.aala-index .aala-photo-editorial > * {
+  position: relative;
+  z-index: 1;
+}
+body.aala-v2.aala-index .aala-photo-editorial .story-panel,
+body.aala-v2.aala-index .aala-photo-editorial .narrative-stage,
+body.aala-v2.aala-index .aala-photo-editorial .coverage-card {
+  backdrop-filter: blur(2px);
+}
+body.aala-v2.aala-index .aala-photo-editorial .story-panel,
+body.aala-v2.aala-index .aala-photo-editorial .narrative-stage {
+  background: rgba(255, 255, 255, .74);
+  border: 1px solid rgba(202, 218, 228, .65);
+  border-radius: 10px;
+  padding: clamp(24px, 3vw, 38px);
+  box-shadow: 0 16px 34px rgba(38, 79, 106, .09);
+}
+body.aala-v2.aala-index .aala-photo-editorial .coverage-card {
+  background: rgba(255, 255, 255, .78);
+  border-color: rgba(202, 218, 228, .74);
+  box-shadow: 0 16px 34px rgba(38, 79, 106, .09);
 }
 
-body.aala-v2.aala-index .hero-shell.aala-photo-hero {
-  position:relative!important;
-  isolation:isolate;
-  width:calc(100vw - 2px)!important;
-  max-width:none!important;
-  margin-left:calc(50% - 50vw + 1px)!important;
-  margin-right:calc(50% - 50vw + 1px)!important;
-  min-height:clamp(380px,39vw,565px);
-  padding:clamp(44px,5.8vw,88px) max(22px,calc((100vw - 1280px)/2))!important;
-  overflow:hidden;
-  background:#ebf1f4;
+/* Pestaña Programas y proyectos · hero dinámico de fotografía difuminada */
+body.aala-v2.aala-index .aala-program-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100vw;
+  max-width: none;
+  min-height: clamp(250px, 36vw, 410px);
+  margin-left: calc(50% - 50vw) !important;
+  margin-bottom: clamp(18px, 2.8vw, 28px);
+  background: linear-gradient(135deg, #eaf1f4, #dce6ec);
 }
-body.aala-v2.aala-index .aala-photo-hero-background {
-  position:absolute;inset:0;z-index:0;
-  background-position:center 50%;background-size:cover;
-  opacity:0;
-  transition:opacity .55s ease-out;
-  pointer-events:none;
+body.aala-v2.aala-index .aala-program-hero-media,
+body.aala-v2.aala-index .aala-program-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
-body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .aala-photo-hero-background {opacity:1;}
-body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready::before {
-  content:""!important;
-  display:block!important;
-  position:absolute;inset:0;z-index:1;
-  pointer-events:none;
-  background:linear-gradient(90deg,rgba(13,38,57,.81) 0%,rgba(19,48,65,.70) 55%,rgba(18,46,59,.51) 100%);
+body.aala-v2.aala-index .aala-program-hero-media {
+  background-image: var(--aala-program-hero-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.045);
+  transition: opacity .55s ease, transform 1.1s ease;
 }
-body.aala-v2.aala-index .aala-photo-hero > :not(.aala-photo-hero-background) {
-  position:relative;z-index:2;
+body.aala-v2.aala-index .aala-program-hero-overlay {
+  background: linear-gradient(90deg, rgba(251,252,253,.84) 0%, rgba(251,252,253,.74) 34%, rgba(251,252,253,.54) 100%);
+  backdrop-filter: blur(2px);
 }
-body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .hero-main .eyebrow,
-body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .hero-main h1.hero-title {
-  color:#fff!important;
-  text-shadow:0 2px 16px rgba(5,20,31,.25)!important;
+body.aala-v2.aala-index .aala-program-hero--loaded .aala-program-hero-media { opacity: 1; }
+body.aala-v2.aala-index .aala-program-hero-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1320px, calc(100vw - 48px));
+  min-height: inherit;
+  margin: 0 auto;
+  padding: clamp(34px, 5vw, 68px) 0;
+  display: flex;
+  align-items: flex-end;
 }
-body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .hero-main.card p.hero-copy,
-body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready .hero-main.card .hero-copy strong {
-  color:#f5f9fa!important;
-  text-shadow:0 1px 8px rgba(5,20,31,.26)!important;
+body.aala-v2.aala-index .aala-program-hero-copy {
+  max-width: min(740px, 100%);
+  color: #284f6b;
 }
-body.aala-v2.aala-index .aala-photo-hero.aala-photo-hero-ready img.hero-logo {
-  filter:drop-shadow(0 3px 12px rgba(0,0,0,.35))!important;
+body.aala-v2.aala-index .aala-program-hero-kicker {
+  margin-bottom: 8px;
+  font: 800 .77rem/1.2 var(--aala-ui-type, 'Nunito', sans-serif) !important;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: #355f7d;
+}
+body.aala-v2.aala-index .aala-program-hero-title {
+  margin: 0 0 10px;
+  font: 800 clamp(2.35rem, 6vw, 4rem)/.96 var(--aala-ui-type, 'Nunito', sans-serif) !important;
+  letter-spacing: -.03em;
+  color: #284f6b;
+}
+body.aala-v2.aala-index .aala-program-hero-text {
+  margin: 0;
+  max-width: 58ch;
+  font: 600 clamp(1rem, 1.25vw, 1.16rem)/1.6 var(--aala-ui-type, 'Nunito', sans-serif) !important;
+  color: rgba(40, 79, 107, .96);
+}
+body.aala-v2.aala-index .aala-program-hero-period {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.68);
+  border: 1px solid rgba(90, 130, 158, .18);
+  font: 700 .87rem/1.2 var(--aala-ui-type, 'Nunito', sans-serif) !important;
+  color: #355f7d;
 }
 
-/* Tul lleva un cintillo más bajo para que siga siendo una página informativa. */
-body.aala-v2 .aala-photo-strip--tul {margin-block:16px 24px;}
-body.aala-v2 .aala-photo-strip--tul .aala-photo-frame {height:clamp(105px,12vw,145px);}
+/* Suavizar el espacio entre el hero de programas y el selector mensual */
+body.aala-v2.aala-index .program-month-toolbar {
+  margin-top: 0 !important;
+}
 
-@media (max-width:860px) {
-  body.aala-v2.aala-index .hero-shell.aala-photo-hero {
-    min-height:0;
-    padding:32px 22px!important;
-    gap:10px!important;
+@media (max-width: 860px) {
+  body.aala-v2.aala-index .aala-photo-editorial {
+    padding: 28px 18px;
   }
-  body.aala-v2.aala-index .aala-photo-strip .aala-photo-frame {height:clamp(160px,29vw,235px);}
-  body.aala-v2 .aala-photo-strip--program .aala-photo-frame {height:clamp(140px,23vw,185px);}
-}
-@media (max-width:520px) {
-  body.aala-v2.aala-index .hero-shell.aala-photo-hero {
-    width:100%!important;
-    margin:0!important;
-    padding:28px 16px!important;
+  body.aala-v2.aala-index .aala-photo-editorial .story-panel,
+  body.aala-v2.aala-index .aala-photo-editorial .narrative-stage {
+    padding: 22px 18px;
   }
-  body.aala-v2.aala-index .aala-photo-strip--index,
-  body.aala-v2.aala-index .aala-photo-strip--projects {
-    width:100%;margin-inline:0;
+  body.aala-v2.aala-index .aala-program-hero {
+    min-height: 240px;
+    margin-bottom: 18px;
   }
-  body.aala-v2.aala-index .aala-photo-strip .aala-photo-track {gap:3px;}
-  body.aala-v2.aala-index .aala-photo-strip .aala-photo-frame {height:120px;}
-  body.aala-v2 .aala-photo-strip--program .aala-photo-frame {height:125px;}
-  body.aala-v2 .aala-photo-strip--tul .aala-photo-frame {height:95px;}
-  body.aala-v2 .aala-photo-placeholder span {font-size:.62rem!important;}
+  body.aala-v2.aala-index .aala-program-hero-shell {
+    width: min(100vw - 34px, 1320px);
+    padding: 28px 0;
+  }
+  body.aala-v2.aala-index .aala-program-hero-period {
+    padding: 9px 12px;
+    font-size: .82rem !important;
+  }
 }
-@media (prefers-reduced-motion:reduce) {
-  body.aala-v2 .aala-photo-img {animation:none;opacity:1;transition:none;}
-  body.aala-v2 .aala-photo-hero-background {transition:none;}
-}
-@media print {
-  body.aala-v2 .aala-photo-strip {display:none!important;}
-  body.aala-v2.aala-index .hero-shell.aala-photo-hero {min-height:0;width:auto!important;margin:0!important;}
-  body.aala-v2.aala-index .aala-photo-hero-background {display:none!important;}
+@media (max-width: 540px) {
+  body.aala-v2.aala-index .aala-photo-editorial {
+    padding: 24px 14px;
+  }
+  body.aala-v2.aala-index .aala-program-hero {
+    min-height: 216px;
+  }
+  body.aala-v2.aala-index .aala-program-hero-shell {
+    width: min(100vw - 26px, 1320px);
+    padding: 24px 0;
+  }
+  body.aala-v2.aala-index .aala-program-hero-title {
+    font-size: clamp(2rem, 9vw, 2.6rem) !important;
+  }
+  body.aala-v2.aala-index .aala-program-hero-period {
+    display: inline-block;
+  }
 }
