@@ -77,12 +77,12 @@ function installSharedSummaryBackground() {
   });
 }
 
-// Una sola imagen de fondo detrás del carrusel y su selector mensual.
+// Una sola imagen de fondo detrás de la sección de programas y proyectos.
 function installProgramsBackground() {
   const page = document.querySelector('#page-programas');
   if (!page || page.dataset.aalaProgramsBackground === 'true') return;
   page.dataset.aalaProgramsBackground = 'true';
-  preloadPhoto('index', 'in5.jpg', (src) => {
+  preloadPhoto('index', 'in4.jpg', (src) => {
     if (!page.isConnected) return;
     page.style.setProperty('--aala-programs-background', `url("${src}")`);
     page.classList.add('aala-programs-background--loaded');
@@ -174,7 +174,6 @@ export function installAalaPhotos() {
   installWelcomeImage();
   installSharedSummaryBackground();
   installProgramsBackground();
-  installCarouselMarquees();
   installScrollTextReveal();
 }
 
