@@ -1,4 +1,4 @@
-import { APPS_SCRIPT_WEBAPP_URL } from './report-config.mjs';
+import { loadMonthlyReport, gmailDraftForReport } from './report-gmail.mjs';
 const FILES = {
   'atitlan-recicla.html':'atitlan_recicla',
   'conservando-atitlan.html':'conservando_atitlan',
@@ -17,23 +17,33 @@ function currentPeriod(){
   const month=pills.indexOf(selected)+1;
   return month>=1&&month<=12?`2026-${String(month).padStart(2,'0')}`:null;
 }
-function launch(action){
-  const period=currentPeriod();
-  if(!period){window.alert('Selecciona primero un mes con datos publicados.');return;}
-  const params=new URLSearchParams({programa:PROGRAM,mes:period});
-  if(action==='mail'){
-    if(!APPS_SCRIPT_WEBAPP_URL){
-      window.alert('El envío automático todavía no está configurado. Falta añadir la URL /exec de Apps Script en src/reports/report-config.mjs.');
-      return;
-    }
-    const url=new URL(APPS_SCRIPT_WEBAPP_URL);
-    url.searchParams.set('programa',PROGRAM);
-    url.searchParams.set('mes',period);
-    window.open(url.toString(),'_blank','noopener,noreferrer');
+async function launch(action) {
+  const period = currentPeriod();
+  if (!period) {
+    window.alert('Selecciona primero un mes con datos publicados.');
     return;
   }
-  const url=`./informe.html?${params.toString()}`;
-  window.open(url,'_blank','noopener,noreferrer');
+  if (action === 'mail') {
+    // Abrir la ventana durante el clic evita que el bloqueador de ventanas emergentes
+    // interrumpa la navegación después de cargar los datos del informe.
+    const draftWindow = window.open('about:blank', '_blank');
+    if (!draftWindow) {
+      window.alert('El navegador bloqueó la nueva ventana. Permite ventanas emergentes para este sitio y vuelve a intentarlo.');
+      return;
+    }
+    try {
+      draftWindow.opener = null;
+      draftWindow.document.body.textContent = 'Preparando el borrador del informe en Gmail…';
+      const report = await loadMonthlyReport(PROGRAM, period);
+      draftWindow.location.replace(gmailDraftForReport(report));
+    } catch (error) {
+      draftWindow.close();
+      window.alert(`No se pudo preparar el borrador de Gmail: ${error.message}`);
+    }
+    return;
+  }
+  const params = new URLSearchParams({ programa: PROGRAM, mes: period });
+  window.open(`./informe.html?${params.toString()}`, '_blank', 'noopener,noreferrer');
 }
 function enhance(){
   if(!PROGRAM)return;
@@ -47,10 +57,10 @@ function enhance(){
     actions.querySelector('#btnMail').before(btn);
   }
   const mail=actions.querySelector('#btnMail');
-  mail.setAttribute('aria-label','Abrir formulario de envío automático del informe');
+  mail.setAttribute('aria-label','Abrir borrador del informe en Gmail');
   const label=mail.querySelector('span:last-child');
-  if(label && label.textContent!=='Enviar informe por correo')label.textContent='Enviar informe por correo';
-  else if(!mail.querySelector('svg') && mail.textContent!=='Enviar informe por correo')mail.textContent='Enviar informe por correo';
+  if(label && label.textContent!=='Preparar correo en Gmail')label.textContent='Preparar correo en Gmail';
+  else if(!mail.querySelector('svg') && mail.textContent!=='Preparar correo en Gmail')mail.textContent='Preparar correo en Gmail';
 }
 export function installReportActions(){
   if(!PROGRAM||typeof document==='undefined')return;
