@@ -376,3 +376,89 @@ body[data-aala-portada] :is(section.hero, section.fm-hero)::before {
     .hero-inline-logo, .hero-logo, .fm-hero-image img
   ) { max-width: 116px !important; max-height: 98px !important; }
 }
+
+/* ================================================================
+   Ajuste final solicitado: sin recuadro, sin subtítulo adicional,
+   logos un poco más grandes y todos los títulos blancos.
+   Ámbito EXCLUSIVO: portada de cada programa; no afecta los KPI.
+   ================================================================ */
+
+/* El contenido continúa centrado, pero directamente sobre la imagen.
+   Se quita por completo el rectángulo azul (incluyendo sus bordes). */
+body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) > :is(.hero-main, .fm-hero-text) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  padding: 8px 0 !important;
+}
+
+/* Quitar únicamente los sobre-títulos en las portadas.
+   El nombre principal del programa y su descripción permanecen. */
+body[data-aala-portada] :is(section.hero, section.fm-hero) :is(
+  .fm-overline, .hero-eyebrow, .hero-kicker
+) {
+  display: none !important;
+}
+
+/* Un poco más de espacio para el logo, manteniendo el texto en la
+   primera columna y sin tapar las caras del lado izquierdo. */
+body[data-aala-portada] :is(section.hero, section.fm-hero) {
+  grid-template-columns: minmax(0, 1fr) minmax(154px, 225px) !important;
+}
+body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) > :is(
+  .hero-side, .hero-logo-card, .fm-hero-image
+) {
+  margin-left: -18px !important;
+}
+body[data-aala-portada] :is(section.hero, section.fm-hero) :is(
+  .hero-logo-card img, .hero-side img, .program-logo-card img,
+  .hero-inline-logo, .hero-logo, .fm-hero-image img
+) {
+  width: 100% !important;
+  max-width: 225px !important;
+  max-height: 180px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+/* Educando: neutralizar expresamente la regla que impone azul y
+   -webkit-text-fill-color: initial al título de la portada. */
+body[data-aala-portada="ec"] #resumen.hero.present-slide .hero-main h1,
+body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) :is(
+  .hero-main, .fm-hero-text
+) h1 {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 1100px) {
+  body[data-aala-portada] :is(section.hero, section.fm-hero) {
+    grid-template-columns: minmax(0, 1fr) minmax(115px, 164px) !important;
+  }
+  body[data-aala-portada] :is(section.hero, section.fm-hero) :is(
+    .hero-logo-card img, .hero-side img, .program-logo-card img,
+    .hero-inline-logo, .hero-logo, .fm-hero-image img
+  ) { max-width: 164px !important; max-height: 146px !important; }
+}
+@media (max-width: 720px) {
+  body[data-aala-portada] :is(section.hero, section.fm-hero) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  body[data-aala-portada] :is(#resumen, #heroSection, #fmHero, section.hero) > :is(
+    .hero-side, .hero-logo-card, .fm-hero-image
+  ) { margin: 0 !important; }
+  body[data-aala-portada] :is(section.hero, section.fm-hero) :is(
+    .hero-logo-card img, .hero-side img, .program-logo-card img,
+    .hero-inline-logo, .hero-logo, .fm-hero-image img
+  ) { max-width: 142px !important; max-height: 125px !important; }
+}
