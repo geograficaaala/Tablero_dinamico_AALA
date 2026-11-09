@@ -70,5 +70,13 @@
   ],
   "inmuebles_con_entrega_calculados": 93,
   "resumen_fuente": "El valor de recolección del cuadro de indicadores coincide con la suma de los diez totales municipales del informe operativo. Los litros individuales se conservan sin corregir diferencias de redondeo.",
-  "nota_interna": "El informe registra 7,072 litros distribuidos en diez municipios. El detalle por establecimiento presenta pequeñas diferencias de redondeo frente a los totales municipales, que se conservan conforme al resumen oficial. Producción de jabones: 5,000 de hotel y 500 de tocador. Ventas de jabones: 2,000 de hotel y 0 de tocador, por Q2,200. Se registran 450 velas vendidas por Q7,452 en una operación separada de la venta de jabones. Ocho publicaciones en redes y segunda prueba de jabón líquido. Se respeta la meta mensual de 6,670 litros indicada en el informe de octubre."
+  "nota_interna": "El informe registra 7,072 litros distribuidos en diez municipios. El detalle por establecimiento presenta pequeñas diferencias de redondeo frente a los totales municipales, que se conservan conforme al resumen oficial. Producción de jabones: 5,000 de hotel y 500 de tocador. Ventas de jabones: 2,000 de hotel y 0 de tocador, por Q2,200. Se registran 450 velas vendidas por Q7,452 en una operación separada de la venta de jabones. Ocho publicaciones en redes y segunda prueba de jabón líquido. Se respeta la meta mensual de 6,670 litros indicada en el informe de octubre.",
+  "actualizaciones_posteriores": {
+    "velas_vendidas_mes": {
+      "dato_original_informe": 450,
+      "dato_vigente_publicado": 730,
+      "fecha_de_registro": "2026-11-09",
+      "motivo": "Corrección de las velas de octubre solicitada para el tablero; el informe original conserva 450 velas."
+    }
+  }
 }
