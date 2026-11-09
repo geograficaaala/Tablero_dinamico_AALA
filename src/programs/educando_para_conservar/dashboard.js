@@ -256,6 +256,13 @@ const PATHS = {
       return greenToneFromProgress(status, progress);
     }
 
+    // Octubre 2026: la única meta que permanece abierta es Ferias ambientales.
+    // La clausura es un estado de presentación; no altera los resultados históricos.
+    function octoberWindowState(labelOrKey, period = state.periodo){
+      if(String(period) !== '2026-10') return null;
+      return /ferias/i.test(String(labelOrKey || '')) ? 'active' : 'closed';
+    }
+
     function badgeText(status, progress){
       if(status==='pending') return 'Programado';
       if(status==='closed') return 'Ventana cerrada';
@@ -425,8 +432,8 @@ const PATHS = {
         hideWindow:true,
         tone: greenToneFromProgress(isActive ? 'active' : 'pending', monthlyProgress),
         chip: isActive ? `Cohorte ${cohort}` : '',
-        valueText: diplomaMonthlyStudentMainText(state.periodo),
-        reference: isActive ? `Meta mensual <strong>${fmt(monthlyTarget)} estudiantes sostenidos</strong>` : 'Estado <strong>Programado</strong>',
+        valueText: octoberWindowState('Estudiantes del diplomado') === 'closed' ? 'Ventana cerrada' : diplomaMonthlyStudentMainText(state.periodo),
+        reference: octoberWindowState('Estudiantes del diplomado') === 'closed' ? 'Ciclo formativo <strong>concluido</strong>' : (isActive ? `Meta mensual <strong>${fmt(monthlyTarget)} estudiantes sostenidos</strong>` : 'Estado <strong>Programado</strong>'),
         line1:'',
         line2: isActive ? `Cumplimiento de meta mensual: <strong>${fmtPct(monthlyProgress)}</strong>` : '',
         progressWidth: Math.min(monthlyProgress, 1) * 100,
@@ -446,8 +453,8 @@ const PATHS = {
         hideWindow:true,
         tone: greenToneFromProgress(isActive ? 'active' : 'pending', isActive ? 1 : 0),
         chip: isActive ? `Cohorte ${sessions[0].cohort}` : '',
-        valueText: isActive ? label : 'Programado',
-        reference: isActive ? `Meta mensual <strong>${fmt(actual)} ${esc(sessionUnit(actual))}</strong>` : 'Estado <strong>Programado</strong>',
+        valueText: octoberWindowState('Módulos del diplomado') === 'closed' ? 'Ventana cerrada' : (isActive ? label : 'Programado'),
+        reference: octoberWindowState('Módulos del diplomado') === 'closed' ? 'Ciclo formativo <strong>concluido</strong>' : (isActive ? `Meta mensual <strong>${fmt(actual)} ${esc(sessionUnit(actual))}</strong>` : 'Estado <strong>Programado</strong>'),
         line1:'',
         line2: isActive ? 'Cumplimiento de meta mensual: <strong>100.00%</strong>' : '',
         progressWidth: isActive ? 100 : 0,
@@ -551,7 +558,7 @@ const PATHS = {
       const startMonth = cfg.start;
       const endMonth = cfg.end;
       const hasWindow = Number.isFinite(Number(startMonth)) && Number.isFinite(Number(endMonth));
-      const status = !hasWindow ? 'pending' : (monthNum < startMonth ? 'pending' : (monthNum > endMonth ? 'closed' : 'active'));
+      const status = octoberWindowState(cfg.key, row.periodo_clave) || (!hasWindow ? 'pending' : (monthNum < startMonth ? 'pending' : (monthNum > endMonth ? 'closed' : 'active')));
       const progress = cfg.target > 0 ? actual / cfg.target : 0;
       const tone = toneFromProgress(status, progress);
       const isPendingWithoutResult = status === 'pending' && actual === 0;
@@ -575,16 +582,21 @@ const PATHS = {
     }
 
     function renderKpiCard(data, index){
+      const octoberStatus = octoberWindowState(data.label);
+      const octoberBadge = octoberStatus
+        ? `<div class="kpi-achieved" aria-label="Estado de la meta">${octoberStatus === 'closed' ? 'Ventana cerrada' : 'Activa'}</div>`
+        : '';
       if(String(data.customHtml || '').trim()){
         return `
         <article class="card kpi annual-kpi ${data.tone}" style="--delay:${index*80}ms">
+          ${octoberBadge}
           <div class="kpi-custom">${data.customHtml}</div>
         </article>`;
       }
 
       const parts=splitDisplayValue(data.valueText);
       const windowMarkup = data.hideWindow || !String(data.window || '').trim() ? '' : `<div class="kpi-window">${esc(data.window)}</div>`;
-      const chipMarkup = String(data.chip || '').trim() ? `<div class="kpi-achieved">${esc(data.chip)}</div>` : '';
+      const chipMarkup = octoberBadge || (String(data.chip || '').trim() ? `<div class="kpi-achieved">${esc(data.chip)}</div>` : '');
       const line1Markup = String(data.line1 || '').trim() ? `<div class="kpi-meta">${data.line1}</div>` : '';
       const line2Markup = String(data.line2 || '').trim() ? `<div class="kpi-meta">${data.line2}</div>` : '';
       const readingsMarkup = (line1Markup || line2Markup) ? `<div class="kpi-readings">${line1Markup}${line2Markup}</div>` : '';
@@ -689,6 +701,8 @@ const PATHS = {
     }
 
     function annualOperationalStatus(cfg, row){
+      const octoberStatus = octoberWindowState(cfg.key, row.periodo_clave);
+      if(octoberStatus) return octoberStatus;
       const monthNum = Number(row.mes_num || 0);
       if(cfg.start == null || cfg.end == null) return 'pending';
       if(monthNum < Number(cfg.start)) return 'pending';
@@ -883,6 +897,16 @@ const PATHS = {
       return OP_CONFIG.map(cfg => {
         const actual = Number(row[cfg.key] || 0);
         const target = Number(cfg.target || 0);
+        const octoberStatus = octoberWindowState(cfg.key, row.periodo_clave);
+        if(octoberStatus){
+          const pct = target > 0 ? actual / target : 0;
+          return {
+            label: cfg.label, actual, target, status: octoberStatus, pct,
+            pctLabel: octoberStatus === 'closed' ? 'Ventana cerrada' : fmtPct(pct),
+            width: Math.max(0, Math.min(100, pct * 100)),
+            detail: `${fmt(actual)} de ${fmt(target)}`
+          };
+        }
         const annualCfg = OP_ANNUAL_META.find(item => item.key === cfg.key);
         const annualActual = annualCfg ? annualActualValue(cfg.key, row.periodo_clave || state.periodo) : 0;
         const annualTarget = Number(annualCfg?.annualTarget || 0);
