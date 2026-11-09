@@ -600,3 +600,147 @@ body.aala-v2.aala-index .program-card :is(.program-title,.prog-score-value,.metr
   }
   body.aala-v2.aala-index .header-logo-img {height:48px!important;}
 }
+
+
+/* ===========================================================
+   AALA · Navegación y presentación con zoom del navegador
+   2026-11-09 · Solo header, carrusel mensual y tarjetas del índice.
+   =========================================================== */
+
+/* Seis programas: regreso directo a la tarjeta abierta, visible a cualquier zoom. */
+body.aala-v2:not(.aala-index) .aala-v2-actions > .aala-v2-return-to-programs {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  gap: 6px !important;
+  min-height: 33px !important;
+  padding: 6px 11px !important;
+  border: 1px solid #2b638d !important;
+  border-radius: 5px !important;
+  background: #2b638d !important;
+  color: #ffffff !important;
+  font: 800 .76rem/1.2 var(--aala-ui-type) !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+}
+body.aala-v2:not(.aala-index) .aala-v2-actions > .aala-v2-return-to-programs:hover,
+body.aala-v2:not(.aala-index) .aala-v2-actions > .aala-v2-return-to-programs:focus-visible {
+  background: #17496f !important;
+  color: #ffffff !important;
+  outline-offset: 2px !important;
+}
+body.aala-v2:not(.aala-index) .aala-v2-return-to-programs > span:first-child {
+  font-size: 1.22em !important;
+  line-height: .85 !important;
+}
+/* Se mantienen los meses, pero desaparece el rótulo redundante «Mes · 2026». */
+body.aala-v2:not(.aala-index) .aala-v2-month-container :is(.aala-v2-month-label,.period-rack-label) {
+  display: none !important;
+}
+@media (max-width: 1370px) {
+  body.aala-v2:not(.aala-index) .aala-v2-actions {
+    justify-content: flex-start !important;
+  }
+}
+
+/* Índice: selector mensual persistente por encima de las tarjetas,
+   y desplazado dinámicamente según el alto real del header al 175%. */
+body.aala-v2.aala-index #page-programas .program-month-toolbar.program-month-toolbar {
+  position: sticky !important;
+  top: var(--aala-index-header-height, 76px) !important;
+  z-index: 45 !important;
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+  padding: 10px clamp(10px,1.5vw,20px) !important;
+  background: rgba(19, 47, 69, .97) !important;
+  border-bottom: 1px solid rgba(255,255,255,.25) !important;
+  border-radius: 0 0 7px 7px !important;
+  box-shadow: 0 4px 12px rgba(7,22,37,.18) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+body.aala-v2.aala-index #page-programas .program-month-copy :is(strong,span),
+body.aala-v2.aala-index #page-programas #programMonthLabel {
+  color: #ffffff !important;
+}
+body.aala-v2.aala-index #page-programas #programMonthButtons button {
+  color: #ffffff !important;
+}
+body.aala-v2.aala-index #page-programas #programMonthButtons button:is(.active,[aria-pressed="true"]) {
+  color: #ffffff !important;
+}
+
+/* A zoom alto la misma tarjeta pasa de 4 columnas a 2,
+   conservando todos los indicadores, valores y barras (sin recortarlos). */
+@media (max-width: 1100px) {
+  body.aala-v2.aala-index #page-programas .program-card .metric-header {
+    display: none !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-card .metric-row,
+  body.aala-v2.aala-index #page-programas .program-card.no-monthly .metric-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 11px 18px !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-card .metric-row .mname {
+    grid-column: 1 / -1 !important;
+    min-width: 0 !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-card .metric-row :is(.mcol-acum,.mcol-pct,.mcol-monthly) {
+    display: grid !important;
+    min-width: 0 !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-card .mcol-acum::before,
+  body.aala-v2.aala-index #page-programas .program-card .mcol-pct::before,
+  body.aala-v2.aala-index #page-programas .program-card .mcol-monthly::before {
+    color: #55799c !important;
+    font-size: .67rem !important;
+    line-height: 1.3 !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: .03em !important;
+    margin-bottom: 5px !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-card .mcol-acum::before {
+    content: "Avance acumulado / meta anual";
+  }
+  body.aala-v2.aala-index #page-programas .program-card .mcol-pct::before {
+    content: "Porcentaje de avance";
+  }
+  body.aala-v2.aala-index #page-programas .program-card .mcol-monthly::before {
+    content: "Cumplimiento mensual";
+  }
+  body.aala-v2.aala-index #page-programas .program-card .metric-note-full {
+    grid-column: 1 / -1 !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-card {
+    min-width: 0 !important;
+    overflow-wrap: anywhere;
+  }
+  body.aala-v2.aala-index #page-programas .program-month-toolbar {
+    flex-wrap: wrap !important;
+    gap: 9px !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-month-buttons {
+    flex-wrap: nowrap !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.aala-v2.aala-index #page-programas .program-month-btn {
+    flex: 0 0 auto !important;
+  }
+}
+@media (max-width: 600px) {
+  body.aala-v2.aala-index #page-programas .program-card .metric-row,
+  body.aala-v2.aala-index #page-programas .program-card.no-monthly .metric-row {
+    grid-template-columns: minmax(0,1fr) !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-card .metric-row .mname,
+  body.aala-v2.aala-index #page-programas .program-card .metric-note-full {
+    grid-column: 1 !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-card { padding-inline: 22px !important; }
+}
