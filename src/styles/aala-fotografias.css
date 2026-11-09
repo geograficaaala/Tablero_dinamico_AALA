@@ -579,3 +579,69 @@ body.aala-v2.aala-index :is(#page-resumen, #page-programas) > .wrap {
 body.aala-v2.aala-index footer.site-footer[data-aala-refined="true"] {
   margin-top: 0 !important;
 }
+
+
+/* 2026-11-09 · Reparación de flechas del carrusel.
+   Al quitar los cintillos quedó sin alto la barra de controles, cuyas flechas
+   eran absolutas. Se restablece una fila normal visible al 100% y al 175%. */
+body.aala-v2.aala-index #page-programas .program-carousel .program-carousel-actions {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 64px !important;
+  min-height: 64px !important;
+  margin: 0 0 10px 0 !important;
+  padding: 5px clamp(8px, 1.5vw, 22px) !important;
+  overflow: visible !important;
+  isolation: isolate;
+  z-index: 4 !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-actions > .program-carousel-arrow,
+body.aala-v2.aala-index #page-programas #programCarouselPrev,
+body.aala-v2.aala-index #page-programas #programCarouselNext {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  flex: 0 0 44px !important;
+  width: 44px !important;
+  height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 5 !important;
+  background: rgba(255,255,255,.98) !important;
+  color: #1e4a68 !important;
+  box-shadow: 0 2px 10px rgba(6,32,51,.24) !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-actions > .program-carousel-arrow:disabled {
+  opacity: .52 !important;
+}
+body.aala-v2.aala-index #page-programas .program-carousel-actions > .program-carousel-dots {
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  flex: 0 1 auto !important;
+  margin: 0 auto !important;
+  z-index: 5 !important;
+}
+@media (max-width: 520px) {
+  body.aala-v2.aala-index #page-programas .program-carousel .program-carousel-actions {
+    padding-inline: 4px !important;
+  }
+  body.aala-v2.aala-index #page-programas .program-carousel-actions > .program-carousel-arrow,
+  body.aala-v2.aala-index #page-programas #programCarouselPrev,
+  body.aala-v2.aala-index #page-programas #programCarouselNext {
+    flex-basis: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
