@@ -34,7 +34,7 @@ test('la carga inicial renderiza cifras y metas desde CSV',()=>{
   assert.match(element('kpiGrid').innerHTML,/90,000|90000/);
   assert.match(element('kpiComplementGrid').innerHTML,/Seguimiento cartográfico de mapas/);
   assert.equal(element('sourceBanner').textContent,'');
-  assert.match(element('heroSurvival').textContent,/68/);
+  assert.match(element('heroSurvival').textContent,/71/);
   assert.ok(element('reforestacionHeaderMount')!==undefined);
 });
 test('filtro mensual cambia cifras sin advertencias de procedencia',()=>{
@@ -48,6 +48,7 @@ test('filtro mensual cambia cifras sin advertencias de procedencia',()=>{
 });
 test('resumen ejecutivo y presentación se generan con el mes seleccionado',()=>{
   ctx.window.setReforestaPeriod('2026-09');
+  assert.match(element('heroSurvival').textContent,/68/);
   assert.match(element('execKpiGrid').innerHTML,/35,000|35000/);
   ctx.openPresentation();
   assert.match(element('presentationTrack').innerHTML,/Reforestando Atitlán/i);
