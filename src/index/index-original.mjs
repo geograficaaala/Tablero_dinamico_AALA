@@ -1,21 +1,50 @@
 
 import { construirProgramaInstitucional } from './indicadores-institucionales.mjs';
+import { programIdFromSearch, rememberedProgramId, rememberProgramId } from '../components/aala-program-return.mjs';
 
 /* ────────────────────────────────
    NAVEGACIÓN POR TABS
 ──────────────────────────────── */
-document.querySelectorAll('.nav-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    const page = document.getElementById('page-' + tab.dataset.page);
-    if (page) page.classList.add('active');
-    if (tab.dataset.page === 'programas'){
-      window.requestAnimationFrame(() => goToProgramCarousel(programCarouselIndex, 'auto'));
-    }
+const returnProgramId = programIdFromSearch(window.location.search);
+if (returnProgramId) rememberProgramId(returnProgramId);
+
+function showIndexPage(name, { resetScroll = true, updateUrl = true } = {}) {
+  if (name !== 'resumen' && name !== 'programas') return;
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    const active = tab.dataset.page === name;
+    tab.classList.toggle('active', active);
+    tab.setAttribute('aria-selected', String(active));
   });
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.toggle('active', page.id === `page-${name}`);
+  });
+  // La pestaña queda registrada ANTES de abrir cualquier HTML independiente:
+  // el botón Atrás del navegador vuelve a Programas, no a Resumen.
+  if (updateUrl && window.location.hash !== `#${name}`) {
+    window.history.replaceState(window.history.state, '', `#${name}`);
+  }
+  if (resetScroll) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  if (name === 'programas') {
+    window.requestAnimationFrame(() => goToProgramCarousel(programCarouselIndex, 'auto'));
+  }
+}
+
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => showIndexPage(tab.dataset.page));
 });
+
+// El header puede ocupar varias filas cuando el navegador está al 175%.
+// El selector mensual pegajoso debe quedar SIEMPRE debajo de él.
+const indexHeader = document.querySelector('body.aala-index > header.header');
+if (indexHeader) {
+  const measureHeader = () => document.documentElement.style.setProperty(
+    '--aala-index-header-height', `${Math.ceil(indexHeader.getBoundingClientRect().height)}px`
+  );
+  measureHeader();
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(measureHeader).observe(indexHeader);
+  window.addEventListener('resize', measureHeader);
+}
+
 
 /* ────────────────────────────────
    UTILIDADES
@@ -244,6 +273,9 @@ function updateProgramCarouselControls(index = programCarouselIndex){
   if (!items.length) return;
 
   programCarouselIndex = Math.max(0, Math.min(index, items.length - 1));
+  if (document.getElementById('page-programas')?.classList.contains('active')) {
+    rememberProgramId(items[programCarouselIndex].dataset.programId);
+  }
   const prev = document.getElementById('programCarouselPrev');
   const next = document.getElementById('programCarouselNext');
   const dots = document.getElementById('programCarouselDots');
@@ -588,7 +620,8 @@ function renderProgramMonth(month){
   previousRenderedMonth = month;
   ++numberAnimationRevision; // Cancela una animación anterior al elegir otro mes.
   const currentItems=programCarouselItems();
-  const activeProgramId=currentItems[programCarouselIndex]?.dataset.programId || null;
+  const activeProgramId=currentItems[programCarouselIndex]?.dataset.programId ||
+    (window.location.hash === '#programas' ? (returnProgramId || rememberedProgramId()) : null);
   selectedMonth=month;
   paintMonthButtons();
   const label=document.getElementById('programMonthLabel');
@@ -621,6 +654,25 @@ function renderProgramMonth(month){
     if(meter) meter.style.width='0%';
   }
 }
+// Delegación: no se pierde al reconstruir las tarjetas por cambio de mes.
+document.getElementById('programCarouselViewport')?.addEventListener('click', event => {
+  const link = event.target.closest('a[href]');
+  const card = link?.closest('.program-card');
+  if (card) rememberProgramId(card.dataset.programId);
+});
+
+// En recarga directa o tras pulsar Atrás, recuperar la pestaña y tarjeta visitadas.
+if (window.location.hash === '#programas') showIndexPage('programas', { updateUrl: false });
+window.addEventListener('pageshow', () => {
+  if (window.location.hash !== '#programas') return;
+  showIndexPage('programas', { updateUrl: false });
+  const id = rememberedProgramId() || returnProgramId;
+  window.requestAnimationFrame(() => {
+    const index = programCarouselItems().findIndex(item => item.dataset.programId === id);
+    if (index >= 0) goToProgramCarousel(index, 'auto');
+  });
+});
+
 async function init(){
   const monthLabel = document.getElementById('programMonthLabel');
   if (monthLabel) monthLabel.textContent = 'Tarjetas institucionales a octubre de 2026.';
