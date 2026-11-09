@@ -39,7 +39,7 @@ test('la portada conserva in1 y el resumen utiliza solo una imagen compartida in
   assert.match(js, /installSharedSummaryBackground/);
   assert.match(js, /preloadPhoto\('index', 'in2\.jpg'/);
   assert.doesNotMatch(js, /preloadPhoto\('index', 'in3\.jpg'/);
-  assert.doesNotMatch(js, /preloadPhoto\('index', 'in4\.jpg'/);
+  assert.match(js, /preloadPhoto\('index', 'in4\.jpg'/);
   assert.match(css, /#page-resumen\.aala-shared-summary-photo--loaded/);
   assert.match(css, /aala-shared-summary-photo/);
   assert.match(css, /aala-photo-scene--loaded::before/);
@@ -67,11 +67,11 @@ test('los dos cintillos muestran estáticas las seis imágenes sin alterar el ca
   assert.doesNotMatch(js, /report-config|monthPills|KpiGrid|metas_2026/);
 });
 
-test('las tarjetas quedan sobre un único fondo in5 y mantienen la aparición al scroll', () => {
+test('las tarjetas quedan sobre un único fondo in4 y mantienen la aparición al scroll', () => {
   const js = read('src/components/aala-photo-strips.mjs');
   const css = read('src/styles/aala-fotografias.css');
   assert.match(js, /installProgramsBackground/);
-  assert.match(js, /preloadPhoto\('index', 'in5\.jpg'/);
+  assert.match(js, /preloadPhoto\('index', 'in4\.jpg'/);
   assert.match(css, /#page-programas\.aala-programs-background--loaded/);
   assert.match(css, /program-carousel > \.aala-photo-marquee--right/);
   assert.match(css, /margin-top: 0 !important/);
