@@ -1,0 +1,86 @@
+name: AALA · Aplicar Gmail y retirar chatbot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar:
+    name: Instalar cambios comprobados
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar base y aplicar SOLO los archivos autorizados
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          from zipfile import ZipFile
+          import sys
+
+          old = {'public/index.html': '7a0bace5c2c9354775b14e0efd99f9e6c173cde0e58486b32295b42cb6a00b94', 'scripts/index/build_portal.py': '1afa169214f7c122f462a6b48e532ddde7c8c5c729c9914fb0f65e1a6ca50736', 'src/reports/report-ui.mjs': '75911a698c5e47b0d005656b9d837c3b230cbb7f8be96a7ffadda775e7550238', 'src/reports/report-config.mjs': '0ea26d8a64e57de1dca72a2b6a0e805de586e5b2fa3472a9c5fee0011960407f', 'public/chatbot.js': '3cb7077d3118d87ea9abd5ad69a3a2df58e2e572d93cf99d6e491960c7e349e4', 'public/chatbot-config.js': 'b6f67f07e8dd8252ce40b8f2c7a52b47ee43fa2fa6a5a4e78ed3b42748cf281a', 'public/chatbot-data.js': 'f358fdd98a9f6c34787053cd60edf31f4ffe961507b0c55249d96d527177a423', 'public/data/chatbot_manifest.json': 'c23ba9898688b48675db72b277879bd3d999b50badfcaef355545d8be292a22c'}
+          new = {'public/index.html': 'f5c0a256454f59855269f9e5515a3b2441dbe2cd953195a171dfdf56c7f3a49a', 'scripts/index/build_portal.py': '6cff1be538fe4a3ce78a07b74b70cbfc0d65a54357f5b42a164e808877b9436a', 'src/reports/report-ui.mjs': '5594f4a39c6bfff47505904d99be6b309773f7bd6541c42c4cee474a1111401a', 'src/reports/report-config.mjs': '7451064e8fd2db5710d0c7d1e2ecc40f3c34f7afa6a8c7c54db70f861afe9198', 'src/reports/report-gmail.mjs': '142c79db0f9ed619ec67aab7457244da14c24239a76df8780858d83b6af1053f', 'tests/reports/gmail-compose.test.mjs': 'fa521289043c179d14b1d613c322dc3f9cbddf21b0d91d98fda1001970d493a6'}
+          changed = ['public/index.html', 'scripts/index/build_portal.py', 'src/reports/report-ui.mjs', 'src/reports/report-config.mjs', 'src/reports/report-gmail.mjs', 'tests/reports/gmail-compose.test.mjs']
+          obsolete = ['public/chatbot.js', 'public/chatbot-config.js', 'public/chatbot-data.js', 'public/data/chatbot_manifest.json']
+          archive = Path('.github/aala-migracion/instalar-correo-gmail.zip')
+
+          def digest(data):
+              return sha256(data).hexdigest()
+
+          with ZipFile(archive) as patch:
+              names = set(patch.namelist())
+              expected = set(changed) | {'ELIMINAR_ESTOS_ARCHIVOS.txt'}
+              if names != expected:
+                  sys.exit('Archivo del instalador no válido: contiene rutas imprevistas.')
+              # Comprobar TODO antes de modificar NADA.
+              for filename in changed:
+                  file = Path(filename)
+                  if file.exists():
+                      found = digest(file.read_bytes())
+                      if found not in {old.get(filename), new[filename]}:
+                          sys.exit('Se detuvo para proteger un archivo distinto al ZIP recibido: ' + filename)
+                  elif filename in old:
+                      sys.exit('Se detuvo: falta el archivo original ' + filename)
+                  if digest(patch.read(filename)) != new[filename]:
+                      sys.exit('ZIP modificado o incorrecto: ' + filename)
+              for filename in obsolete:
+                  file = Path(filename)
+                  if file.exists() and digest(file.read_bytes()) != old[filename]:
+                      sys.exit('Se detuvo para proteger un archivo del chatbot distinto: ' + filename)
+              # Todas las condiciones son correctas: instalación idempotente.
+              for filename in changed:
+                  file = Path(filename)
+                  file.parent.mkdir(parents=True, exist_ok=True)
+                  file.write_bytes(patch.read(filename))
+              for filename in obsolete:
+                  Path(filename).unlink(missing_ok=True)
+          print('Cambios aplicados. No se han tocado los datos, fotos, HTML de programas, CSS ni KPI.')
+          PY
+      - name: Comprobar JavaScript
+        run: |
+          node --check src/reports/report-ui.mjs
+          node --check src/reports/report-gmail.mjs
+      - name: Validar generación de informes y correo Gmail
+        run: node --test tests/reports/*.test.mjs
+      - name: Publicar commit limitado a esta migración
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- public/index.html scripts/index/build_portal.py \
+            src/reports/report-ui.mjs src/reports/report-config.mjs \
+            src/reports/report-gmail.mjs tests/reports/gmail-compose.test.mjs
+          git add -A -- public/chatbot.js public/chatbot-config.js \
+            public/chatbot-data.js public/data/chatbot_manifest.json
+          if git diff --cached --quiet; then
+            echo "La migración ya estaba aplicada; no hay cambios que publicar."
+          else
+            git commit -m "Retirar chatbot y Apps Script; preparar informes en Gmail"
+            git push origin "HEAD:${{ github.ref_name }}"
+          fi
