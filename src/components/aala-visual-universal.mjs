@@ -1,4 +1,5 @@
 import { installReportActions } from '../reports/report-ui.mjs';
+import { returnToProgramsHref, programIdFromPath } from './aala-program-return.mjs';
 import { installPhotoGallery } from './aala-fotografias.mjs';
 import { aalaIcon } from './aala-icons.mjs';
 import { mountInstitutionalFooter } from './aala-institutional-footer.mjs';
@@ -24,7 +25,7 @@ function enhanceHeader(header) {
   const originalLogo = main.querySelector('img');
   const programName = titles[location.pathname.split('/').pop()] || 'Tablero dinámico';
   const logoLink = document.createElement('a');
-  logoLink.href = './index.html';
+  logoLink.href = returnToProgramsHref(window.location.pathname);
   logoLink.className = 'aala-v2-logo-link';
   logoLink.setAttribute('aria-label','Ir al índice institucional');
   if (originalLogo) {
@@ -59,6 +60,16 @@ function enhanceHeader(header) {
     const text=document.createElement('span');
     text.textContent=labels[id];
     button.append(badge,text);
+  }
+  // El enlace de regreso vive en el espacio de herramientas del header,
+  // permanece accesible al 175% y conserva la tarjeta de origen en el índice.
+  if (programIdFromPath(window.location.pathname)) {
+    const back = document.createElement('a');
+    back.className = 'aala-v2-return-to-programs';
+    back.href = returnToProgramsHref(window.location.pathname);
+    back.setAttribute('aria-label', 'Volver a Programas y proyectos, a la tarjeta de este programa');
+    back.innerHTML = '<span aria-hidden="true">«</span><span>Volver a programas</span>';
+    actions.prepend(back);
   }
   row.replaceChildren(months,actions);
   row.className='aala-v2-controls';
