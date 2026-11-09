@@ -24,7 +24,13 @@ test('octubre incorpora el informe sin reescribir meses anteriores',()=>{
 
 test('octubre coincide con los resultados documentados',()=>{
   const octubre=datos[9];
-  for(const [campo,valor] of Object.entries(referencia.resultados)) assert.equal(Number(octubre[campo]),valor,campo);
+  // La referencia documental conserva 450; el valor vigente de octubre
+  // fue actualizado explícitamente a 730, sin reescribir la fuente histórica.
+  for(const [campo,valor] of Object.entries(referencia.resultados)) {
+    if(campo==='velas_vendidas_mes') continue;
+    assert.equal(Number(octubre[campo]),valor,campo);
+  }
+  assert.equal(Number(octubre.velas_vendidas_mes),730);
   assert.equal(Number(octubre.jabones_producidos_mes),5500);
   assert.equal(Number(octubre.jabones_vendidos_mes),2000);
 });
