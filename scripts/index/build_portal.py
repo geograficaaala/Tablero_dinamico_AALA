@@ -8,8 +8,6 @@ html = html.replace('href="../src/styles/themes/aala-pastel.css"', 'href="./src/
 html = html.replace('src="../src/components/aala-visual-universal.mjs"', 'src="./src/components/aala-visual-universal.mjs"')
 html = html.replace('src="../src/index/index-original.mjs"', 'src="./src/index/index-original.mjs"')
 html = html.replace('src="./assets/logos/', 'src="./public/assets/logos/')
-for name in ('chatbot-config.js', 'chatbot-data.js', 'chatbot.js'):
-    html = html.replace(f'src="./{name}"', f'src="./public/{name}"')
 for slug in ('atitlan-recicla', 'conservando-atitlan', 'fortalecimiento-municipal', 'educando-para-conservar', 'reforestando-atitlan', 'tul'):
     html = html.replace(f'href="./{slug}.html"',f'href="./public/{slug}.html"')
 required = [
