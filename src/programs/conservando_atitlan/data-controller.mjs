@@ -99,7 +99,8 @@ function computeStrategicMetrics(){
   const pruebasAccum=countMonthsWith(r=>toNum(r.pruebas_jabon_liquido_mes)>0);
   const pruebasExpected=expectedPruebasAtCut(months);
   const ventasAccum=sumMonths('ingresos_ventas_q_mes');
-  const velasProdAccum=GOALS.velasProducidas||50;
+  // Lectura anual confirmada para octubre; los períodos anteriores conservan su dato histórico.
+  const velasProdAccum=state.period==='2026-10' ? 730 : (GOALS.velasProducidas||50);
 
   const colectaProgress=clamp((colectaAccum/GOALS.colectasAnual)*100,0,100);
   const aceiteProgress=clamp((aceiteAccum/GOALS.aceiteAnual)*100,0,100);

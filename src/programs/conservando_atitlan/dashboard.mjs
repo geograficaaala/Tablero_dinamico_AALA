@@ -393,7 +393,7 @@ function progressMetricAbsolute(metricId, months){
   if(metricId==='jabones-prod') return {actual:sumMonths('jabones_producidos_mes'), expected:GOALS.jabonesProducidosMensual*months, target:GOALS.jabonesProducidosAnual, unit:'jabones'};
   if(metricId==='jabones-vend') return {actual:sumMonths('jabones_vendidos_mes'), expected:GOALS.jabonesVendidosMensual*months, target:GOALS.jabonesVendidosAnual, unit:'jabones'};
   if(metricId==='pruebas') return {actual:countMonthsWith(r=>toNum(r.pruebas_jabon_liquido_mes)>0), expected:expectedPruebasAtCut(months), target:GOALS.pruebasAnual, unit:'pruebas'};
-  if(metricId==='velas-prod') return {actual:GOALS.velasProducidas||50, expected:(GOALS.velasAnual/12)*months, target:GOALS.velasAnual, unit:'velas'};
+  if(metricId==='velas-prod') return {actual:state.period==='2026-10'?730:(GOALS.velasProducidas||50), expected:(GOALS.velasAnual/12)*months, target:GOALS.velasAnual, unit:'velas'};
   return {actual:0, expected:0, target:100, unit:''};
 }
 function progressMetricValueText(value, unit){
