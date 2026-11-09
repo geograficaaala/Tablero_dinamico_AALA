@@ -70,8 +70,21 @@ def validar():
         referencia = json.loads((ROOT / 'references/conservando_atitlan/octubre_2026_fuentes.json').read_text(encoding='utf-8'))
         octubre = next(r for r in datos if r['mes_clave'] == '2026-10')
         exigir(referencia['periodo'] == '2026-10', 'Referencia de octubre incorrecta')
-        for campo, esperado in referencia['resultados'].items():
-            exigir(numero(octubre, campo) == Decimal(str(esperado)), f'Octubre: {campo} no coincide con el informe')
+        # El informe original no se modifica: las correcciones posteriores del
+        # tablero se registran expresamente y deben conservar el valor de origen.
+        ajustes = referencia.get('actualizaciones_posteriores', {})
+        exigir(set(ajustes) <= {'velas_vendidas_mes'}, 'Octubre: ajuste posterior no autorizado')
+        for campo, esperado_original in referencia['resultados'].items():
+            esperado = esperado_original
+            if campo in ajustes:
+                ajuste = ajustes[campo]
+                exigir(Decimal(str(ajuste['dato_original_informe'])) == Decimal(str(esperado_original)),
+                       f'Octubre: el ajuste de {campo} no conserva el valor documental')
+                exigir(bool(ajuste.get('motivo', '').strip()),
+                       f'Octubre: falta justificar el ajuste de {campo}')
+                esperado = ajuste['dato_vigente_publicado']
+            exigir(numero(octubre, campo) == Decimal(str(esperado)),
+                   f'Octubre: {campo} no coincide con el informe o con su actualización documentada')
         with (DATA / 'recoleccion_municipios_2026.csv').open(encoding='utf-8', newline='') as f:
             municipios = list(csv.DictReader(f))
         with (DATA / 'recoleccion_inmuebles_octubre_2026.csv').open(encoding='utf-8', newline='') as f:
